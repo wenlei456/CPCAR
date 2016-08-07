@@ -1,0 +1,15 @@
+G:\工作开发\CP_workspace\CarParts.com\LogModule\bin\Debug\LogModule.dll
+G:\工作开发\CP_workspace\CarParts.com\LogModule\bin\Debug\LogModule.pdb
+G:\工作开发\CP_workspace\CarParts.com\LogModule\bin\Debug\AOP.dll
+G:\工作开发\CP_workspace\CarParts.com\LogModule\bin\Debug\CommonModule.dll
+G:\工作开发\CP_workspace\CarParts.com\LogModule\bin\Debug\CommonUtils.dll
+G:\工作开发\CP_workspace\CarParts.com\LogModule\bin\Debug\DAO.dll
+G:\工作开发\CP_workspace\CarParts.com\LogModule\bin\Debug\log4net.dll
+G:\工作开发\CP_workspace\CarParts.com\LogModule\bin\Debug\EntityFramework.dll
+G:\工作开发\CP_workspace\CarParts.com\LogModule\bin\Debug\AOP.pdb
+G:\工作开发\CP_workspace\CarParts.com\LogModule\bin\Debug\CommonModule.pdb
+G:\工作开发\CP_workspace\CarParts.com\LogModule\bin\Debug\CommonUtils.pdb
+G:\工作开发\CP_workspace\CarParts.com\LogModule\bin\Debug\DAO.pdb
+G:\工作开发\CP_workspace\CarParts.com\LogModule\obj\Debug\LogModule.csprojResolveAssemblyReference.cache
+G:\工作开发\CP_workspace\CarParts.com\LogModule\obj\Debug\LogModule.dll
+G:\工作开发\CP_workspace\CarParts.com\LogModule\obj\Debug\LogModule.pdb

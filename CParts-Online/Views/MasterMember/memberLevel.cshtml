@@ -1,0 +1,290 @@
+﻿@model IEnumerable<DAO.MemberLevel>
+@{
+    ViewBag.Title = "会员等级管理";
+    Layout = "~/Views/Shared/_master.cshtml";
+  
+}
+
+
+
+<div class="content-box">
+    <!-- Start Content Box -->
+    <div class="content-box-header2">
+        <h3>会员等级维护</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">所有列表</a></li>
+            <!-- href must be unique and match the id of target div -->
+            <li><a href="#tab2" id="f1">添加</a></li>
+            <li><a href="#tab3" id="tabEdit">编辑</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <div>
+                <div class="bulk-actions">
+                    
+                </div>
+
+            </div>
+
+
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th valign="middle">
+                            <input class="check-all" type="checkbox" />
+                        </th>
+                        <th valign="middle">等级名称</th>
+                        <th valign="middle">最小积分</th>
+                        <th valign="middle">最大积分</th>
+                        @*<th valign="middle">折扣(0-1)</th>   *@
+                         <th valign="middle">返利(0-1)</th>                      
+                        <th valign="middle">操作</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <button class="button">删除</button>
+                            <div class="clear"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody style="font-size: 12px">
+                    @foreach (var item in Model)
+                    {
+                         <tr>
+                        <td >
+                            <input  type="checkbox"  class="check"/>
+                        </td>
+                        <td >@item.Name</td>
+                        <td >@item.MinIntegral</td>
+                        <td >@item.MaxIntegral</td>
+                        <td >@item.Ratio</td>      
+                             <td >@item.Income</td>                  
+                        <td ><a class="button edit" levelid="@item.ID" levlName="@item.Name"  minInt="@item.MinIntegral" maxInt="@item.MaxIntegral" levelRatio="@item.Ratio" income="@item.Income">编辑</a>&nbsp;&nbsp;<a class="button del" levelid="@item.ID">删除</a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- End #tab1 -->
+        <div class="tab-content" id="tab2" style="width: 100%">
+            <form method="post" action="/member/Add" id="addForm">
+            <table width="30%">
+                <tr>
+                    <td>名称:</td>
+                    <td>
+                        <input type="text" id="txtName" name="Name"  /></td>
+                </tr>
+                <tr>
+                    <td>最小经验:</td>
+                   
+                    <td><input type="text"  id="txtMin" name="MinIntegral" /></td>
+                </tr>
+                <tr>
+                    <td>最大经验:</td>
+                  
+                    <td> <input type="text"  id="txtMax" name="MaxIntegral" /></td>
+                </tr>
+                  @*<tr>
+                    <td>折扣:</td>
+                   
+                    <td> <input type="text" id="txtZK" name="Ratio"/></td>
+                </tr>*@
+                   <tr>
+                    <td>返利:</td>
+                   
+                    <td> <input type="text" id="txtFL" name="Income"/></td>
+                </tr>
+                <tfoot>
+                    <tr>
+                      
+                        <td><a class="button" id="save" >保存</a></td>
+                       <td><p style="color:red; display:none" id="errorMsg">信息不完整！</p></td>
+                    </tr>
+
+                </tfoot>
+            </table>
+            <div class="clear">
+            </div>
+                </form>
+            <!-- End .clear -->
+
+        </div>
+
+
+         <div class="tab-content" id="tab3" style="width: 100%">
+
+         <form method="post" action="/member/Edit" id="EaddForm">
+            <table width="30%">
+                <tr>
+                    <td>名称:</td>
+                    <td>
+                        <input type="hidden" id="Eid" name="ID"  />
+                        <input type="text" id="EtxtName" name="Name"  /></td>
+                </tr>
+                <tr>
+                    <td>最小经验:</td>
+                   
+                    <td><input type="text"  id="EtxtMin" name="MinIntegral" /></td>
+                </tr>
+                <tr>
+                    <td>最大经验:</td>
+                  
+                    <td> <input type="text"  id="EtxtMax" name="MaxIntegral" /></td>
+                </tr>
+                  @*<tr>
+                    <td>折扣:</td>
+                   
+                    <td> <input type="text" id="EtxtZK" name="Ratio"/></td>
+                </tr>*@
+                    @*<tr>
+                    <td>折扣:</td>
+                   
+                    <td> <input type="text" id="EtxtFL" name="Income"/></td>
+                </tr>*@
+                <tfoot>
+                    <tr>
+                      
+                        <td><a class="button" id="Esave" >保存</a></td>
+                       <td><p style="color:red; display:none" id="EerrorMsg">信息不完整！</p></td>
+                    </tr>
+
+                </tfoot>
+            </table>
+            <div class="clear">
+            </div>
+                </form>
+            <div class="clear">
+            </div>
+            <!-- End .clear -->
+
+        </div>
+        <!-- End #tab2 -->
+    </div>
+    <!-- End .content-box-content -->
+</div>
+@section scripts
+    {
+   <script type="text/ecmascript">    
+       $(function () {
+           //添加
+           $("#save").click(function () {
+              // showdiv('正在保存中***');
+               var name = $("#txtName").val();
+               var min = $("#txtMin").val();
+               var max = $("#txtMax").val();
+               var zk = $("#txtZK").val();
+               var fl = $("#EtxtFL").val();
+               var level = {
+                   Name: name,
+                   MinIntegral: min,
+                   MaxIntegral: max,
+                   Ratio: zk,
+                   Income:fl
+               };
+               if (VaData(level)) {
+                   /**Post("/Master/AddCar", car, function (data, error) {
+                       if (error) {
+                           ChangBox("网络异常，请稍后再试");
+                       }
+                       if (data.result == "error") {
+                           alert("添加异常，请稍后再试！");
+                       }
+                       else if (data.result == "ok") {
+                           setTimeout(function () {
+                               window.location.href = "/Master/CarsManage";
+                           }, 2)
+                       }
+                   });
+                   **/
+                   $("#addForm").submit();
+               }
+               else {
+                   $("#errorMsg").show();
+                   hidediv();
+               }
+           })
+           //删除
+           $(".del").click(function () {
+               if (confirm("确认要删除？")) {                  
+                   var id = $(this).attr("levelid");
+                   Post("/member/Del", {id:id}, function (data, error) {
+                       if (error) {
+                           ChangBox("网络异常，请稍后再试");
+                       }
+                       if (data.result == "error") {
+                           alert("删除异常，请稍后再试！");
+                       } else if (data.result == "ok") {
+                           setTimeout(function () {
+                               window.location.href = "/member/memberLevel";
+                           }, 2)
+
+                       }
+                   });
+               }
+           });
+           //修改
+           $(".edit").click(function () {
+              // levlname="等级二" minint="256" maxint="1000" levelratio="0.900"
+               $("#tabEdit").click();            
+               var id = $(this).attr("levelid");
+               var levlname = $(this).attr("levlname");
+               var minint = $(this).attr("minint");
+               var maxint = $(this).attr("maxint");
+               var levelratio = $(this).attr("levelratio");
+               var levelfl = $(this).attr("income");
+               $("#Eid").val(id);
+               $("#EtxtName").val(levlname);
+               $("#EtxtMin").val(minint);
+               $("#EtxtMax").val(maxint);
+               $("#EtxtZK").val(levelratio);
+               $("#EtxtFL").val(levelfl);
+             
+           })
+           //提交更改
+           $("#Esave").click(function () {
+             var id=$("#Eid").val();
+             var levlname = $("#EtxtName").val();
+             var minint = $("#EtxtMin").val();
+             var maxint = $("#EtxtMax").val();
+             var levelratio = $("#EtxtZK").val();
+             var levelfl = $("#EtxtFL").val();
+               var level = {
+                   ID: id,
+                   Name: levlname,
+                   MinIntegral: minint,
+                   MaxIntegral: maxint,
+                   Ratio: levelratio,
+                   Income: levelfl
+               };
+               if (VaData(level)) {
+                   
+                   $("#EaddForm").submit();
+               }
+               else {
+                   $("#EerrorMsg").show();
+                   hidediv();
+               }
+
+
+           })
+
+       })
+       //数据验证   
+       function VaData(c)
+       {
+           if (c.Name == "" || !isNumber(c.MinIntegral) || !isNumber(c.MaxIntegral) || !isNumber(c.Ratio) || !isNumber(c.Income)) {
+               return false;
+           } else {
+               return true;
+           }
+
+       }
+
+   </script>
+    }
+ 

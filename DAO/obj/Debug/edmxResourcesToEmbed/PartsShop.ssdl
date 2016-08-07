@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CarPartsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityType Name="Active">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActiveIMG" Type="nvarchar" MaxLength="200" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="SubName" Type="nvarchar" MaxLength="50" />
+    <Property Name="StarDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="10" />
+    <Property Name="Decribe" Type="nvarchar" MaxLength="200" />
+    <Property Name="Common" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ActiveAttr">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActiveID" Type="int" Nullable="false" />
+    <Property Name="AProID" Type="int" Nullable="false" />
+    <Property Name="AtrrID" Type="int" Nullable="false" />
+    <Property Name="NewPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="Stock" Type="int" />
+  </EntityType>
+  <EntityType Name="ActiveImg">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActiveID" Type="int" Nullable="false" />
+    <Property Name="ImgPath" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="UploadDate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActivePros">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActiveID" Type="int" Nullable="false" />
+    <Property Name="ProID" Type="int" Nullable="false" />
+    <Property Name="ProName" Type="nvarchar" MaxLength="50" />
+    <Property Name="NewPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="ATitle" Type="nvarchar" MaxLength="500" />
+    <Property Name="AContent" Type="nvarchar" MaxLength="500" />
+    <Property Name="Adecribe" Type="nvarchar" MaxLength="500" />
+    <Property Name="Stock" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AddressBook">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Province" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Area" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="People" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsDefault" Type="bit" />
+  </EntityType>
+  <EntityType Name="AdminAccount">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccountName" Type="nvarchar" MaxLength="50" />
+    <Property Name="RealName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CarM">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProYear" Type="varchar" MaxLength="50" />
+    <Property Name="BrandEnglish" Type="varchar" MaxLength="50" />
+    <Property Name="Brand" Type="varchar" MaxLength="50" />
+    <Property Name="ModelEnglish" Type="varchar" MaxLength="50" />
+    <Property Name="Model" Type="varchar" MaxLength="50" />
+    <Property Name="Engine" Type="varchar" MaxLength="50" />
+    <Property Name="Oil" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="int" />
+  </EntityType>
+  <EntityType Name="CarsInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProYear" Type="nvarchar" MaxLength="50" />
+    <Property Name="Engine" Type="nvarchar" MaxLength="50" />
+    <Property Name="Oil" Type="nvarchar" MaxLength="50" />
+    <Property Name="State" Type="int" />
+  </EntityType>
+  <EntityType Name="ExpRecord">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uid" Type="int" Nullable="false" />
+    <Property Name="Source" Type="nvarchar" MaxLength="50" />
+    <Property Name="LowerUid" Type="int" />
+    <Property Name="OrderNum" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrderPrice" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="Exp" Type="int" />
+    <Property Name="Balance" Type="int" />
+    <Property Name="Datetime" Type="datetime" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="FriendCode">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatUser" Type="int" Nullable="false" />
+    <Property Name="UseUser" Type="int" />
+    <Property Name="CreatDate" Type="datetime" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="ImgStock">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartID" Type="int" Nullable="false" />
+    <Property Name="ImgPath" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="UploadDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="LogInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OpearName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="EventName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="EvenMsg" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="InAttr" Type="text" Nullable="false" />
+    <Property Name="OutAttr" Type="text" Nullable="false" />
+    <Property Name="Datetime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MemberBase">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="LoginName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="State" Type="int" />
+    <Property Name="MemberType" Type="int" />
+    <Property Name="Ucode" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpUser" Type="int" Nullable="false" />
+    <Property Name="Levels" Type="int" />
+    <Property Name="Integral" Type="int" />
+    <Property Name="Source" Type="nvarchar" MaxLength="10" />
+    <Property Name="RegDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="MemberLevel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LevelId" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="MinIntegral" Type="int" Nullable="false" />
+    <Property Name="MaxIntegral" Type="int" Nullable="false" />
+    <Property Name="Ratio" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+    <Property Name="Income" Type="decimal" Precision="5" Scale="3" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderId" Type="varchar" MaxLength="50" />
+    <Property Name="Uid" Type="int" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="UserPhone" Type="varchar" MaxLength="50" />
+    <Property Name="OrderSource" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrderTime" Type="datetime" />
+    <Property Name="OrderStatus" Type="varchar" MaxLength="50" />
+    <Property Name="Consignee" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="CellPhone" Type="varchar" MaxLength="50" />
+    <Property Name="PayStatus" Type="varchar" MaxLength="50" />
+    <Property Name="Payment" Type="varchar" MaxLength="50" />
+    <Property Name="Remarks" Type="varchar" MaxLength="800" />
+    <Property Name="Preferential" Type="varchar" MaxLength="50" />
+    <Property Name="CashPwd" Type="varchar" MaxLength="100" />
+    <Property Name="Ratio" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="DiscountAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="ShippingCost" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="TotalPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="SearchTag" Type="varchar" MaxLength="500" />
+    <Property Name="OperatorRemarks" Type="varchar" MaxLength="500" />
+    <Property Name="OrderType" Type="varchar" MaxLength="10" />
+    <Property Name="OrderFrom" Type="int" />
+    <Property Name="SendName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SendNum" Type="nvarchar" MaxLength="50" />
+    <Property Name="Prov" Type="nvarchar" MaxLength="50" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="Area" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OrderPay">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uid" Type="int" Nullable="false" />
+    <Property Name="Uname" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrderId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PayState" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Bank" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+    <Property Name="PayType" Type="int" Nullable="false" />
+    <Property Name="OrderType" Type="int" Nullable="false" />
+    <Property Name="RecordState" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderProList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderId" Type="varchar" MaxLength="50" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SupplyNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Num" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="InputTime" Type="datetime" />
+    <Property Name="AttrID" Type="int" />
+    <Property Name="AttrDecribe" Type="nvarchar" MaxLength="50" />
+    <Property Name="PType" Type="int" />
+    <Property Name="IsFlag" Type="int" />
+    <Property Name="activeName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PartAttr">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="FlagName" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="int" />
+  </EntityType>
+  <EntityType Name="PartBrand">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Country" Type="nvarchar" MaxLength="50" />
+    <Property Name="Describe" Type="text" />
+    <Property Name="Common" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Parts">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartName" Type="nvarchar" MaxLength="500" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="PartTitle" Type="ntext" />
+    <Property Name="PartSubtitle" Type="ntext" />
+    <Property Name="PartBrand" Type="int" />
+    <Property Name="PartModel" Type="nvarchar" MaxLength="50" />
+    <Property Name="PartSuppyNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="PartNumber" Type="varchar" MaxLength="50" />
+    <Property Name="ToCars" Type="nvarchar(max)" />
+    <Property Name="Describe" Type="ntext" />
+    <Property Name="SpecParma" Type="ntext" />
+    <Property Name="DetailList" Type="ntext" />
+    <Property Name="SAS" Type="ntext" />
+    <Property Name="Common" Type="ntext" />
+    <Property Name="Orderby" Type="int" />
+    <Property Name="ShowDate" Type="datetime" />
+    <Property Name="State" Type="int" />
+    <Property Name="mDescribe" Type="ntext" />
+    <Property Name="ProType" Type="int" />
+    <Property Name="product_child_json" Type="varchar(max)" />
+    <Property Name="child_product_dicts" Type="varchar(max)" />
+    <Property Name="sku" Type="varchar" MaxLength="50" />
+    <Property Name="imgProduct" Type="varchar" MaxLength="5000" />
+  </EntityType>
+  <EntityType Name="PartsCategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ParentID" Type="int" />
+    <Property Name="ICOPath" Type="nvarchar" MaxLength="100" />
+    <Property Name="BannerPath" Type="nvarchar" MaxLength="100" />
+    <Property Name="OrderBy" Type="int" />
+    <Property Name="IsShow" Type="int" />
+  </EntityType>
+  <EntityType Name="PartsExtend">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartID" Type="int" Nullable="false" />
+    <Property Name="ParentAttr" Type="int" Nullable="false" />
+    <Property Name="AttrName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AttrFlagName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AttrValue" Type="nvarchar" MaxLength="50" />
+    <Property Name="AttrPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="Qty" Type="int" Nullable="false" />
+    <Property Name="State" Type="int" />
+    <Property Name="IsMain" Type="int" />
+  </EntityType>
+  <EntityType Name="PartStock">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartID" Type="int" />
+    <Property Name="StockType" Type="int" />
+    <Property Name="StockNUM" Type="int" />
+  </EntityType>
+  <EntityType Name="PhoneMsg">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UID" Type="int" />
+    <Property Name="PhoneNum" Type="varchar" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="MSG" Type="nvarchar" MaxLength="250" />
+    <Property Name="State" Type="varchar" MaxLength="20" />
+    <Property Name="Source" Type="varchar" MaxLength="50" />
+    <Property Name="STime" Type="datetime" />
+    <Property Name="Port" Type="varchar" MaxLength="50" />
+    <Property Name="InfoNumber" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="RebateDraw">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UID" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="OrderNumber" Type="varchar" MaxLength="50" />
+    <Property Name="PType" Type="nvarchar" MaxLength="10" />
+    <Property Name="Payment" Type="nvarchar" MaxLength="10" />
+    <Property Name="BankInfo" Type="nvarchar" MaxLength="50" />
+    <Property Name="CardNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="CardName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Datetime" Type="datetime" />
+    <Property Name="Statu" Type="int" />
+  </EntityType>
+  <EntityType Name="RebateRecord">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UID" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="Source" Type="nvarchar" MaxLength="20" />
+    <Property Name="PType" Type="nvarchar" MaxLength="20" />
+    <Property Name="LowerUID" Type="int" />
+    <Property Name="LowerLoginName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LowerOrder" Type="varchar" MaxLength="50" />
+    <Property Name="InCome" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="OrderPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+    <Property Name="Datetime" Type="datetime" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="Voucher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uid" Type="int" Nullable="false" />
+    <Property Name="VoucherNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsState" Type="int" Nullable="false" />
+    <Property Name="EndTime" Type="datetime" />
+    <Property Name="InsertTime" Type="datetime" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="TypeName" Type="varchar" MaxLength="50" />
+    <Property Name="N2" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="WebsiteMenu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuName" Type="nvarchar" MaxLength="50" />
+    <Property Name="MenuLevel" Type="int" />
+    <Property Name="MenuParent" Type="int" />
+    <Property Name="MenuOrderby" Type="int" />
+    <Property Name="MenuBindURL" Type="nvarchar" MaxLength="200" />
+    <Property Name="MenuState" Type="int" />
+    <Property Name="Enable" Type="int" />
+  </EntityType>
+  <EntityContainer Name="CarPartsModelStoreContainer">
+    <EntitySet Name="Active" EntityType="Self.Active" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActiveAttr" EntityType="Self.ActiveAttr" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActiveImg" EntityType="Self.ActiveImg" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActivePros" EntityType="Self.ActivePros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AddressBook" EntityType="Self.AddressBook" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AdminAccount" EntityType="Self.AdminAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarM" EntityType="Self.CarM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarsInfo" EntityType="Self.CarsInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExpRecord" EntityType="Self.ExpRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FriendCode" EntityType="Self.FriendCode" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImgStock" EntityType="Self.ImgStock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LogInfo" EntityType="Self.LogInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MemberBase" EntityType="Self.MemberBase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MemberLevel" EntityType="Self.MemberLevel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderPay" EntityType="Self.OrderPay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderProList" EntityType="Self.OrderProList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartAttr" EntityType="Self.PartAttr" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartBrand" EntityType="Self.PartBrand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Parts" EntityType="Self.Parts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartsCategory" EntityType="Self.PartsCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartsExtend" EntityType="Self.PartsExtend" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartStock" EntityType="Self.PartStock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhoneMsg" EntityType="Self.PhoneMsg" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RebateDraw" EntityType="Self.RebateDraw" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RebateRecord" EntityType="Self.RebateRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Voucher" EntityType="Self.Voucher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebsiteMenu" EntityType="Self.WebsiteMenu" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

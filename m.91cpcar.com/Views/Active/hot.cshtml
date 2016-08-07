@@ -1,0 +1,172 @@
+﻿@model m.cpcar.com.Controllers.HotModel
+@{
+   
+}
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>CP文化,火爆热卖</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+ <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+<meta name="keywords" content="诚配,诚配改装,汽车改装,改装件,汽车配件,海外配件,进口配件,保时捷,宝马,奔驰,法拉利,豪车改装,高端改装">
+<meta name="description" content="" />
+<link rel="stylesheet" href="/New/content/css/hot.css" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery-1.10.2.min.js"></script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?d252ab9e4e87638601460ea0c7412a01";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</head>
+<body>
+<div id="loading">
+<div class="spinner8">
+<div class="spinner-container container1">
+<div class="circle1">&nbsp;</div>
+<div class="circle2">&nbsp;</div>
+<div class="circle3">&nbsp;</div>
+<div class="circle4">&nbsp;</div>
+</div>
+<div class="spinner-container container2">
+<div class="circle1">&nbsp;</div>
+<div class="circle2">&nbsp;</div>
+<div class="circle3">&nbsp;</div>
+<div class="circle4">&nbsp;</div>
+</div>-
+<div class="spinner-container container3">
+<div class="circle1">&nbsp;</div>
+<div class="circle2">&nbsp;</div>
+<div class="circle3">&nbsp;</div>
+<div class="circle4">&nbsp;</div>
+</div>
+<i>loading...</i>
+</div></div>
+<section id="hot">
+<div class="back"><a href="/index.html"></a></div>
+<div class="hotbanner">
+<div class="topright"></div>
+<div class="hotheader"></div>
+<div class="hotcar"></div>
+<div class="hotchair"></div>
+<div class="mattress"></div>
+<div class="doll"></div>
+<div class="btn"><a href="javascript:void(0)"></a></div>
+<div class="headerbtn"><a href="/Product/getCar"></a><a href="/Member/Myhome/login"></a></div>
+</div>
+<div class="hotlist">
+
+
+
+     @if (Model.HotTable != null)
+     {
+         for (int item = 0; item < Model.HotTable.Count; item++)
+         {
+
+             var ap = Model.parts.Where(m => m.HotProductId == Model.HotTable[item].ID).ToList();
+
+            if(ap.Count!=0)
+            {
+                
+                <dl><dt>@Model.HotTable[item].HotName</dt>
+         
+                    @if(ap.Count<=6)
+         {
+                  for(int pItem=0;pItem<ap.Count;pItem++)
+         {
+            <dd>
+<a href="/Product/ProductDetail?id=@ap[pItem].ID">
+<img src="http://www.91cpcar.com/@ap[pItem].imgpath" alt="" />
+<span>@ap[pItem].PartName</span>
+<i>￥<em>@ap[pItem].Price</em></i>
+</a>
+</dd>
+         }
+          <dd class="morelink"><a href="/Product/cList?t=7&&b=0&&m=0&&y=0&&h=@Model.HotTable[item].ID">更多热卖</a></dd>
+         }else
+         {
+                     for(int pItem=0;pItem<6;pItem++)
+         {
+            <dd>
+<a href="/Product/ProductDetail?id=@ap[pItem].ID">
+<img src="http://www.91cpcar.com/@ap[pItem].imgpath" alt="" />
+<span>@ap[pItem].PartName</span>
+<i>￥<em>@ap[pItem].Price</em></i>
+</a>
+</dd>
+         
+      
+         }
+         
+         <dd class="morelink"><a href="/Product/cList?t=7&&b=0&&m=0&&y=0&&h=@Model.HotTable[item].ID">更多热卖</a></dd>
+            
+         }
+                   </dl>
+         
+         }
+                   
+         }
+     }
+             
+
+
+
+</div>
+
+    
+<div class="wrap-box"></div>
+
+<div class="fixed-bar">
+	<div class="wide-bar">
+		<div class="consult-box">
+			<div class="consult-header clearfix">
+			<h3 class="consult-title">免费咨询</h3>
+			</div>
+			<ul class="consult-list">
+				<li class="clearfix">
+					<span>高先生：</span><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=156517755&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:156517755:52" alt="需要咨询请点击" title="需要咨询请点击"/></a>
+				</li>
+				
+				<li class="clearfix"><span class="tel-icon">0730-8673882</span></li> 
+			</ul>
+		</div>
+		<a href="javascript:scrollTo(0,0)" class="gotop" title="回到顶部" style="display:none;"><i class="icon">返回顶部</i><span>返回顶部</span></a>
+	</div>
+</div>
+
+<script type="text/javascript">
+    $(document).scroll(function () {
+        var scrollTop = $(document).scrollTop(), bodyHeight = $(window).height();
+        if (scrollTop > bodyHeight) {
+            $('.fixed-bar .gotop').css('display', 'block');
+        } else {
+            $('.fixed-bar .gotop').css('display', 'none');
+        }
+    })
+</script>
+
+<div class="footer">        
+<p>Copyring @@ 2015 诚配91CPCAR.com  版权所有 <br> 湘ICP备15020410号 <br><a href="//m.kuaidi100.com" target="_blank">快递查询</a>  </p>
+</div>
+</section>
+
+<script type="text/javascript" src="/New/content/js/zepto.min.js" ></script>
+    <script src="~/New/content/js/Base.js"></script>
+<script type="text/javascript">
+$(function () {
+$("#loading").remove();
+$("#default").addClass("showbg");
+setTimeout(function () { $("#hot").addClass("s-hot"); }, 1000);
+
+});
+</script>
+</body>
+</html>

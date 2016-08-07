@@ -1,0 +1,162 @@
+﻿@model IEnumerable<DAO.Order>
+@{
+    ViewBag.Title = "";
+   // Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_master.cshtml";
+}
+@section scripts
+{
+   <script language="javascript" type="text/javascript" src="/resources/scripts/My97DatePicker/WdatePicker.js"></script>
+    <script>
+        $(function () {
+            $("#orderStatus,#payStatus").change(function () {
+                $("#OrderForm").submit();
+            })
+            $("#orderTable tr").hover(function () {
+                $(this).addClass("hover");
+            }, function () {
+                $(this).removeClass("hover");
+            })
+        })
+    </script>
+  
+}
+@section styles{
+      <link href="/resources/scripts/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+    <style>
+        .hover {
+        background:#b8eba5 !important;
+        }
+        #orderTable a {
+         display:block;
+         padding:5px;
+         width:50px;
+        }
+    </style>
+    }
+  
+<div class="content-box">
+    <!-- Start Content Box -->
+    <div class="content-box-header2">
+        <h3>订单管理</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">所有列表</a></li>
+            <!-- href must be unique and match the id of target div -->
+            <li><a href="#tab2" id="f1">添加</a></li>
+            <li><a href="#tab3" id="tabEdit">编辑</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <div>
+              @using (Html.BeginForm("Index", "Master", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "OrderForm" }))
+   {
+                <div class="bulk-actions">
+                    订单状态: 
+                    <select name="orderStatus" id="orderStatus">
+                        <option value="all">--所有--</option>
+                        <option value="未处理">未处理</option>
+                        <option value="已发货">已发货</option>                        
+                        <option value="已完成">已完成</option>
+                        <option value="已作废">已作废</option>
+                    </select>&nbsp;&nbsp;
+                     支付状态:
+                    <select  name="payStatus" id="payStatus">
+                        <option value="all">--所有--</option>
+                        <option value="已支付">已支付</option>
+                        <option value="未支付">未支付</option>                        
+                    </select>&nbsp;&nbsp;
+                     订单号：<input type="text" class="text-input" name="orderNumber"/>
+                    <button class="button"   type="submit">搜索</button>
+                     从：<input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" name="orderBeginTime"/>
+                     到：<input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" name="orderEndTime"/>
+                    <button class="button"  type="submit">搜索</button>
+                </div>
+              }
+
+            </div>
+            <div style="width:50%">
+            
+                </div>
+          <table width="100%" id="orderTable">
+                <thead>
+                    <tr>
+                        <th valign="middle">订单ID</th>
+                        <th valign="middle">订单号</th>
+                        <th valign="middle">下单用户</th>                        
+                      @*  <th valign="middle">商品总数</th>  *@
+                        <th valign="middle">订单金额</th>
+                        <th valign="middle">下单日期</th> 
+                        <th valign="middle">支付状态</th>    
+                        <th valign="middle">订单状态</th>   
+                        <th valign="middle">快递公司</th>  
+                        <th valign="middle">快递单号</th>    
+                        <th>操作</th>                 
+                    </tr>
+                </thead>
+               
+                <tbody style="font-size: 14px">
+                    @foreach (var item in Model)
+                    {
+                         <tr>
+                        <td >@item.ID</td>
+                        <td >@item.OrderId</td>
+                        <td >@item.UserName</td>                        
+                         @*  <th valign="middle">商品总数</th>  *@ 
+                        <td >@item.TotalPrice.ToString(".00")</td>
+                        <td >@item.OrderTime</td> 
+                        <td > @if (item.PayStatus=="未支付")
+                                {
+                                  <a href="javascript:void(0)" style="color:#000;" >未支付</a>
+                                }else{
+                                 <a href="javascript:void(0)" style="color:#fff; background:red; ">@item.PayStatus</a>
+                                }</td>    
+                        <td >
+                            @if (item.PayStatus == "已支付")
+                            {
+                                if (item.OrderStatus == "未处理")
+                                {
+                                <a href="javascript:void(0)" style="color:#fff; background:red;" >@item.OrderStatus</a> 
+                                } if (item.OrderStatus == "已发货")
+                                {
+                                <a href="javascript:void(0)" style="color:#fff; background:#ff6a00;" >@item.OrderStatus</a> 
+                                }
+                                if (item.OrderStatus == "已完成")
+                                {
+                                <a href="javascript:void(0)" style="color:#fff;background:green;" >@item.OrderStatus</a> 
+                                }
+                            }else{
+                            @item.OrderStatus
+                            }
+                        </td>    
+                              <td>@item.SendName</td>   
+                              <td>@item.SendNum</td>   
+                        <td><a class="button" target="_blank" href="/Master/OrderDetail?OrderNumber=@(item.OrderId)">订单详细</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>                 
+                    </tr>
+                    }
+                    
+                </tbody>
+            </table>
+        </div>
+       
+        <div class="tab-content" id="tab2" style="width: 100%">
+
+            
+          
+            <!-- End .clear -->
+
+        </div>
+
+
+         <div class="tab-content" id="tab3" style="width: 100%">
+
+             
+         
+
+        </div>
+        <!-- End #tab2 -->
+    </div>
+    <!-- End .content-box-content -->
+</div>

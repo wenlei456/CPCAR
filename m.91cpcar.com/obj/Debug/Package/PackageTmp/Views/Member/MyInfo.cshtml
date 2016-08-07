@@ -1,0 +1,61 @@
+﻿@model  CParts_Online.Models.UserHomeVM
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+}
+@section styles{
+    <style>
+        h4 {
+        color:#3f3f3f;
+        }
+    </style>
+    }
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/content/img/ico/icon_phome.png">
+    </a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/content/img/ico/icon_shopcar.png">
+    </a>
+    <div class="head-title">返利记录</div>
+
+</header>
+<div class="mui-content" >
+    <div style="width:95%; margin:0px auto;padding:10px;">
+    <table>
+        <tr>
+            <td><h4>用户名:</h4></td>
+            <td><h4><span class="uh_binfo">@Model.Userinfo.LoginName</span></h4></td>
+        </tr>
+         <tr>
+            <td><h4>联系邮箱:</h4></td>
+            <td><h4><span class="uh_binfo">@Model.Userinfo.Email</span></h4></td>
+        </tr>
+         <tr>
+            <td><h4>手机号码:</h4></td>
+            <td><h4><span class="uh_binfo">@Model.Userinfo.Mobile</span></h4></td>
+        </tr>
+        @* <tr>
+            <td><h4>推荐人:</h4></td>
+            <td><h4><span class="uh_binfo">@Model.Userinfo.LoginName</span></h4></td>
+        </tr>*@
+
+    </table>
+        <hr />
+        <h4 class="pull-left">当前等级：<span class="uh_info">@Model.UserLevel[0].Name</span></h4>
+    <h4 class="pull-left">账户积分：<span class="uh_info">@Model.UserLevel[0].UExp</span></h4>
+    <h4 class="pull-left">享受折扣：<span class="uh_info">@((Model.UserLevel[0].Ratio*100).ToString(".0")) %</span></h4>
+    <h4 class="pull-left">享受返利：<span class="uh_info">@((Model.UserLevel[0].Income*100).ToString(".0")) % </span></h4>
+    <div style="clear:both"></div>
+                <hr />
+    <h4 class="pull-left">下一等级：<span class="uh_info">@Model.UserLevel[1].Name</span></h4>
+    <h4 class="pull-left">需要积分：<span class="uh_info">@Model.UserLevel[1].MinIntegral</span></h4>
+    <h4 class="pull-left">享受折扣：<span class="uh_info">@((Model.UserLevel[1].Ratio*100).ToString(".0")) %</span></h4>
+    <h4 class="pull-left">享受返利：<span class="uh_info">@((Model.UserLevel[1].Income*100).ToString(".0")) %</span></h4>    
+    <div style="clear:both"></div>
+      
+        </div>
+
+    </div>

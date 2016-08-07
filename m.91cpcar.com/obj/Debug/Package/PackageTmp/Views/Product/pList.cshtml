@@ -1,0 +1,50 @@
+﻿@model ProductModule.Models.ProductList
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Header-->
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+	   
+        <a class="mui-pull-right" href="/Member/Myhome"><img class="head-ico" src="/content/img/ico/icon_phome.png"></a>
+        <a class="mui-pull-right" href="/Product/getCar"><img class="head-ico" src="/content/img/ico/icon_shopcar.png"></a>
+        <div class="head-title">@Model.partCate.CategoryName</div>
+    </header>
+<div class="mui-content">
+	    <ul class="mui-table-view">
+            @foreach (var item in Model.proList)
+            {
+                	<li class="mui-table-view-cell mui-media">
+					<a href="/Product/ProductDetail?id=@item.ID">
+						<img class="mui-media-object mui-pull-left" src="http://www.91cpcar.com/@item.imgpath">
+						<div class="mui-media-body">
+							<div class="cate-list-title">@item.PartName</div> 
+                             @if (!string.IsNullOrEmpty(item.partSubtitle)&& item.partSubtitle.Length > 100)
+                                {
+                                 <div class='cate-list-content'>
+                                     @item.partSubtitle.Substring(0, 100) ....
+							    </div>                             
+                                }else{
+                              <div class='cate-list-content'>
+                                     @item.partSubtitle
+							    </div>   
+                             }                  
+                            
+						</div>
+					</a>
+                           <div class="cate-list-content ">
+                                 <div class='mui-pull-right'  >
+                               <a  href="/Product/ProductDetail?id=@item.ID" class="mui-btn mui-btn-danger">查看详细</a>
+                                </div>
+                                <div class='mui-pull-right' style="color:red; font-size:18px;margin-right:20px;padding-top:10px;">
+                                ￥@item.Price
+                                </div>
+							
+
+                            </div>
+				</li>
+            }
+			
+			</ul>
+	</div>

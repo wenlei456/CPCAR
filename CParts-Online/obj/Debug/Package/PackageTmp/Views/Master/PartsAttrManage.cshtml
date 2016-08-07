@@ -1,0 +1,143 @@
+﻿@model IEnumerable<DAO.PartAttr>
+@{
+    ViewBag.Title = "零件属性管理";
+    Layout = "~/Views/Shared/_master.cshtml";
+ 
+}
+
+<div class="content-box">
+    <!-- Start Content Box -->
+    <div class="content-box-header2">
+        <h3>零件属性管理</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">所有列表</a></li>
+            <!-- href must be unique and match the id of target div -->
+            <li><a href="#tab2" id="f1">添加</a></li>        
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <div>
+                <div class="bulk-actions">
+                    品牌:  <input type="text" class="text-input" />
+                    <a class="button" href="#">搜索</a>
+                </div>
+
+            </div>
+
+
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th valign="middle">
+                            <input class="check-all" type="checkbox" />
+                        </th>
+                        <th valign="middle">名称</th>
+                        <th valign="middle">标示名</th>                             
+                        <th valign="middle">操作</th>
+                    </tr>
+                </thead>
+       
+                <tbody style="font-size: 12px">
+                    @foreach (var item in Model)
+                    {
+                         <tr>
+                        <td >
+                            <input  type="checkbox"  class="check"/>
+                        </td>
+                        <td >@item.Name</td>
+                        <td >@item.FlagName</td>
+                        <td >&nbsp;&nbsp;<a class="button del" cid="@item.ID">删除</a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- End #tab1 -->
+        <div class="tab-content" id="tab2" style="width: 100%">
+     <form action="/Master/AddPartsAttr" method="post" id="addForm" name="addForm">         
+            <table width="90%">
+                <tr>
+                    <td>名称:</td>
+                    <td>     
+                      <input type="text" id="Name"  name="Name" placeholder="请输入属性名称" />
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>标示名:</td>
+                    <td>
+                          <input type="text"  id="FlagName"  name="FlagName" placeholder="请输入标示名"  /><span style=" color:red">标示名为后台数据用的唯一识别名,请不要用中文，例：color</span>
+                        </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>描述:</td>
+                    <td>                    
+                   
+                    </td>
+                    <td> </td>
+                </tr>
+                <tfoot>
+                    <tr>                      
+                        <td><input  type="button" id="saveCar" value="保存" class="button"/></td>
+                          <td><p style="color:red; display:none" id="errorMsg">信息不完整！</p></td>
+                    </tr>
+
+                </tfoot>
+            </table>
+            <div class="clear"> </div>       
+       </form>
+        </div>
+
+       
+    </div>
+    <!-- End .content-box-content -->
+</div>
+<script type="text/ecmascript">
+    $(function () {
+     
+        //添加
+    $("#saveCar").click(function () {
+        showdiv('正在保存中***');
+        var n = $("#Name").val();
+        var fn = $("#FlagName").val();     
+       if (n == "" || fn == "" ) {
+           hidediv();
+           $("#errorMsg").show();
+       } else {
+           $("#addForm").submit();
+       }
+        
+    })
+     
+        //删除
+    $(".del").click(function () {
+        if (confirm("确认要删除？")) {
+
+            var id = $(this).attr("cid");
+            Post("/Master/DelPartsAttr", { id: id }, function (data, error) {
+                if (error) {
+                    ChangBox("网络异常，请稍后再试");
+                }
+                if (data.result == "error") {
+                    alert("删除异常，请稍后再试！");
+                } else if (data.result == "ok") {
+                    setTimeout(function () {
+                        window.location.href = "/Master/PartsAttrManage";
+                    }, 2)
+
+                }
+            });
+        }
+    });
+    })
+</script>
+
+@section styles{
+    
+
+    }

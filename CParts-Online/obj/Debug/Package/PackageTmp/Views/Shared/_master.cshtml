@@ -1,0 +1,336 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+       <!--打包的js-->
+    @System.Web.Optimization.Scripts.Render("~/Content/jsliboff")
+    @System.Web.Optimization.Scripts.Render("~/bundles/jsoff")
+ 
+        <!--打包的css-->
+    
+    @RenderSection("scripts", required: false)  
+    @RenderSection("styles", required: false)
+
+     <link rel="stylesheet" href="/resources/css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/resources/css/invalid.css" type="text/css" media="screen" />
+    <!--                       Javascripts                       -->
+    <!-- jQuery -->
+
+
+    <script type="text/javascript" src="/resources/scripts/simpla.jquery.configuration.js"></script>
+   @* <script type="text/javascript" src="/resources/scripts/facebox.js"></script>*@
+    <script type="text/javascript" src="/resources/scripts/jquery.wysiwyg.js"></script>
+    <script type="text/javascript" src="/resources/scripts/GolMaseter.js"></script>
+        <script type="text/javascript" src="/resources/scripts/prodview.js"></script>
+    <style type="text/css">
+        #tinybox {
+            position: absolute;
+            display: none;
+            padding: 10px;
+            background: #ffffff url(/images/preload.gif) no-repeat 50% 50%;
+            border: 10px solid #e3e3e3;
+            z-index: 2000;
+        }
+
+        #tinymask {
+            position: absolute;
+            display: none;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: #000000;
+            z-index: 1500;
+        }
+
+        #tinycontent {
+            background: #ffffff;
+            font-size: 1.1em;
+        }
+
+ #bg{ display: none; position: absolute; top: 0%; left: 0%; width: 100%; height: 100%; background-color: black; z-index:1001; -moz-opacity: 0.7; opacity:.70; filter: alpha(opacity=70);}
+ #show{display: none; position: absolute; top: 25%; left: 22%; width: 40%; height: 40%; padding: 8px; border: 8px solid #E8E9F7; background-color: white; z-index:1002; overflow: auto;}
+
+    </style>
+</head>
+<body>
+     <div id="bg"></div>
+    <div id="show">
+      
+    </div>
+
+     
+    <div id="body-wrapper">
+        <!-- Wrapper for the radial gradient background -->
+        <div id="sidebar">
+            <div id="sidebar-wrapper">
+                <!-- Sidebar with logo and menu -->
+                <h1 id="sidebar-title">
+                  </h1>
+                <!-- Logo (221px wide) -->
+                <a href="/Master/index" runat="server">
+                    <div style="padding-left:60px;">
+                    <img id="logo" src="/content/img/logo.png" width="102" height="67" />
+                       </div> </a>
+                <!-- Sidebar Profile links -->
+                <div id="profile-links">
+                    Hello, 管理员
+                        , you have 
+                            <br />
+                    <br />
+                    <a href="/master/loginOut" title="User Center">修改密码
+                    </a>|
+                    <a href="/master/UpdatePW">注销登录</a>
+                </div>
+                <!------------连接地址后加入当前Li 的id--------------------->
+                <ul id="main-nav">
+                    <li><a href="~/Home.aspx" class="nav-top-item current" id="accorion1"
+                        name="accorion" onclick="/Master/index">首页 </a>
+                    </li>
+                    <li><a href="#" class="nav-top-item no-submenu" id="accorion2" name="accorion" onclick="chageType('accorion2','')">
+                        产品管理 </a>
+                        <ul>
+                            <li onclick="chageType('accorion2','accorion2_4')" id="l_2_4"><a href="/master/PartsManage?l_2_4"
+                                id="accorion2_4" name="accorion_">产品管理</a></li>
+                            <li onclick="chageType('accorion2','accorion2_1')" id="l_2_1"><a href="/master/CarsManage?l_2_1"
+                                id="accorion2_1" name="accorion_">汽车管理</a></li>
+                            <li onclick="chageType('accorion2','accorion2_2')" id="l_2_2"><a href="/master/PartsCateManage?l_2_2"
+                                id="accorion2_2" name="accorion_">产品分类管理</a></li>
+                            <li onclick="chageType('accorion2','accorion2_3')" id="l_2_3"><a href="/master/PartsAttrManage?l_2_3"
+                                id="accorion2_3" name="accorion_">产品属性管理</a></li>                            
+                            <li onclick="chageType('accorion2','accorion2_5')" id="l_2_5"><a href="/master/PartsBrandManage?l_2_5"
+                                id="accorion2_5" name="accorion_">产品品牌管理</a></li>
+                               <li onclick="chageType('accorion2','accorion2_6')" id="l_2_6"><a href="/master/DPartsManage?l_2_6"
+                                id="accorion2_6" name="accorion_">已下架产品</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" class="nav-top-item" id="accorion3" name="accorion" onclick="chageType('accorion3','')">
+                        会员管理 </a>
+                        <ul>
+                            <li onclick="chageType('accorion3','accorion3_1')" id="l_3_1"><a href="/MasterMember/memberLevel?l_3_1"
+                                id="accorion3_1" name="accorion_">会员等级</a></li>
+                            <li onclick="chageType('accorion3','accorion3_2')" id="l_3_2"><a href="/MasterMember/memberManage?l_3_2"
+                                id="accorion3_2" name="accorion_">会员管理</a></li>                          
+                        </ul>
+                    </li>
+                    <li><a href="#" class="nav-top-item" id="accorion4" name="accorion" onclick="chageType('accorion4','')">
+                       订单管理 </a>
+                        <ul>
+                            <li onclick="chageType('accorion4','accorion4_1')" id="l_4_1"><a href="/Master/Index?l_4_1"
+                                id="accorion4_1" name="accorion_">订单处理 </a></li>
+                                
+                        </ul>
+                    </li>
+                    <li><a href="#" class="nav-top-item" id="accorion5" name="accorion" onclick="chageType('accorion5','')">
+                        活动管理 </a>
+                        <ul id="testtest">
+                            <li onclick="chageType('accorion5','accorion5_1')" id="l_5_1"><a href="/Master/ActiveList?l_5_1"
+                                id="accorion5_1" name="accorion_">活动列表</a></li>
+                            <li onclick="chageType('accorion5','accorion5_2')" id="l_5_2"><a href="/Master/GetActivePros" id="accorion5_2"
+                                name="accorion_">活动产品</a></li>
+                            <li onclick="chageType('accorion5','accorion5_3')" id="l_5_3"><a href="#" id="accorion5_3"
+                                name="accorion_">暂无</a></li>
+                            <li onclick="chageType('accorion5','accorion5_4')" id="l_5_4"><a href="#" id="accorion5_4"
+                                name="accorion_">暂无</a></li>
+                        </ul>
+                    </li>
+                @*    <li><a href="#" class="nav-top-item" id="accorion6" name="accorion" onclick="chageType('accorion6','')">
+                        系统属性 </a>
+                        <ul>
+                            <li onclick="chageType('accorion6','accorion6_1')" id="l_6_1"><a href="/master/NavManage?l_6_1"
+                                id="accorion6_1" name="accorion_">导航管理</a></li>
+                            <li onclick="chageType('accorion6','accorion6_2')" id="l_6_2"><a href="#" id="accorion6_2"
+                                name="accorion_">Marketing Catalog</a></li>
+                            <li onclick="chageType('accorion6','accorion6_3')" id="l_6_3"><a href="#?l_6_3"
+                                id="accorion6_3" name="accorion_">暂无</a></li>
+                        </ul>
+                    </li>*@
+                </ul>
+                <!-- End #main-nav -->
+                <div id="messages" style="display:none">
+                  
+                    <br />
+                    
+                    <br />
+                    <br />
+                   
+                    
+                </div>
+            </div>
+        </div>
+        <div id="main-content">
+            <div style="text-align: right; padding-right: 15px; margin-top: -30px; padding-bottom:0px; height: 14px;">
+             <!----   <a href="#" target="_blank">Site Map</a> |----> @*<a href="/WebPage/PartsOnline/PartsOrderList.aspx?l_2_5" target="_blank">Shopping Cart</a>*@
+              <a  href="#" onClick="javascript:window.external.addFavorite(window.location.href,'诚配网站后台管理')" target="_blank">加入收藏夹</a> @*| <a href="/WebPage/Gifts/GiftsList.aspx?l_2_3" target="_blank">Gifts Exchange</a>*@
+            </div>
+            <noscript>
+                <div class="notification error png_bg">
+                    <div>
+                        Javascript is disabled or is not supported by your browser. Please <a href="/Product/Index/" title="Upgrade to a better browser">
+                            upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852"
+                                title="Enable Javascript in your browser">enable</a> Javascript to navigate
+                        the interface properly. Download From <a href="http://powerlinkworld.com">powerlinkworld.com</a></div>
+                </div>
+            </noscript>
+            <div class="top-header">
+                <div class="tsearch role=search">
+                    <ul id="J_TSearchTabs" class="tsearch-tab clearfix" style="padding-bottom: 0px">
+                        <li style="height: 25px;background: rgb(35, 156, 222)" id="order"><a style="color:#fff;">订单</a><b class="rc-lt"></b><b class="rc-rt"></b></li>
+                       @* <li style="height: 25px; background: none" id="product"><a>Products</a><b class="rc-lt"></b><b class="rc-rt"></b></li>
+                        <li style="height: 25px; background: none" id="stock"><a>Stock</a><b class="rc-lt"></b><b class="rc-rt"></b></li>
+                        <li style="height: 25px; background: none" id="TF"><a >Technical Data</a><b class="rc-lt"></b><b class="rc-rt"></b></li>
+                        <li style="height: 25px; background: none" id="3d"><a >3D Parts</a><b class="rc-lt"></b><b class="rc-rt"></b></li>
+                        <li style="height: 25px; background: none" id="ligift"><a >Gifts</a> <b class="rc-lt"></B><b class="rc-rt"></b></li>*@
+                    </ul>
+                    <div class="tsearch-panel clearfix">
+                        <div class="tsearch-fields focus">
+                            <input type="text" style="height: 18px; border-bottom: 2px" id="condition" onkeydown="keycode(event);"/>
+                        </div>
+                        <div style=" text-align:center; font-size:16px">
+                        <input type="button" class="tsearch-submit" type="submit" id="serchbutton"  value="Search" /><B class="rc-lb"></B><B class="rc-lt"></B>
+                        <input type="hidden" id="hide1" value="order" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Head -->
+            <div style=" padding-bottom:10px;" class="clear">
+            </div>
+
+            <div style=" padding-top:4px; margin-bottom:16px;"> @*<img src="/images/banner001.jpg" alt="" width="100%" />*@</div>
+   
+            <div class="clear">
+            </div>
+            <!-- End .clear -->
+            <!------------------------内页开始---------------------------------------->
+             <div id="container">@RenderBody()</div>
+        
+
+            <!---
+            <div class="content-box column-left">
+                <div class="content-box-header">
+                    <h3>
+                        New stock</h3>
+                </div>              
+                <div class="content-box-content">
+                    <div class="tab-content default-tab">
+                        <table width="100%" style="margin-top: -5px">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Model
+                                    </th>
+                                    <th>
+                                        Series
+                                    </th>
+                                    <th>
+                                        Engine
+                                    </th>
+                                    <th>
+                                        Alternator
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size: 12px">
+                         
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <a href="/WebPage/Stock/Stock.aspx?l_5_1">View More</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  
+                </div>
+              
+            </div>
+          
+            <div class="content-box column-right">
+                <div class="content-box-header">
+                
+                    <h3>
+                        New Brochure</h3>
+                </div>
+              
+                <div class="content-box-content">
+                    <div class="" style="background-color: White; text-align: left;">
+                        <br />
+                      
+                    </div>
+                  
+                </div>
+               
+            </div>
+            <div class="clear"></div>           
+            <div class="notification attention png_bg">
+                <a href="#" class="close">
+                    <img src="resources/images/icons/cross_grey_small.png" title="Close this notification"
+                        alt="close" runat="server" /></a>
+                <div>
+                    <a ID="HyperLink1" runat="server"></a>
+                </div>
+                
+            </div>
+            <div class="notification information png_bg">
+                <a href="#" class="close">
+                    <img src="resources/images/icons/cross_grey_small.png" title="Close this notification"
+                        alt="close" runat="server" /></a>
+                <div>
+                  <a ID="HyperLink2" runat="server"></a>
+                </div>
+            </div>
+            <div class="notification success png_bg">
+                <a href="#" class="close">
+                    <img src="resources/images/icons/cross_grey_small.png" title="Close this notification"
+                        alt="close" runat="server" /></a>
+                <div>
+                <a ID="HyperLink3" runat="server"></a>
+                </div>
+            </div>
+            <div class="notification error png_bg">
+                <a href="#" class="close">
+                    <img src="resources/images/icons/cross_grey_small.png" title="Close this notification"
+                        alt="close" runat="server" /></a>
+                <div>
+                   <a ID="HyperLink4" runat="server"></a>
+                </div>
+            </div>
+           
+            --->
+            <div id="footer">
+                <small>
+                    <!-- Remove this notice or replace it with whatever you want -->
+                    &#169; Copyright 2015 | Powered by <a href="http://www.91cpcar.com"
+                        target="_blank">www.91cpcar.com</a> | <a href="#">Top</a> </small>
+            </div>
+            <!-- End #footer -->
+        </div>
+        <!-- End #main-content -->
+    </div>
+
+
+
+</body>
+</html>
+<script type="text/javascript">
+    window.onload = function () {
+        var args = document.location.toString();
+        var lo = args.indexOf("?");
+        if (parseInt(lo) > 1) {
+            var agu = args.substr(lo + 1, 5)
+            if (document.getElementById(agu) != null) {
+                document.getElementById(agu).onclick();
+                $("#" + agu).parent().slideDown("slow");
+            }
+        }
+    }
+</script>

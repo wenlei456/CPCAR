@@ -1,0 +1,179 @@
+﻿@model m.cpcar.com.Models.TypeListByCarViewModel
+@{
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CP文化</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+    <meta name="keywords" content="诚配,诚配改装,汽车改装,改装件,汽车配件,海外配件,进口配件,保时捷,宝马,奔驰,法拉利,豪车改装,高端改装">
+    <meta name="description" content="">   <meta  />
+       <link href="/New/content/css/mui.css" rel="stylesheet" />
+     <link href="/New/content/css/main.css" rel="stylesheet" />
+    
+    <style>
+
+.mui-bar-nav ~ .mui-content{padding:44px 0 1px 0;}
+.mui-content{background:#eee;}
+.head-ico{margin-right:10px;}
+#segmentedControls a{position:relative;}
+#segmentedControls .mui-active:before{position:absolute;z-index:1;left:3px;top:6px;width:3px;height:40px;background:#c10000;content: "";}
+.mui-control-item{background:#fff;color:#333 !important;}
+.mui-segmented-control.mui-segmented-control-inverted.mui-segmented-control-vertical .mui-control-item,.mui-segmented-control.mui-segmented-control-inverted.mui-segmented-control-vertical .mui-control-item.mui-active{border-bottom: solid 1px #eee;}
+.mui-control-content{padding-top:10px;}
+.mui-table-view.mui-grid-view .mui-table-view-cell > a:not(.mui-btn){background: #fff;}
+.mui-table-view-cell{margin-left: 0;}
+.mui-table-view.mui-grid-view .mui-table-view-cell > a:not(.mui-btn){margin: 0;}
+.mui-table-view-cell{margin-bottom:0;}
+        .mui-row.mui-fullscreen > [class*="mui-col-"] {
+            height: 100%;
+        }
+
+        .mui-col-xs-3,
+        .mui-control-content {
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .mui-segmented-control .mui-control-item {
+            width: 100%;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+            color: #c10000 !important;
+        }
+
+        .mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
+            font-size: 15px;
+            color: #333;
+            padding-bottom:8px;
+            margin-top: 0;
+            height:23px;
+        }
+
+        .remai {
+        border-bottom: 1px solid #eee;
+        border: 0;
+        display: block;
+          width: 100%;
+              transition: background-color .1s linear;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #333 !important;
+        padding: 16px 10px;
+    background: #fff;
+        margin-bottom: 1px;
+        }
+    </style>
+      <script>
+          var _hmt = _hmt || [];
+          (function () {
+              var hm = document.createElement("script");
+              hm.src = "//hm.baidu.com/hm.js?d252ab9e4e87638601460ea0c7412a01";
+              var s = document.getElementsByTagName("script")[0];
+              s.parentNode.insertBefore(hm, s);
+          })();
+</script>
+</head>
+<body>
+     <div id="modal-bg"></div>
+    <div id="modal-show">
+       <img  src="/New/content/img/ico/loading.gif"/>
+    </div>
+  
+    <div class="main-container">
+<!--Header-->
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-pull-left "></a>	
+        <a class="mui-pull-right" href="/Member/Myhome"><img class="head-ico" src="/New/content/img/ico/icon_phome.png"></a>
+        <a class="mui-pull-right" href="/Product/getCar"><img class="head-ico" src="/New/content/img/ico/icon_shopcar.png"></a>
+        <div class="head-title"></div>
+    </header>
+	<!--body-->
+	<div class="mui-content mui-row mui-fullscreen">
+			<div class="mui-col-xs-3">
+				<div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
+
+                      @for (int i = 0; i < Model.topCate.Count; i++)
+                    {
+                        
+                        if(i==6){
+                             @*<a id="aaa" class="remai" href="/Product/cList?t=7&&b=0&&m=0&&y=0&&h=null">@Model.topCate[i].CategoryName</a>*@
+                            
+                        }
+                        else
+                        {
+                         <a class="mui-control-item" href='#content-@i'>@Model.topCate[i].CategoryName</a>
+                    }
+                    }
+				</div>
+			</div>
+			<div id="segmentedControlContents" class="mui-col-xs-9">
+				
+                 
+                      @for (int i = 0; i < Model.topCate.Count; i++)
+                      {
+                          var plist = Model.childenrCate.Where(o=>o.ParentID==Model.topCate[i].ID);
+                        
+                           <div id="content-@i" class='mui-control-content mui-active '>
+
+                               	<ul class="mui-table-view mui-grid-view">
+
+                                      
+                                       @foreach (var item in plist)
+	                                    {
+		                                 <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		                                    <a href="/Product/cList?t=@item.ID&&b=@Model.Carinfo.Brand&&m=@Model.Carinfo.Model&&y=@Model.Carinfo.ProYear&&h=0">
+		                                        <img class="mui-media-object" src="http://91cpcar.com/@item.ICOPath">
+		                                        <div class="mui-media-body">@item.CategoryName</div>
+		                                    </a>
+		                                 </li>
+	                                    }
+                                           
+                                       </ul>
+                                     
+                               </div>
+                      }
+                    
+             
+			</div>
+	</div>
+</div>
+   <footer class="pfoot">		
+        <div class="ui-footer-version">        
+        <p>Copyring @@ 2015 诚配91CPCAR.com  版权所有 <br> 湘ICP备15020410号  </p>
+        </div>
+  
+	</footer>
+</body>
+</html>
+  <script src="/New/content/js/mui.min.js"></script>
+ <script src="/New/Content/js/zepto.min.js"></script>
+<script src="/New/Content/js/zepto.cookie.js"></script>
+<script src="/New/Content/js/Base.js"></script>
+ 
+    <script>
+        mui.init({
+            swipeBack: false //启用右滑关闭功能
+        });
+
+        var controls = document.getElementById("segmentedControls");
+        var contents = document.getElementById("segmentedControlContents");
+
+        controls.querySelector('.mui-control-item').classList.add('mui-active');
+
+        //controls.querySelector('.mui-control-Hot').classList.add('mui-active');
+        contents.querySelector('.mui-control-content ').classList.add('mui-active');
+        </script>
+      
+<script>
+    if (Validata.IsPC()) {
+        //  window.location.href = "http://www.91cpcar.com";
+    }
+</script>
+

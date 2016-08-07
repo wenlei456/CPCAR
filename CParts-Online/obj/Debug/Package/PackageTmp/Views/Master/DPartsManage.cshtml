@@ -1,0 +1,1387 @@
+﻿@model CParts_Offline.Models.PartOutModel
+@{
+    ViewBag.Title = "下架零件管理";
+    Layout = "~/Views/Shared/_master.cshtml";
+    var carBrands = Model.Cars.GroupBy(m => m.Brand).ToList();
+    System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+}
+
+@section styles{
+     <link href="/Content/Tools/imgUpload/uploadify.css" type="text/css" rel="stylesheet" />
+        <link  rel="stylesheet" href="~/Content/bootstrap/css/bootstrap.min.css"/>
+    <style>
+        #partExtAttr span{
+          padding:3px;
+           cursor:pointer;
+        }
+        .AttrName 
+        {
+            font-size:18px;
+            color:red ! important;
+             border:1px solid red;
+        }
+        .AtttValue {
+              border:1px solid #0b1ff8;
+              margin:5px;
+        }
+        .currAttr {
+         background-color:#0b1ff8;
+         color:#fff; 
+        }
+        .imgDiv {
+            float:left; margin:5px;border:2px solid #444
+        }
+            .imgDiv img {
+                width:200px;height:200px;
+            }
+        .currImg {
+        border:4px solid red;
+        }
+    </style>
+    <style>
+             .hover {
+        background:#b8eba5 !important;
+        }
+    .paginator
+ {
+     font: 14px Arial, Helvetica, sans-serif;
+     padding: 10px 20px 10px 0;
+     margin: 0px auto;
+ }
+  
+ .paginator a
+ {
+     border: solid 1px #ccc;
+     color: #0063dc;
+     cursor: pointer;
+     text-decoration: none;
+ }
+  
+ .paginator a:visited
+ {
+     padding: 1px 6px;
+     border: solid 1px #ddd;
+     background: #fff;
+     text-decoration: none;
+ }
+  
+ .paginator .cpb
+ {
+     border: 1px solid #F50;
+     font-weight: 700;
+     color: #F50;
+     background-color: #ffeee5;
+ }
+  
+ .paginator a:hover
+ {
+     border: solid 1px #F50;
+     color: #f60;
+     text-decoration: none;
+ }
+  
+ .paginator a, .paginator a:visited, .paginator .cpb, .paginator a:hover
+ {
+     float: left;
+     height: 22px;
+     line-height: 22px;
+     min-width: 10px;
+     _width: 10px;
+     margin-right: 8px;
+     text-align: center;
+     white-space: nowrap;
+     font-size: 14px;
+     font-family: Arial,SimSun;
+     padding: 0 3px;
+ }
+  
+ .paginator label
+ {
+     display:block;   
+     float:left;   
+ }
+
+</style>
+    <style type="text/css">
+        .dropdown-submenu {
+            position: relative;
+        }
+        .dropdown-submenu > .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: -1px;
+            -webkit-border-radius: 0 6px 6px 6px;
+            -moz-border-radius: 0 6px 6px;
+            border-radius: 0 6px 6px 6px;
+        }
+        .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }
+        .dropdown-submenu > a:after {
+            display: block;
+            content: " ";
+            float: right;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 5px 0 5px 5px;
+            border-left-color: #ccc;
+            margin-top: 5px;
+            margin-right: -10px;
+        }
+        .dropdown-submenu:hover > a:after {
+            border-left-color: #fff;
+        }
+        .dropdown-submenu.pull-left {
+            float: none;
+        }
+        .dropdown-submenu.pull-left > .dropdown-menu {
+            left: -100%;
+            margin-left: 10px;
+            -webkit-border-radius: 6px 0 6px 6px;
+            -moz-border-radius: 6px 0 6px 6px;
+            border-radius: 6px 0 6px 6px;
+        }
+    </style>
+}
+<div class="content-box">
+    <!-- Start Content Box -->
+    <div class="content-box-header2">
+        <h3>零件管理</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">所有列表</a></li>     
+           @* <li><a href="#tab2" id="f1">新增产品</a></li>*@
+             <li><a href="#tab3" id="tabEdit">编辑产品</a></li>
+            <li><a href="#tab5" id="tabAdv">高级属性</a></li>           
+            <li><a href="#tab4" id="tabEditStock">修改库存</a></li>
+             <li><a href="#tab6" id="tabImg">图片管理</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <div>
+                <form method="post" action="/Master/DPartsManage/">
+                <div class="bulk-actions">                    
+                    <select id="SelectByCate" name="SelectByCate" style="display:none">
+                        <option value="-1">所有分类</option>
+                          @foreach (var item in Model.PartCateList.Where(m=>m.ParentID!=0))
+                                {
+                                     <option value="@item.ID">@item.CategoryName</option>
+                                }
+
+                        </select>
+                  @*  <input type="text" class="text-input" />*@
+                   @* <button type="submit" class="button"  id="btnSearch">搜索</button>*@
+                </div>
+                    <nav class="navbar navbar-default" role="navigation">
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <ul class="nav navbar-nav">   @* navGoon*@
+               @foreach (var item in Model.PartCateList.Where(m => m.ParentID == 0))
+               {
+                    <li class="dropdown"><a href="javascript:void(0)" val="@item.ID " class="dropdown-toggle" data-toggle="dropdown">@item.CategoryName<b class="caret"></b></a>
+                       @Html.navGoon(item.ID,Model.PartCateList,"navCatelist")
+                    </li>
+               }
+              
+                
+            </ul>
+        </div>
+    </nav>
+                    </form>
+            </div>
+
+
+            <table width="100%" id="datalist">
+                <thead>
+                    <tr>
+                      <th valign="middle">ID</th>
+                        <th valign="middle">名称</th>
+                        <th valign="middle">分类</th>
+                        <th valign="middle">品牌</th>
+                        <th valign="middle">型号</th>
+                        <th valign="middle">货号</th>
+                        <th valign="middle">价格</th>
+                         <th valign="middle">库存</th>
+                        <th valign="middle">排序</th>
+                        <th valign="middle">上架时间</th>
+                        <th valign="middle">状态</th>
+                          <th valign="middle">操作</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    @*分页*@
+        <tr class="">
+            <td colspan="11"  style="text-align:right;" class="paginator">
+                <div style="float:right;">
+                <span>
+                    @Html.ShowPageNavigate(Model.currentPage, Model.pageSize, Model.totleCount)
+                </span>
+                    </div>
+            </td>
+        </tr>
+                </tfoot>
+                <tbody style="font-size: 12px">
+                    @foreach (var item in Model.PartList)
+                    {
+                        <tr>
+                            <td> @item.ID</td>
+                            <td valign="middle">@item.PartName</td>
+                            <td valign="middle">@item.CategoryName</td>
+                            <td valign="middle">@item.BrandName</td>
+                            <td valign="middle">@item.PartModel</td>
+                            <td valign="middle">@item.PartSuppyNo</td>
+                            <td valign="middle">@item.Price</td>
+                             <td valign="middle">@item.StockNUM</td>
+                            <td valign="middle">@item.Orderby</td>
+                            <td valign="middle">@item.ShowDate</td>
+                            <td valign="middle">@(item.State == 0 ? "下架" : "已上架")</td>
+                            <td><a class="button downPro" parid="@item.ID" parstatus="@item.State">@(item.State == 0 ? "上架" : "下架")</a>&nbsp;&nbsp;&nbsp;
+                                <a class="button editPart" parid="@item.ID">编辑</a>&nbsp;&nbsp;
+                                <a class="button EditAtt" pn="@item.PartName" pid="@item.ID" pb="@item.BrandName" pm="@item.PartModel" ps="@item.PartSuppyNo" pp="@item.StockNUM">高级属性</a>
+                                <a class="button editStock" pn="@item.PartName" pid="@item.ID" pb="@item.BrandName" pm="@item.PartModel" ps="@item.PartSuppyNo" pp="@item.StockNUM">修改库存</a>&nbsp;&nbsp;
+                               <a class="button imgPart"  pn="@item.PartName" pid="@item.ID" pb="@item.BrandName" pm="@item.PartModel" ps="@item.PartSuppyNo" pp="@item.StockNUM">图片管理</a>&nbsp;&nbsp;
+                                 <a class="button " href='/Product/detail/@item.ID' target="_blank">网页查看</a></td>
+                        </tr>
+                    }
+                       
+                </tbody>
+            </table>
+        </div>
+        <!-- End #tab1 -->
+        <!-- 添加 -->
+      @**  <div class="tab-content" id="tab2" style="width: 100%">
+          
+                <table width="90%">
+                    <tr>
+                        <td>名称:</td>
+                        <td>
+                            <input type="text" id="PartName" name="PartName" placeholder="请输入产品名称" /><span style="color:red">*</span>
+                        </td>
+                        <td>分类:</td>
+                        <td>
+                            <select id="PartCategory" name="Category"><span style="color:red">*</span>
+                                <option value="-1">请选择分类</option>
+                                @foreach (var item in Model.PartCateList)
+                                {
+                                     <option value="@item.ID">@item.CategoryName</option>
+                                }
+                            </select>
+                            <div class="dropdown">
+                                <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#"
+                                    href="javascript:;">选择分类 <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                    @foreach (var item in Model.PartCateList.Where(m => m.ParentID == 0))
+                                    {
+                                          <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="javascript:;">@item.CategoryName</a>                                        
+                                              @Html.navGoon(item.ID, Model.PartCateList, "navCateadd")  
+                                       
+                                    </li>
+                                          <li class="divider"></li>
+                                    }     
+                                </ul>
+                            </div>                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>品牌:</td>
+                        <td>
+                            <select id="PartBrand" name="PartBrand"><span style="color:red">*</span>
+                                <option value="-1">请选择品牌</option>
+                                    @foreach (var item in Model.PartBrandList)
+                                    {
+                                     <option value="@item.ID">@item.BrandName</option>
+                                    }
+                            </select> 
+                         
+                        </td>
+                        <td>型号:</td>
+                        <td>
+                            <input type="text" name="PartModel" id="PartModel"  placeholder="请输入型号"><span style="color:red">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>货号:</td>
+                        <td>
+                            <input type="text" name="PartSupplyNo" id="PartSupplyNo">
+                        </td>
+                        <td>价格:</td>
+                        <td>
+                            <input type="text" name="PartPrice" id="PartPrice"   placeholder="请输入价格"><span style="color:red">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>排序:</td>
+                        <td>
+                            <input type="text" name="PartOrderby" id="PartOrderby" value="0">
+                        </td>
+                        <td>状态:</td>
+                        <td>
+                            <select id="PartState">
+                                <option value="1">上架</option>
+                                <option value="0">下架</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>本地库存</td>
+                        <td><input type="text" name="PartStock" id="PartStock" value="0"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle;">适用车型</td>
+                        <td colspan="3">
+                            <table>
+                                <tr>
+                                    <td>品牌<br />
+                                        <select id="CarBrand" name="CarBrand" multiple="true" size="10" style="width: 100px">
+                                                @foreach (var item in carBrands)
+                                                {
+                                                   <option value="@item.Key">@item.Key</option>
+                                                }
+                                        </select>
+                                    </td>
+                                    <td>年份<br />
+                                        <select id="CarYear" name="CarYear" multiple="true" size="10" style="width: 100px">
+                                        </select>
+                                    </td>
+                                    <td>型号<br />
+                                        <select id="CarModel" name="CarModel" multiple="true" size="10" style="width: 100px">
+                                        </select>
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <a href="javascript:void(0)" class="button" id="AddCar">添加->>></a>
+                                        <br /><br />
+                                         <a href="javascript:void(0)" class="button" id="RemoveCar"><<<-移除</a>
+                                    </td>
+                                     <td>已选型号<br />
+                                        <select id="SelectCar" name="SelectCar" multiple="true" size="10" style="width: 200px"><span style="color:red">*</span>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                    </tr>
+                    <tr>
+                        <td>标题</td>
+                        <td colspan="3">
+                          <textarea name="PartTitle" id="PartTitle"></textarea><span style="color:red">*</span>
+                        </td>                      
+                    </tr>
+                    <tr>
+                      <td>副标题</td>
+                        <td colspan="3">
+                          <textarea name="PartSubTitle" id="PartSubTitle" cols="100" rows="5"></textarea><span style="color:red">*</span>
+                        </td>     
+                    </tr>
+                    <tr>                       
+                         <td>详细描述</td>
+                        <td colspan="3">
+                          <textarea name="PartDes" id="PartDes"></textarea>
+                        </td>
+                    </tr>
+
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <input type="button" id="saveCar" value="       下一步      " class="button" /></td>
+                            <td>
+                                <p style="color: red; display: none" id="errorMsg">信息不完整！</p>
+                            </td>
+                        </tr>
+
+                    </tfoot>
+                </table>
+                <div class="clear"></div>
+         
+        </div>      ***@
+        <!-----修改产品--->  
+        <div class="tab-content" id="tab3" style="width: 100%">
+                  <table width="90%">
+                    <tr>
+                        <td>名称:</td>
+                        <td>
+                            <input type="text" id="E_PartName" name="E_PartName" placeholder="请输入产品名称" /><span style="color:red">*</span>
+                        </td>
+                        <td>分类:</td>
+                        <td>
+                            <select id="E_PartCategory" name="E_Category"><span style="color:red">*</span>
+                                <option value="-1">请选择分类</option>
+                                @foreach (var item in Model.PartCateList)
+                                {
+                                     <option value="@item.ID">@item.CategoryName</option>
+                                }
+                            </select>      
+                              <div class="dropdown">
+                                <a id="deLabel" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#"
+                                    href="javascript:;">选择分类 <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                    @foreach (var item in Model.PartCateList.Where(m => m.ParentID == 0))
+                                    {
+                                          <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="javascript:;">@item.CategoryName</a>                                        
+                                              @Html.navGoon(item.ID, Model.PartCateList, "navCateedit")  
+                                       
+                                    </li>
+                                          <li class="divider"></li>
+                                    }     
+                                </ul>
+                            </div>                             
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>品牌:</td>
+                        <td>
+                            <select id="E_PartBrand" name="E_PartBrand"><span style="color:red">*</span>
+                                <option value="-1">请选择品牌</option>
+                                    @foreach (var item in Model.PartBrandList)
+                                    {
+                                     <option value="@item.ID">@item.BrandName</option>
+                                    }
+                            </select> 
+                         
+                        </td>
+                        <td>型号:</td>
+                        <td>
+                            <input type="text" name="E_PartModel" id="E_PartModel"  placeholder="请输入型号"><span style="color:red">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>货号:</td>
+                        <td>
+                            <input type="text" name="E_PartSupplyNo" id="E_PartSupplyNo">
+                        </td>
+                        <td>价格:</td>
+                        <td>
+                            <input type="text" name="E_PartPrice" id="E_PartPrice"   placeholder="请输入价格"><span style="color:red">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>排序:</td>
+                        <td>
+                            <input type="text" name="E_PartOrderby" id="E_PartOrderby" value="0">
+                        </td>
+                        <td>状态:</td>
+                        <td>
+                            <select id="E_PartState">
+                                <option value="1">上架</option>
+                                <option value="0">下架</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>本地库存</td>
+                        <td><input type="text" name="E_PartStock" id="E_PartStock" value="0"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle;">适用车型</td>
+                        <td colspan="3">
+                            <table>
+                                <tr>
+                                    <td>品牌<br />
+                                        <select id="E_CarBrand" name="E_CarBrand" multiple="true" size="10" style="width: 100px">
+                                                @foreach (var item in carBrands)
+                                                {
+                                                   <option value="@item.Key">@item.Key</option>
+                                                }
+                                        </select>
+                                    </td>
+                                    <td>年份<br />
+                                        <select id="E_CarYear" name="E_CarYear" multiple="true" size="10" style="width: 100px">
+                                        </select>
+                                    </td>
+                                    <td>型号<br />
+                                        <select id="E_CarModel" name="E_CarModel" multiple="true" size="10" style="width: 100px">
+                                        </select>
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <a href="javascript:void(0)" class="button" id="E_AddCar">添加->>></a>
+                                        <br /><br />
+                                         <a href="javascript:void(0)" class="button" id="E_RemoveCar"><<<-移除</a>
+                                    </td>
+                                     <td>已选型号<br />
+                                        <select id="E_SelectCar" name="E_SelectCar" multiple="true" size="10" style="width: 200px"><span style="color:red">*</span>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                    </tr>
+                    <tr>
+                        <td>标题</td>
+                        <td colspan="3">
+                          <textarea name="E_PartTitle" id="E_PartTitle" cols="100" rows="5"></textarea><span style="color:red">*</span>
+                        </td>                      
+                    </tr>
+                    <tr>
+                      <td>副标题</td>
+                        <td colspan="3">
+                          <textarea name="E_PartSubTitle" id="E_PartSubTitle" cols="100" rows="5"></textarea><span style="color:red">*</span>
+                        </td>     
+                    </tr>
+                    <tr>                       
+                         <td>详细描述</td>
+                        <td colspan="3">
+                          <textarea name="E_PartDes" id="E_PartDes"></textarea>
+                        </td>
+                    </tr>
+
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <input type="button" id="E_saveCar" value="       保存      " class="button" /></td>
+                            <td>
+                                <p style="color: red; display: none" id="E_errorMsg">信息不完整！</p>
+                            </td>
+                        </tr>
+
+                    </tfoot>
+                </table>
+                <div class="clear"></div>
+
+
+        </div>
+        <!--修改库存-->
+         <div class="tab-content" id="tab4" style="width: 100%">
+             <input  type="hidden" value="" id="editStock_pid"/>
+              <table width="50%">
+                  <tr>
+                      <td>供货号</td>
+                      <td><span id="editStock_psupply"></span></td>
+                  </tr>
+                  <tr>
+                      <td>产品名</td>
+                      <td><span id="editStock_pname"></span></td>
+                  </tr>
+                  <tr>
+                      <td>品牌</td>
+                      <td><span id="editStock_pbrand"></span></td>
+                  </tr>
+                  <tr>
+                      <td>型号</td>
+                      <td><span id="editStock_pmodel"></span></td>
+                  </tr>
+                  <tr>
+                      <td>本地库存</td>
+                      <td>
+                          <input type="text" id="editStock_pnum"></input></td>
+                  </tr>
+                  <tr>
+                      <td colspan="2">
+                          <input class="button" value="保存" id="doEditStock" /></td>                  
+                  </tr>
+                  </table>
+
+         </div>
+        <!---高级属性-->
+          <div class="tab-content" id="tab5" style="width: 100%">
+              <div style="display:inline; float:left">
+                  <h3>当前产品</h3>
+                  <p style="color:red" id="attrInfo"></p>
+                  <table id="partExtAttr" style="width:800px"></table>
+                  <br />
+                  <br />
+                  <div><button class="button" id="delAttr">删除选中属性</button></div>
+                  <div style="color:red">注：选择属性删除将会删除改属性下所有的值，及其所有值下的子属性。选择值删除将会删除该值及子属性</div>
+              </div>
+              <div style="display:inline; float:right">
+                  <input  type="hidden" id="hidPartID"/>
+                  <table style="width:500px">
+                
+                      <tr>
+                          <td>属性</td>
+                          <td><select id="PartAtts">
+                              @if (Model.PartAttrList != null)
+                              {
+                                  <option value="-1">请选择属性</option>
+                                  foreach (var item in Model.PartAttrList)
+                                  {
+                                     <option value="@item.FlagName">@item.Name</option>
+                                  }
+                              }
+                              </select></td>
+                          </tr>
+                      <tr>
+                          <td>属性值</td>
+                          <td><input type="text"  id="PartsAttValue" /></td>                   
+                          </tr>
+                         <tr>
+                          <td>价格</td>
+                          <td><input  type="text" id="PartsAttPrice" /></td>
+                      </tr>
+                          <tr>
+                          <td>库存</td>
+                          <td><input  type="text" id="PartsAttQty"  value="0"/></td>
+                      </tr>
+                      <tr>
+                          <td colspan="2">
+                              <button id="AddPartAttr">添加</button>
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <div style="clear:both"></div>
+        </div>
+        <!--图片-->
+          <div class="tab-content" id="tab6" style="width: 100%;">
+                <h3>当前产品</h3>
+                  <p style="color:red" id="ProductInfo"></p>
+              <button id="delImg" class="button">--选中删除--</button>
+              <br /><br />
+              <div id="imgView"></div>
+              <div style="clear:both;"></div>
+              <form id="form1" runat="server" enctype="multipart/form-data">
+              <div>
+                  <input type="file" name="uploadify" id="uploadify" />&nbsp;  <a href="javascript:$('#uploadify').uploadifyUpload()">上传</a>| <a href="javascript:$('#uploadify').uploadifyClearQueue()">取消上传</a>
+              </div>
+              <div id="fileQueue"></div>
+              <div style="clear: both;"></div>
+                  </form>
+          </div>
+    </div>
+    <!-- End .content-box-content -->
+</div>
+
+@section scripts
+{
+     <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+     <script type="text/javascript" src="/Content/Tools/imgUpload/jquery.uploadify.min.js"></script>
+     <script type="text/javascript" src="/Content/Tools/imgUpload/uploadswfobject.js"></script>
+      <script type="text/javascript" src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var parentAttr;//父属性
+       // var currType;//选中属性类型
+        var editor_PartTitle;
+        var editor_PartSubTitle;
+        var editor_PartDes;
+        var E_editor_PartTitle;
+        var E_editor_PartSubTitle;
+        var E_editor_PartDes;
+        $(function () {
+            initImgUpload();//图片控件初始化
+            //初始化富文本框
+           // editor_PartTitle = CKEDITOR.replace("PartTitle", { width: 1200, height: 100 });
+           // editor_PartSubTitle = CKEDITOR.replace("PartSubTitle", { width: 1200, height: 100 });
+          //  editor_PartDes = CKEDITOR.replace("PartDes", { width: 1200, height: 100 });
+            E_editor_PartTitle = CKEDITOR.replace("E_PartTitle", { width: 1200, height: 100 });
+           // E_editor_PartSubTitle = CKEDITOR.replace("E_PartSubTitle", { width: 1200, height: 100 });
+            E_editor_PartDes = CKEDITOR.replace("E_PartDes", { width: 1200, height: 500 });
+            var CarInfoList ='@jss.Serialize(Model.Cars)';          
+            var CarObjs = JSON2Obj(strZY(CarInfoList));
+            //适用车选中品牌
+            $("#CarBrand").change(function () {
+                var carBrand = $(this).val();
+                var options; //CarYear
+                $("#CarYear option").remove();
+                var n = {}, r = []; //n为hash表，r为临时数组
+                for (var i = 0; i <CarObjs.length; i++) {
+                    if (CarObjs[i].Brand == carBrand) {
+                        if (!n[CarObjs[i].ProYear]) //如果hash表中没有当前项
+                        {
+                            n[CarObjs[i].ProYear] = true; //存入hash表   
+                            options = "<option value='" + CarObjs[i].ProYear + "'>" + CarObjs[i].ProYear + "</option>";
+                            $("#CarYear").append(options);//Model
+                        }
+                    }
+                }
+            })
+            $("#E_CarBrand").change(function () {
+                var carBrand = $(this).val();
+                var options; //CarYear
+                $("#E_CarYear option").remove();
+                var n = {}, r = []; //n为hash表，r为临时数组
+                for (var i = 0; i < CarObjs.length; i++) {
+                    if (CarObjs[i].Brand == carBrand) {
+                        if (!n[CarObjs[i].ProYear]) //如果hash表中没有当前项
+                        {
+                            n[CarObjs[i].ProYear] = true; //存入hash表   
+                            options = "<option value='" + CarObjs[i].ProYear + "'>" + CarObjs[i].ProYear + "</option>";
+                            $("#E_CarYear").append(options);//Model
+                        }
+                    }
+                }
+            })
+            //适用车选中年份
+            $("#CarYear").change(function () {
+                var carBrand = $("#CarBrand").val();
+                var carYear = $(this).val();
+                var options; //CarYear
+                $("#CarModel option").remove();
+                var n = {}, r = []; //n为hash表，r为临时数组
+                for (var i = 0; i < CarObjs.length; i++) {
+                    if (CarObjs[i].Brand == carBrand && CarObjs[i].ProYear == carYear) {
+                        if (!n[CarObjs[i].Model]) //如果hash表中没有当前项
+                        {
+                            n[CarObjs[i].Model] = true; //存入hash表   
+                            options = "<option value='" + CarObjs[i].ID + "' brand='" + carBrand + "'   year='" + carYear + "'>" + CarObjs[i].Model + "</option>";//+ carBrand + "/" + carYear + "/" 
+                            $("#CarModel").append(options);//Model
+                        }
+                    }
+                }
+            })
+            $("#E_CarYear").change(function () {
+                var carBrand = $("#E_CarBrand").val();
+                var carYear = $(this).val();
+                var options; //CarYear
+                $("#E_CarModel option").remove();
+                var n = {}, r = []; //n为hash表，r为临时数组
+                for (var i = 0; i < CarObjs.length; i++) {
+                    if (CarObjs[i].Brand == carBrand && CarObjs[i].ProYear == carYear) {
+                        if (!n[CarObjs[i].Model]) //如果hash表中没有当前项
+                        {
+                            n[CarObjs[i].Model] = true; //存入hash表
+                            options = "<option value='" + CarObjs[i].ID + "' brand='" + carBrand + "'   year='" + carYear + "'>" + CarObjs[i].Model + "</option>";//+ carBrand + "/" + carYear + "/" 
+                            $("#E_CarModel").append(options);//Model
+                        }
+                    }
+                }
+            })
+            //添加车
+            $("#AddCar").click(function () {
+                var allselect = $('#CarModel :selected');
+                if (allselect.length > 0) {
+                    $('#SelectCar').append(allselect);
+                    allselect.each(function () {
+                        $(this).html($(this).attr("brand") + "/" + $(this).attr("year") + "/" + $(this).html());
+                    })
+                }
+            })
+            $("#E_AddCar").click(function () {
+                var allselect = $('#E_CarModel :selected');
+                if (allselect.length > 0) {
+                    $('#E_SelectCar').append(allselect);
+                    allselect.each(function () {
+                        var cmodel = $(this).html();
+                        $(this).html($(this).attr("brand") + "/" + $(this).attr("year") + "/" + cmodel);
+                    })
+                    //$("#E_SelectCar option").each(function () {
+                    //    var cmodel=$(this).html();
+                    //    $(this).html($(this).attr("brand") + "/" + $(this).attr("year") + "/" + cmodel);
+                    //})
+                }
+            })
+            //移除车
+            $("#RemoveCar").click(function () {             
+                var allselect = $('#SelectCar :selected');
+                if (allselect.length > 0) {
+                    $('#SelectCar  :selected').remove();
+                }
+            })
+            $("#E_RemoveCar").click(function () {
+                var allselect = $('#E_SelectCar :selected');
+                if (allselect.length > 0) {
+                    $('#E_SelectCar  :selected').remove();
+                }
+            })
+            //下一步
+            $("#saveCar").click(function () {
+                var partBase = {
+                    PartName: $("#PartName").val(),
+                    CategoryID: $("#PartCategory").val(),
+                    PartBrand: $("#PartBrand").val(),
+                    PartModel: $("#PartModel").val(),
+                    PartSuppyNo: $("#PartSupplyNo").val(),
+                    Price: $("#PartPrice").val(),
+                    Orderby: $("#PartOrderby").val(),
+                    State: $("#PartState").val(),
+                    ToCars:'',
+                    PartTitle: editor_PartTitle.getData(),
+                    PartSubtitle:$("#PartSubTitle").val(), //editor_PartSubTitle.getData(),
+                    Describe: editor_PartDes.getData(),
+                    StockNUM: $("#PartStock").val()
+                };
+                var selectCar="";
+                $("#SelectCar option").each(function () {
+                    selectCar += "," + $(this).val() + ",";
+                })
+                partBase.ToCars = selectCar;
+               // partBase.ToCars = selectCar+",";//适用车
+                //数据验证
+                if (Vild(partBase))
+                {
+                    showdiv('正在保存中***');
+                    Post("/Master/AddPart", partBase, function (data, error)
+                    {
+                        if (error)
+                        {
+                            hidediv();//关闭遮罩
+                            alert("网络错误，稍后重试");
+                        }
+                        if (data.code == "200") 
+                        {
+                            hidediv();//关闭遮罩
+                            alert("添加成功,开始编辑高级属性");
+                            $("#tabAdv").click();                     
+                            $("#hidPartID").val(data.newPart.ID);
+                            $("#attrInfo").html("名称" + data.newPart.PartName + " / 品牌：" + data.newPart.PartBrand + " / 型号：" + data.newPart.PartModel + " / 货号：" + data.newPart.PartSuppyNo + " / 价格：￥" + data.newPart.Price);
+                            $("#partExtAttr tr").remove();
+                            //window.location.href = "/Master/DPartsManage";
+                        }
+                        if (data.code == "99") {
+                            hidediv();//关闭遮罩
+                            alert("产品添加失败");
+                            window.location.href = "/Master/DPartsManage";
+                        }
+                        if (data.code == "98") {
+                            hidediv();//关闭遮罩
+                            alert("产品添加失败，库存添加失败");
+                            window.location.href = "/Master/DPartsManage";
+                        }
+
+                    });
+                }           
+
+            })
+            //修改库存
+            $(".editStock").click(function () {
+                var pid = $(this).attr("pid");
+                var pb=$(this).attr("pb");
+                var pm=$(this).attr("pm");
+                var ps=$(this).attr("ps");
+                var pn = $(this).attr("pn");
+                var pp = $(this).attr("pp");
+                $("#tabEditStock").click();            
+                $("#editStock_pid").val(pid);
+                $("#editStock_psupply").html(ps);
+                $("#editStock_pname").html(pn);
+                $("#editStock_pbrand").html(pb);
+                $("#editStock_pmodel").html(pm);
+                $("#editStock_pnum").val(pp);
+
+            });
+            $("#doEditStock").click(function () {
+                var pid = $("#editStock_pid").val();
+                var pp = $("#editStock_pnum").val();
+                if (!pid) {
+                    alert("请先从列表页面选择产品");
+                } else {
+                    if (isInteger(pp)) {
+                        showdiv('正在保存中***');
+                        Post("/Master/UpdateStock", {pid:pid,pn:pp}, function (data, error) {
+                            if (error) {
+                                hidediv();//关闭遮罩
+                                alert("网络错误，稍后重试");
+                            }
+                            if(data==200)
+                            {
+                                hidediv();//关闭遮罩
+                                window.location.reload();
+                            }
+                            if (data == 99) {
+                                hidediv();//关闭遮罩
+                                alert("修改失败，请重试");
+                            }
+                            if (data == -1) {
+                                hidediv();//关闭遮罩
+                                alert("数据错误！");
+                            }
+                        })
+                    } else {
+                        alert("库存只能是数字");
+                    }
+                }
+
+            })
+            //编辑高级属性
+            $(".EditAtt").click(function () {
+                var pid = $(this).attr("pid");
+                var pb = $(this).attr("pb");
+                var pm = $(this).attr("pm");
+                var ps = $(this).attr("ps");
+                var pn = $(this).attr("pn");
+                var pp = $(this).attr("pp");
+                $("#tabAdv").click();
+                $("#hidPartID").val(pid);
+                $("#attrInfo").html("  名称：" + pn+" / 品牌："+pb + " / 型号：" + pm + " / 货号：" + ps +  " / 价格：￥" + pp);
+                Post("/Master/GetExtendList", { pid: pid }, function (data, error) {
+                    if (data) {
+                        ShowExtAtt(data.PartExtends);                  
+                    }
+                })
+
+
+            });
+            //添加属性
+            $("#AddPartAttr").click(function () {
+                showdiv('正在保存中***');
+                var currType = $("#partExtAttr .currAttr").attr("currType");
+                var ParentAttr = $("#partExtAttr .currAttr").attr("ParentAttr");
+                if (currType == "AttrName" && ParentAttr != -1)
+                {
+                    hidediv();//关闭遮罩
+                    alert("只有顶级属性才能直接添加属性值");
+                    return false;
+                }
+
+                var objPart = {
+                    PartID: $("#hidPartID").val(),
+                    ParentAttr: -1,
+                    AttrFlagName: $("#PartAtts").val(),
+                    AttrName: $("#PartAtts").find("option:selected").text(),
+                    AttrValue: $("#PartsAttValue").val(),
+                    AttrPrice: $("#PartsAttPrice").val(),
+                    Qty:$("#PartsAttQty").val()
+                }
+                if (parentAttr) {
+                    objPart.ParentAttr = parentAttr;
+                }
+                if (VildPartAttr(objPart)) {
+                    //添加高级属性
+                    Post("/Master/AddPartExtend", objPart, function (data, error) {
+                        if (error) {
+                            hidediv();//关闭遮罩
+                            alert("网络错误，稍后重试");
+                        }
+                        if (data.code == 200) {                   
+                            ShowExtAtt(data.PartExtends);
+                            hidediv();//关闭遮罩
+                            $("#PartAtts option").show();
+                            $("#PartAtts option:first").attr("selected", "selected");
+                            $("#PartsAttValue").val(""); 
+                            $("#PartsAttPrice").val("");
+                            $("#PartsAttQty").val("");
+                        }
+                        if (data.code == 99) {
+                            hidediv();//关闭遮罩
+                            alert("添加高级属性失败，请稍后重试");
+                            window.location.href = "/Master/DPartsManage";
+                        }
+                        if (data.code == 98) {
+                            hidediv();//关闭遮罩
+                            alert("没有选择父属性，一个产品只能有一个顶级属性");
+                        }
+                    })
+                }
+            });
+            //删除属性
+            $("#delAttr").click(function () {           
+                var currType = $("#partExtAttr .currAttr").attr("currType");        
+                var currText = $("#partExtAttr .currAttr").html();
+                var currID = $("#partExtAttr .currAttr").attr("CurrID");
+                var at;
+                if (currType == "AttrName")
+                {
+                    at = currText;
+                }
+                if (currType == "AttrValue")
+                {
+                    at = currID;
+                }
+
+                if(confirm("确定要删除？"))
+                {
+                    //删除的是属性
+                    Post("/Master/DelExtendAttr", { type: currType, pid: $("#hidPartID").val(), cut: at }, function (data, error) {
+                        if (data.status) {                   
+                            alert("删除成功");
+                            ShowExtAtt(data.PartExtends);
+                        } else {
+                            alert("删除失败");
+                        }
+                    })
+                }
+            })
+            //下架产品
+            $(".downPro").click(function () {
+                var id = $(this).attr("parid");
+                var status = $(this).attr("parstatus");
+                var mes= (status == 0 ? "上架" : "下架");
+                if (confirm("确认要" + mes))
+                {
+                    //int proid,int status
+                    Post("/Master/setPartStatus", {proid:id,status:status==0?1:0}, function (data) {
+                        if (data) {
+                            window.location.reload();
+                        }
+                    })
+                }
+            });
+            //保存修改产品
+            $("#E_saveCar").click(function () {
+           
+                var partBase = {
+                    ID: $("#hidPartID").val(),
+                    PartName: $("#E_PartName").val(),
+                    CategoryID: $("#E_PartCategory").val(),
+                    PartBrand: $("#E_PartBrand").val(),
+                    PartModel: $("#E_PartModel").val(),
+                    PartSuppyNo: $("#E_PartSupplyNo").val(),
+                    Price: $("#E_PartPrice").val(),
+                    Orderby: $("#E_PartOrderby").val(),
+                    State: $("#E_PartState").val(),
+                    ToCars: '',
+                    PartTitle: E_editor_PartTitle.getData(),
+                    PartSubtitle: $("#E_PartSubTitle").val(),// E_editor_PartSubTitle.getData(),
+                    Describe: E_editor_PartDes.getData(),
+                    StockNUM: $("#E_PartStock").val()
+                };
+                var selectCar = "";
+                $("#E_SelectCar option").each(function () {
+                    selectCar += "," + $(this).val()+",";
+                })
+                partBase.ToCars = selectCar;//适用车
+                //数据验证
+                if (Vild(partBase)) {
+                    showdiv('正在保存中***');
+                    Post("/Master/UpdatePart", partBase, function (data, error) {
+                        if (error) {
+                            hidediv();//关闭遮罩
+                            alert("网络错误，稍后重试");
+                        }
+                        if (data.code == "200") {
+                            hidediv();//关闭遮罩
+                            alert("修改成功");                         
+                            //$("#hidPartID").val(data.newPart.ID);
+                              $("#partExtAttr tr").remove();
+                        }
+                        if (data.code == "99") {
+                            hidediv();//关闭遮罩
+                            alert("产品修改成功，库存修改失败");
+                           
+                        }
+                        if (data.code == "98") {
+                            hidediv();//关闭遮罩
+                            alert("产品修改失败，库存修改成功");                          
+                        } 
+                        window.location.href = window.location.href;// "/Master/DPartsManage";
+                    });
+                }  
+
+            })
+            //去编辑  初始化产品信息
+            $(".editPart").click(function () {
+                $("#hidPartID").val($(this).attr("parid"));
+                Post("/Master/GetPartModel", { proID: $(this).attr("parid") }, function (data, error) {
+                    //map.Add("Part", bll.GetPartModel(proID));
+                    if(data.PartStock)
+                    {
+                        $("#E_PartStock").val(data.PartStock.StockNUM);
+                    }
+                    if (data.Part)
+                    {
+                        $("#E_PartName").val(data.Part.PartName);
+                        $("#E_PartCategory").val(data.Part.CategoryID);
+                        $("#E_PartBrand").val(data.Part.PartBrand);
+                        $("#E_PartModel").val(data.Part.PartModel);
+                        $("#E_PartSupplyNo").val(data.Part.PartSuppyNo);
+                        $("#E_PartPrice").val(data.Part.Price);
+                        $("#E_PartOrderby").val(data.Part.Orderby);
+                        $("#E_PartState").val(data.Part.State);
+                        E_editor_PartTitle.setData(data.Part.PartTitle);
+                        $("#E_PartSubTitle").val(data.Part.PartSubtitle);
+                        E_editor_PartDes.setData(data.Part.Describe);
+                        var ToCars = data.Part.ToCars.split(',');
+                        // $("#E_SelectCar") CarObjs
+                        $("#E_SelectCar option").remove();
+                        for (var i = 0; i < ToCars.length; i++) {
+                            for (var j = 0; j < CarObjs.length; j++)
+                            {
+                                if (ToCars[i] == CarObjs[j].ID)
+                                {
+                                    $("#E_SelectCar").append("<option value='" + ToCars[i] + "' brand='" + CarObjs[j].Brand + "' year='" + CarObjs[j].ProYear + "'>" + CarObjs[j].Brand + "/" + CarObjs[j].ProYear + "/" + CarObjs[j].Model + "</option>");
+                                    
+                                }
+                            }
+                        }
+                    }
+                
+                })
+
+                $("#tabEdit").click();
+            })
+            //图片管理
+            $(".imgPart").click(function () {
+                var pid = $(this).attr("pid");
+                var pb = $(this).attr("pb");
+                var pm = $(this).attr("pm");
+                var ps = $(this).attr("ps");
+                var pn = $(this).attr("pn");
+                var pp = $(this).attr("pp");               
+                $("#hidPartID").val(pid);
+                $("#ProductInfo").html("  名称: " + pn + " / 品牌：" + pb + " / 型号：" + pm + " / 货号：" + ps + " / 价格：￥" + pp);
+                $("#tabImg").click();
+                ShowImg();
+              
+            })
+            //删除图片
+            $("#delImg").click(function () {
+                //partID='" + data[i].PartID + "' currId='" + data[i].ID + "
+                var pid = $("#imgView .currImg").attr("partID");
+                var imgid = $("#imgView .currImg").attr("currId");
+                Post("/Master/delImgs", { partId: pid,imgId:imgid }, function (data) {
+                    ShowImg();
+                });
+            })
+            //$("#btnSearch").click(function () {
+            //    var cate = $("#SelectByCate").val();
+            //})
+            $(".navCatelist").click(function () {
+                $("#SelectByCate").val($(this).attr("val"));
+                $("#SelectByCate").change();
+            })
+            $(".navCateadd").click(function () {
+                $("#PartCategory").val($(this).attr("val"));
+            })
+            $(".navCateedit").click(function () {
+                $("#E_PartCategory").val($(this).attr("val"));
+            })
+            
+
+            $("#SelectByCate").change(function () {
+                var svalue = $(this).val();
+                $(".paginator a").each(function () {
+                    var src = $(this).attr("href");
+                    if (src.toString().indexOf("SelectByCate") > 0) {
+                        var j = src.toString().substring(src.toString().lastIndexOf("=")+1);
+                        src = src.replace(j, svalue);
+                        $(this).attr("href",src);
+                    } else {
+                        $(this).attr("href", src + "&&SelectByCate=" + $(this).val());
+                    }
+                })
+                window.location.href = "/Master/DPartsManage/?pageIndex=1&&SelectByCate=" + svalue;
+
+            })
+
+            var selecttype = getQueryString("SelectByCate");
+            if (selecttype) {
+                $("#SelectByCate").val(selecttype);
+            } else {
+                $("#SelectByCate").val(-1);
+            }
+            $(".paginator a").each(function () {
+                var src = $(this).attr("href");
+                $(this).attr("href", src + "&&SelectByCate=" + $("#SelectByCate").val());
+            })
+            //光棒效果
+            $("#datalist  tbody tr").hover(function () {
+                $(this).addClass("hover");
+            }, function () {
+                $(this).removeClass("hover");
+            })
+
+        })
+        //验证产品数据
+            function Vild(obj) {
+            if (obj.PartName.length <= 0) {
+                alert(" 产品名称不能为空！");
+                return false;
+            }
+            if (obj.CategoryID == -1) {
+                alert(" 产品分类不能为空！");
+                return false;
+            }
+            //if (obj.PartBrand == -1) {
+            //    alert(" 产品品牌不能为空！");
+            //    return false;
+            //}
+            //if (obj.PartModel.length <= 0) {
+            //    alert(" 产品型号不能为空！");
+            //    return false;
+            //}
+            /**
+             if(obj.PartSuppyNo.length<0)
+             {
+                 alert(" 产品供货号不能为空！");
+                 return false;
+             }**/
+            if (!isNumber(obj.Price) || parseInt(obj.Price) <= 0) {
+                alert(" 产品价格错误！");
+                return false;
+            }
+            if (obj.PartName.length <= 0) {
+                alert(" 产品名称不能为空！");
+                return false;
+            }
+            if (obj.Orderby.length <= 0 || !isInteger(obj.Orderby)) {
+                alert(" 排序数值错误！");
+                return false;
+            }
+            if (obj.ToCars.length <= 0) {
+                alert(" 适用车型不能为空！");
+                return false;
+            }
+            //if (editor_PartTitle.document.getBody().getText().length <= 0) {
+            //    alert(" 产品标题不能为空！");
+            //    return false;
+            //}
+            if (!isInteger(obj.StockNUM)) {
+                alert(" 本地库存输入错误！");
+                return false;
+            }
+            return true;
+            }
+        //为新生绑定事件
+            function addEveTree() {
+                //点击属性名称
+                $(".AttrName").click(function () {
+                    var attName = $(this).html();
+                    parentAttr = $(this).parent().parent("tr").find(".AtttValue:first").attr("ParentAttr");            
+                    $(this).addClass("currAttr");
+                    $("#PartAtts option").each(function () {
+                        if ($(this).text() != attName) {
+                            $(this).hide();
+                        } else {
+                            $(this).attr("selected", "selected");
+                        }
+                    })
+                 
+                });
+                //选中样式
+                $("#partExtAttr tr span").click(function () {
+                    //  $(this).parent().parent("tr").find("span").removeClass("currAttr");
+                    $("#partExtAttr tr span").removeClass("currAttr");
+                    $(this).addClass("currAttr");
+               
+                })
+                $(".AtttValue").click(function () {
+                    $("#PartAtts option").show();
+                    $("#PartAtts option:first").attr("selected", "selected");
+                    $("#PartsAttValue").val("");
+                    $("#PartsAttPrice").val("");
+                
+                    parentAttr = $(this).attr("CurrID");
+                })
+
+
+               
+            }
+            function VildPartAttr(objPart)
+            {
+                if(!objPart.PartID)
+                {
+                    hidediv();
+                    alert("产品ID错误");
+                    return false;
+                }              
+                if (objPart.ParentAttr.toString() == "")
+                {
+                    hidediv();
+                    alert("父属性错误");
+                    return false;
+                }
+                if(!objPart.AttrName)
+                {
+                    hidediv();
+                    alert("属性名称错误");
+                    return false;
+                }
+                if (!objPart.AttrFlagName)
+                {
+                    hidediv();
+                    alert("属性标示错误");
+                    return false;
+                }
+                if(!objPart.AttrValue)
+                {
+                    hidediv();
+                    alert("属性值错误");
+                    return false;
+                }
+                if (!objPart.AttrPrice || !isNumber(objPart.AttrPrice))
+                {
+                    hidediv();
+                    alert("属性价格错误");
+                    return false;
+                }
+                if (!isInteger(objPart.Qty))
+                {
+                    hidediv();
+                    alert("库存错误");
+                    return false;
+                }
+                return true;
+            }
+        //显示高级属性
+            function ShowExtAtt(obj) {
+                $("#partExtAttr tr").remove();
+                if (obj.length > 0) {
+                    for (var i = 0; i < obj.length; i++) {
+                        var tr="";
+                        tr += "<tr>";
+                        tr += "<td style=' width: 80px;'><span class='AttrName'  currType='AttrName'  ParentAttr='" + obj[i].ParentAttr + "'>" + obj[i].AttrName + "</span></td>";
+                        tr += "<td>";
+                        if (obj[i].AttrList.length > 0) {
+                            for (var ii = 0; ii < obj[i].AttrList.length; ii++) {
+                                var up = "";
+                                if (i > 0)
+                                {
+                                    for (var n = 0; i < obj[i-1].AttrList.length; n++) {
+                                        if (obj[i - 1].AttrList[n].ID == obj[i].AttrList[ii].ParentAttr)
+                                        {
+                                            up = obj[i - 1].AttrList[n].AttrValue;
+                                            break;
+                                        }
+                                    }
+                                }
+                                tr += "<span class='AtttValue' ParentAttr='" + obj[i].AttrList[ii].ParentAttr + "' currType='AttrValue'  CurrID='" + obj[i].AttrList[ii].ID + "'>" + up + "--" + obj[i].AttrList[ii].AttrValue + "(￥" + obj[i].AttrList[ii].AttrPrice + ") (库存：" + obj[i].AttrList[ii].Qty+ ")</span>";
+                            }
+                        }
+                        tr += "</td>";
+                        tr += "</tr>";
+                        $("#partExtAttr").append(tr);
+                    }
+                }
+                addEveTree();//绑定事件
+            }
+        //显示图片
+            function ShowImg()
+            {
+                $("#imgView div").remove();
+                var pid = $("#hidPartID").val();
+                Post("/Master/GetImgs", { partId: pid }, function (data) {
+                    if (data)
+                    {
+                        if (data.length > 0)
+                        {
+                            for (var i = 0; i <data.length; i++) {
+                                $("#imgView").append("<div class='imgDiv' partID='" + data[i].PartID + "' currId='" + data[i].ID + "'><img  src='" + data[i].ImgPath + "'/></div>");
+                            }
+                            $(".imgDiv").click(function () {
+                                $(".imgDiv").removeClass("currImg");
+                                $(this).addClass("currImg");
+                                
+                            })
+                        }
+
+                    }
+
+                });
+            }
+        
+        //初始化图片上传控件
+            function initImgUpload()
+            {
+                $("#uploadify").uploadify({
+                    'uploader': '/Content/Tools/imgUpload/uploadify.swf',
+                    'script': '/Content/Tools/imgUpload/UpLoadPage.ashx',
+                    'cancelImg': '/Content/Tools/imgUpload/images/cancel.png',
+                    'folder': '/upload/images',
+                    'queueID': 'fileQueue',
+                    'auto': false,
+                    'multi': true,
+                    'fileExt': '*.jpg;*.gif;*.png',
+                    'fileDesc': 'Web Image Files (.JPG, .GIF, .PNG)',
+                    'buttonText': '浏览',
+                    'onSelect': function (event, queueID, fileObj) {
+                        $("#uploadify").uploadifySettings("script", "/Content/Tools/imgUpload/UpLoadPage.ashx?pid=" + $("#hidPartID").val()); //动态更新配(执行此处时可获得值)
+
+                    },
+                    'onError': function (event, queueId, fileObj, errorObj) {
+                        alert(errorObj.info + "---------" + errorObj.type);
+                    },
+                    'onAllComplete': function () {
+                        ShowImg();
+                    }
+                });
+            }
+    </script>
+}
+

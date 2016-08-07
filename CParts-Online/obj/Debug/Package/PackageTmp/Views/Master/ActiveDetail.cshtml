@@ -1,0 +1,98 @@
+﻿@model CParts_Online.Models.Master.ActiveDetailOM
+    @{
+        ViewBag.Title = "活动详情";
+        Layout = "~/Views/Shared/_master.cshtml";
+    }
+
+    <div class="content-box">
+        <!-- Start Content Box -->
+        <div class="content-box-header2">
+            <h3>活动详细</h3>
+            <ul class="content-box-tabs">
+                <li><a href="#tab1" class="default-tab">详情</a></li>
+                <!-- href must be unique and match the id of target div -->
+                <li><a href="#tab2" id="f1">添加</a></li>
+                <li><a href="#tab3" id="tabEdit">编辑</a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <!-- End .content-box-header -->
+        <div class="content-box-content">
+            <div class="tab-content default-tab" id="tab1">
+                <h4>活动添加</h4>
+                <table>
+                    <tr>
+                        <td>封面图片</td>
+                        <td colspan="3">
+                            <input type="file" value="选择图片" name="file" accept="image/*" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>活动名称</td>
+                        <td><input type="text" id="add_Act_Name" name="Name" /></td>
+                        <td>活动代码</td>
+                        <td><input type="text" id="add_Act_subName" name="SubName" /></td>
+                    </tr>
+                    <tr>
+                        <td>开始时间</td>
+                        <td>
+                            <input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" id="add_Act_sdate" name="StarDate" />
+                            <select id="add_Act_shour" class="dplist" name="shour"></select>
+                            <select id="add_Act_smin" class="dplist" name="smin"></select>
+                        </td>
+                        <td>截止时间</td>
+                        <td>
+                            <input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" id="add_Act_edate" name="EndDate" />
+                            <select id="add_Act_ehour" class="dplist" name="ehour"></select>
+                            <select id="add_Act_emin" class="dplist" name="emin"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>状态：</td>
+                        <td><select id="add_Act_status" name="Status"><option value="0">终止</option><option value="1" selected>正常</option></select></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><button id="btn-add" type="submit">保存活动</button></td>
+                    </tr>
+                </table>
+                <br />
+                        <div >
+                            <h3>活动产品</h3>
+                            <select>
+                                <option value="1" >P1</option>
+                                <option value="2">P1</option>
+                            </select>
+                        </div>
+                        <div id="act_pro_list">
+                                <div id="pro_1">
+                                     <div class="pro_title">p1</div>
+                                    <div class="pro_content" style="display:none" >
+                                      <br />
+                                        p2222
+                                        <br />
+                                    </div>
+                                </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+  </div>
+@section scripts{
+    <script>
+        $(function () {
+            $(".pro_title").click(function () {
+                $(this).siblings(".pro_content").toggle();
+            });
+        })
+    </script>
+    
+    }

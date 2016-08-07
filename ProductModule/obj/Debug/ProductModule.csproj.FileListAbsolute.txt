@@ -1,0 +1,11 @@
+G:\工作开发\CP_workspace\CarParts.com\ProductModule\bin\Debug\ProductModule.dll
+G:\工作开发\CP_workspace\CarParts.com\ProductModule\bin\Debug\ProductModule.pdb
+G:\工作开发\CP_workspace\CarParts.com\ProductModule\bin\Debug\AOP.dll
+G:\工作开发\CP_workspace\CarParts.com\ProductModule\bin\Debug\DAO.dll
+G:\工作开发\CP_workspace\CarParts.com\ProductModule\bin\Debug\EntityFramework.dll
+G:\工作开发\CP_workspace\CarParts.com\ProductModule\bin\Debug\log4net.dll
+G:\工作开发\CP_workspace\CarParts.com\ProductModule\bin\Debug\AOP.pdb
+G:\工作开发\CP_workspace\CarParts.com\ProductModule\bin\Debug\DAO.pdb
+G:\工作开发\CP_workspace\CarParts.com\ProductModule\obj\Debug\ProductModule.csprojResolveAssemblyReference.cache
+G:\工作开发\CP_workspace\CarParts.com\ProductModule\obj\Debug\ProductModule.dll
+G:\工作开发\CP_workspace\CarParts.com\ProductModule\obj\Debug\ProductModule.pdb

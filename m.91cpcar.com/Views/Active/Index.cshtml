@@ -1,0 +1,250 @@
+﻿@model m.cpcar.com.Controllers.OutModel
+@{
+
+}
+
+   <!DOCTYPE html>
+<html>
+<head>
+<title>活动</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+<meta name="keywords" content="诚配,诚配改装,汽车改装,改装件,汽车配件,海外配件,进口配件,保时捷,宝马,奔驰,法拉利,豪车改装,高端改装">
+<meta name="description" content="">   <meta  />
+<link href="/New/content/css/mui.css" rel="stylesheet" />
+<link href="/New/content/css/main.css" rel="stylesheet" />
+<style type="text/css">
+.head-title, .mui-pull-left{background:none;}
+.mui-icon-back:before,.mui-icon-left-nav:before{color:#666;}
+.mui-pull-left{width: auto;margin: 0;}
+.mui-bar-nav ~ .mui-content{margin:44px 0 0 0;}
+#activityIndex{position: fixed;z-index:99;width:100%;height:100%;background:#000 url(/New/images/banner03.jpg) no-repeat center bottom;background-size:cover;}
+#activityIndex ul{margin: 0;padding: 0;height:100%;}
+.logo{transform: translateY(-422px);-webkit-transform:-webkit-translatrY(-422px);text-align:center;}
+.logo img{max-width:80%;}
+.add{height:283px; margin-top:30px; background:url(/New/images/active01.png) no-repeat center;opacity:0;-webkit-opacity:0;}
+.show .logo{animation: aylogo 2s ease-in-out;-webkit-animation: aylogo 2s ease-in-out;-webkit-animation-fill-mode: both; animation-fill-mode: both;transform: translateY(0);-webkit-transform:-webkit-translatrY(0);}
+.show .add{animation: ayadd 3.5s ease-in-out;-webkit-animation: ayadd 3.5s ease-in-out;-webkit-animation-fill-mode: both; animation-fill-mode: both;transform: translateY(0);-webkit-transform:-webkit-translatrY(0);}
+@@keyframes aylogo{	from{transform: translateY(-422px);}to{transform: translateY(0);;}}
+@@-webkit-keyframes aylogo{	from{-webkit-transform:translateY(-422px);}to{-webkit-transform:translateY(0);}}
+@@keyframes ayadd{ 80%{opacity:0}100%{opacity:1}}
+@@-webkit-keyframes ayadd{	80%{-webkit-opacity:0;}100%{-webkit-opacity:1;}}
+.back{position:absolute;z-index:1;left:15px;top:15px;width:32px;height:32px; overflow: hidden; }
+.back a{display:block;height:32px; line-height:32px; overflow: hidden;background:url(/New/content/img/arrow-l.png) no-repeat;}
+.btn{position:absolute;z-index:22;bottom:0;left:50%;background: url(/New/images/hot08.png) no-repeat;width:67px;height:48px;margin:10px 10px 0 -34px;background-size: 100% auto;;display:block;
+}
+.show .btn{animation: pulse 1s ease-in-out infinite;-webkit-animation: pulse 1s ease-in-out infinite;-webkit-animation-fill-mode: both; animation-fill-mode: both;transform:scaleX(80%);-webkit-transform:scaleX(80%)}
+@@-webkit-keyframes pulse{0%{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}50%{-webkit-transform:scale3d(1.05,1.05,1.05);transform:scale3d(1.05,1.05,1.05)}100%{-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}
+}
+@@keyframes pulse{0%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}50%{-webkit-transform:scale3d(1.05,1.05,1.05);-ms-transform:scale3d(1.05,1.05,1.05);transform:scale3d(1.05,1.05,1.05)}100%{-webkit-transform:scale3d(1,1,1);-ms-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}
+}
+#activityIndex.ax_hide{animation:hideax 2s ease-out;-webkit-animation: hideax 2s ease-out;-webkit-animation-fill-mode: both; animation-fill-mode: both;z-index:-1;}
+@@keyframes hideax{ 0%{opacity:1}100%{opacity:0;display: none}}
+@@-webkit-keyframes hideax{	0%{-webkit-opacity:1;}100%{-webkit-opacity:0;display: none;}}
+</style>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?d252ab9e4e87638601460ea0c7412a01";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</head>
+<body>
+<div id="activityIndex" class="show">
+<div class="back"><a href="/index.html"></a></div>
+
+<ul><li class="logo"><img src="/New/images/active02.png" alt=""></li><li class="add"><div class="btn"></div></li></ul>
+</div>
+<div id="modal-bg"></div>
+<div id="modal-show"><img  src="/content/img/ico/loading.gif"/></div>
+<div class="main-container">
+<header class="mui-bar mui-bar-nav">
+<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>  
+<a class="mui-pull-right" href="/Member/Myhome"><img class="head-ico" src="/New/content/img/ico/icon_phome.png"></a>
+<a class="mui-pull-right" href="/Product/getCar"><img class="head-ico" src="/New/content/img/ico/icon_shopcar.png"></a>
+<div class="head-title">活动</div>
+</header>
+<div class="mui-content mui-row mui-fullscreen">
+  
+
+<div style="background-image:url(http://m.91cpcar.com/html/5-1/bg.jpg); width:100%; margin:0px auto;">
+ <div><img src="http://m.91cpcar.com/html/5-1/1.png" style="width:100%" /></div>
+  <div><img src="http://m.91cpcar.com/html/5-1/2.png" style="width:100%" /></div>
+<div><img style="width:100%;"  src="http://m.91cpcar.com/html/5-1/8.jpg"/></div>
+<div>
+<div class="mui-content mui-row mui-fullscreen">
+      @*   @if(Model.active!=null)
+        {               
+                               	<ul class="mui-table-view mui-grid-view">
+                                     @foreach (var item in Model.parts)
+	                                    {
+		                                 <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		                                    <a href="/Active/ProDetail?id=@item.ID&&aid=@Model.active.ID">
+		                                        <img class="mui-media-object" src="http://91cpcar.com@item.imgpath">
+                                                     <p class="price">@item.Price</p>
+		                                        <div class="mui-media-body">@item.PartName</div>
+		                                    </a>
+		                                 </li>
+	                                    }
+                                       </ul>
+         }else{
+         <p>活动不存在</p>
+         }*@
+
+    <div style="background-image:url(/html/5-1/bg.jpg); width:100%; margin:0px auto;">
+        @if (Model.active != null)
+        {
+            @*<h3>@Model.active.Name</h3>
+            <h4>测试优惠产品列表</h4>*@
+             <div><img src="/html/5-1/1.png" style="width:100%" /></div>
+              <div><img src="/html/5-1/2.png" style="width:100%" /></div>
+    @*<div style="position:absolute; top:200px;left:65%; cursor:pointer;" onclick="flink()"><img src="~/html/5-1/btn-reg.jpg"  style="width:128px;" /></div>*@
+            for (int item = 0; item < Model.parts.Count; item++)
+            {
+                if (item % 2 == 0)
+                {
+                    var ap = Model.activePro.Where(m => m.ProID == Model.parts[item].ID).FirstOrDefault();
+
+                    int i = ap == null ? 0 : Convert.ToInt32(ap.Stock);
+                        <div class="pro-1">
+                            <a href="/Active/ProDetail?id=@Model.parts[item].ID&&aid=@Model.active.ID">
+                                <div style="float:left;">
+                                    <img src="http://91cpcar.com/@Model.parts[item].imgpath" style="width:150px" />
+                                </div>                           
+                                <div style="float:right;color:#faf83c; font-size:16px; font-weight:600; width:50% ; padding-left:10px">
+                                         <div >
+                                    @Model.parts[item].PartName
+                                        </div>
+                                    <div >
+                                        <div style="float:left; padding-top:20px" ><img  src="~/html/5-1/free.png" style="width:120px"/></div>
+                                    <div style="float:left;  position:relative" ><img  src="~/html/5-1/qty_pao.png" style="width:60px"/><div style="position:absolute; left:10px;top:10px; color:#044171; font-size:13px">限量<br />@(i)套</div></div>
+                                          <div style="clear:both;"></div>
+                                    </div>
+                                </div>
+                                  <div style="clear:both;"></div>
+                            </a>
+                        </div>
+                   }
+                   else
+                   {
+                       var ap = Model.activePro.Where(m => m.ProID == Model.parts[item].ID).FirstOrDefault();
+
+                       int i = ap == null ? 0 : Convert.ToInt32(ap.Stock);
+                    <div class="pro-1">
+                        <a href="/Active/ProDetail?id=@Model.parts[item].ID&&aid=@Model.active.ID">
+                            <div style="float:right;">
+                                <img src="http://91cpcar.com/@Model.parts[item].imgpath" style="width:150px" />
+                            </div>
+                            <div style="float:left;color:#faf83c; font-size:16px; font-weight:600; width:50% ; padding-left:10px">
+                                <div>
+                                    @Model.parts[item].PartName
+                                </div>
+                                <div>
+                                    <div style="float:left; padding-top:20px"><img src="~/html/5-1/free.png" style="width:120px" /></div>
+                                    <div style="float:left;  position:relative"><img src="~/html/5-1/qty_pao.png" style="width:60px" /><div style="position:absolute; left:10px;top:10px; color:#044171; font-size:13px">限量<br />@(i)套</div></div>
+                                    <div style="clear:both;"></div>
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </a>
+                    </div>
+
+                   }
+
+                }
+                <div><img style="width:100%;"  src="~/html/5-1/8.jpg"/></div>
+                    <div>
+                        @if (Model.aimg.Count > 0)
+                        {
+                            <div id="slider" class="mui-slider">
+                                <div class="mui-slider-group mui-slider-loop">
+
+                                    <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+                                    <div class="mui-slider-item mui-slider-item-duplicate">
+                                             <img src="http://91cpcar.com/@Model.aimg[Model.aimg.Count-1].ImgPath">                                   
+                                    </div>
+
+                                    @foreach (var item in Model.aimg)
+                                    {
+                                        <div class="mui-slider-item">
+                                                 <img src="http://91cpcar.com/@item.ImgPath">                                    
+                                        </div>
+                                    }
+                                    <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+                                    <div class="mui-slider-item mui-slider-item-duplicate">                                     
+                                            <img src="http://91cpcar.com/@Model.aimg[0].ImgPath">                                     
+                                    </div>
+
+                                </div>
+                                <div class="mui-slider-indicator">
+                                    <div class="mui-indicator mui-active"></div>
+                                    <div class="mui-indicator"></div>
+                                    <div class="mui-indicator"></div>
+                                    <div class="mui-indicator"></div>
+                                    <div class="mui-indicator"></div>
+                                </div>
+                            </div>
+                        }
+
+
+
+
+                    </div>
+        }
+        else
+        {
+            <p>活动不存在</p>
+        }
+
+    </div>
+
+	</div>
+
+
+
+
+</div>
+
+</div>
+
+</div>
+</div>
+ <script src="/New/content/js/zepto.min.js"></script>
+ <script type="text/javascript">
+     $(function () {
+         $(".add").click(function () { $("#activityIndex").removeClass("show").addClass("ax_hide") });
+     });
+     var q = getQueryString("puser");
+     function flink() {
+         window.location.href = "/member/reg?timeExp=" + randomChar(32) + "&&puser=" + q + "&&usePK=" + randomChar(32);
+
+     }
+     //获取URL参数
+     function getQueryString(value) {
+         var reg = new RegExp("(^|&)" + value + "=([^&]*)(&|$)", "i");
+         var href = decodeURI(window.location.search);
+         var r = href.substr(1).match(reg);
+         if (r != null) {
+             return unescape(r[2]);
+         } else {
+             return "";
+         }
+
+     }
+     //生成一个时间戳字符串
+     function randomChar(l) {
+         var x = "0123456789qwertyuioplkjhgfdsazxcvbnm";
+         var tmp = "";
+         var timestamp = new Date().getTime();
+         for (var i = 0; i < l; i++) {
+             tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length);
+         }
+         return timestamp + tmp;
+     }
+
+</script>
+</body>
+</html>

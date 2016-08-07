@@ -1,0 +1,372 @@
+﻿@model ProductModule.model.CrowdFundingList
+@{
+    ViewBag.Title = "CrowdFindingDeail";
+}
+
+<!DOCTYPE html>
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<title>京东众筹移动版</title>
+
+	<link rel="stylesheet" type="text/css" href="/list_file/base.css">
+	<link rel="stylesheet" type="text/css" href="/list_file/single.css">
+	<link rel="stylesheet" type="text/css" href="/list_file/fixbottom.css">
+
+
+<style>
+/*	.sp_btn{
+		width: 80px;
+		height: 80px;
+		position: absolute;
+		left:50%;
+		top:50%;
+		margin-left:-40px;
+		margin-top:-40px;
+	}
+	.single_top .single_bg{
+		margin:0px 6px;
+	}
+	.sp_title{
+		font-size:14px;
+		color:#fff;
+		margin-left:10px;
+		padding-right:10px;
+        text-decoration:none;
+        display: block;
+        height: 40px;
+        line-height: 40px;
+		background-color:#000;
+	}
+*/
+.check_more {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    margin-top: -15px;
+}
+
+	.check_more img {
+	    width: 20px;
+	    height: 50px;
+	   
+	}
+    /*.go_back {*/
+        /*position: absolute;*/
+        /*width: 30px;*/
+        /*height: 30px;*/
+        /*z-index: 9999;*/
+        /*/!* left: 5px; *!/*/
+        /*/!* top: 5px; *!/*/
+    /*}*/
+    /*.go2index {*/
+        /*position: absolute;*/
+        /*width: 35px;*/
+        /*height: 35px;*/
+        /*z-index: 9999;*/
+        /*right: 0px;*/
+        /*top: 0px;*/
+    /*}*/
+    /*.null_apth{
+    	background-position: -112px -361px;
+	    width: 34px;
+	    height: 14px;
+	    display: inline-block;
+	    margin-left: 5px;
+    }
+    .null_apzx{
+    	background-position: -112px -349px;
+	    width: 34px;
+	    height: 14px;
+	    display: inline-block;
+	    margin-left: 5px;
+    }
+    */
+    .alert_ly {
+    width: 100%;
+    margin: 0 auto;
+    position: fixed;
+    top: 20%;
+    z-index: 602;
+}
+</style>
+</head>
+         
+<body>
+<div class="cover_fix" style="display:none;"></div>
+	    <div class="alert" style="display:none;">
+	    <div class="alert_box">
+	        <div class="alert_title"><em class="local_icon"></em>
+	            <i class="del local_icon" id="del">
+	                <img src="/list_file/al02.png"></i></div>
+	        <div class="alert_con">
+	            <p class="big">温馨提示</p>
+	            <p class="small">删除订单可能造成订单无法找回,确定要继续操作吗</p>
+	        </div>
+	        <div class="btn" id="isOk"><a>确定</a></div>
+	    </div>
+</div>
+
+
+   <!-- single_top -->
+   <div class="single_top">
+        <div class="single_bg">
+            <!-- 返回顶部 -->
+            <div class="go_back"><a href="javascript:history.go(-1);"><img src="/list_file/back.png"></a></div>
+            <!-- /返回顶部 -->
+
+            <!-- 返回首页 -->
+            <div class="go2index"><a href="/Product/CrowdFunding"><img src="/list_file/empty.gif" class="icon"></a></div>
+            <!-- /返回首页 -->
+
+            <div class="single_fk">
+
+				                                    <a href="/Product/crowdtDetail?id=@Model.crowdFundingDeail.Pid" clstag="pageclick|keycount|dp_other_2015092221|3">
+                        <img src="http://www.91cpcar.com/@Model.crowdFundingDeail.Banner">
+                    </a>
+                            </div>
+
+            <div class="bg_bottom">
+                <span>
+                                            <a href="/Product/crowdtDetail?id=@Model.crowdFundingDeail.Pid" clstag="pageclick|keycount|dp_other_2015092221|3" class="sp_title">
+                                                    @Model.crowdFundingDeail.PartName
+                                            </a>
+                </span>
+            </div>
+
+        </div>
+   </div>
+   <!-- /single_top -->
+
+	<!-- single_total -->
+	<div class="single_total">
+		<div class="single_total_con">
+			<div class="total_data" style="padding-top:10px;">
+				<ul>
+					<li><p>
+							<span><i id="zcrs"></i><em>支持人数</em></span>
+						</p></li>
+						
+							            			            		<li class="can">
+		            			 <div class="w100" style="position: relative;">
+	                          	  <canvas class="process01" width="200" height="200" data-sn-index="0" style="width: 100px; height: 100px;" id="bfb"></canvas>
+                                  <span class="center_span">
+		                        													众筹中
+											                        		</span>
+                                     @if (@Model.crowdFundingDeail.StockNUM<=0)
+                                     {
+                                         <div class="percent_text">0%</div>
+                                     }else{
+		                        <div class="percent_text">@(Model.crowdFundingDeail.Number/Model.crowdFundingDeail.StockNUM*100)%</div>
+                                     }</div>
+		            			
+			            		<!-- 			            			<canvas class="process01" width="115px" height="115px">191%</canvas>
+			            		 -->
+	                  		</li>
+		            			            					
+					<li>
+						                			                				<p>
+									<span>
+										<i>
+																							@Model.crowdFundingDeail.EndTime.Subtract(DateTime.Now).Days<b>天</b>
+																					</i>
+				                		 	<em>剩余时间</em>
+									</span>
+								</p>
+                			                							
+							
+					</li>
+				</ul>
+				<div class="hill_line"></div>
+			</div>
+			<div class="total_tab">
+				<ul>
+					<li><span id="mbje"></span><span class="ls_span"><em class="icon mubiao"></em><b>目标金额</b></span></li>
+					<li><span id="ycje"></span><span class="ls_span"><em class="icon mubiao"></em><b>已筹金额</b></span></li>
+				</ul>
+			</div>	
+               	 	<input type="hidden" id="project_id" value="60179">
+               	 	<input type="hidden" id="project_extTag" value="0">
+               	 	<input type="hidden" id="project_skuId" value="">
+					<input type="hidden" name="ordFrom" id="ordFrom" value="m">
+					<input type="hidden" name="fromApp" id="fromApp" value="">
+					<input type="hidden" name="orderfrom" id="orderfrom" value="">
+					<input type="hidden" name="redoundType" id="redoundType" value="yyzx">
+					<input type="hidden" name="praiseSwitchFlag" id="praiseSwitchFlag" value="open">
+
+							<a href="/Product/crowdtDetail?id=@Model.crowdFundingDeail.Pid" style="text-decoration: none;" clstag="pageclick|keycount|dp_other_2015092221|3">
+	        			
+				</a><div class="total_zan" style="border-bottom: none;"><a href="/Product/crowdtDetail?id=@Model.crowdFundingDeail.Pid" style="text-decoration: none;" clstag="pageclick|keycount|dp_other_2015092221|3">
+
+						<span class="total_zan_text">@Model.crowdFundingDeail.ListTille</span>
+		                </a><div class="btn-waper"><a href="/Product/crowdtDetail?id=@Model.crowdFundingDeail.Pid" style="text-decoration: none;" clstag="pageclick|keycount|dp_other_2015092221|3">
+															</a><a href="/Product/crowdtDetail?id=@Model.crowdFundingDeail.Pid" clstag="pageclick|keycount|dp_other_2015092221|3" class="btn-detail-1">查看项目详情&gt;</a>
+					        		                </div>
+
+				</div>
+			
+		</div>
+	</div>
+<!-- 大图展示 -->
+   <div class="single-thumbs-big" data_iwborninjgdq="2"></div>
+<!-- 大图展示 end -->
+		<!-- single_list -->
+
+    @if (Model.memberBaseList.Count() > 0 && Model.memberBaseList!=null)
+    { 
+		<div class="single_list">
+						<!-- list_box -->
+				<div class="list_box">
+				<div class="box_title box_title_link">
+                  <span><em class="icon xmjz"></em><i>项目进展</i></span>
+                </div>
+
+
+                    @foreach (var item in Model.memberBaseList)
+                    {
+                     
+                    if(item!=null)
+                    {
+					<div class="box_con">
+						<div class="box_con_title">
+							<span class="title_head">
+                                @if (!Convert.IsDBNull(item.wxHeadimgurl))
+                                {
+                                    <img src="@item.wxHeadimgurl">
+                                }else{
+                                     <img src="/list_files/no-img_mid_.jpg">
+                                }
+                                
+                                						
+															</span> 
+								<span class="title_text">      
+                                    @item.LoginName
+    </span>
+						</div>
+												<div class="message">
+							<!-- mes_con -->
+								<div class="mes_con">
+									<div class="time_line">
+									</div>
+
+                                    <div class="mes_con mes_con_one">
+									<div class="board">
+										
+										<span class="board_con text_area">感谢大家的支持，众筹正在火热进行中，我已成功获取！
+										</span>
+										
+																				
+										
+									</div>
+									</div>
+								
+								</div>
+							<!-- mes_con over -->
+						</div>
+					</div>
+                    }
+                    }
+
+
+				</div>
+			<!-- list_box -->
+							
+					<!-- list_box -->
+			
+		<!-- list_box -->
+		
+
+<!-- 查看图文详细情况 -->
+        <div class="list_box">
+            <div class="box_title box_title_nb">
+                <a href="/Product/crowdtDetail?id=@Model.crowdFundingDeail.Pid" clstag="pageclick|keycount|dp_bottom_2015092220|8" class="btn-detail-2">查看图文详情&gt;</a>
+            </div>
+        </div>
+
+<!-- 查看图文详细情况 -->
+
+		
+					
+			
+	</div>
+    }
+	<div class="single_cover"></div>
+
+    <div class="share_weixin">
+        <div class="wh300"></div>
+    </div>
+
+	
+	 <!-- 我要投资 -->
+	<!-- 分享优化 -->
+	<div class="opacity_cover" data-event-agent="touchend|close"></div>
+    <div class="invest">
+        <div class="con">
+            <ul class="buts">
+                              <li></li>
+                              	               		 	                	<li class="but">
+	                		<a href="javascript:void(0);" id="AddCar" clstag="pageclick|keycount|dp_bottom_2015092220|1" data-event-agent="touchmove,touchend|touzi">
+	                		
+	                		</a>
+	                	</li>
+	                	                            <li data-event-agent="touchend|share"></li>
+            </ul>
+        </div>
+        
+    </div>
+
+ 
+</body></html>
+
+<script src="/New/Content/js/zepto.min.js"></script>
+<script src="/New/Content/js/zepto.cookie.js"></script>
+<script src="/New/Content/js/Base.js"></script>
+    <script src="/Content/js/service-cart.js"></script>
+    <script type="text/javascript" charset="UTF-8">
+        $(function () {
+            $("#zcrs").html("@(Model.crowdFundingDeail.Number-Model.crowdFundingDeail.StockNUM)");
+            var e = "@Model.crowdFundingDeail.StockNUM";
+            if (parseInt(e) <= 0) {
+                $("#bfb").html(@Model.crowdFundingDeail.StockNUM+"%");
+                e = "1";
+            }
+            else
+            {
+                    $("#bfb").html(parseInt("@(Model.crowdFundingDeail.Number)") / parseInt(e) + "%");
+            }
+            $("#mbje").html("<i>￥</i>" + "@(Model.crowdFundingDeail.Price*Model.crowdFundingDeail.Number)");
+            $("#ycje").html("<i>￥</i>" + "@(Model.crowdFundingDeail.Price*(Model.crowdFundingDeail.Number - Model.crowdFundingDeail.StockNUM))");
+           
+            var c = "@Model.crowdFundingDeail.StockNUM";
+            if (parseInt(c) <= 0) {
+                $("#AddCar").html("众筹已完成");
+            }
+            else {
+                $("#AddCar").html("我要支持(" + "@Model.crowdFundingDeail.Price" + ")￥");
+            }
+
+            $("#AddCar").click(function () {
+                var s = "@Model.crowdFundingDeail.StockNUM";
+                 if (s == "0") {
+                     alert("众筹已完成！请您关注下期众筹")
+                 }
+                 else {
+                     tocar("add");
+                 }
+             })
+        });
+        function tocar(type) {
+                    var shop =
+                        {
+                            ID: "@Model.crowdFundingDeail.Pid",
+                            Qty: 1,
+                            Price: "@Model.crowdFundingDeail.Price",
+                            Attrs: null
+                        }
+                    shopCar.AddToCart(shop);
+                    shopCar.GetAllCount();
+                        window.location.href = "/Product/GetCar";
+        }
+    </script>

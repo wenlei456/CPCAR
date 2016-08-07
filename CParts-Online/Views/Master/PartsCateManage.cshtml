@@ -1,0 +1,415 @@
+﻿@model CParts_Offline.Models.Master.PartCateViewModel
+@{
+    ViewBag.Title = "零件分类管理";
+    Layout = "~/Views/Shared/_master.cshtml";  
+}
+@section styles{
+    <style>
+
+        .treeUL ul {
+          margin:0px;
+           padding:0px !important;
+        }
+        .treeUL li {       
+        padding:10px 10px 0px 20px;
+        font-size:15px;
+        /*border-left:1px solid #000;
+        border-bottom:1px solid #000;*/
+        }
+        .treeUL span {
+         margin-left:10px
+        }
+        .treeUL .cul {
+        border-left:1px solid #000;
+        border-bottom:1px solid #000;
+        margin-left:20px;
+        }
+        .treeUL .topTab {
+        font-weight:600;
+        color:#0612f5;
+        font-size:16px;
+        
+        }
+
+    </style>
+    
+    }
+
+
+<div class="content-box">
+    <!-- Start Content Box -->
+    <div class="content-box-header2">
+        <h3>零件类型维护</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">所有列表</a></li>
+            <!-- href must be unique and match the id of target div -->
+            <li><a href="#tab2" id="f1">添加</a></li>
+            <li><a href="#tab3" id="tabEdit">编辑</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <div>
+                <div class="bulk-actions">
+                    品牌: 
+                    <select name="dropdown">
+                        <option value="option1">Last a Month</option>
+                        <option value="option2">Last Six Months</option>
+                        <option value="option3">Last a Year</option>
+                    </select>&nbsp;&nbsp;
+                     型号:
+                    <select name="dropdown">
+                        <option value="option1">Last a Month</option>
+                        <option value="option2">Last Six Months</option>
+                        <option value="option3">Last a Year</option>
+                    </select>&nbsp;&nbsp;
+                     关键词：<input type="text" class="text-input" />
+                    <a class="button" href="#">搜索</a>
+                </div>
+
+            </div>
+            <div style="width:50%">
+            <ul class="treeUL">               
+                 @foreach (var item in Model.PCItem)
+                 {
+                       <li>
+                           <div>
+                           <span class="topTab">@item.currItem.CategoryName</span>
+                           <span style="color:@(item.currItem.IsShow == 1 ? "green" : "red")">@(item.currItem.IsShow == 1 ? "启用" : "禁用")</span>
+                           <span> <a class="button edit"   cid="@item.currItem.ID"  cc="@item.currItem.CategoryName" cp="@item.currItem.ParentID" co="@item.currItem.OrderBy" cs="@item.currItem.IsShow" ico="@item.currItem.ICOPath" banner="@item.currItem.BannerPath">编辑</a>&nbsp;&nbsp;<a class="button del" cid="@item.currItem.ID">删除</a></span>
+                      </div>
+                         @Html.Partial("PartCateTree", item.Children)
+                       </li>
+                    }
+            </ul>
+                </div>
+         @**   <table width="100%">
+                <thead>
+                    <tr>
+                        <th valign="middle">
+                            <input class="check-all" type="checkbox" />
+                        </th>
+                        <th valign="middle">名称</th>
+                        <th valign="middle">父分类</th>
+                        <th valign="middle">排序</th>
+                        <th valign="middle">是否启用</th>      
+                        <th></th>                 
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <button class="button">删除</button>
+                            <div class="clear"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody style="font-size: 12px">
+                    @foreach (var item in Model)
+                    {
+                         <tr>
+                        <td >
+                            <input  type="checkbox"  class="check"/>
+                        </td>
+                        <td >@item.currItem.CategoryName</td>
+                        <td >@item.currItem.ParentID</td>
+                        <td >@item.currItem.OrderBy</td>
+                        <td >@(item.currItem.IsShow == 1 ? "启用" : "禁用")</td>                       
+                        <td ><a class="button edit"   cid="@item.currItem.ID"  cc="@item.currItem.CategoryName" cp="@item.currItem.ParentID" co="@item.currItem.OrderBy" cs="@item.currItem.IsShow" ico="@item.currItem.ICOPath">编辑</a>&nbsp;&nbsp;<a class="button del" cid="@item.currItem.ID">删除</a></td>
+                     </tr>
+                        Html.RenderPartial("PartCateTree", item.Children);
+                    }
+                </tbody>
+            </table>***@
+        </div>
+        <!-- End #tab1 -->
+        <div class="tab-content" id="tab2" style="width: 100%">
+
+            <table width="30%">
+                <tr>
+                    <td>分类:</td>
+                    <td>     
+                     <input type="text"  placeholder="分类名称" id="PCName_TXT" />
+
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>父分类:</td>
+                    <td>
+                           <select  id="PCP_DL">
+                            <option value="0" checked>顶层</option>
+                            @foreach (var item in Model.AllItem)
+                            {
+                                  <option value="@item.ID">@item.CategoryName</option>
+                            }                           
+                        </select>
+                        </td>
+                    <td><</td>
+                </tr>
+                <tr>
+                    <td>排序:</td>
+                    <td>
+                       <input type="text"  value="0" id="PCOrderBy_TXT" /> 
+                    </td>
+                    <td> </td>
+                </tr>
+                  <tr>
+                    <td>状态:</td>
+                    <td>
+                        <select id="PCS_DL">
+                            <option value="1" checked>启用</option>
+                            <option value="0">禁用</option>
+                         
+                        </select></td>
+                    <td> </td>
+                </tr>
+                  
+                <tfoot>
+                    <tr>
+                      
+                        <td><a class="button" id="savePartC" >保存</a></td>
+                          <td><p style="color:red; display:none" id="errorMsg">信息不完整！</p></td>
+                    </tr>
+
+                </tfoot>
+            </table>
+            <div class="clear">
+            </div>
+            <!-- End .clear -->
+
+        </div>
+
+
+         <div class="tab-content" id="tab3" style="width: 100%">
+
+             <table width="30%">
+                <tr>
+                    <td>分类:</td>
+                    <td>     
+                     <input type="text"  placeholder="分类名称" id="PCName_TXT_E" />
+
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>父分类:</td>
+                    <td>
+                           <select  id="PCP_DL_E">
+                            <option value="0" checked>顶层</option>
+                            @foreach (var item in Model.AllItem)
+                            {
+                                  <option value="@item.ID">@item.CategoryName</option>
+                            }                           
+                        </select>
+                        </td>
+                    <td><</td>
+                </tr>
+                <tr>
+                    <td>排序:</td>
+                    <td>
+                       <input type="text"  value="0" id="PCOrderBy_TXT_E" /> 
+                    </td>
+                    <td> </td>
+                </tr>
+                  <tr>
+                    <td>状态:</td>
+                    <td>
+                        <select id="PCS_DL_E">
+                            <option value="1" checked>启用</option>
+                            <option value="0">禁用</option>
+                         
+                        </select></td>
+                    <td> </td>
+                </tr>
+                  
+                <tfoot>
+                    <tr>
+                      
+                        <td><a class="button" id="savePartC_E" >保存</a></td>
+                          <td><p style="color:red; display:none" id="errorMsg_E">信息不完整！</p></td>
+                    </tr>
+
+                </tfoot>
+            </table>
+             <div style="">
+                 <form action="/Master/AddPartsCImg" method="post" enctype = "multipart/form-data">
+                 <h3>分类图片</h3>
+                   <input name="Upimg" type="hidden" id="Upimg" value=""/>
+                 <img style="width:67px; height:67px;" id="icoImg" src=""/>
+                 <input type="file" value="选择图片" name="icoImgFile"/>
+                 <button class="button" type="submit" >上传</button>
+                 </form>
+             </div>
+                  <div style=" margin-top:20px">
+                 <form action="/Master/AddBannerImg" method="post" enctype = "multipart/form-data">
+                 <h3>顶层banner图片</h3>
+                   <input name="Upbanner" type="hidden" id="Upbanner" value=""/>
+                 <img style="width:100%; height:100%;" id="Upbannerimg" src=""/>
+                 <input type="file" value="选择banner图片" name="icoImgFile"/>
+                 <button class="button" type="submit" >上传</button>
+                 </form>
+             </div>
+            <div class="clear">
+            </div>
+            <!-- End .clear -->
+
+        </div>
+        <!-- End #tab2 -->
+    </div>
+    <!-- End .content-box-content -->
+</div>
+@section scripts
+    {
+   <script type="text/ecmascript">     
+
+
+       $(function () {
+           //添加
+           $("#savePartC").click(function () {
+               showdiv('正在保存中***');
+               var CategoryName = $("#PCName_TXT").val();
+               var ParentID = $("#PCP_DL").val();
+               var OrderBy = $("#PCOrderBy_TXT").val();
+               var IsShow = $("#PCS_DL").val();
+            
+               var pcate = {
+                   CategoryName: CategoryName,
+                   ParentID: ParentID,
+                   OrderBy: OrderBy,
+                   IsShow: IsShow                
+               };
+               if (VaCar(pcate)) {
+                   Post("/Master/AddPartsCate", pcate, function (data, error) {
+                       if (error) {
+                           ChangBox("网络异常，请稍后再试");
+                       }
+                       if (data.result == "error") {
+                           alert("添加异常，请稍后再试！");
+                       }
+                       else if (data.result == "ok") {
+                           setTimeout(function () {
+                               window.location.href = "/Master/PartsCateManage";
+                           }, 2)
+                       }
+                   });
+
+               }
+               else {
+                   $("#errorMsg").show();
+                   hidediv();
+               }
+
+
+           })
+           //删除
+           $(".del").click(function () {
+               if (confirm("确认要删除？")) {
+
+                   var id = $(this).attr("cid");
+                   Post("/Master/DelPartsCate", { ID: id }, function (data, error) {
+                       if (error) {
+                           ChangBox("网络异常，请稍后再试");
+                       }
+                       if (data.result == "error") {
+                           alert("删除异常，请稍后再试！");
+                       } else if (data.result == "ok") {
+                           setTimeout(function () {
+                               window.location.href = "/Master/PartsCateManage";
+                           }, 2)
+
+                       }
+                   });
+               }
+           });
+           //修改
+           $(".edit").click(function () {
+           
+               $("#tabEdit").click();            
+               var cid = $(this).attr("cid");
+               var cc = $(this).attr("cc");
+               var cp = $(this).attr("cp");            
+               var co = $(this).attr("co");
+               var cs = $(this).attr("cs");        
+               $("#PCName_TXT_E").val(cc);
+               $("#PCP_DL_E").val(cp);
+               $("#PCOrderBy_TXT_E").val(co);
+               $("#PCS_DL_E").val(cs);
+               $("#savePartC_E").attr("cid", cid);
+               $("#Upimg").val(cid);
+               $("#Upbanner").val(cid);
+               $("#icoImg").attr("src", $(this).attr("ico"));
+               $("#Upbannerimg").attr("src", $(this).attr("banner"));
+           })
+           //提交更改
+           $("#savePartC_E").click(function () {
+
+               showdiv('正在保存中***');
+               var id = $(this).attr("cid");
+               var CategoryName = $("#PCName_TXT_E").val();
+               var ParentID = $("#PCP_DL_E").val();
+               var OrderBy = $("#PCOrderBy_TXT_E").val();
+               var IsShow = $("#PCS_DL_E").val();
+
+               var pcate = {
+                   ID:id,
+                   CategoryName: CategoryName,
+                   ParentID: ParentID,
+                   OrderBy: OrderBy,
+                   IsShow: IsShow
+               };
+
+               if (VaCar(pcate)) {
+                  
+                   Post("/Master/EditPartsCate", pcate, function (data, error) {
+                       if (error) {
+                           ChangBox("网络异常，请稍后再试");
+                       }
+                       if (data.result == "error") {
+                           alert("修改异常，请稍后再试！");
+                           hidediv();
+                       }
+                       else if (data.result == "ok") {
+                           setTimeout(function () {
+                               window.location.href = "/Master/PartsCateManage";
+                           }, 2)
+                          
+                       }
+                   });
+                
+               }
+               else {
+                   $("#errorMsg_E").show();
+                   hidediv();
+               }
+
+
+           })
+
+           // <img style="width:67px; height:67px;" id="icoImg" src=""/>
+           //      <input type="file" value="选择图片" id="icoImgFile"/>
+             //    <button class="button" id="icoImgButton">上传</button>
+           $("#icoImgButton").click(function () {
+
+
+
+           })
+       })
+       //数据验证
+       function VaCar(c)
+       {
+           if (c.CategoryName == "" || c.ParentID == "" || c.OrderBy == "" || c.IsShow == "" ) {
+               return false;
+           } else {
+               return true;
+           }
+
+       }
+
+   </script>
+    
+    }

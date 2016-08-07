@@ -1,0 +1,326 @@
+﻿/**正在加载模态窗口**/
+ #modal-bg{ display: none; position: fixed; top: 0%; left: 0%; width: 100%; height: 100%; background-color: black; 
+            z-index:1001; -moz-opacity: 0.05; opacity:.05; filter: alpha(opacity=5);}
+ #modal-show{display: none;position: absolute;position: fixed;top: 40%; left: 40%; margin:-31px 0 0 -31px; z-index:1002; overflow: auto;}
+ /*****/
+ .head-ico{
+	margin-right: 5px;
+	padding-top: 2px;
+}
+.head-logo{
+height:36px;
+width:98px;
+}
+.head-title{
+    line-height: 40px;
+    text-align: center;
+    background:url(../img/ico/text.png) no-repeat 0 15px;
+    margin-left:110px;
+    margin-right:140px;
+    background-size:100%;
+    height:40px;
+    overflow: hidden;
+}
+.nav-header{
+	font-size: 1rem;
+	color: #848484 !important;
+}
+.pfoot{
+padding: 15px 0;
+text-align: center;
+font-size: 13px;
+}
+.ui-footer-version p{
+	font-size:12px;
+}
+.txt-grey-3{
+	color: #000;
+	margin-right: 10px;
+}
+.left-nav-a{
+	padding:16px 10px;
+	color: #fff;
+    text-align: center;
+    background: #04007C;
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid #fff;
+}
+.mui-col-xs-9{
+	width: 80%;
+}
+.mui-slider-300 
+{
+	max-width: 300px;
+}
+#slider{
+	margin: 44px auto 0 auto;
+}
+.pro-baseInfo{
+	border-bottom: 1px solid #e2e2e2;
+}
+.pro-baseInfo-name {
+	padding:5px 10px 10px 0px ;	
+	font-size: 16px;
+	color: #141313;
+	font-weight: 600;
+    width:71%;
+	
+}
+.pro-baseInfo-price {
+	padding:5px 10px 10px 0px ;	
+	font-size: 16px;
+	color: red;
+	font-weight: 600;
+}
+.pro-info{
+	padding: 10px;
+	margin-bottom: 50px;
+}
+.pro-attr,.pro-qty,.pro-tocar,.pro-buyArea{
+	padding: 5px 0px;
+}
+#partExtAttr td {
+    height: 40px;
+}
+
+.AtttValue {
+    cursor: pointer;
+    font-size: 16px;
+    border: 2px solid #a99c9c;
+    margin: 5px;
+    padding: 5px 10px;
+    float: left;
+    }
+.currAttr {
+   /* background-color: #0b1ff8;*/
+    color: #000;
+    border: 2px solid #cb0000;
+}
+.pro-buyArea div{
+	padding: 5px 0px;
+	width: 50%;
+	float: left;
+}
+.pro-buyArea div button{
+	width: 100%;
+
+}
+.pro-buyArea .btn-addcar
+{
+	padding-right: 10px;
+}
+.pro-buyArea .btn-lbuy
+{
+	padding-left: 10px;
+}
+.pro-tocar-item{
+	margin-top: 10px;
+	list-style: none;
+	padding:0px;
+	padding-left:10px ;
+}
+.pro-tocar-item li{
+	float: left;
+	font-size: 12px;
+	color: #3e4750;
+	font-weight: 600;
+	width: 50%;
+}
+.mui-segmented-control{
+background: #efefef;	
+}
+.cartable {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+.selectCar {
+color:#666;
+}
+.mui-control-item {
+    padding: 16px 10px;
+    text-align: center;
+    background: #04007C;
+
+}
+.car-pros {
+padding:15px 5px 56px 5px;
+}
+.car-pro {
+padding:6px 5px;
+border:1px solid #000;
+position:relative;
+margin-bottom:8px;
+}
+.car-item-name {
+color:black;
+padding:3px 0px;
+
+}
+.car-pro-info {
+width:52%;
+padding-top:8px;
+padding-left:4px;
+}
+.car-item-cty, .car-item-price, .car-item-atts {
+
+color:#3e4750;
+font-size:15px
+}
+.car-item-price {
+color:red;
+font-size:16px;
+}
+.car-pro-op {
+padding-top:4px;
+}
+.car-item-num 
+{
+position:absolute;
+bottom:0px;
+width: 40px !important; 
+text-align: center;
+font-size:14px;
+padding: 5px 5px !important; 
+height:30px !important; 
+right:5px
+}
+.car-totle {
+margin-bottom:100px
+}
+
+.bottom-submit {
+    height: 50px;
+    background-color: #FFF;
+    position: fixed;
+    bottom: -1px;
+    z-index: 999;
+    box-shadow: #9d9d9d 0px 0px 10px;
+    width:100%;
+}
+.cart-submit-right {
+color:#fff;
+    width: 40%;
+    background-color: #da3915;
+    line-height: 50px;
+    float:right;
+    text-align:center;
+    cursor:pointer;
+}
+.input-text {
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    box-shadow: inset 0px 3px 3px #e3e3e3;
+    font-size: 14px;
+    text-indent: 10px;
+    margin: 10px 0px;
+    vertical-align: middle;
+    outline: none;
+}
+.width-100 {
+width:100%;
+}
+.width-50 {
+width:50%;
+}
+.width-95 {
+width:95%;
+}
+.btn-border {
+line-height: 37px;
+    color: #da3915;
+    font-size: 12px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    border: 1px solid #da3915;
+    background-color: White;
+    padding:0px 10px;
+}
+
+.btn-main {
+    line-height: 37px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    background: #d93715;
+}
+.btn-ok {
+     line-height: 37px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    background: #13ea11;
+}
+.go-order-title {
+    background-color: #d9d9d9;
+    line-height: 30px;
+    font-size: 14px;
+    padding-left: 2%;
+}
+
+.go-order-payinfo {
+    border-bottom:#ddd;
+    text-align:right;
+    padding-bottom:15px;
+}
+.myhome-img img
+ {
+    width:100px;
+    height:100px;
+    border-radius:80px;
+}
+.myhome-info {
+padding-left:10px;
+}
+.myhome-title {
+font-weight:600;
+font-size:16px;
+color:#333;
+}
+.myhome-item{
+    color:#7d7d7d;
+    font-size:12px;
+    line-height:20px;
+}
+.myhome-img-ops {
+padding:20px 0px;
+}
+.myhome-img-op {
+width:25%;
+float:left;
+text-align:center;
+font-size:13px;
+padding-bottom:15px;
+}
+    .myhome-img-op a {
+        display:block;
+    width:95%;
+    margin:0px auto;
+    color:#666666;
+    }
+.myhome-img-op img {
+width:80%;
+}
+.order-detail {
+     width:95%;
+     margin:0 auto;
+     padding:10px 0px;
+}
+.order-detail-item-title {
+float:left;
+width:25%;
+
+line-height:25px;
+}
+.order-detail-item-value {float:left;text-align:left;width:75%;line-height:25px;}
+@media screen and (max-width:374px){.head-title{margin-right:90px;}}

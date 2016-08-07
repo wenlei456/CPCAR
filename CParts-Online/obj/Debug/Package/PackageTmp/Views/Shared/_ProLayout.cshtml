@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+ <meta name="keywords" content="诚配,诚配改装,汽车改装,改装件,汽车配件,海外配件,进口配件,保时捷,宝马,奔驰,法拉利,豪车改装,高端改装">
+    <meta name="description" content="">
+    <meta  />
+    <!--打包的js-->
+    @System.Web.Optimization.Scripts.Render("~/Content/jslib")
+    @System.Web.Optimization.Scripts.Render("~/bundles/js")
+    <!--打包的css-->
+    @System.Web.Optimization.Styles.Render("~/Content/csslib")
+   
+    @RenderSection("styles", required: false)
+    
+  
+</head>
+<body>
+     <div class="body">
+        <div class="head">
+            <div class="logo left"><a href="/index2.html">
+               <img src="/content/img/logo.png" /></a><img src="/content/img/slogo.png" class="slogo"/></div>
+            <div class="hGsearch left">
+                <div class="hGgsearch center" >
+                       <img src="/content/img/searchbutton.jpg" class="right" id="topsearch"/>
+                    <div class="right"><input type="text" class="txt_search " id="txt_keyword" /></div>
+                    <div style="clear:both"></div>          
+                </div>
+            </div>
+            <div class="left" style="padding-top: 30px">
+                <a href="/Car/index" class="btn btn-default" style="font-size: 16px">
+                    <span class="glyphicon glyphicon-shopping-cart" style="">购物车共<span style="color: red; font-size: 20px" id="hcarnum">0</span>项</span>
+                </a>
+            </div>
+            <div class="left" style="padding-left: 10px;">
+             <div style="font-size: 16px; padding-top: 10px; padding-bottom: 6px;" id="nologinAre">
+                    &nbsp; <a href="/member/Login">登录</a> | <a href="/Member/RegView">注册</a><br />
+                </div>
+                 <div style="font-size: 16px; padding-top: 10px; padding-bottom: 6px; display:none" id="loginAre">
+                    &nbsp; <a href="/member/LoginOut">退出登录</a> <br />
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle"
+                        data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user"></span>我的账户 <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                         <li><a href="/Member/UserHome">账户信息</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/Member/MyOrder">我的订单</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/Member/ExpRecord">我的积分</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/Member/RebateRecord">我的返利</a></li>
+                         <li class="divider"></li>
+                        <li><a href="/Member/AddressBook">我的地址簿</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/Member/UpdatePW">修改密码</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+         </div>
+    
+        <div class="ProductMain">
+            <img  src="@(ViewBag.banner==null?"/content/img/banner4.jpg":ViewBag.banner)" style="max-width: 1200px; width:100%; height: auto"/> 
+            <div class="ProductsearchAre">
+                <div class="ProductsearchAre2">
+                 @{Html.RenderAction("GetCarList", "Common"); }  </div>
+
+            </div>
+                      
+            @{Html.RenderAction("Nav", "Common",new{type=0}); }            
+               <div style="clear:both"></div>
+         
+        </div>
+  @*       <div class="ProductMain">
+            <img  src="@(ViewBag.banner==null?"/content/img/banner4.jpg":ViewBag.banner)" style="max-width: 100%; height: auto"/>           
+            <div class="body" id="centdiv" style="height:475px;top:-470px">
+            <div class="ProductsearchAre"></div>
+            <div class="ProductsearchAre2">
+                 @{Html.RenderAction("GetCarList", "Common"); }  
+            </div>            
+            @{Html.RenderAction("Nav", "Common",new{type=0}); }            
+               <div style="clear:both"></div>
+            </div>       
+        </div>*@
+    <div class="body">
+    <div id="container">@RenderBody()</div>
+        </div>
+    <div style="clear:both"></div>
+          <div class="body">
+<div class="foot">
+<div class="about">关于诚配|网站公约|网站声明|帮助中心|联系我们|常见问题|网站地图</div>
+<div class="copyring">我们在致力于打造中国最齐全的汽车改装配件市场!诚配改装网是汽车改装配件电商平台<br />我们能为您快速查找您需要的改装配件，同时提供最放心的交易平台</div>
+<div class="copying2">Copyring @@ 2015 91CPCAR.com All Right Reserved &nbsp;&nbsp;版权所有&nbsp;&nbsp;湘ICP备15020410号 &nbsp</div> 
+<div class="authentication">
+			<a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn/">
+				<img width="103" height="32" alt="经营性网站备案中心" src="http://img12.360buyimg.com/da/jfs/t535/349/1185317137/2350/7fc5b9e4/54b8871eNa9a7067e.png" class="err-product">
+			</a><a rel="nofollow" target="_blank" href="http://www.bj.cyberpolice.cn/index.do">
+				<img width="103" height="32" alt="网络警察" src="http://img11.360buyimg.com/da/jfs/t559/186/1172042286/2795/7d90b036/54b8874bN694454a5.png" class="err-product">
+			</a>
+			<a rel="nofollow" target="_blank" href="http://www.szfw.org/">
+				<img width="103" height="32" src="http://img11.360buyimg.com/da/jfs/t451/173/1189513923/1992/ec69b14a/54b8875fNad1e0c4c.png" class="err-product">
+		<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1257109381'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1257109381%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+            </a></div>
+</div>
+    </div>
+  <div>
+   @Html.Partial("_ModalDiag")    
+      </div>
+
+</body>
+</html>
+
+ @RenderSection("scripts", required: false)  
+<script  type="text/javascript" charset="utf-8">
+    $(function () {
+        $("#topsearch").click(function () {
+            var kw = $("#txt_keyword").val();
+            if (kw) {
+                window.location.href = "/product/SearchProduct?keyword=" + encodeURI(kw);
+            }
+        })
+
+        var keyword = getQueryString("keyword");
+        if (keyword) {
+            $("#txt_keyword").val(keyword);
+            $(".paginator a").each(function () {
+                var src = $(this).attr("href");
+                $(this).attr("href", src + "&&keyword=" + $("#txt_keyword").val());
+            })
+        } else {
+            $("#txt_keyword").val("");
+        }
+        initHeight();
+        $(window).resize(function () {
+            initHeight();
+        });
+    })
+    function initHeight() {
+        var height = 475;
+        var width = $(window).innerWidth();
+        var rat = width / 1920;
+        if (width > 1200) {
+            if ( width < 1400) {
+                if (!IsPC()) {
+
+                } else {
+                    $(".ProductsearchAre").css("height", 430 * rat + "px");
+                    $(".buttonList").css("left", "53%").css("top", "20%");
+                }
+            }
+            if (width >= 1400 && width<1800) {
+                if (!IsPC()) {
+
+                } else {
+                    $(".ProductsearchAre").css("height", 430 * rat + "px");
+                    $(".buttonList").css("left", "47%").css("top", "22%");
+                }
+            } 
+            if (width >= 1800) {
+                if (!IsPC()) {
+
+                } else {
+                    $(".ProductsearchAre").css("height", 430 * rat + "px");
+                    $(".buttonList").css("left", "45%").css("top", "24%");
+                }
+            }
+           
+        } else {
+            $(".ProductsearchAre").css("height", 283 + "px");
+            $(".buttonList").css("left", "52%").css("top", "18%");
+        }
+    }
+</script>

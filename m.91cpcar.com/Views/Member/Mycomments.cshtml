@@ -1,0 +1,38 @@
+﻿@model  IEnumerable<MemberModule.Model.Comments>
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+}
+@section styles{
+    <style>
+        h4 {
+        color:#3f3f3f;
+        }
+    </style>
+    }
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/content/img/ico/icon_phome.png">
+    </a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/content/img/ico/icon_shopcar.png">
+    </a>
+    <div class="head-title">我的评论</div>
+
+</header>
+<div class="mui-content" >
+    <div style="padding:20px; ">
+
+    <dl>
+        @foreach (var item in Model)
+        {
+              <dt><dd>评论的产品：@item.PartName</dd><dd>评论的内容：@item.mentsname</dd></dt>
+       <hr />
+        }
+      
+    </dl>
+        </div>
+
+    </div>

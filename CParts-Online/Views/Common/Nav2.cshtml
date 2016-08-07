@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DAO.PartsCategory>
+@{
+    Layout = null;
+}
+<style>
+    .dropdown {
+        background:#0b77eb;
+    /*background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,157,158,1)), color-stop(20%,rgba(29,94,119,1)), color-stop(80%,rgba(29,94,119,1)), color-stop(100%,rgba(0,157,158,1)))*/
+    }
+    .dropdown li{
+      /*background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,157,158,1)), color-stop(20%,rgba(29,94,119,1)), color-stop(80%,rgba(29,94,119,1)), color-stop(100%,rgba(0,157,158,1)));*/
+    }
+    .topNav {
+   display: block;
+  font-size: 15px;
+  line-height: 29px !important;
+   color:#fff;
+  padding: 22px 27px 23px !important;
+    }
+    .clia {
+        font-size:15px;
+    padding: 10px 10px 10px !important;
+    }
+
+</style>
+<div style=" font-size:18px">
+<ul class="nav nav-pills dropdown ">
+   <li ><a class="active topNav" href="/Product/Index/">首页</a></li>
+    <li class="dropdown">
+      <a class="dropdown-toggle topNav" data-toggle="dropdown" href="#">
+         产品 <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+           @foreach (var item in Model)
+    {
+        <li><a href="/Product/TypeList/@item.ID" class="clia">@item.CategoryName</a></li>
+    }
+        
+      </ul>
+   </li>
+
+
+   
+
+</ul>
+    </div>
+

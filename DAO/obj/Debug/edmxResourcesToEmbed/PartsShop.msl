@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CarPartsModelStoreContainer" CdmEntityContainer="CarPartsEntities">
+    <EntitySetMapping Name="CarsInfo">
+      <EntityTypeMapping TypeName="CarPartsModel.CarsInfo">
+        <MappingFragment StoreEntitySet="CarsInfo">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Oil" ColumnName="Oil" />
+          <ScalarProperty Name="Engine" ColumnName="Engine" />
+          <ScalarProperty Name="ProYear" ColumnName="ProYear" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExpRecord">
+      <EntityTypeMapping TypeName="CarPartsModel.ExpRecord">
+        <MappingFragment StoreEntitySet="ExpRecord">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Exp" ColumnName="Exp" />
+          <ScalarProperty Name="OrderPrice" ColumnName="OrderPrice" />
+          <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+          <ScalarProperty Name="LowerUid" ColumnName="LowerUid" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImgStock">
+      <EntityTypeMapping TypeName="CarPartsModel.ImgStock">
+        <MappingFragment StoreEntitySet="ImgStock">
+          <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+          <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+          <ScalarProperty Name="PartID" ColumnName="PartID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MemberBase">
+      <EntityTypeMapping TypeName="CarPartsModel.MemberBase">
+        <MappingFragment StoreEntitySet="MemberBase">
+          <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="Integral" ColumnName="Integral" />
+          <ScalarProperty Name="Levels" ColumnName="Levels" />
+          <ScalarProperty Name="UpUser" ColumnName="UpUser" />
+          <ScalarProperty Name="Ucode" ColumnName="Ucode" />
+          <ScalarProperty Name="MemberType" ColumnName="MemberType" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PartAttr">
+      <EntityTypeMapping TypeName="CarPartsModel.PartAttr">
+        <MappingFragment StoreEntitySet="PartAttr">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="FlagName" ColumnName="FlagName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PartBrand">
+      <EntityTypeMapping TypeName="CarPartsModel.PartBrand">
+        <MappingFragment StoreEntitySet="PartBrand">
+          <ScalarProperty Name="Common" ColumnName="Common" />
+          <ScalarProperty Name="Describe" ColumnName="Describe" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PartStock">
+      <EntityTypeMapping TypeName="CarPartsModel.PartStock">
+        <MappingFragment StoreEntitySet="PartStock">
+          <ScalarProperty Name="StockNUM" ColumnName="StockNUM" />
+          <ScalarProperty Name="StockType" ColumnName="StockType" />
+          <ScalarProperty Name="PartID" ColumnName="PartID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebsiteMenu">
+      <EntityTypeMapping TypeName="CarPartsModel.WebsiteMenu">
+        <MappingFragment StoreEntitySet="WebsiteMenu">
+          <ScalarProperty Name="Enable" ColumnName="Enable" />
+          <ScalarProperty Name="MenuState" ColumnName="MenuState" />
+          <ScalarProperty Name="MenuBindURL" ColumnName="MenuBindURL" />
+          <ScalarProperty Name="MenuOrderby" ColumnName="MenuOrderby" />
+          <ScalarProperty Name="MenuParent" ColumnName="MenuParent" />
+          <ScalarProperty Name="MenuLevel" ColumnName="MenuLevel" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MemberLevel">
+      <EntityTypeMapping TypeName="CarPartsModel.MemberLevel">
+        <MappingFragment StoreEntitySet="MemberLevel">
+          <ScalarProperty Name="Income" ColumnName="Income" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Ratio" ColumnName="Ratio" />
+          <ScalarProperty Name="MaxIntegral" ColumnName="MaxIntegral" />
+          <ScalarProperty Name="MinIntegral" ColumnName="MinIntegral" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FriendCode">
+      <EntityTypeMapping TypeName="CarPartsModel.FriendCode">
+        <MappingFragment StoreEntitySet="FriendCode">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
+          <ScalarProperty Name="UseUser" ColumnName="UseUser" />
+          <ScalarProperty Name="CreatUser" ColumnName="CreatUser" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhoneMsg">
+      <EntityTypeMapping TypeName="CarPartsModel.PhoneMsg">
+        <MappingFragment StoreEntitySet="PhoneMsg">
+          <ScalarProperty Name="InfoNumber" ColumnName="InfoNumber" />
+          <ScalarProperty Name="Port" ColumnName="Port" />
+          <ScalarProperty Name="STime" ColumnName="STime" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="MSG" ColumnName="MSG" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddressBook">
+      <EntityTypeMapping TypeName="CarPartsModel.AddressBook">
+        <MappingFragment StoreEntitySet="AddressBook">
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="People" ColumnName="People" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RebateDraw">
+      <EntityTypeMapping TypeName="CarPartsModel.RebateDraw">
+        <MappingFragment StoreEntitySet="RebateDraw">
+          <ScalarProperty Name="Statu" ColumnName="Statu" />
+          <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+          <ScalarProperty Name="CardName" ColumnName="CardName" />
+          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+          <ScalarProperty Name="BankInfo" ColumnName="BankInfo" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="PType" ColumnName="PType" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminAccount">
+      <EntityTypeMapping TypeName="CarPartsModel.AdminAccount">
+        <MappingFragment StoreEntitySet="AdminAccount">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="RealName" ColumnName="RealName" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PartsCategory">
+      <EntityTypeMapping TypeName="CarPartsModel.PartsCategory">
+        <MappingFragment StoreEntitySet="PartsCategory">
+          <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+          <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+          <ScalarProperty Name="BannerPath" ColumnName="BannerPath" />
+          <ScalarProperty Name="ICOPath" ColumnName="ICOPath" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PartsExtend">
+      <EntityTypeMapping TypeName="CarPartsModel.PartsExtend">
+        <MappingFragment StoreEntitySet="PartsExtend">
+          <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="AttrPrice" ColumnName="AttrPrice" />
+          <ScalarProperty Name="AttrValue" ColumnName="AttrValue" />
+          <ScalarProperty Name="AttrFlagName" ColumnName="AttrFlagName" />
+          <ScalarProperty Name="AttrName" ColumnName="AttrName" />
+          <ScalarProperty Name="ParentAttr" ColumnName="ParentAttr" />
+          <ScalarProperty Name="PartID" ColumnName="PartID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogInfo">
+      <EntityTypeMapping TypeName="CarPartsModel.LogInfo">
+        <MappingFragment StoreEntitySet="LogInfo">
+          <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+          <ScalarProperty Name="OutAttr" ColumnName="OutAttr" />
+          <ScalarProperty Name="InAttr" ColumnName="InAttr" />
+          <ScalarProperty Name="EvenMsg" ColumnName="EvenMsg" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="OpearName" ColumnName="OpearName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Active">
+      <EntityTypeMapping TypeName="CarPartsModel.Active">
+        <MappingFragment StoreEntitySet="Active">
+          <ScalarProperty Name="ActiveIMG" ColumnName="ActiveIMG" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Common" ColumnName="Common" />
+          <ScalarProperty Name="Decribe" ColumnName="Decribe" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StarDate" ColumnName="StarDate" />
+          <ScalarProperty Name="SubName" ColumnName="SubName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActiveAttr">
+      <EntityTypeMapping TypeName="CarPartsModel.ActiveAttr">
+        <MappingFragment StoreEntitySet="ActiveAttr">
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="AProID" ColumnName="AProID" />
+          <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+          <ScalarProperty Name="AtrrID" ColumnName="AtrrID" />
+          <ScalarProperty Name="ActiveID" ColumnName="ActiveID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parts">
+      <EntityTypeMapping TypeName="CarPartsModel.Parts">
+        <MappingFragment StoreEntitySet="Parts">
+          <ScalarProperty Name="imgProduct" ColumnName="imgProduct" />
+          <ScalarProperty Name="sku" ColumnName="sku" />
+          <ScalarProperty Name="child_product_dicts" ColumnName="child_product_dicts" />
+          <ScalarProperty Name="product_child_json" ColumnName="product_child_json" />
+          <ScalarProperty Name="ProType" ColumnName="ProType" />
+          <ScalarProperty Name="mDescribe" ColumnName="mDescribe" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="ShowDate" ColumnName="ShowDate" />
+          <ScalarProperty Name="Orderby" ColumnName="Orderby" />
+          <ScalarProperty Name="Common" ColumnName="Common" />
+          <ScalarProperty Name="SAS" ColumnName="SAS" />
+          <ScalarProperty Name="DetailList" ColumnName="DetailList" />
+          <ScalarProperty Name="SpecParma" ColumnName="SpecParma" />
+          <ScalarProperty Name="Describe" ColumnName="Describe" />
+          <ScalarProperty Name="ToCars" ColumnName="ToCars" />
+          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="PartSuppyNo" ColumnName="PartSuppyNo" />
+          <ScalarProperty Name="PartModel" ColumnName="PartModel" />
+          <ScalarProperty Name="PartBrand" ColumnName="PartBrand" />
+          <ScalarProperty Name="PartSubtitle" ColumnName="PartSubtitle" />
+          <ScalarProperty Name="PartTitle" ColumnName="PartTitle" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="PartName" ColumnName="PartName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="CarPartsModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Prov" ColumnName="Prov" />
+          <ScalarProperty Name="SendNum" ColumnName="SendNum" />
+          <ScalarProperty Name="SendName" ColumnName="SendName" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="OperatorRemarks" ColumnName="OperatorRemarks" />
+          <ScalarProperty Name="SearchTag" ColumnName="SearchTag" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="ShippingCost" ColumnName="ShippingCost" />
+          <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+          <ScalarProperty Name="Ratio" ColumnName="Ratio" />
+          <ScalarProperty Name="CashPwd" ColumnName="CashPwd" />
+          <ScalarProperty Name="Preferential" ColumnName="Preferential" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="PayStatus" ColumnName="PayStatus" />
+          <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Consignee" ColumnName="Consignee" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+          <ScalarProperty Name="OrderSource" ColumnName="OrderSource" />
+          <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderPay">
+      <EntityTypeMapping TypeName="CarPartsModel.OrderPay">
+        <MappingFragment StoreEntitySet="OrderPay">
+          <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Bank" ColumnName="Bank" />
+          <ScalarProperty Name="PayState" ColumnName="PayState" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="Uname" ColumnName="Uname" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderProList">
+      <EntityTypeMapping TypeName="CarPartsModel.OrderProList">
+        <MappingFragment StoreEntitySet="OrderProList">
+          <ScalarProperty Name="activeName" ColumnName="activeName" />
+          <ScalarProperty Name="IsFlag" ColumnName="IsFlag" />
+          <ScalarProperty Name="PType" ColumnName="PType" />
+          <ScalarProperty Name="AttrDecribe" ColumnName="AttrDecribe" />
+          <ScalarProperty Name="AttrID" ColumnName="AttrID" />
+          <ScalarProperty Name="InputTime" ColumnName="InputTime" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Num" ColumnName="Num" />
+          <ScalarProperty Name="SupplyNo" ColumnName="SupplyNo" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RebateRecord">
+      <EntityTypeMapping TypeName="CarPartsModel.RebateRecord">
+        <MappingFragment StoreEntitySet="RebateRecord">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+          <ScalarProperty Name="OrderPrice" ColumnName="OrderPrice" />
+          <ScalarProperty Name="InCome" ColumnName="InCome" />
+          <ScalarProperty Name="LowerOrder" ColumnName="LowerOrder" />
+          <ScalarProperty Name="LowerLoginName" ColumnName="LowerLoginName" />
+          <ScalarProperty Name="LowerUID" ColumnName="LowerUID" />
+          <ScalarProperty Name="PType" ColumnName="PType" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Voucher">
+      <EntityTypeMapping TypeName="CarPartsModel.Voucher">
+        <MappingFragment StoreEntitySet="Voucher">
+          <ScalarProperty Name="N2" ColumnName="N2" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="InsertTime" ColumnName="InsertTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="IsState" ColumnName="IsState" />
+          <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActivePros">
+      <EntityTypeMapping TypeName="CarPartsModel.ActivePros">
+        <MappingFragment StoreEntitySet="ActivePros">
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="Adecribe" ColumnName="Adecribe" />
+          <ScalarProperty Name="AContent" ColumnName="AContent" />
+          <ScalarProperty Name="ATitle" ColumnName="ATitle" />
+          <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+          <ScalarProperty Name="ProName" ColumnName="ProName" />
+          <ScalarProperty Name="ProID" ColumnName="ProID" />
+          <ScalarProperty Name="ActiveID" ColumnName="ActiveID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActiveImg">
+      <EntityTypeMapping TypeName="CarPartsModel.ActiveImg">
+        <MappingFragment StoreEntitySet="ActiveImg">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+          <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+          <ScalarProperty Name="ActiveID" ColumnName="ActiveID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarM">
+      <EntityTypeMapping TypeName="CarPartsModel.CarM">
+        <MappingFragment StoreEntitySet="CarM">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Oil" ColumnName="Oil" />
+          <ScalarProperty Name="Engine" ColumnName="Engine" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ModelEnglish" ColumnName="ModelEnglish" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="BrandEnglish" ColumnName="BrandEnglish" />
+          <ScalarProperty Name="ProYear" ColumnName="ProYear" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

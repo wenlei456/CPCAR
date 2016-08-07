@@ -1,0 +1,43 @@
+﻿@{   
+    Layout = "~/Views/Shared/_LayoutNoBa.cshtml";
+}
+@section styles{
+    <style>
+        .uh-left a {
+            padding: 15px !important;
+            font-size: 16px;
+        }
+
+            /*.uh-left a:hover {
+                color: #fff !important;
+            }*/
+         
+    </style>
+    }
+<div style="padding-top:20px">
+<div class="uh-left pull-left">     
+@*<ul class="nav nav-pills nav-stacked">
+   <li class="active"><a href="#">个人中心</a></li>
+   <li><a href="#">我的订单</a></li>
+   <li><a href="#">我的积分</a></li>
+   <li><a href="#">我的返利</a></li>
+   <li><a href="#">我的地址簿</a></li>
+   <li><a href="#">修改密码</a></li>
+</ul>*@
+    <h3>我的账户</h3>
+<ul class="">
+   <li class="active"><a href="/Member/UserHome">个人中心</a></li>
+   <li><a href="/Member/MyOrder">我的订单</a></li>
+   <li><a href="/Member/ExpRecord">我的积分</a></li>
+   <li><a href="/Member/RebateRecord">我的返利</a></li>
+   <li><a href="/Member/RebateRecord">我的地址簿</a></li>
+   <li><a href="/Member/UpdatePW">修改密码</a></li>   
+</ul>
+
+</div>
+<div class="uh-right pull-left">
+    @RenderBody()
+     <div style="clear:both"></div>
+</div>
+ <div style="clear:both"></div>
+</div>

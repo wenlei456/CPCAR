@@ -1,0 +1,24 @@
+﻿@model IEnumerable<DAO.PartsCategory>
+@{
+    Layout = null;
+}
+ <div class="buttonList">   
+@foreach (var item in Model)
+{
+     <div class="btn-div left"><a href="/Product/TypeList/@item.ID"><img  src="@item.ICOPath"/></a></div>
+}
+     <div class="clear"></div>
+ </div>
+<div class="clear"></div>
+<div class="buttonList2">
+    @foreach (var item in Model)
+{
+    <div class="btn-div2">
+        <img class="btnlist2" tid="@item.ID" src="/content/img/btn2_@(item.ID).jpg" />
+    </div>
+    }
+     <div class="btn-div2">
+        <img class="btnlist2" tid="-1" src="/content/img/btn2_All.jpg" />
+    </div>
+   
+</div>

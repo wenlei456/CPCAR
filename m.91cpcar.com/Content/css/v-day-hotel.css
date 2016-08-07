@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0; padding:0;}
+a{ border:0; text-decoration:none;}
+img{border:0; max-width:100%;}
+li{ list-style-type:none;}
+p{ color:#333;}
+body{ font-family:Arial, Helvetica, microsoft yahei; background-color:#f9faec;}
+section{ min-width:320px; height:auto; display:inline-block;}
+img{ overflow:hidden; border:0;}
+
+.v-m-bg{ margin:0 auto; width:100%;}
+.v-m-main{ width:100%;}
+.v-m-button{ width:90%; height:45px; line-height:45px; background-color:#da3915; text-align:center; border-radius:5px; display:block; color:white; box-shadow:#a42b10 0px 4px 0px; font-weight:bold; font-size:12px; margin:5% 5%;}
+.v-m-button span{ font-size:16px; font-weight:bold;}
+
+.v-m-notice{ width:100%; margin:0 1% 5px 1%; display:inline-block;}
+.v-m-notice-bg{ background-color:#FFF; }
+.v-m-notice h1{ font-size:14px; font-weight:bold; line-height:20px; margin-bottom:7px;}
+.v-m-notice p{ font-size:12px; color:#333; line-height:20px; text-justify:auto; text-align:justify; text-indent:0;}
+.v-m-notice span{ background-color:#ff6633; padding:2px 5px; color:white; margin-right:8px;}
+.v-a{ width:100%; text-align:center; margin-top:10px;}
+.v-a a{ font-size:14px; color:#069; text-decoration:none;}
+
+/* 弹出框
+*******************************************************/
+.dialog-mask { position:fixed; width:100%; height:100%; background-color:#000; opacity:0.6; top:0; left:0; z-index:2;}
+.dialog{ position:fixed; width:90%; background-color:#FFF; height:95%; margin:auto; top:0; left:0; bottom:0; right:0; z-index:999;}
+.dialog-title{ width:90%; margin:0 5%; height:10%; border-bottom:1px solid #CCC; text-align:center; line-height:3em; font-weight:bold;}
+.dialog-title b{ position:absolute; right:5%; top:2%;}
+.dialog-title span{ color:#333; font-size:1em;}
+.dialog-content{ width:80%; margin:2% 10%; height:auto; padding:10px 0;}
+.dialog-content p{ font-size:0.7em; line-height:1.5em; text-align:justify; overflow:auto;}
+.dialog-close{ max-width:50%;}
+.wxbg{ position:absolute; width:100%; height:100%; top:0; left:0; z-index:3;}
+/********************************************************/
+.v-alert{ position:absolute; top:0; left:0; right:0; bottom:0; margin:auto; height:20%; padding:0 5%;}
+.v-alert p{ color:#333; text-align:center; font-size:12px; line-height:30px;}
+.v-alert-img-1{  max-width:26%; position:absolute; right:10%; bottom:2%;}
+.v-alert-img{ position:absolute; left:40%; right:0; top:5%; margin:auto; max-width:50%;}

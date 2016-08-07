@@ -1,0 +1,179 @@
+﻿@model OrderModule.model.OrderDetail
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+    decimal ptotlePrice = Model.opList.Sum(m => m.Price * m.Num);
+}
+@section styles{
+    <style>
+       a .mui-active {
+            color: #007aff !important;
+        }
+
+        .mui-control-item {
+            background: transparent;
+        }
+    </style>
+}
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/content/img/ico/icon_phome.png">
+    </a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/content/img/ico/icon_shopcar.png">
+    </a>
+    <div class="head-title">详情订单</div>
+
+</header>
+<div class="mui-content">
+    <div class="go-order-title" style="margin-top: 10px; padding:8px; color: #000; font-weight:600; font-size:15px">订单号：@Model.order.OrderId </div>
+  
+      <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+            <a class="mui-control-item mui-active" href="#odetail">订单详情</a>
+            <a class="mui-control-item" href="#send">支付与配送</a>
+        </div>
+        <div id="odetail" class="mui-control-content mui-active">
+               <div class="order-detail" >
+                       <h4>收获人信息</h4>
+             <div class="order-detail-item">
+             <div class="order-detail-item-title">收货人：</div>
+             <div class="order-detail-item-value">@Model.order.Consignee</div>
+        </div>
+             <div class="order-detail-item">
+             <div class="order-detail-item-title">地　址：</div>
+             <div class="order-detail-item-value">@(Model.order.Prov) @Model.order.City @Model.order.Address</div>
+        </div>
+             <div class="order-detail-item">
+             <div class="order-detail-item-title">手机号：</div>
+             <div class="order-detail-item-value">@Model.order.CellPhone</div>
+        </div>
+        <div class="mui-clearfix"></div>
+         <h4>订单信息</h4>
+             <div class="order-detail-item">
+             <div class="order-detail-item-title" style="padding:3px 0px">支付状态：</div>
+             <div class="order-detail-item-value"> @if (@Model.order.PayStatus=="未支付"){  <a href="/Common/PayOrder?oid=@(Model.order.OrderId)" class="btn-main" style=" line-height:30px; padding:0px 8px;">继续支付</a>}else{<span style="color:green">已支付</span>}</div>
+        </div>
+                           <div class="mui-clearfix"></div>
+             <div class="order-detail-item">
+             <div class="order-detail-item-title">订单状态：</div>
+             <div class="order-detail-item-value">@Model.order.OrderStatus</div>
+        </div>
+             <div class="order-detail-item">
+             <div class="order-detail-item-title">总金额：</div>
+             <div class="order-detail-item-value">￥@ptotlePrice</div>
+        </div>
+             <div class="order-detail-item">
+             <div class="order-detail-item-title">优惠金额：</div>
+             <div class="order-detail-item-value">￥-@Model.order.DiscountAmount</div>
+        </div>
+             <div class="order-detail-item">
+             <div class="order-detail-item-title">应付金额：</div>
+             <div class="order-detail-item-value">￥@Model.order.TotalPrice</div>
+        </div>
+                           <div class="mui-clearfix"></div>
+                    <h4>积分</h4>
+             <div class="order-detail-item">
+             <div class="order-detail-item-title">获得积分：</div>
+             <div class="order-detail-item-value">@Model.exp</div>
+        </div>
+             @*<div class="order-detail-item">
+             <div class="order-detail-item-title">折扣：</div>
+             <div class="order-detail-item-value">@(Model.order.Ratio*100)%</div>
+        </div>*@
+          <div class="mui-clearfix"></div>
+
+                   </div>
+
+        </div>    
+        <div id="send" class="mui-control-content">
+             
+      <div class="order-detail" >
+    
+         <h4>支付及配送方式</h4>
+             <div class="order-detail-item">
+             <div class="order-detail-item-title">支付方式：</div>
+             <div class="order-detail-item-value">
+                 @if (string.IsNullOrEmpty(Model.order.Payment))
+                 { 
+                 <span >无</span>
+                 }else{
+                     
+                           <span>Model.order.Payment</span>
+                 }
+             </div>
+        </div>
+             <div class="order-detail-item">
+             <div class="order-detail-item-title">物流公司：</div>
+             <div class="order-detail-item-value">@(string.IsNullOrEmpty(Model.order.SendName)?"未发货":Model.order.SendName)</div>
+        </div>
+             <div class="order-detail-item">
+             <div class="order-detail-item-title">运单号：</div>
+             <div class="order-detail-item-value">@Model.order.SendNum</div>
+        </div>
+        <div class="mui-clearfix"></div>
+        
+    </div>
+        </div>
+    
+    
+   
+    <div class="mui-clearfix"></div>
+     <div class="go-order-title" style="margin-top: 10px; color: #000; font-weight:600">产品信息</div>
+     
+    <div style=" width:95%; margin:0 auto;">       
+              <div class="car-pros" style="padding-bottom:5px;">
+       
+             @foreach (var op in Model.opList)
+            {
+                var imgItem = Model.pimgList.Where(m => m.PartID == op.ProductID).FirstOrDefault();
+                var imgPath = imgItem == null ? "/content/img/noimg.jpg" : imgItem.ImgPath;
+                var ad = op.AttrDecribe.Replace("||", "|").Split('|');
+                string pixstr;
+                if (op.IsFlag != -1)
+                {
+                    pixstr = "/Active/ProDetail?aid=" + op.IsFlag + "&&id=" + op.ProductID;
+                }
+                else
+                {
+                    pixstr = "/Product/ProductDetail?id=" + op.ProductID;
+                }
+                  <a href="@pixstr">
+            <div class="car-pro">
+           
+             <div class="car-item-name"> @op.ProductName</div>
+                <div class="car-pro-img mui-pull-left" style="width: 30%;">
+                    <img class="mui-media-object mui-pull-left" style="width:100%;" src="http://www.91cpcar.com/@imgPath ">
+                </div>
+                <div class="car-pro-info mui-pull-left">                    
+                    @*<div class="car-item-cty"> </div>*@
+                 
+                    <div class="car-item-atts">                   
+                            @foreach (var i in ad)
+                            {
+                            <span class="TDatt" style="display:block;padding:3px">@i</span>                  
+                            }                        
+                    </div>
+                    <div   class="car-item-price">￥<span class="car-item-price-v"> @Math.Round( op.Price,2)</span>&nbsp;&nbsp;
+                         @if (op.IsFlag != -1)
+                          { 
+                          <span style="color:#fff; background:red;border-radius:5px; padding:2px;">@op.activeName</span> 
+                          }</div>
+                </div>
+                <div class="car-pro-op mui-pull-right">
+                    <div>
+                       @* <input   type="text"  class="car-item-num " style="border:0px" value=" @(op.Num)" readonly />*@
+                      <span style="color:#000">x @(op.Num)</span>
+                    </div>
+                </div>
+                 <div class=" mui-clearfix"></div>
+            </div>
+                      </a>
+           
+            }          
+        
+    </div>
+    </div>
+    
+</div>

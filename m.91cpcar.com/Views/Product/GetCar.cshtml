@@ -1,0 +1,151 @@
+﻿@model IEnumerable<ProductModule.Models.CarProductDetail>
+@{
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CP文化</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+    <meta name="keywords" content="诚配,诚配改装,汽车改装,改装件,汽车配件,海外配件,进口配件,保时捷,宝马,奔驰,法拉利,豪车改装,高端改装">
+    <meta name="description" content="">   <meta  />
+       <link href="/New/content/css/mui.css" rel="stylesheet" />
+     <link href="/New/content/css/main.css" rel="stylesheet" />
+		<style type="text/css">
+			#list {
+				/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+				margin-top: -1px;               
+			}
+			.head-title,.mui-pull-left{background:none;}
+			.mui-pull-left{width: auto;margin: 0;}
+			.mui-icon-back:before, .mui-icon-left-nav:before{color:#666;}
+			.mui-bar-nav ~ .mui-content{padding:44px 0 1px 0;}
+			.car-pro{border:solid 1px #d3d3d3; position:relative;}
+			.car-pro a{display:inline-block;width:100%;}
+			.car-pro-info{height:auto !important;margin-left:10px;}
+			.car-pro .car-pro-img{width:65px !important;height: 65px !important;}
+			.delCar{position: absolute;z-index: 1;right:20px;top:50%;margin-top:-23px;}
+		</style>
+      <script>
+          var _hmt = _hmt || [];
+          (function () {
+              var hm = document.createElement("script");
+              hm.src = "//hm.baidu.com/hm.js?d252ab9e4e87638601460ea0c7412a01";
+              var s = document.getElementsByTagName("script")[0];
+              s.parentNode.insertBefore(hm, s);
+          })();
+</script>
+</head>
+<body>
+     <div id="modal-bg"></div>
+    <div id="modal-show">
+       <img  src="/content/img/ico/loading.gif"/>
+    </div>
+  
+    <div class="main-container">
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome"><img class="head-ico" src="/New/content/img/ico/icon_phome.png"> </a>
+    <a class="mui-pull-right" href="/Product/getCar"><img class="head-ico" src="/New/content/img/ico/icon_shopcar.png">  </a>
+    <div class="head-title">购物车</div>
+
+</header>
+
+<div class="mui-content">
+    <div class="car-pros">
+        @if (Model != null && Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {              
+                System.Text.StringBuilder sb = new System.Text.StringBuilder(item.proDetail.ID.ToString());
+                string pixstr;
+                      if (item.activeM != null)
+                      {
+                          pixstr = "/Active/ProDetail?aid=" + item.activeM.ID + "&&id=" + item.proDetail.ID;
+                      }
+                      else { 
+                       pixstr ="/Product/ProductDetail?id="+item.proDetail.ID;
+                      }
+            <div class="car-pro">
+                <a href="@pixstr">
+                <div class="car-item-name"> @item.proDetail.PartName</div>
+                <div class="car-pro-img mui-pull-left" style="width: 30%;">
+                    <img class="mui-media-object mui-pull-left" style="width:100%;" src="http://www.91cpcar.com/@(item.imgStock == null ? "/content/img/ico/noimg.jpg" : (item.imgStock.ImgPath)) ">
+                </div>
+                <div class="car-pro-info mui-pull-left">                    
+                    <div class="car-item-cty">分类：@item.partCate.CategoryName</div>
+                    @if (!string.IsNullOrEmpty(item.proDetail.BrandName))
+                    {
+                        <div>品牌：@item.proDetail.BrandName</div>
+                    }
+                    <div class="car-item-atts">
+                        @if (@item.partExt != null)
+                        {
+                            foreach (var item2 in @item.partExt)
+                            {
+                            <span class="TDatt">@item2.AttrName:@item2.AttrValue</span>
+                                sb.Append(@item2.ID.ToString());
+                            }
+
+                        }
+                        @{string cid = sb.ToString();}
+                        <input type="hidden" id="pid-@cid" value="@item.proDetail.ID"/>
+                        <input type="hidden" id="patt-@cid" value="@item.lastAttr"/>
+                    </div>
+                    <div id="itemPrice-@(cid)"  class="car-item-price">￥<span class="car-item-price-v">@item.proDetail.Price</span></div>
+                    @if(item.activeM!=null)
+                {
+                    <input id="type-@cid" value="@item.activeM.ID" type="hidden"/>
+               <br />
+                   <span style="color:#fff; background:red;border-radius:5px; padding:2px">@item.activeM.Name</span>              
+                }
+                </div>
+                </a>
+                <div class="car-pro-op mui-pull-right">
+                  @*  <button type="button" class="mui-btn mui-btn-danger">删除</button>*@
+                      <img class="delCar"pid="@item.proDetail.ID" attid="@item.lastAttr" alt="删除"  src="/Content/img/ico/icon-del.png" style="display:block" />
+                    <div>
+                        <input id="itemNum-@(cid)" cid="@cid" type="text"  disabled="true" class="car-item-num" value=" @item.Qty" />
+                    </div>
+                </div>
+                 <div class=" mui-clearfix"></div>
+            </div>
+           
+            }
+            <!--总数-->
+          
+        }  
+        <div class="bottom-submit">
+            <div class="car-totle">
+                <div class="cart-submit-right" ><a href="/Order/goOrder" style="color:#fff">立即结算</a></div>
+                <div class="mui-pull-right" style="padding-right:20px">
+                    <h4>总数:<span id="totleNum" style="color: red"></span></h4>
+                    <h4>合计:<span style="color: red">￥</span><span id="totlePrice" style="color: red"></span></h4>
+                </div>
+
+                <div class=" mui-clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
+
+  <script src="/New/content/js/mui.min.js"></script>
+ <script src="/New/Content/js/zepto.min.js"></script>
+<script src="/New/Content/js/zepto.cookie.js"></script>
+<script src="/New/Content/js/Base.js"></script>
+          <script src="~/Content/js/service-cart.js"></script>
+    <script src="~/Content/js/shopCar.js"></script>
+<script>
+    if (Validata.IsPC()) {
+        //  window.location.href = "http://www.91cpcar.com";
+    }
+</script>
+
+
+

@@ -1,0 +1,116 @@
+﻿@model OrderModule.model.OrderDetail
+@{
+    ViewBag.Title = "订单详情|诚配网";
+    Layout = "~/Views/Shared/_LayoutNoBa.cshtml";
+    decimal ptotlePrice = Model.opList.Sum(m => m.Price * m.Num);
+}
+ <div class="modal-header">              
+    <h2 class="modal-title">订单详情</h2>
+ </div>
+ <div style="padding:10px 15px; font-size:15px;">              
+   <a style="color:#1d2088" href="/Member/UserHome">个人中心</a>  > 
+     <a style="color:#1d2088" href="/Member/MyOrder">我的订单</a> >
+      <a style="color:#1d2088" href="#">订单详情 ：@Model.order.OrderId</a> 
+ </div>
+<div class="od-head">
+    <strong>订单号：@Model.order.OrderId &nbsp;&nbsp;&nbsp;&nbsp; 状态：@Model.order.OrderStatus  &nbsp;&nbsp;&nbsp;&nbsp; 支付状态：@Model.order.PayStatus</strong>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; @if (@Model.order.PayStatus=="未支付"){  <a href="/Common/PayOrder?oid=@(Model.order.OrderId)" class="btn btn-danger" >去支付</a>}
+
+</div>
+
+<div class="od-head">
+    <h4 style="font-weight:600; ">订单信息</h4>
+    <div class="od-title">收获人信息</div><br />
+    <div class="od-detail">收货人：@Model.order.Consignee</div>
+    <div class="od-detail">地 址 ：@(Model.order.Prov) @Model.order.City @Model.order.Address  </div>
+    <div class="od-detail">手机号码：@Model.order.CellPhone</div>
+    <br /><br />
+    <div class="od-title">支付及配送方式</div><br />
+    <div class="od-detail">支付方式：@(string.IsNullOrEmpty(Model.order.Payment)?"未支付":Model.order.Payment)</div>
+    @*<div class="od-detail">支付日期：20152541524</div>*@
+    <div class="od-detail">物流公司：@Model.order.SendName</div>
+    <div class="od-detail">运单号：@Model.order.SendNum</div>
+    <br /><br />
+    <div class="od-title">积分</div><br />
+    <div class="od-detail">获得积分：@Model.exp</div>
+    @*<div class="od-detail">折扣：@(Model.order.Ratio*100)%</div>*@
+    <br /><br />
+    <div class="od-title">商品清单</div><br />
+       <div class="tab-contents">
+       @* <div id="all" class="tab-content">*@
+    <table style="width:100%" border="1">
+        <thead>
+            <tr>
+            <th>商品图片</th>
+            <th style="width:500px;">商品名称</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>总金额</th>
+            <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.opList)
+            {
+                 var imgItem=Model.pimgList.Where(m=>m.PartID==item.ProductID).FirstOrDefault();
+                 var imgPath = imgItem == null ? "/content/img/noimg.jpg" : imgItem.ImgPath;
+                string pixstr;
+                    if (item.IsFlag != -1)
+                 {
+                     pixstr = "/Active/ProDetail?aid=" + item.IsFlag + "&&id=" + item.ProductID;
+                 }
+                 else
+                 {
+                     pixstr = "/Product/detail?id=" + item.ProductID;
+                 }
+                  <tr class="plist">
+                    <td>
+                        <div class="odImg" >  <a target="_blank"  href="@pixstr"><img  src="@imgPath"/></a></div>                        
+                    </td>
+                      <td>
+                          @if (item.IsFlag != -1)
+                          { 
+                          <span style="color:#fff; background:red;border-radius:5px; padding:2px">@item.activeName</span> 
+                          }
+                          &nbsp;&nbsp;               
+                       <a target="_blank"  href="@pixstr">  @item.ProductName    </a>                      
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                       @item.AttrDecribe
+                             
+                      </td>
+                      <td>
+                           <div class="">￥ @Math.Round( item.Price,2)</div>
+                      </td>
+                      <td>
+                          <div class="">x @(item.Num)</div>
+                      </td>
+                       <td>
+                          <div class="">￥ @Math.Round( item.Num * item.Price,2)</div>
+                      </td>
+                      <td></td>
+
+                      </tr>                       
+            }
+
+        </tbody>        
+    </table>
+           </div>
+        <div style="float:right; padding:20px;">
+            <table class="orderTotlaAre">
+                <tr>
+                    <td style="text-align:right">总商品金额:</td>
+                    <td style="padding-left:15px">￥@ptotlePrice</td>
+                </tr>
+                <tr>
+                    <td  style="text-align:right">优惠金额:</td>
+                    <td style="padding-left:15px">￥-@Model.order.DiscountAmount</td>
+                </tr>
+                <tr>
+                    <td  style="text-align:right; font-size:16px; font-weight:600">应付总金额:</td>
+                    <td style="padding-left:15px; color:#f00;font-size:18px; font-weight:600">￥@Model.order.TotalPrice</td>
+                </tr>
+
+            </table>                       
+
+         </div>
+           <div style="clear:both;"></div>
+</div>

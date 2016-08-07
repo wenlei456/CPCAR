@@ -1,0 +1,144 @@
+﻿@model CParts_Online.Models.TypeListByCarViewModel
+
+@{
+    ViewBag.Title = "产品分类|诚配网";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.banner = Model.parentCate.Count > 0 ? (string.IsNullOrEmpty(Model.parentCate[0].BannerPath) ? "/content/img/banner4.jpg" : Model.parentCate[0].BannerPath) : "/content/img/banner4.jpg";
+    string t = Request.QueryString["t"];
+    string b = Request.QueryString["b"];
+    string m = Request.QueryString["m"];
+    string y = Request.QueryString["y"];
+    string ext = "";
+    string ctype = "";
+    string sss = "";
+   
+}
+
+ <div class="ProMain">
+     @if (Model.parentCate.Count > 0 && Model.Carinfo !=null)
+     {
+          <div class="ProNav">
+              @if(Model.Carinfo!=null)
+              {
+              <div>@(Model.Carinfo.Brand) @(Model.Carinfo.Model) @(Model.Carinfo.ProYear) @(Model.parentCate.Last().CategoryName)</div>
+              }
+                  <div><a href="/Product/TypeListByCar?t=-1&&b=@Request.QueryString["b"]&&m=@Request.QueryString["m"]&&y=@Request.QueryString["y"]" style="color:#1d2088">首页</a>
+                                @foreach (var item in Model.parentCate)
+                               {
+                                    string tt=item.CategoryName=="全部产品" ? "-1" : Request.QueryString["t"];
+                                @:/ <a href="/Product/TypeListByCar?t=@tt&&b=@Request.QueryString["b"]&&m=@Request.QueryString["m"]&&y=@Request.QueryString["y"]" style="color:#1d2088"> @item.CategoryName</a>
+                                
+                               }                       
+                  </div>
+          </div>
+         if (Model.parentCate[0].ParentID.ToString() == "-1")
+         {
+             foreach (var citem in Model.topCate)
+             {
+                 var childenrs = Model.childenrCate.Where(mm=>mm.ParentID==citem.ID);
+                 if(childenrs.Count()<1)
+                 {
+                     continue;
+                 }
+                
+                 <div class="ProArea">
+             <div class="ProTitle">               
+                 <div class="ProTitleImg left" style="background-image:url(@citem.ICOPath)"></div>                
+                 <div class="ProTitleImgN"></div>
+                 <div class="clear"></div>
+             </div>
+              <div class="ProList">
+                  @if (childenrs != null && childenrs.Count() > 0)
+                  {
+                      if (!string.IsNullOrEmpty(m) && !string.IsNullOrEmpty(b) && !string.IsNullOrEmpty(y))
+                      {
+                          ext = "?b=" + b + "&&m=" + m + "&&y=" + y;
+                      }
+                      foreach (var item in childenrs)
+                      {
+                          ctype = "&&t=" + @item.ID;
+                          sss = ext + ctype;             
+                      <a href="/Product/TypeListByCar/@sss" class="prohref">
+                          <div class="ProItem left">
+                              <div class="ProItemImg">
+                                  @if (string.IsNullOrEmpty(item.ICOPath))
+                                  {
+                                  <img src="/content/img/noimg.jpg" />
+                                  }else{
+                                   <img src="@item.ICOPath" />
+                                  }
+                              </div>
+                              <div class="ProItemName">@item.CategoryName</div>
+                                <div class="ProItemName2">@(Model.Carinfo.ProYear) @(Model.Carinfo.Brand) @(Model.Carinfo.Model) </div><div></div>
+                          </div>
+                              </a>
+                      }
+                  }else{
+                    
+                      Html.RenderAction("List", "Product", new { id = Model.parentCate[Model.parentCate.Count - 1].ID });
+                    
+                  }
+                  
+                
+              </div>
+          </div>
+          <div class="clear"></div>
+             }               
+             
+         }else{
+          <div class="ProArea">
+             <div class="ProTitle">               
+                 <div class="ProTitleImg left" style="background-image:url(@Model.parentCate[0].ICOPath)"></div>                
+                 <div class="ProTitleImgN"></div>
+                 <div class="clear"></div>
+             </div>
+              <div class="ProList">
+                  @if (Model.childenrCate != null && Model.childenrCate.Count > 0 )
+                  {
+                            if (!string.IsNullOrEmpty(m) && !string.IsNullOrEmpty(b) && !string.IsNullOrEmpty(y))
+                      {
+                          ext = "?b=" + b + "&&m=" + m + "&&y=" + y;
+                      }
+                       foreach (var item in Model.childenrCate)
+                      {
+                          ctype = "&&t=" + @item.ID;
+
+                          sss = ext + ctype;              
+                      <a href="/Product/TypeListByCar/@sss" class="prohref">
+                           
+                        @*  <a href="/Product/TypeListByCar2?t=@item.ID&&c=@Model.Carinfo.ID">*@
+                          <div class="ProItem left">
+                              <div class="ProItemImg">
+                                  @if (string.IsNullOrEmpty(item.ICOPath))
+                                  {
+                                  <img src="/content/img/noimg.jpg" />
+                                  }else{
+                                   <img src="@item.ICOPath" />
+                                  }
+                              </div>
+                              <div class="ProItemName">@item.CategoryName</div> <div class="ProItemName2">@(Model.Carinfo.ProYear) @(Model.Carinfo.Brand) @(Model.Carinfo.Model) </div>
+                              <div></div>
+                          </div>
+                              </a>
+                      }
+                  }else{
+                    
+                      Html.RenderAction("List", "Product", new { id = Model.parentCate[Model.parentCate.Count - 1].ID });
+                    
+                  }
+                  
+                
+              </div>
+          </div>
+     }
+         
+     }else{
+     <h2>没有找到该产品</h2>
+     }
+             <div class="clear"></div>
+         
+           
+
+
+
+        </div>

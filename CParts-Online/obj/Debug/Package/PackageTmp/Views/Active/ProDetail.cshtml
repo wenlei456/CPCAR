@@ -1,0 +1,255 @@
+﻿@model ProductModule.Models.ProductDetail
+@{
+    ViewBag.Title = "产品详情|诚配网";
+    Layout = "~/Views/Shared/_ProLayout.cshtml";
+    ProductModule.model.ActivePro Actmodel = ViewBag.ActiveSet;
+   
+}
+@section styles{
+    <style>
+          .lprice {
+        text-decoration: line-through;
+        }
+        .proPrice2 {
+        height: 60px;
+    padding: 15px;
+    font-size: 22px;   
+    background: #e6e5e5;
+    font-weight: 500;
+        }
+    </style>
+    }
+<div class="ProMain2">
+    <div class="ProNav2">
+        <div></div>
+        <div>首页 / <a href="/Product/TypeList/@Model.partCate.ID" style="color:#1d2088"> @Model.partCate.CategoryName </a> / @Model.proDetail.PartName </div>
+    </div>
+    @if(Actmodel.active!=null)
+    {
+    <div class="ProArea">
+        <div class="ProductArea">
+            <div class="ProImg left">
+                <div class="box">
+                    <div class="imgView">
+                        @if (@Model.imgStock.Count > 0)
+                        {
+                            <img id="imgViewM" src="@Model.imgStock[0].ImgPath" />
+                        }
+                        else
+                        {
+                            <img id="imgViewM" src="~/Content/img/noimg.jpg" />
+                        }
+                    </div>
+                    <div class="imgtabs">
+                        <ul class="tabList">
+                            @if (@Model.imgStock.Count > 0)
+                            {
+                                foreach (var item in Model.imgStock)
+                                {
+                                <li>
+                                    <img src="@item.ImgPath" /></li>
+                                }
+                            }
+                            else
+                            {
+                                <li>
+                                    <img src="~/Content/img/noimg.jpg" /></li>
+                            }
+                        </ul>
+                        <div style="clear: both;"></div>
+                        <div class="PreNext preBtn">
+                            <button id="perimg" type="button" class="btn"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                        </div>
+                        <div class="PreNext nextBtn">
+                            <button id="nextimg" type="button" class="btn"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ProDecibe left">
+                <input type="hidden" id="proId" value="@(Model.proDetail.ID)"/>
+                <div style="background:red;color:#fff; width:200px; text-align:center;padding:10px;font-size:15px">@Actmodel.active.Name</div>
+                <h3 class="proName">@Model.proDetail.PartName</h3>
+                @if (Model.partExt.Count>0&& Actmodel.activePro != null)
+                {
+                    <div class="proPrice2"><span id="oldPrice" class="lprice">原价:￥@(Model.proDetail.Price.ToString(".00"))</span> &nbsp;&nbsp;  活动价:￥<span id="currPrice"></span></div>
+                
+                }else{
+                <div class="proPrice2"><span id="oldPrice" class="lprice">原价:￥@(Model.proDetail.Price.ToString(".00"))</span> &nbsp;&nbsp;  活动价:￥<span id="currPrice">@Actmodel.activePro.NewPrice.ToString(".00")</span></div>
+                }
+                 <div class="proDecribe">@Model.proDetail.PartSubtitle</div>
+                    @if (Actmodel.active.EndDate < DateTime.Now)
+                     { 
+                     <h3>活动产品已下架</h3>
+                     }else{
+                <div class="proContent">
+                      <h4><img src="~/Content/img/gou.jpg"/>适用车型</h4>
+                      <ul>
+                          @if (Model.carList == null)
+                          { 
+                           <li style="">所有车型</li> 
+                          }
+                          else
+                          {
+                              foreach (var item in Model.carList)
+                              {
+                         <li style="">@(item.ProYear + " " + item.Brand + " " + item.Model)</li> 
+                              }
+                          }
+                          </ul>
+                      <div style="clear:both;"></div>
+                      </div>
+                <div class="attrs">
+                    <table id="partExtAttr" style="width: 500px">
+                        @{
+                            
+                            }
+                        @foreach (var item in Model.partExt)
+                        {
+                            List<string> haveAttr = new List<string>();
+                            <tr>
+                                <td style='width: 50px;'><span class='AttrName'  currType='AttrName'  ParentAttr='@item.ParentAttr'>@item.AttrName</span></td>
+                                <td class="TDattValue">
+                                    @foreach (var obj in item.AttrList)
+                                    {
+                                        decimal newPrice = obj.AttrPrice;
+                                        if (Actmodel.activeAttr != null)
+                                        {
+                                            foreach (var i in Actmodel.activeAttr)
+                                            {
+                                                if (i.AProID == obj.PartID && i.AtrrID == obj.ID)
+                                                {
+                                                    newPrice = i.NewPrice;
+                                                }
+                                            }
+                                        }
+
+                                        <span class='AtttValue' newPrice="@newPrice" currPrice="@obj.AttrPrice" ParentAttr='@obj.ParentAttr' currType='AttrValue'  CurrID='@obj.ID'>@obj.AttrValue</span>                        
+                                       
+                                    }
+
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </table>
+
+                </div>
+                <div class="proTools">
+             @if (Model.proDetail.State == 1)
+             {                 
+                 <div class="form-group" style="padding-bottom: 0px">                 
+                     <button class="btn" id="minNum">-</button>
+                     <input id="txtNum" type="text" style="width: 50px; text-align: center; display: inline" class="form-control popover-hide" value="1" title="数量只能是数字" data-container="body" data-toggle="popover" data-placement="top" data-content="" />
+                     <button class="btn" id="maxNum">+</button>
+                     <button type="button" style="margin-left: 20px" class="btn btn-danger" id="AddCar"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button>
+                 </div>
+             }
+             else
+             {
+                        <h3 style="padding-bottom: 30px;">该产品已下架,无法购买！</h3>
+             }
+
+
+                </div>
+                    }
+
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="ProTitle">
+            <div class="prodeatil">
+
+                <div class="pdNav" style="background:#505050;color:#fff;">产品详情</div>                  
+                <div style="clear:both;"></div>
+                <div class="proContent">                     
+                    @Html.Raw(Model.proDetail.Describe)
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+            <div class="prodeatil">
+                @if (!string.IsNullOrEmpty(Model.proDetail.BrandName))
+                {
+                <div class="pdNav" style="background:#505050;color:#fff;">关于@(Model.proDetail.BrandName)</div>
+                <div class="BrandContent">
+                    @Html.Raw(Model.proDetail.BrandDescribe)
+                </div>
+                }
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    }else{
+    <h3>没有此活动！</h3>
+    }
+</div>
+
+@section scripts{
+    <script src="/Content/tools/imgMove/js/startMove.js" type="text/javascript"></script>
+    <script>
+        $(function () {
+            //选中样式
+            $(".TDattValue:first span").click(function () {
+               // $(this).parent().children("span").removeClass("currAttr");
+                $(".AtttValue").removeClass("currAttr");
+            })          
+            //父子属性反向选择
+            $(".AtttValue").click(function () {
+                $(this).parent().children("span").removeClass("currAttr");
+                $(this).addClass("currAttr");
+                $(this).parent().parent().next().find(".AtttValue").show();         
+                var parent = $(this).attr("parentattr");
+                var currid = $(this).attr("currid");
+                $(this).parent().parent().next().find(".AtttValue:not([parentattr='" + currid + "'])").hide();
+
+                $("#currPrice").html($(this).attr("newPrice")); 
+                $("#oldPrice").html("原价:￥" + $(this).attr("currPrice"));
+            })
+
+            $(".TDattValue span:first").click();
+          
+            $("#AddCar").click(function () {
+                if (isInteger($("#txtNum").val()))
+                {
+                    var flag = true;
+                    var attrs = "";
+                    $(".TDattValue").each(function () {
+                        if ($(this).children(".currAttr").length <= 0) {
+                            alert("请选择完整的产品");
+                            flag = false;
+                            return false;
+                        } 
+                    })
+                    if (flag)
+                    {
+                        var shop = {
+                            ID: $("#proId").val(),
+                            Qty: $("#txtNum").val(),
+                            Price: $("#currPrice").html(),
+                            Attrs: $(".TDattValue:last .currAttr:first").attr("currid"),
+                            Type:'@Actmodel.active.ID'
+                        }
+                        AddToCart(shop);
+                        GetAllCount();
+                        $("#CarMode").modal('show');
+                        $('#CarMode').modal({ backdrop: 'static', keyboard: false });
+                    }
+
+                } else
+                {
+                    $("#txtNum").popover('show');
+                }
+
+            });
+        })
+
+
+    </script>
+}

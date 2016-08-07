@@ -1,0 +1,118 @@
+﻿@model Cparts_service.Model.Commlect
+@{
+    ViewBag.Title = "commselect";
+    Layout = "~/Views/Shared/_master.cshtml";
+}
+
+<h2>评论查询</h2>
+<div>
+     <input type="text" id="numberId" class="text-input" />
+                  <button type="button" class="button"  id="btnSearch">搜索</button>
+     <table width="100%" id="datalist">
+                <thead>
+                    <tr>
+                        <th valign="middle">姓名</th>
+                        <th valign="middle">ID</th>
+                        <th valign="middle">客户ID</th>                    
+                        <th valign="middle">详细评论</th> 
+                        <th valign="middle">时间</th>
+                        <th valign="middle">是否显示</th>
+                       
+                    </tr>
+                </thead>
+                <tfoot>
+                    @*分页*@
+                    <tr class="">
+                        <td colspan="11" style="text-align:right;" class="paginator">
+                            <div style="float:right;">
+                                <span>
+                               
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody style="font-size: 12px">
+                        
+                    @foreach (var item in Model.sede)
+                    {
+                        <tr>
+                             <td valign="middle">@item.name</td> 
+                            <td valign="middle">@item.ID</td>                          
+                            <td valign="middle">@item.userID</td>
+                            <td valign="middle">@item.mentsname</td>
+                            <td valign="middle">@item.Time</td>
+                            @if (@item.shown==1)
+                            {
+                                <td valign="middle">是</td>
+                            }
+                             @if (@item.shown == 2)
+                             {
+                                  <td valign="middle">否</td>
+                             } 
+                            
+                            <td><a class="button shifou" pid="@item.ID">是</a>
+                             <a class="button fous" pid="@item.ID">否</a>
+
+                            </td>
+                            <td> <a class="button edits" pid="@item.ID" >删除</a>
+                             
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+    </div>
+<script src="~/Content/js/common/base.js"></script>
+<script>
+    $(function () {
+        $("#btnSearch").click(function () {
+            var number = $("#numberId").val();
+            window.location.href = "/Master/commselect/?stringcommname=" + number;
+        })
+        $(".shifou").click(function () {
+            var pid = $(this).attr("pid");
+            if (confirm("确定要显示")) {
+                Post("/Master/commsf", { commID: pid }, function (data) {
+                    if (data.msg) {
+                        alert("更新成功");
+                        window.location.reload();
+                    }
+                    else {
+                        alert("更新失败，稍后再试");
+                    }
+                })
+                }
+        })
+        $(".fous").click(function () {
+            var pid = $(this).attr("pid");
+            if (confirm("确定要显示")) {
+                Post("/Master/commfas", { commID: pid }, function (data) {
+                    if (data.msg) {
+                        alert("更新成功");
+                        window.location.reload();
+                    }
+                    else {
+                        alert("更新失败，稍后再试");
+                    }
+                })
+            }
+        })
+   $(".edits").click(function () {
+        var pid = $(this).attr("pid");
+        if (confirm("确认要删除？")) {
+            Post("/Master/commedits", { pid: pid }, function (data) {
+                if (data.r) {
+                    alert("删除成功");
+                    window.location.reload();
+                } else {
+                    alert("删除失败，稍后再试");
+                }
+            })
+        }
+    });
+    })
+ 
+</script>

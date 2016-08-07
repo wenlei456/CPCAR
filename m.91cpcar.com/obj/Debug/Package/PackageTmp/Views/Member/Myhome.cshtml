@@ -1,0 +1,48 @@
+﻿@model  CParts_Online.Models.UserHomeVM
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+}
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/content/img/ico/icon_phome.png">
+    </a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/content/img/ico/icon_shopcar.png">
+    </a>
+    <div class="head-title">购物车</div>
+
+</header>
+
+<div class="mui-content">
+    <div style="width:95%; margin:0 auto;padding-top:20px">
+        <div class="myhome-img mui-pull-left"><img  src="~/Content/img/ico/myhome_ico.jpg"/></div>
+        <div class="myhome-info mui-pull-left">
+            <div class="myhome-title">@Model.Userinfo.LoginName</div>
+               <div class="myhome-item" style="margin-top:3px;">等级：@Model.UserLevel[0].Name</div>    
+            <div class="myhome-item">折扣：@((Model.UserLevel[0].Ratio*100).ToString(".0")) %</div>        
+            <div class="myhome-item">返利：@((Model.UserLevel[0].Income*100).ToString(".0")) %</div>        
+            <div class="myhome-item">积分：@Model.UserLevel[0].UExp</div>                
+        </div>
+        <div class="myhome-op mui-pull-right">
+            <a class="btn-main" style="width:50px;" href="/Member/LoginOut">退出</a>
+        </div>
+        <div class="mui-clearfix"></div>
+        <div style="height:20px; margin-top:20px; background:#d9d9d9"></div>
+        <div class="myhome-img-ops">
+            <div class="myhome-img-op"><a href="/Member/MyOrder"><img  src="~/Content/img/ico/list-icon.png"/><br />我的订单</a></div>
+             <div class="myhome-img-op"><a href="/Member/ExpRecord"><img  src="~/Content/img/ico/choujiang-icon.png"/><br />积分记录</a></div>
+            <div class="myhome-img-op"><a href="/Member/RebateRecord"><img  src="~/Content/img/ico/money-icon.png"/><br />我的返利</a></div>
+            <div class="myhome-img-op"><a href="/Member/MyInfo"><img  src="~/Content/img/ico/person-data-icon.png"/><br />个人资料</a></div>
+            <div class="myhome-img-op"><a href="/Member/UpdatePW"><img  src="~/Content/img/ico/pwd-icon.png"/><br />修改密码</a></div>
+            
+            <div class="mui-clearfix"></div>
+     </div>
+        <a href="/Active/index?aid=3&&puser=@(Session["mobile"]==null?"":Session["mobile"].ToString())">
+            <img src="http://91cpcar.com//Upload/Active/20160504/1605042226473835H47WP10.png" style="width:100%">
+        </a>
+    </div>
+ </div>

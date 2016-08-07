@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body style="margin:0px; padding:0px;">
+    <div style="background-image:url(5-1/bg.jpg); width:1000px; margin:0px auto;">
+        <div><a href="http://www.91cpcar.com/Active/ProDetail?id=2226&&aid=3"><img src="5-1/1.png" style="width:100%" /></a></div>
+        <div><a href="http://www.91cpcar.com/Active/ProDetail?id=2230&&aid=3"><img src="5-1/2.png" style="width:100%" /></a></div>
+        <div><img src="5-1/3.png" style="width:100%" /></div>
+        <div><img src="5-1/4.png" style="width:100%" /></div>
+        <div><img src="5-1/5.png" style="width:100%" /></div>
+        <div><a href="http://www.91cpcar.com/Active/ProDetail?id=2233&&aid=3"><img src="5-1/6.png" style="width:100%" /></a></div>
+        <div><img src="5-1/7.png" style="width:100%" /></div>
+        <div style="position:absolute; top:333px;left:65%; cursor:pointer;" onclick="flink()"><img src="5-1/btn-reg.jpg" /></div>
+    </div>
+</body>
+</html>
+<script>
+    var q = getQueryString("puser");
+    function flink()
+    {
+        window.location.href = "/member/reg?timeExp=" + randomChar(32) + "&&puser=" + q + "&&usePK=" + randomChar(32);
+
+    }
+    //获取URL参数
+    function getQueryString(value) {
+        var reg = new RegExp("(^|&)" + value + "=([^&]*)(&|$)", "i");
+        var href = decodeURI(window.location.search);
+        var r = href.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        } else {
+            return "";
+        }
+
+    }
+    //生成一个时间戳字符串
+    function randomChar(l) {
+        var x = "0123456789qwertyuioplkjhgfdsazxcvbnm";
+        var tmp = "";
+        var timestamp = new Date().getTime();
+        for (var i = 0; i < l; i++) {
+            tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length);
+        }
+        return timestamp + tmp;
+    }
+
+</script>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5a3439c7364e4ec8b92ec9dc9224a61c" Name="关系图1" ShowGrid="true" SnapToGrid="true" ZoomLevel="94">
+        <EntityTypeShape EntityType="CarPartsModel.CarsInfo" Width="1.5" PointX="5" PointY="0.75" />
+        <EntityTypeShape EntityType="CarPartsModel.ExpRecord" Width="1.5" PointX="3.625" PointY="6.125" />
+        <EntityTypeShape EntityType="CarPartsModel.PartAttr" Width="1.5" PointX="5.125" PointY="8.75" />
+        <EntityTypeShape EntityType="CarPartsModel.PartBrand" Width="1.5" PointX="3.375" PointY="0.875" />
+        <EntityTypeShape EntityType="CarPartsModel.PartStock" Width="1.5" PointX="5.375" PointY="10.625" />
+        <EntityTypeShape EntityType="CarPartsModel.WebsiteMenu" Width="1.5" PointX="9.125" PointY="8.125" />
+        <EntityTypeShape EntityType="CarPartsModel.MemberLevel" Width="1.5" PointX="3.625" PointY="9.125" />
+        <EntityTypeShape EntityType="CarPartsModel.FriendCode" Width="1.5" PointX="9.5" PointY="4.5" />
+        <EntityTypeShape EntityType="CarPartsModel.AddressBook" Width="1.5" PointX="5.125" PointY="6.125" />
+        <EntityTypeShape EntityType="CarPartsModel.RebateDraw" Width="1.5" PointX="1.5" PointY="0.875" />
+        <EntityTypeShape EntityType="CarPartsModel.AdminAccount" Width="1.5" PointX="3.5679649913534357" PointY="12.65437299602403" />
+        <EntityTypeShape EntityType="CarPartsModel.PartsCategory" Width="1.5" PointX="3.776962723479123" PointY="16.66511040211893" />
+        <EntityTypeShape EntityType="CarPartsModel.PartsExtend" Width="1.5" PointX="2.3205454341697251" PointY="10.832942446150325" />
+        <EntityTypeShape EntityType="CarPartsModel.LogInfo" Width="1.5" PointX="11.854528734392734" PointY="30.797646447456277" />
+        <EntityTypeShape EntityType="CarPartsModel.Active" Width="1.5" PointX="8.25" PointY="3.625" />
+        <EntityTypeShape EntityType="CarPartsModel.ActiveAttr" Width="1.5" PointX="11.375" PointY="8.75" />
+        <EntityTypeShape EntityType="CarPartsModel.OrderPay" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CarPartsModel.OrderProList" Width="1.5" PointX="9.5" PointY="17" />
+        <EntityTypeShape EntityType="CarPartsModel.RebateRecord" Width="1.5" PointX="0.875" PointY="12.5" />
+        <EntityTypeShape EntityType="CarPartsModel.Voucher" Width="1.5" PointX="6.375" PointY="13.75" />
+        <EntityTypeShape EntityType="CarPartsModel.ActivePros" Width="1.5" PointX="8.375" PointY="11.75" />
+        <EntityTypeShape EntityType="CarPartsModel.ActiveImg" Width="1.5" PointX="13.375" PointY="8.75" />
+        <EntityTypeShape EntityType="CarPartsModel.CarM" Width="1.5" PointX="13.375" PointY="11.75" />
+        <EntityTypeShape EntityType="CarPartsModel.HotTable" Width="1.5" PointX="9.1125048087502378" PointY="5.0250916653429583" />
+        <EntityTypeShape EntityType="CarPartsModel.ImgStock" Width="1.5" PointX="7.875" PointY="7" />
+        <EntityTypeShape EntityType="CarPartsModel.MemberBase" Width="1.5" PointX="12.5" PointY="3.5" />
+        <EntityTypeShape EntityType="CarPartsModel.Order" Width="1.5" PointX="6.51686099288839" PointY="0.56626668598794694" />
+        <EntityTypeShape EntityType="CarPartsModel.information" Width="1.5" PointX="7.625" PointY="8.25" />
+        <EntityTypeShape EntityType="CarPartsModel.PhoneMsg" Width="1.5" PointX="10.763650366460741" PointY="31.618014678181154" />
+        <EntityTypeShape EntityType="CarPartsModel.Addship" Width="1.5" PointX="2.8531657042229388" PointY="24.693461086923936" />
+        <EntityTypeShape EntityType="CarPartsModel.tml" Width="1.5" PointX="1.9843632122428918" PointY="6.1037074206879867" />
+        <EntityTypeShape EntityType="CarPartsModel.Parts" Width="1.5" PointX="3.330761003927682" PointY="29.264529137529678" />
+        <EntityTypeShape EntityType="CarPartsModel.CrowdFunding" Width="1.5" PointX="7.7865382916231347" PointY="25.023934465378492" />
+        <EntityTypeShape EntityType="CarPartsModel.comments" Width="1.5" PointX="7.3032066073749249" PointY="11.451560755936225" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

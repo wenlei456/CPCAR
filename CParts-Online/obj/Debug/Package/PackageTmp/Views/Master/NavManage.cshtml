@@ -1,0 +1,243 @@
+﻿@model IEnumerable<DAO.WebsiteMenu>
+@{
+    ViewBag.Title = "NavManage";
+    Layout = "~/Views/Shared/_master.cshtml";
+}
+
+
+<div class="content-box">
+    <!-- Start Content Box -->
+    <div class="content-box-header2">
+        <h3>导航维护</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">所有列表</a></li>
+            <!-- href must be unique and match the id of target div -->
+            <li><a href="#tab2" id="f1">添加</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <table width="100%">
+                <thead>
+                    <tr>                        
+                        <th valign="middle">序号</th>                       
+                        <th valign="middle">导航名称</th>
+                        <th valign="middle">父级</th>
+                        <th valign="middle">排序</th>
+                        <th valign="middle">绑定地址</th>                       
+                        <th valign="middle">是否显示</th>
+                        <th valign="middle">操作</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <button class="button">删除</button>
+                            <div class="clear"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody style="font-size: 12px">
+                    @foreach (var item in Model)
+                    {
+                         <tr>
+                        <td >
+                            <input  type="checkbox"  class="check"/>
+                        </td>
+                        <td >@item.ID</td>
+                        <td >@item.MenuName</td>
+                        <td >@item.MenuParent</td>
+                        <td >@item.MenuOrderby</td>
+                        <td >@item.MenuBindURL</td>
+                        <td >@(item.Enable==1?"显示":"隐藏")</td>
+                        <td ><a class="button">编辑</a>&nbsp;&nbsp;<a class="button del" cid="@item.ID">删除</a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+
+            <div>
+                <div class="bulk-actions">
+                    品牌: 
+                    <select name="dropdown">
+                        <option value="option1">Last a Month</option>
+                        <option value="option2">Last Six Months</option>
+                        <option value="option3">Last a Year</option>
+                    </select>&nbsp;&nbsp;
+                     型号:
+                    <select name="dropdown">
+                        <option value="option1">Last a Month</option>
+                        <option value="option2">Last Six Months</option>
+                        <option value="option3">Last a Year</option>
+                    </select>&nbsp;&nbsp;
+                     关键词：<input type="text" class="text-input" />
+                    <a class="button" href="#">搜索</a>
+                </div>
+
+            </div>
+        </div>
+        <!-- End #tab1 -->
+        <div class="tab-content" id="tab2" style="width: 100%">
+
+         @****
+               <table width="30%">
+                <tr>
+                    <td>品牌:</td>
+                    <td>     
+                        <select id="Brand_DL">
+                            <option value="#" checked>从已有中选择</option>
+                            @foreach (var item in brands)
+                            {
+                                  <option value="@item.Key">@item.Key</option>
+                            }                           
+                        </select></td>
+                    <td>
+                        <input type="text" id="Brand_TXT" placeholder="添加新品牌" /></td>
+                </tr>
+                <tr>
+                    <td>型号:</td>
+                    <td>
+                           <select  id="Model_DL">
+                            <option value="#" checked>从已有中选择</option>
+                            @foreach (var item in models)
+                            {
+                                  <option value="@item.Key">@item.Key</option>
+                            }                           
+                        </select>
+                        </td>
+                    <td><input type="text"  placeholder="添加新型号" id="Model_TXT"  /></td>
+                </tr>
+                <tr>
+                    <td>年份:</td>
+                    <td>
+                        <select id="Year_DL">
+                            <option value="#" checked>从已有中选择</option>
+                              @foreach (var item in years)
+                            {
+                                <option value="@item.Key">@item.Key</option>
+                            }
+                        </select></td>
+                    <td> <input type="text" placeholder="添加新年份" id="Year_TXT" /></td>
+                </tr>
+                  <tr>
+                    <td>发动机:</td>
+                    <td>
+                        <select id="Engin_DL">
+                            <option value="#" checked>从已有中选择</option>
+                                @foreach (var item in engins)
+                            {
+                                  <option value="@item.Key">@item.Key</option>
+                            }
+                        </select></td>
+                    <td> <input type="text" placeholder="添加新引擎"  id="Engin_TXT"/></td>
+                </tr>
+                  <tr>
+                    <td>燃料:</td>
+                    <td>
+                        <select id="Oil_DL">
+                            <option value="#" checked>从已有中选择</option>
+                               @foreach (var item in oils)
+                            {
+                                 <option value="@item.Key">@item.Key</option>
+                            }
+                        </select></td>
+                    <td><input type="text" placeholder="添加新燃料"  id="Oil_TXT"/></td>
+                </tr>
+                <tfoot>
+                    <tr>
+
+                        <td><button class="button" id="saveCar" >保存</button></td>
+                    </tr>
+
+                </tfoot>
+            </table>
+            ****@
+            <div class="clear">
+            </div>
+           
+
+        </div>
+       
+    </div>
+   
+</div>
+@section scripts
+    {
+   <script type="text/ecmascript">     
+
+
+       $(function () {
+           //添加
+           $("#saveCar").click(function () {
+               showdiv('正在保存中***');
+               var brand = $("#Brand_DL").val() == "#" ? $("#Brand_TXT").val() : $("#Brand_DL").val();
+               var model = $("#Model_DL").val() == "#" ? $("#Model_TXT").val() : $("#Model_DL").val();
+               var year = $("#Year_DL").val() == "#" ? $("#Year_TXT").val() : $("#Year_DL").val();
+               var eng = $("#Engin_DL").val() == "#" ? $("#Engin_TXT").val() : $("#Engin_DL").val();
+               var oil = $("#Oil_DL").val() == "#" ? $("#Oil_TXT").val() : $("#Oil_DL").val();
+               var car = {
+                   Brand: brand,
+                   Model: model,
+                   ProYear: year,
+                   Engine: eng,
+                   Oil: oil,
+                   State: 1,
+               };
+               if (VaCar(car))
+               {
+                   Post("/Master/AddCar", car, function (data, error) {
+                       if (error) {
+                           ChangBox("网络异常，请稍后再试");
+                       }
+                       if (data.result == "error") {
+                           alert("添加异常，请稍后再试！");
+                       } else if (data.result == "ok") {
+                           window.location.href = "/Master/CarsManage";
+                       }
+                   });
+
+               }
+
+
+           })        
+           $(".del").click(function () {
+               if (confirm("确认要删除？")) {
+
+                   var id = $(this).attr("cid");
+                   Post("/Master/DelMenu", {id:id}, function (data, error) {
+                       if (error) {
+                           ChangBox("网络异常，请稍后再试");
+                       }
+                       if (data.result == "error") {
+                           alert("删除异常，请稍后再试！");
+                       } else if (data.result == "ok") {
+                           window.location.href = "/Master/NavManage";
+                       }
+                   });
+               }
+           });
+
+         
+
+       })
+       //数据验证
+       function VaCar(c)
+       {
+           if (c.Brand == "" || c.Model == "" || c.ProYear == "" || c.Engine == "" || c.Oil == "") {
+               return false;
+           } else {
+               return true;
+           }
+
+       }
+
+   </script>
+    
+    }
+@section styles{
+    
+
+    }

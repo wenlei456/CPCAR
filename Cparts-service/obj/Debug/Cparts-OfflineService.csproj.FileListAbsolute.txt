@@ -1,0 +1,13 @@
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\bin\Debug\Cparts-service.dll
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\bin\Debug\Cparts-service.pdb
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\bin\Debug\AOP.dll
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\bin\Debug\CommonUtils.dll
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\bin\Debug\DAO.dll
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\bin\Debug\EntityFramework.dll
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\bin\Debug\log4net.dll
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\bin\Debug\AOP.pdb
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\bin\Debug\CommonUtils.pdb
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\bin\Debug\DAO.pdb
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\obj\Debug\Cparts-OfflineService.csprojResolveAssemblyReference.cache
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\obj\Debug\Cparts-service.dll
+G:\工作开发\CP_workspace\CarParts.com\Cparts-service\obj\Debug\Cparts-service.pdb

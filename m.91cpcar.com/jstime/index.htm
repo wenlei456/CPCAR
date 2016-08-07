@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <META HTTP-EQUIV="Pragma"CONTENT="no-cache">
+
+<META HTTP-EQUIV="Cache-Control"CONTENT="no-cache">
+
+<META HTTP-EQUIV="Expires"CONTENT="0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no" />
+<title>一分钱抢购倒计时</title>
+
+<style type="text/css">
+h1{font-family:"微软雅黑";font-size:40px;margin:20px 0;;border-bottom:solid 1px #ccc;padding-bottom:20px;letter-spacing:2px;}
+
+.time-item strong{background:#C71C60;color:#fff;line-height:49px;font-size:36px;font-family:Arial;padding:0 10px;margin-right:10px;border-radius:5px;box-shadow:1px 1px 3px rgba(0,0,0,0.2);}
+#day_show{float:left;line-height:49px;color:#c71c60;font-size:32px;margin:0 10px;font-family:Arial, Helvetica, sans-serif;}
+.item-title .unit{background:none;line-height:49px;font-size:24px;padding:0 10px;float:left;}
+</style>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+    var date1 = new Date();  //当前时间
+    var date2 = new Date("Thu, 23 Jun 2016 13:30:00");//给定时间
+    var date3 = (date2.getTime() - date1.getTime()) / 1000;
+
+    //var OneMonth = 6;  
+    //var OneDay = 20;  
+    //var OneYear = 2016;  
+    //var OneXiaoshi = 13;
+    //var OneFen = 30;
+    //var miao = 0;
+
+
+
+    //var cha = (Date.parse('Thu, 20 Jun 2016 13:30:00 GMT') - Date.parse(myDate.toString("r")));
+
+
+
+    var intDiff = parseInt(date3);//倒计时总秒数量
+
+    function timer(intDiff) {
+        window.setInterval(function () {
+            var day = 0,
+                hour = 0,
+                minute = 0,
+                second = 0;//时间默认值		
+            if (intDiff > 0) {
+                day = Math.floor(intDiff / (60 * 60 * 24));
+                hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+                minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+                second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+            }
+            if (minute <= 9) minute = '0' + minute;
+            if (second <= 9) second = '0' + second;
+            $('#day_show').html(day + "天");
+            $('#hour_show').html('<s id="h"></s>' + hour + '时');
+            $('#minute_show').html('<s></s>' + minute + '分');
+            $('#second_show').html('<s></s>' + second + '秒');
+            intDiff--;
+
+            if (intDiff < 1) {
+                window.location.href = "http://m.91cpcar.com/pay/weixin/wxProcess.aspx?id=487298";
+            }
+        }, 1000);
+
+
+
+
+    }
+
+    $(function () {
+        timer(intDiff);
+    });
+</script>
+
+</head>
+<body>
+<div align="center" style="width:416px; margin:120px auto">
+<h1>一分钱抢购倒计时</h1>
+
+<div class="time-item">
+	<span id="day_show">0天</span>
+	<strong id="hour_show">0时</strong>
+	<strong id="minute_show">0分</strong>
+	<strong id="second_show">0秒</strong>
+</div><!--倒计时模块-->
+</div>
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+
+</div>
+</body>
+</html>

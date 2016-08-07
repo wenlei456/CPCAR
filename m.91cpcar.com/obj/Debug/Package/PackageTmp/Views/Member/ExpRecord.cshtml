@@ -1,0 +1,40 @@
+﻿@model  IEnumerable<DAO.ExpRecord>
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+    var totle = Model.Where(m => m.Status == 1).Sum(m => m.Exp);
+    var dtotle = Model.Where(m => m.Status == 0).Sum(m => m.Exp);
+}
+@section styles{
+   <style>
+       dd {
+       margin:0px;
+       }
+   </style>
+    }
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/content/img/ico/icon_phome.png">
+    </a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/content/img/ico/icon_shopcar.png">
+    </a>
+    <div class="head-title">积分记录</div>
+
+</header>
+<div class="mui-content">
+    <div style="padding:20px; ">
+         <h4>当前积分：@totle</h4>
+        <h4>冻结积分：@dtotle</h4>
+    <dl>
+        @foreach (var item in Model)
+        {
+              <dt><dd>积分：@item.Exp</dd><dd>来源：@item.Source</dd><dd>获得日期：@(string.Format("{0:yyyy-MM-dd}",item.Datetime))</dd><dd>状态：<span style="color:@(item.Status==0?"red":"green")">@(item.Status==0?"冻结":"正常")</span></dd></dt>
+       <hr />
+        }
+      
+    </dl>
+        </div>
+   </div>

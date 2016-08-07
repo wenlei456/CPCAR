@@ -1,0 +1,53 @@
+﻿@model  IEnumerable<DAO.RebateRecord>
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+    var totle = Model.Where(m => m.Status == 1).Sum(m => m.Price);
+    var dtotle = Model.Where(m => m.Status == 0).Sum(m => m.Price);
+}
+@section styles{
+   <style>
+       dd {
+       margin:0px;
+       float:left;
+       width:50%;
+       font-size:12px;
+       }
+   </style>
+    }
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/content/img/ico/icon_phome.png">
+    </a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/content/img/ico/icon_shopcar.png">
+    </a>
+    <div class="head-title">返利记录</div>
+
+</header>
+<div class="mui-content">
+    <div style="padding:20px; ">
+         <h4>当前金额：@totle</h4>
+        <h4>冻结金额：@dtotle</h4>
+    <dl>
+        @foreach (var item in Model)
+        {
+              <dt>
+                  <dd>返利：@item.Price</dd>
+                   <dd>获得日期：@(string.Format("{0:yyyy-MM-dd}",item.Datetime))</dd>
+                  <dd>来源：@item.Source</dd>
+                  <dd>来自会员：@item.LowerLoginName</dd>
+                  <dd>来自订单：@item.LowerOrder</dd>
+                  <dd>订单金额：@item.OrderPrice</dd>
+                     <dd>返利比例：@((item.InCome*100).ToString(".00"))%</dd>
+                  <dd>状态：<span style="color:@(item.Status==0?"red":"green")">@(item.Status==0?"冻结":"已入账")</span></dd></dt>
+         <div style="clear:both"></div>
+             <hr />
+         
+        }
+      
+    </dl>
+        </div>
+   </div>

@@ -1,0 +1,592 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*全局样式*/
+*{margin:0; padding:0; line-height:1em; font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;}
+.clear{clear:both;}
+a{text-decoration:none; cursor:pointer}
+a img{border:none;}
+li{list-style-type:none;}
+img{max-width: 100% !important;height: auto; }
+body{background:#fff; font-size:12px; min-width:1200px; width:100%;}
+.left{ float:left;}
+.right{ float:right;}
+.center{margin:0 auto;}
+
+.CfontH{ color:#231815}/**普通灰色**/
+.CfontB{color:#0047a1}/*普通蓝色*/
+.CfontD{color:#a2b7d3}/*页脚淡色*/
+
+/***Layout**/
+.body{width:1200px; margin:0 auto; position:relative;}
+.head{padding-top:10px; padding-bottom:8px}
+/*.nav{height:95px;}*/
+/****input***/
+.input-100{ width:100px}
+/***head***/
+.logo{ width:330px; padding-left:25px; padding-top:20px}
+.slogo { margin-left:10px;}
+.hcarts{width:260px}
+.hGsearch{width:590px; padding-top:35px;z-index:999;padding-left: 100px;}
+.hGgsearch{width:420px;}
+.hcartsFont{ padding:4px 20px}
+.hcarts .cfont {
+font-size:14px; color:#060296;
+padding:5px;
+}
+#topsearch {
+ cursor:pointer;
+}
+.hcarts .carNum {
+color:#be110c;
+font-size:20px;
+
+
+}
+.LoginAre { background-color:#e8e8e8; padding-left:20px; padding-top:10px; width:180px}
+.LoginAre div{ padding-bottom:3px}
+.navSline{border-left:1px solid #a2b7d3; display:block; padding-left:15px}
+.txt_search{ width:280px; border:#bfbfbf 1px solid ; background-color:#e9e9ea; font-size:14px; padding:7px 20px; color:#000;}
+.mainBody {
+ position:relative; 
+  height:518px;
+  width:1200px
+}
+.ProductMain {
+ position:relative; 
+
+  width:100%;
+
+}
+.searchAre {
+    background:url(../img/SearchDiv.jpg);
+    width:264px;
+    height:488px;
+    position:relative;    
+    left:200px;
+     filter:alpha(opacity:60);
+     opacity:0.6; 
+     -moz-opacity:0.5; /*支持FF */
+}
+.ProductsearchAre {
+    background:url(../img/SearchDiv.jpg);
+   width:264px;
+    height:430px;
+       min-height:283px;
+    top:0px;
+    left:28%;
+    position: absolute;       
+     filter:alpha(opacity:80);
+     opacity:0.8; 
+     -moz-opacity:0.8; /*支持FF */
+}
+
+.ProductsearchAre2 {
+    position:absolute;    
+   min-height:283px;
+    width:250px;
+     
+}
+.searchAre2 {
+    position:relative;  
+    left:200px;
+    margin-top:-518px;
+    width:250px;
+    padding-top:60px;    
+}
+.searchTitle { 
+ font-size:22px;
+ color:#434c9c;
+ font-weight:700;
+ padding:3% 6%;
+
+}
+.serchSelect {
+ width:200px;
+ padding:6px 5px;
+}
+
+.serchDiv {
+ padding-left:20px;
+ padding-right:30px;
+}
+.buttonList {
+    width: 260px;  
+    position: absolute;
+    left: 44%;
+    top: 24%;
+}
+.btn-div {
+    width: 71px;
+    height: 71px;
+    margin: 3px;
+    padding: 2px;
+    cursor: pointer;
+}
+.buttonList2 {
+    width: 130px;
+    height: 480px;
+    background: #242424;
+    position: absolute;
+    left: 40%;
+    top: 25%;
+     display:none;
+         z-index: 1;
+}
+.btn-div2 {
+  padding:2px;
+  cursor:pointer;
+  margin:15px
+}
+.ProMain {
+     padding-left:150px;
+}
+.ProMain2 {
+     padding-left:30px;
+}
+/***ProList***/
+.ProNav {
+    padding:10px 0px 10px 71px;
+    color:#1d2088;
+    font-size:18px;    
+}
+.ProNav2 {
+    padding:5px 0px 10px 30px;
+    color:#1d2088;
+    font-size:18px;    
+}
+    .ProNav div {
+        padding: 10px 0px;
+    }
+.ProTitle {
+ position:relative;
+}
+.ProTitleImg {
+ width:71px;
+ height:71px;
+
+}
+
+.ProTitleImgN {
+ height:30px;
+ background:#1d2088;
+ position:absolute;
+ bottom:0px;
+  width:100%;
+  z-index:-1;
+  color:#fff;
+}
+.ProArea {
+padding-top:10px;
+}
+.ProList {
+ padding-top:10px;
+}
+.ProItem {
+  width:233px;
+  height:240px;
+  margin-right:20px;
+  border:1px solid #fff;
+  margin-bottom:10px;
+  text-align:center;
+   cursor:pointer;
+    overflow:hidden;
+}
+    .ProItem:hover {
+      border:1px solid #989898;
+    }
+
+.ProItemImg {
+
+    
+}
+.ProItemImg img{
+    /*width:228px;
+    height:168px;*/
+   max-width:228px;
+   max-height:168px;
+   
+}
+.ProItemName {
+text-align:center;
+ color:#141313;
+ font-weight:600;
+ padding:5px;
+ font-size:14px;
+}
+.ProItemName2 {
+text-align:center;
+ color:#898989;
+ font-weight:600;
+ padding:5px;
+ font-size:13px;
+}
+.ProItemPrice {
+color:red;
+font-size:18px;
+padding-top:3px;
+
+}
+
+.proName {
+ font-weight:800;
+}
+.proPrice {
+height:60px;
+padding:15px;
+font-size:22px;
+color:red;
+background:#e6e5e5;
+font-weight:500;
+}
+.proDecribe {
+     padding:15px 20px;
+     font-size:15px;
+     line-height:26px;
+     border-bottom:1px solid #c6c2c2
+}
+.proTools {
+position:absolute;
+bottom:0px;
+}
+.prodeatil 
+{
+padding-top:30px
+}
+.pdNav {
+ background:#0047a1;
+ padding:12px 15px;
+ font-size:16px;
+ color:#fff;
+}
+.proContent {
+     padding:15px 15px;
+     font-size:15px;
+     line-height:26px;
+}
+    .proContent ul {
+    padding-left:20px;
+    }
+        .proContent ul li {
+            padding: 10px 0px;
+            font-size: 16px;
+            margin-right: 20px;
+            float: left;
+            color: #3e4750;
+            font-weight: 600;
+        }
+.BrandContent {
+     padding:15px 15px;
+     font-size:13px;
+     line-height:20px;
+}
+/*****foot**/
+.foot{ padding-top:40px; color:#3773c3}
+.about{ width:400px; margin:0 auto; text-align: center;line-height: 24px; display:none}
+.copyring{ width:1000px; margin:0 auto; text-align: center; line-height: 24px;}
+.copying2{ width:580px; margin:0 auto; text-align: center;line-height: 24px;}
+.authentication{width:365px; margin:0 auto;  padding:10px}
+
+
+
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+    display:block;
+    padding-top:10px;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+/****图片预览****/
+
+.box {
+    float: left;
+    width: 500px;
+}
+/*.ProDecibe {
+ width:700px;
+ padding-left:20px;
+  height:392px;
+  position:relative;
+}*/
+.ProDecibe {
+ width:600px;
+ padding-left:20px;
+  height:630px;
+  position:relative;
+}
+/*.ProImg {
+width:350px;
+}*/
+.ProImg {
+width:500px;
+}
+/*.imgView {
+    width: 360px;
+    height: 320px;
+}*/
+.imgView {
+    width: 510px;
+    height: 520px;
+}
+
+    /*.imgView img {
+        width: 350px;
+        height: 300px;
+    }*/
+       .imgView img {
+        width: 500px;
+        height: 500px;
+    }
+/*.imgtabs {
+    width: 344px;
+    overflow: hidden;
+    padding-left: 26px;
+    padding-right: 24px;
+    position: relative;
+}*/
+.imgtabs {
+    width: 464px;
+    overflow: hidden;
+    padding-left: 26px;
+    padding-right: 24px;
+    position: relative;
+}
+
+.tabList {
+    list-style: none;
+    z-index: -1;
+}
+
+    .tabList li {
+        float: left;
+        margin-right: 2px;
+        border: 1px solid #fff;
+        cursor: pointer;
+        /**   filter:alpha(opacity:70);
+     opacity:0.7; 
+     -moz-opacity:0.7; */
+    }
+
+        .tabList li:hover {
+            border: 1px solid #c8c8c8;
+        }
+
+    /*.tabList img {
+        width: 70px;
+        height: 70px;
+    }*/
+    .tabList img {
+        width: 100px;
+        height: 100px;
+    }
+
+.PreNext {
+    height: 72px;
+    background: #fff;
+    padding-top:13px;
+}
+
+.preBtn {
+    position: absolute;
+    top: -12px;
+    left: 0;
+    height: 72px;
+    width: 23px;
+}
+
+.nextBtn {
+    position: absolute;
+    top: -12px;
+    right: 0;
+    height: 72px;
+    width: 23px;
+}
+
+#perimg {
+    height: 100px;
+    padding: 7px 4px;
+}
+
+#nextimg {
+    height: 100px;
+    padding: 7px 4px;
+     background:#f1eeee
+}
+/***高级属性***/
+#partExtAttr td {
+height:40px;
+}
+.AttrName {
+    font-size: 16px;
+}
+
+.AtttValue {
+    cursor: pointer;
+    font-size: 16px;
+    border: 2px solid #a99c9c;
+    margin: 5px;
+    padding:5px 10px;
+      float: left;
+   
+   }
+.noPoint {
+     border: 1px dashed #a99c9c;
+     filter:alpha(opacity:60);
+     opacity:0.6; 
+     -moz-opacity:0.5; 
+     cursor:not-allowed;
+
+}
+.currAttr {
+    /*background-color: #0b1ff8;*/
+    /*color: #fff;*/
+     border: 2px solid #cb0000;
+}
+.attrs {
+    position: absolute;
+    bottom: 60px;
+}
+/*****个人中心******/
+.uh-left {
+width:200px;
+padding-left:20px;
+background-color:#f1f1f1
+}
+    .uh-left li {
+    padding:10px 0px;
+    }
+      .uh-left ul {
+    margin-left:0px;
+    }
+/*.uh_title {
+background:#0b77eb;
+color:#fff;
+font-size:16px;
+padding:15px 15px 15px 20px;
+border-radius: 4px;
+margin-left:20px;
+}*/
+.uh-right {
+    width: 980px;
+   min-height: 1000px;
+    padding-left: 20px;
+    background-color: #f1f1f1;
+    margin-left: 20px;
+    padding-bottom:30px;
+}
+
+    .uh-right h3 {
+        padding-bottom: 10px;
+        border-bottom: 2px solid #666;
+    }
+
+    .uh-right h4 {
+        padding-bottom: 10px;
+        margin-right: 50px;
+    }
+.uh_info {
+color:#eb0b5d
+}
+.bold-weight-600 {
+ font-weight:600;
+
+}
+.tabActive {
+background:#153fe4;
+color:#fff;
+}
+.orderTabs li {
+padding:10px 8px 10px 10px;
+font-size:16px;
+cursor:pointer;
+}
+.orderTabs .active {
+background:#d4390f;
+color:#fff;
+}
+.tab-hide {
+display:none;
+}
+.tab-contents {
+    margin-top:20px;
+    background:#fff;
+    font-size:16px;
+    text-align:center;
+}
+.tab-contents th {
+    font-weight:600;
+    padding:10px;
+    text-align:center;
+}
+.opImg img{
+width:120px;
+height:120px;
+}
+.opName {
+padding-top:40px;
+font-size:16px;
+padding-left:20px;
+
+}
+.opNum {
+padding-top:40px;
+float:right;
+padding-right:20px;
+font-size:16px;
+}
+.consignee {
+
+}
+.plist td {
+    padding:5px;
+}
+.oinfo {
+background:#e8e8e8;
+padding:10px;
+}
+
+.od-head {
+  border: 1px solid #EED97C;
+  padding: 15px 20px;
+  background: #FFFCEB;
+  font-size:15px;
+  margin-top:10px
+}
+.od-title {
+font-weight:600;
+}
+.od-detail {
+padding:5px 0px;
+}
+.odImg img{
+ width:60px;
+ height:60px;
+}
+.odName {
+width:500px;
+}
+.orderTotlaAre tr {
+height:30px;
+}

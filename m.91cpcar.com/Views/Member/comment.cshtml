@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+}
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/content/img/ico/icon_phome.png">
+    </a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/content/img/ico/icon_shopcar.png">
+    </a>
+    <div class="head-title">评论</div>
+
+</header>
+<div class="mui-content">
+     <div style="width: 90%; margin: 0 auto; padding-top:30px;">
+        
+            <input id="comm" name="comm" type="text" placeholder="请输入评论" class="width-100 input-textList login-text"/>
+           
+      <button class="btn-main" onclick="submit()">确认</button>
+          </div>
+    </div>
+@section scripts{
+    <script>
+        function submit() {
+            var id = GetQueryString("id");
+            var comm = Base.Trim($("#comm").val());
+
+            if (Validata.isNull(comm)) {
+                mui.alert('请输入评论', '提示')
+            } else {
+
+                Base.ajaxPost("/Member/commentsadd", { comm: comm, id: id }, function (data) {
+                    if (data.data == "1")
+                    {
+                        alert('提交成功!');
+                        window.location.href = "/Member/MyOrder";
+                    }
+                })
+
+            }
+
+          
+
+        }
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+            var r = window.location.search.substr(1).match(reg); 
+            if (r != null) return unescape(r[2]); return null; 
+        } 
+
+    </script>
+    }

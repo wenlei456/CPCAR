@@ -1,0 +1,120 @@
+﻿@model ProductModule.Models.ProductListBykeyword
+@{
+    ViewBag.Title = "搜索产品|诚配网";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.banner = "/content/img/banner4.jpg";
+}
+@section styles{
+    <style>    
+             .hover {
+        background:#b8eba5 !important;
+        }
+    .paginator
+ {
+     font: 14px Arial, Helvetica, sans-serif;
+     padding: 10px 20px 10px 0;
+     margin: 0px auto;
+ }
+  
+ .paginator a
+ {
+     border: solid 1px #ccc;
+     color: #0063dc;
+     cursor: pointer;
+     text-decoration: none;
+ }
+  
+ .paginator a:visited
+ {
+     padding: 1px 6px;
+     border: solid 1px #ddd;
+     background: #fff;
+     text-decoration: none;
+ }
+  
+ .paginator .cpb
+ {
+     border: 1px solid #F50;
+     font-weight: 700;
+     color: #F50;
+     background-color: #ffeee5;
+ }
+  
+ .paginator a:hover
+ {
+     border: solid 1px #F50;
+     color: #f60;
+     text-decoration: none;
+ }
+  
+ .paginator a, .paginator a:visited, .paginator .cpb, .paginator a:hover
+ {
+     float: left;
+     height: 22px;
+     line-height: 22px;
+     min-width: 10px;
+     _width: 10px;
+     margin-right: 8px;
+     text-align: center;
+     white-space: nowrap;
+     font-size: 14px;
+     font-family: Arial,SimSun;
+     padding: 0 3px;
+ }
+  
+ .paginator label
+ {
+     display:block;   
+     float:left;   
+       padding-top: 5px;
+ }
+
+</style>
+    </style>
+    }
+<div class="ProMain">
+          <div class="ProNav">
+              <div></div>
+          @*    <div>首页 / 所有产品 / </div>*@
+          </div>
+          <div class="ProArea">
+             <h4 style="font-weight:600"> 共搜索到<span style="color:red">@(Model.totleCount)</span>项  </h4>
+              <div class="ProList">
+                  @if(Model.proList.Count>0)
+                  {
+                      foreach (var item in Model.proList)
+                      {
+                          <a href="/Product/detail/@item.ID">
+                          <div class="ProItem left">
+                              <div class="ProItemImg">
+                                  @if (string.IsNullOrEmpty(item.imgpath))
+                                  {
+                                  <img src="/content/img/noimg.jpg" />
+                                  }else{
+                                   <img src="@item.imgpath" />
+                                  }
+                              </div>
+                              <div class="ProItemName">@item.PartName</div>
+                               <div class="ProItemPrice">￥@(item.Price.ToString(".00"))</div>
+                              <div></div>
+                          </div>
+                              </a>
+                      }
+                  }else{
+                      
+                 <h2>没有找到产品</h2>
+                  }
+                  </div>
+                  
+                  <div class="clear"></div>
+        <div class="paginator">
+     
+                <div style="float:right;">
+              
+                    @Html.ShowPageNavigate(Model.currentPage, Model.pageSize, Model.totleCount)
+               
+                    </div>
+        </div>
+          </div>
+             <div class="clear"></div>
+        </div>

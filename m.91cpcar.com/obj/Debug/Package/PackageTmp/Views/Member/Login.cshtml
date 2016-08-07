@@ -1,0 +1,70 @@
+﻿@model m.cpcar.com.Models.LoginModel
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+    string loginName =Model==null ? "" : Model.loginName;
+}
+@section styles{
+    <style>
+        .btn-red {
+    background: #d93715;
+}
+.btn-border {
+    line-height: 37px;
+    color: #da3915;
+    font-size: 16px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    border: 1px solid #da3915;
+    background-color: White;
+}
+    </style>
+    }
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>    
+    <a class="mui-pull-right" href="/Member/Myhome"><img class="head-ico" src="/content/img/ico/icon_phome.png"></a>
+    <a class="mui-pull-right" href="/Product/getCar"><img class="head-ico" src="/content/img/ico/icon_shopcar.png"></a>
+    <div class="head-title">登录</div>
+</header>
+<div class="mui-content">
+    <form id="form_login" action="/Member/Login" method="post">
+        <div style="width: 90%; margin: 0 auto; padding-top:30px;">
+            <input id="loginName" name="loginName" type="text" placeholder="请输入用户名" class="width-100 input-text login-text" value="@loginName"/>
+            <input id="passWord" name="passWord" type="password" placeholder="请输入密码" class="width-100 input-text login-text" />
+        </div>
+
+        <div style="width: 90%; margin: 0 auto; padding-top:30px;">
+            <div class="mui-pull-left width-50">
+                <a href="/member/reg" class="width-95 btn-main btn-border">注册</a>
+            </div>
+            <div class="mui-pull-right width-50" style="text-align:right">
+                <a onclick="Login()" class="width-95 btn-main btn-border">登录</a>
+                <a href="/">忘记密码</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section scripts{
+    <script>
+        function Login()
+        {
+            var name = Base.Trim($("#loginName").val());
+            var pass = Base.Trim($("#passWord").val());
+            if (Validata.isNull(name) || Validata.isNull(pass))
+            {
+                mui.alert('用户名/密码不能为空', '提示')
+            } else
+            {
+                document.getElementById("form_login").submit();
+            }
+        }
+        var msg = "@ViewBag.loginFail";
+        if (!Validata.isNull(msg))
+        {
+            mui.alert(msg, '提示')
+        }
+    </script>    
+    }

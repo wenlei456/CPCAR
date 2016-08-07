@@ -1,0 +1,343 @@
+﻿@model OrderModule.model.MyOrderInfo
+@{
+    ViewBag.Title = "我的订单|诚配网";
+    Layout = "~/Views/Shared/_UserHome.cshtml";
+}
+<div style="padding-right: 10px;">
+
+    <h3>我的订单</h3>
+    <div class="orderTabs">
+        <ul>
+            <li class="left active" tab="#all">全部订单</li>
+            <li class="left" tab="#nopay">待付款</li>
+            <li class="left" tab="#ok">已完成</li>
+
+        </ul>
+        <div style="clear: both;"></div>
+    </div>
+    <div class="tab-contents">
+        <div id="all" class="tab-content">
+            <table style="width: 100%;" border="1">
+                <thead>
+                    <tr>
+                        <th>订单详情</th>
+                        <th>收货人</th>
+                        <th>总金额</th>
+                        <th>支付状态</th>
+                        <th>订单状态</th>
+
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model.orderList)
+                {
+                    bool rowSpan = true;
+                    var oplist = Model.opList.Where(m => m.OrderId == item.OrderId);
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="oinfo">
+                                <div class="left">订单号：@item.OrderId</div>
+                                <div class="left" style="padding-left: 20px;">下单时间：@(string.Format("{0:yyyy-MM-dd HH:mm:ss}", item.OrderTime))</div>
+                            </td>
+                        </tr>
+                        @foreach (var op in oplist)
+                        {
+                            var imgItem = Model.pimgList.Where(m => m.PartID == op.ProductID).FirstOrDefault();
+                            var imgPath = imgItem == null ? "/content/img/noimg.jpg" : imgItem.ImgPath;
+                            var ad = op.AttrDecribe.Replace("||", "|").Split('|');
+                            string pixstr;
+                            if (op.IsFlag != -1)
+                            {
+                                pixstr = "/Active/ProDetail?aid=" + op.IsFlag + "&&id=" + op.ProductID;
+                            }
+                            else
+                            {
+                                pixstr = "/Product/detail?id=" + op.ProductID;
+                            }
+                            <tr class="plist">
+                                <td>
+                                    <div class="left opImg"><a target="_blank"  href="@pixstr">
+                                        <img  src="@imgPath"/></a></div>
+                                    <div class="left opName"><a target="_blank"  href="@pixstr">@op.ProductName</a><br /><br />
+                                               @if (op.IsFlag != -1)
+                          { 
+                          <span style="color:#fff; background:red;border-radius:5px; padding:2px">@op.activeName</span> 
+                          }
+                                    </div>
+                                    <div class="left opName" style="text-align: left;">
+                                        @foreach (var i in ad)
+                                        {
+                                            if (!string.IsNullOrEmpty(i))
+                                            {
+                                            @i<br />}
+                                        }
+                                    </div>
+                                    <div class="left opNum">x @(op.Num)</div>
+                                </td>
+                                @if (oplist.Count() > 0) //(rowSpan)
+                                {
+                                    if (rowSpan)
+                                    {
+                                    <td rowspan="@oplist.Count()">
+                                        <div class="consignee">
+                                            @item.Consignee
+                                        </div>
+                                    </td>
+                                    <td rowspan="@oplist.Count()">￥ @Math.Round(item.TotalPrice, 2)
+                                    </td>
+                                    <td rowspan="@oplist.Count()">
+                                        @if (item.PayStatus == "未支付")
+                                        {
+                                            <a href="/Common/PayOrder?oid=@item.OrderId" class="btn btn-danger" >去支付</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="javascript:void(0)" class="btn btn-success disabled">@item.PayStatus</a>
+                                        }
+
+                                    </td>
+                                    <td rowspan="@oplist.Count()">@item.OrderStatus
+                                        <br />
+                                        <br />
+                                        <a href="/Order/Detail/@item.OrderId" style="font-size:15px">订单详情</a>
+                                    </td>
+                                        rowSpan = false;
+                                    }
+@* else{
+                            <td></td>
+                            }
+                                 **@
+                                }
+                                else
+                                {
+                                    <td rowspan="1">
+                                        @item.Consignee
+                                    </td>
+                                    <td rowspan="1">￥ @Math.Round(item.TotalPrice, 2)
+                                    </td>
+                                    <td rowspan="1">
+                                        <a href="/Common/PayOrder/@item.OrderId">@item.PayStatus</a>
+                                    </td>
+                                    <td rowspan="1">
+                                        <a href="/Common/PayOrder/@item.OrderId">@item.PayStatus</a>
+                                    </td>
+                          
+                        
+                                }
+                            </tr>
+                    
+                        }
+
+                    </tbody>
+                }
+            </table>
+
+        </div>
+        <div id="nopay" class="tab-content tab-hide">
+            <table style="width: 100%;" border="1">
+                <thead>
+                    <tr>
+                        <th>订单详情</th>
+                        <th>收货人</th>
+                        <th>总金额</th>
+                        <th>订单状态</th>
+
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model.orderList.Where(m => m.PayStatus == "未支付"))
+                {
+                    bool rowSpan = true;
+                    var oplist = Model.opList.Where(m => m.OrderId == item.OrderId);
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="oinfo">
+                                <div class="left">订单号：@item.OrderId</div>
+                                <div class="left" style="padding-left: 20px;">下单时间：@(string.Format("{0:yyyy-MM-dd HH:mm:ss}", item.OrderTime))</div>
+                            </td>
+                        </tr>
+                        @foreach (var op in oplist)
+                        {
+                            var imgItem = Model.pimgList.Where(m => m.PartID == op.ProductID).FirstOrDefault();
+                            var imgPath = imgItem == null ? "/content/img/noimg.jpg" : imgItem.ImgPath;
+                            var ad = op.AttrDecribe.Replace("||", "|").Split('|');
+                            string pixstr;
+                            if (op.IsFlag != -1)
+                            {
+                                pixstr = "/Active/ProDetail?aid=" + op.IsFlag + "&&id=" + op.ProductID;
+                            }
+                            else
+                            {
+                                pixstr = "/Product/detail?id=" + op.ProductID;
+                            }
+                            <tr class="plist">
+                                <td>
+                                    <div class="left opImg"><a target="_blank"  href="@pixstr">
+                                        <img  src="@imgPath"/></a></div>
+                                    <div class="left opName"><a target="_blank"  href="@pixstr">@op.ProductName</a><br /><br />
+                                               @if (op.IsFlag != -1)
+                          { 
+                          <span style="color:#fff; background:red;border-radius:5px; padding:2px">@op.activeName</span> 
+                          }
+                                    </div>
+                                    <div class="left opName" style="text-align: left;">
+                                        @foreach (var i in ad)
+                                        {
+                                            if (!string.IsNullOrEmpty(i))
+                                            {
+                                            @i<br />}
+                                        }
+                                    </div>
+
+                                    <div class="left opNum">x @(op.Num)</div>
+                                </td>
+                                @if (oplist.Count() > 0) //(rowSpan)
+                                {
+                                    if (rowSpan)
+                                    {
+                                    <td rowspan="@oplist.Count()">
+                                        <div class="consignee">
+                                            @item.Consignee
+                                        </div>
+                                    </td>
+                                    <td rowspan="@oplist.Count()">￥ @Math.Round(item.TotalPrice, 2)
+                                    </td>
+                                    <td rowspan="@oplist.Count()">
+                                        <a href="/Common/PayOrder?oid=@item.OrderId" class="btn btn-danger">去支付</a>
+                                        <br />
+                                        <br />
+                                        <a href="/Order/Detail/@item.ID" style="font-size:15px">订单详情</a>
+                                    </td>
+                           
+                                        rowSpan = false;
+                                    }
+@* else{
+                            <td></td>
+                            }
+                                 **@
+                                }
+                                else
+                                {
+                                    <td rowspan="1">
+                                        @item.Consignee
+                                    </td>
+                                    <td rowspan="1">￥ @Math.Round(item.TotalPrice, 2)
+                                    </td>
+                                    <td rowspan="1">
+                                        <a href="/Common/PayOrder/@item.OrderId">@item.PayStatus</a>
+                                    </td>
+                          
+                        
+                                }
+                            </tr>
+                    
+                        }
+
+                    </tbody>
+                }
+            </table>
+        </div>
+        <div id="ok" class="tab-content tab-hide">
+            <table style="width: 100%;" border="1">
+                <thead>
+                    <tr>
+                        <th>订单详情</th>
+                        <th>收货人</th>
+                        <th>总金额</th>
+                        <th>订单状态</th>
+
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model.orderList.Where(m => m.OrderStatus == "已完成"))
+                {
+                    bool rowSpan = true;
+                    var oplist = Model.opList.Where(m => m.OrderId == item.OrderId);
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="oinfo">
+                                <div class="left">订单号：@item.OrderId</div>
+                                <div class="left" style="padding-left: 20px;">下单时间：@(string.Format("{0:yyyy-MM-dd HH:mm:ss}", item.OrderTime))</div>
+                            </td>
+                        </tr>
+                        @foreach (var op in oplist)
+                        {
+                            var imgItem = Model.pimgList.Where(m => m.PartID == op.ProductID).FirstOrDefault();
+                            var imgPath = imgItem == null ? "/content/img/noimg.jpg" : imgItem.ImgPath;
+                            var ad = op.AttrDecribe.Replace("||", "|").Split('|');
+                            string pixstr;
+                            if (op.IsFlag != -1)
+                            {
+                                pixstr = "/Active/ProDetail?aid=" + op.IsFlag + "&&id=" + op.ProductID;
+                            }
+                            else
+                            {
+                                pixstr = "/Product/detail?id=" + op.ProductID;
+                            }
+                            <tr class="plist">
+                                <td>
+                                    <div class="left opImg"><a target="_blank"  href="@pixstr">
+                                        <img  src="@imgPath"/></a></div>
+                                    <div class="left opName"><a target="_blank"  href="@pixstr">@op.ProductName</a><br /><br />
+                                          @if (op.IsFlag != -1)
+                          { 
+                          <span style="color:#fff; background:red;border-radius:5px; padding:2px">@op.activeName</span> 
+                          }</div>
+                                    <div class="left opName" style="text-align: left;">
+                                        @foreach (var i in ad)
+                                        {
+                                            if (!string.IsNullOrEmpty(i))
+                                            {
+                                            @i<br />}
+                                        }
+                                    </div>
+                                    <div class="left opNum">x @(op.Num)</div>
+                                </td>
+                                @if (oplist.Count() > 0) //(rowSpan)
+                                {
+                                    if (rowSpan)
+                                    {
+                                    <td rowspan="@oplist.Count()">
+                                        <div class="consignee">
+                                            @item.Consignee
+                                        </div>
+                                    </td>
+                                    <td rowspan="@oplist.Count()">￥ @Math.Round(item.TotalPrice, 2)
+                                    </td>
+                                    <td rowspan="@oplist.Count()">
+                                        <a href="/Common/PayOrder/@item.OrderId">@item.PayStatus</a>
+                                        <br />
+                                        <a href="/Order/Detail/@item.ID">订单详情</a>
+                                    </td>
+                           
+                                        rowSpan = false;
+                                    }
+@* else{
+                            <td></td>
+                            }
+                                 **@
+                                }
+                                else
+                                {
+                                    <td rowspan="1">
+                                        @item.Consignee
+                                    </td>
+                                    <td rowspan="1">￥ @Math.Round(item.TotalPrice, 2)
+                                    </td>
+                                    <td rowspan="1">
+                                        <a href="/Common/PayOrder/@item.OrderId">@item.PayStatus</a>
+                                    </td>
+                          
+                        
+                                }
+                            </tr>
+                    
+                        }
+
+                    </tbody>
+                }
+            </table>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>

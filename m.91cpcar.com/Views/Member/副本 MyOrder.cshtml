@@ -1,0 +1,104 @@
+﻿@model OrderModule.model.MyOrderInfo
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+}
+@section styles{
+    <style>
+        .mui-active {
+            color: #007aff !important;
+        }
+
+        .mui-control-item {
+            background: transparent;
+        }
+    </style>
+}
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/content/img/ico/icon_phome.png">
+    </a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/content/img/ico/icon_shopcar.png">
+    </a>
+    <div class="head-title">我的订单</div>
+
+</header>
+
+<div class="mui-content">
+    <div class="pro-detail-info">
+        <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+            <a class="mui-control-item mui-active" href="#all">全部订单</a>
+            <a class="mui-control-item" href="#nopay">待付款</a>
+            <a class="mui-control-item" href="#ok">已完成</a>
+        </div>
+        <div id="all" class="mui-control-content mui-active">
+
+    @foreach (var item in Model.orderList)
+                {
+                    var oplist = Model.opList.Where(m => m.OrderId == item.OrderId);
+
+      <div class="go-order-title" style="margin-top:10px;color:#000;">订单号：@item.OrderId </div>
+    <div style=" width:95%; margin:0 auto;">       
+              <div class="car-pros" style="padding-bottom:5px;">
+       
+             @foreach (var op in oplist)
+            {
+                var imgItem = Model.pimgList.Where(m => m.PartID == op.ProductID).FirstOrDefault();
+                var imgPath = imgItem == null ? "/content/img/noimg.jpg" : imgItem.ImgPath;
+                var ad = op.AttrDecribe.Replace("||", "|").Split('|');
+                  <a href="/Product/ProductDetail?id=@op.ProductID">
+            <div class="car-pro">
+             <div class="car-item-name"> @op.ProductName</div>
+                <div class="car-pro-img mui-pull-left" style="width: 30%;">
+                    <img class="mui-media-object mui-pull-left" style="width:100%;" src="http://www.91cpcar.com/@imgPath ">
+                </div>
+                <div class="car-pro-info mui-pull-left">                    
+                    @*<div class="car-item-cty"> </div>*@
+                 
+                    <div class="car-item-atts">                   
+                            @foreach (var i in ad)
+                            {
+                            <span class="TDatt" style="display:block;padding:3px">@i</span>                  
+                            }                        
+                    </div>
+                    <div   class="car-item-price">￥<span class="car-item-price-v"> @(op.Price.ToString(".00"))</span></div>
+                </div>
+                <div class="car-pro-op mui-pull-right">
+                    <div>
+                        <input   type="text"  class="car-item-num " value=" @(op.Num)" readonly />
+                      
+                    </div>
+                </div>
+                 <div class=" mui-clearfix"></div>
+            </div>
+                      </a>
+           
+            }          
+        
+    </div>
+    </div>
+
+    }
+
+
+
+
+
+
+
+
+
+        </div>
+        <div id="nopay" class="mui-control-content">
+            2222 2222
+        </div>
+          <div id="ok" class="mui-control-content">
+          44
+        </div>
+    </div>
+
+
+</div>

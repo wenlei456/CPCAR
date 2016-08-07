@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CParts_Offline.Models.Master.PartCateModel>
+
+
+@if(Model.Count()>0)
+{
+<ul class="cul">
+    @foreach (var item in Model)
+    {
+        <li>
+     @*       <table>
+                <tr>
+                    <td><span>@item.currItem.CategoryName</span></td>
+                    <td><span style="color:@(item.currItem.IsShow == 1 ? "green" : "red")">@(item.currItem.IsShow == 1 ? "启用" : "禁用")</span></td>
+                    <td><span><a class="button edit"   cid="@item.currItem.ID"  cc="@item.currItem.CategoryName" cp="@item.currItem.ParentID" co="@item.currItem.OrderBy" cs="@item.currItem.IsShow" ico="@item.currItem.ICOPath">编辑</a></span></td>
+                   <td><a class="button del" cid="@item.currItem.ID">删除</a></td>
+                    <td>   @Html.Partial("PartCateTree", item.Children)</td>
+                </tr>
+            </table>*@
+          <span>@item.currItem.CategoryName</span>
+            <span style="color:@(item.currItem.IsShow == 1 ? "green" : "red")">@(item.currItem.IsShow == 1 ? "启用" : "禁用")</span>
+            <span><a class="button edit"   cid="@item.currItem.ID"  cc="@item.currItem.CategoryName" cp="@item.currItem.ParentID" co="@item.currItem.OrderBy" cs="@item.currItem.IsShow" ico="@item.currItem.ICOPath">编辑</a>&nbsp;&nbsp;<a class="button del" cid="@item.currItem.ID">删除</a></span>
+            @Html.Partial("PartCateTree", item.Children)
+        </li>          
+    }
+</ul>
+}
+

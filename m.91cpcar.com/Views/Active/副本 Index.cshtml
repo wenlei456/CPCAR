@@ -1,0 +1,97 @@
+﻿@model m.cpcar.com.Controllers.OutModel
+@{
+   
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>CP车品,免费送</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+<link rel="stylesheet" href="/New/content/css/activity.css" />
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?d252ab9e4e87638601460ea0c7412a01";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</head>
+<body>
+
+<div id="loading">
+<div class="spinner8">
+<div class="spinner-container container1">
+<div class="circle1">&nbsp;</div>
+<div class="circle2">&nbsp;</div>
+<div class="circle3">&nbsp;</div>
+<div class="circle4">&nbsp;</div>
+</div>
+<div class="spinner-container container2">
+<div class="circle1">&nbsp;</div>
+<div class="circle2">&nbsp;</div>
+<div class="circle3">&nbsp;</div>
+<div class="circle4">&nbsp;</div>
+</div>
+<div class="spinner-container container3">
+<div class="circle1">&nbsp;</div>
+<div class="circle2">&nbsp;</div>
+<div class="circle3">&nbsp;</div>
+<div class="circle4">&nbsp;</div>
+</div>
+<i>loading...</i>
+</div></div>
+<div id="activityIndex">
+<div class="back"><a href="default.html"></a></div>
+<ul><li class="logo"><img src="/New/images/active02.png" alt="" /></li><li class="add"></li></ul>
+<section class="u-arrow-bottom"><div class="pre-wrap"><div class="pre-box1"><div class="pre1"></div></div><div class="pre-box2"><div class="pre2"></div></div></div></section>
+</div>
+<div id="ayproduct">
+<div class="back"><a href="activity.html"></a></div>
+<ul>
+
+
+     @if (Model.active != null)
+     {
+         for (int item = 0; item < Model.parts.Count; item++)
+         {
+
+             var ap = Model.activePro.Where(m => m.ProID == Model.parts[item].ID).FirstOrDefault();
+
+             int i = ap == null ? 0 : Convert.ToInt32(ap.Stock);
+             
+             <li>
+<dl>
+<dt><a href="#"><img src="http://91cpcar.com/@Model.parts[item].imgpath" alt="" /></a></dt>
+<dd class="name"><a href="/Active/ProDetail?id=@Model.parts[item].ID&&aid=@Model.active.ID">@Model.parts[item].PartName</a></dd>
+<dd>限量<i>@(i)套</i></dd>
+<dd class="linkbtn"><a href="/Active/ProDetail?id=@Model.parts[item].ID&&aid=@Model.active.ID">免费获取</a></dd>
+</dl>
+</li>
+             
+             
+         }
+     }
+
+
+</ul>
+</div>
+<script type="text/javascript" src="/New/content/js/zepto.min.js" ></script>
+<script type="text/javascript" src="/New/content/js/touch.js" ></script>
+        <script>
+            $(function () {
+                $("#loading").remove();
+                $("#activityIndex").addClass("show");
+                $("#activityIndex").swipeUp(function () { $("#activityIndex").addClass("noshow") });
+            });
+
+</script>
+    </body>
+</html>
+
+
+

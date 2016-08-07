@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+}
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/content/img/ico/icon_phome.png">
+    </a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/content/img/ico/icon_shopcar.png">
+    </a>
+    <div class="head-title">修改密码</div>
+
+</header>
+<div class="mui-content">
+     <div style="width: 90%; margin: 0 auto; padding-top:30px;">
+         <form id="uppass" method="post" action="/Member/UpdatePW">
+            <input id="oldpass" name="oldpass" type="password" type="text" placeholder="请输入原密码" class="width-100 input-text login-text"/>
+            <input id="newpass" name="newpass" type="password" placeholder="请输入新密码" class="width-100 input-text login-text" />
+           <input id="repass" name="repass" type="password" placeholder="确认新密码" class="width-100 input-text login-text" />
+             </form>
+      <button class="btn-main" onclick="submit()">修改密码</button>
+          </div>
+    </div>
+@section scripts{
+    <script>
+        function submit()
+        {
+            var op = Base.Trim($("#oldpass").val());
+            var np = Base.Trim($("#newpass").val());
+            var rp = Base.Trim($("#repass").val());
+            if (Validata.isNull(op) || Validata.isNull(np) || Validata.isNull(rp)) {
+                mui.alert('用户名/密码不能为空', '提示')
+            } else {
+                if (np != rp) {
+                    mui.alert('两次密码不一致', '提示')
+                } else {
+                    document.getElementById("uppass").submit();
+                }
+            }
+        }
+        var msg = "@ViewBag.msg";
+        if (!Validata.isNull(msg)) {
+            mui.alert(msg, '提示')
+        }
+    </script>
+    }

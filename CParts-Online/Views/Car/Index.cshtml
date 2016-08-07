@@ -1,0 +1,126 @@
+﻿@model IEnumerable<ProductModule.Models.CarProductDetail>
+@{
+    ViewBag.Title = "购物车-诚配汽配";
+    Layout = "~/Views/Shared/_LayoutNoBa.cshtml";
+}
+@section styles{
+    <style>
+    .Carlist img{
+      width: 152px;
+     height: 112px;
+    }      
+        .TDimg {
+         width:260px;
+        }
+        .TDName {
+        
+         padding-top:20px;
+        }
+        .TDatt {
+         margin-right:10px;
+        }
+        .itemTotlePrice {        
+         font-size:16px;
+        }       
+        .middle{
+            padding-top:30px;       
+        }
+        </style>
+    }
+  <div class="modal-header">              
+    <h2 class="modal-title">购物车</h2>
+  </div>
+
+<table class="table table-condensed Carlist">  
+   <thead>
+      <tr>
+         <th colspan="2">产品信息</th>
+         <th>单价</th>
+         <th>产品数量</th>
+         <th>金额小计</th>
+         <th></th>
+      </tr>
+   </thead>
+   <tbody id='tb_rows'>
+       @if(Model!=null && Model.Count()>0){
+       foreach (var item in Model)
+       {
+           string pixstr;
+           System.Text.StringBuilder sb = new System.Text.StringBuilder(item.proDetail.ID.ToString());
+           if (item.activeM != null)
+           {
+               pixstr = "/Active/ProDetail?aid=" + item.activeM.ID + "&&id=" + item.proDetail.ID;
+           }
+           else
+           {
+               pixstr = "/Product/detail?id=" + item.proDetail.ID;
+           }
+         <tr>
+         <td class="TDimg"><a href="@pixstr" target="_blank"><img  src="@(item.imgStock==null?"/content/img/noimg.jpg":(item.imgStock.ImgPath)) "/></a></td>
+         <td class="TDName">
+             <h4><a href="@pixstr" target="_blank">@item.proDetail.PartName</a></h4>
+             <span>分类：@item.partCate.CategoryName</span><br />
+             <span>品牌：@item.proDetail.BrandName</span><br />
+             @if(@item.partExt!=null)
+             {
+                 foreach (var item2 in @item.partExt)
+                 {
+                      <span class="TDatt">@item2.AttrName:@item2.AttrValue</span>
+                     sb.Append(@item2.ID.ToString());
+                 }
+            
+             }
+             @{string cid = sb.ToString(); }
+             <input id="pid-@cid" value="@item.proDetail.ID" type="hidden" />
+             <input id="patt-@cid" value="@item.lastAttr" type="hidden" />            
+         </td>
+         <td ><div class="middle"><h5>￥<span id="itemPrice-@(cid)" class="itemPrice">@item.proDetail.Price</span></h5>
+                @if(item.activeM!=null)
+                {
+                    <input id="type-@cid" value="@item.activeM.ID" type="hidden"/>
+                    <br />
+              <span style="color:#fff; background:red;border-radius:5px; padding:2px">@item.activeM.Name</span>              
+                }
+              </div></td>
+         <td >   <div class="middle">          
+                    <div class="form-group" style="padding-bottom: 0px">
+                        <button class="btn minNum2" cid="@cid">-</button>
+                        <input id="itemNum-@(cid)" cid="@cid" type="text" style="width: 50px; text-align: center; display: inline" class="form-control popover-hide txtNum pqty" value="@item.Qty" title="数量只能是数字" data-container="body" data-toggle="popover" data-placement="top" data-content="" />
+                        <button class="btn maxNum2" cid="@cid">+</button>
+                      
+                    </div>
+                  </div>
+            </td>
+         <td class="middle"><div class="middle">￥<span id="itemTotlePrice-@(cid)" class="itemTotlePrice" >@(item.proDetail.Price*item.Qty)</span></div></td>
+             <td>
+                 <div class="middle"><button type="button" class="btn btn-warning delCar" pid="@item.proDetail.ID" attid="@item.lastAttr">删除</button></div></td>
+     
+              </tr>
+       }
+       }
+   
+   </tbody>
+   <tfoot>
+    <tr>
+        <td></td>
+         <td></td>
+         <td></td>
+         <td><h4><span id="totleNum" style="color:red"></span>件商品</h4></td>
+         <td><h4 >订单金额：<span style="color:red">￥</span><span id="totlePrice" style="color:red"></span></h4></td>
+         <td></td>
+    </tr>
+          <tr>
+        <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td colspan="2"><a href="/order/goorder/"  class="btn btn-danger btn-block"  >去结算</a></td>
+       
+    </tr>
+   
+   </tfoot>
+</table>
+
+@section scripts{
+    <script src="~/Content/js/shopCar.js">  </script>
+    }

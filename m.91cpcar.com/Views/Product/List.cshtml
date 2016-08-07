@@ -1,0 +1,43 @@
+﻿@model ProductModule.Models.ProductList
+
+@{
+    ViewBag.Title = "CP文化";
+   // Layout = "~/Views/Shared/_Layout.cshtml";
+    string t = Request.QueryString["t"];
+    string b = Request.QueryString["b"];
+    string m = Request.QueryString["m"];
+    string y = Request.QueryString["y"];
+    string ext = "";
+    if (!string.IsNullOrEmpty(t) && !string.IsNullOrEmpty(m) && !string.IsNullOrEmpty(b) && !string.IsNullOrEmpty(y))
+    {
+        ext = "?t=" + t + "&&b=" + b + "&&m=" + m + "&&y=" + y;
+    }
+}
+
+<div class="ProList">
+                  @if(Model.proList.Count>0)
+                  {
+                     
+                      foreach (var item in Model.proList)
+                      {
+                          <a href="/Product/detail/@item.ID@ext" target="_blank" class="prohref">
+                          <div class="ProItem left">
+                              <div class="ProItemImg">
+                                  @if (string.IsNullOrEmpty(item.imgpath))
+                                  {
+                                  <img src="/content/img/noimg.jpg" />
+                                  }else{
+                                   <img src="@item.imgpath" />
+                                  }
+                              </div>
+                              <div class="ProItemName">@item.PartName</div>
+                               <div class="ProItemPrice">￥@(item.Price.ToString(".00"))</div>
+                              <div></div>
+                          </div>
+                              </a>
+                      }
+                  }else{
+                      
+                 <h2>没有找到产品</h2>
+                  }
+                  </div>

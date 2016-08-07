@@ -1,0 +1,203 @@
+﻿@model  m._91cpcar.com.Controllers.PayOrderOM
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+}
+@section styles{
+   <style>
+       #vouchers ul{
+       list-style:none;
+       margin:0px;
+       padding:5px;
+       }
+       #vouchers ul li{
+           width:50%;       
+          float:left;          
+          line-height:40px;
+       }
+           #vouchers ul li a {
+           text-decoration:none;
+           }
+           .vouchers{
+               padding:10px 10px 20px 0px;
+
+           }
+      .voucher{
+           border:1px solid #ccc;
+             margin:5px;         
+           padding:4px 5px;         
+           position:relative;
+       }
+          .select {
+           border:1px solid #f00;
+           }
+    .selectb   {
+     background: url(/content/img/sel.png) no-repeat;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+       }
+       .vpp {
+       line-height:50px;margin-bottom:0px;float:left;
+         font-size:22px;
+           font-weight:600;
+           color:#242121;
+       }
+    </style>
+    
+    }
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/content/img/ico/icon_phome.png">
+    </a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/content/img/ico/icon_shopcar.png">
+    </a>
+    <div class="head-title">订单支付</div>
+
+</header>
+
+<div class="mui-content">
+      <div style=" background:#d9d9d9; padding:10px; margin-bottom:10px">使用优惠券</div>
+     <div id="vouchers" class="vouchers">
+        <ul>
+            @if (Model.voucher.Count == 0)
+            {
+                <h3 style="text-align:center">没有可用优惠券</h3>
+            }
+            else
+            {
+                foreach (var item in Model.voucher)
+                {
+
+                    <li class="pull-left">
+                        <a><div class="voucher" price="@Math.Round(item.Price)" num="@item.VoucherNumber"><img src="~/Content/img/money-icon.png" style="width:45px; float:left"  /><p  class="vpp">￥@Math.Round(item.Price)</p><div class="mui-clearfix"></div><b class=""></b></div></a>
+                    </li>
+                }
+            }
+        </ul>
+        <div  class="mui-clearfix"></div>
+    </div>
+    
+
+    <div style=" background:#d9d9d9; padding:10px; margin-bottom:10px">支付方式</div>
+      @if(Model!=null)
+    { 
+    <div class="mui-card">
+				<form class="mui-input-group">
+					<div class="mui-input-row mui-radio mui-left">
+						<label style="font-size:16px"><img src="~/pay/alipay/images/16558.png" style="width:100px;"/></label> 
+						<input name="paytype"    value="alipay"  type="radio" checked>
+                     
+					</div>
+                    <div class="mui-input-row mui-radio mui-left">
+                        <label style="font-size:16px"><img src="~/pay/weixin/images/weixin.png" style="width:100px;" /></label>
+                        <input name="paytype" value="weixin" type="radio" >
+
+                    </div>
+					@*<div class="mui-input-row mui-radio mui-left">
+						<label>暂无</label>
+						<input name="radio1" type="radio" checked>
+					</div>*@
+				
+				</form>
+    </div>
+            <div class="bottom-submit">
+            <div class="car-totle">
+                <div class="cart-submit-right" id="btn-submit"><a href="#" style="color:#fff">去支付</a></div>
+               <div class="mui-pull-right" style="padding-right:20px">
+                    <h4><span style="width:100px;float:left;text-align:right">订单金额：</span><span id="TPrice" style="color: red">￥@Model.order.TotalPrice</span></h4>
+                    <input id="JPrice"  type="hidden"/>
+                    <h4><span style="width:100px;float:left; text-align:right">应付：</span><span id="YPrice" style="color: red">￥@Model.order.TotalPrice</span></h4>
+                </div>
+
+                <input type="hidden" id="typeid" value='@Model.order.OrderType'/>
+                <div class=" mui-clearfix"></div>
+            </div>
+        </div>
+                }else{
+      <div style="padding:20px 10px; text-align:center"><h3>订单错误,<a href="/member/myorder">查看我的订单</a></h3></div>
+      }
+    </div>
+@section scripts{
+    <script>
+        var oid =Base.getQueryString("oid");
+        $(function () {
+            $("#btn-submit").click(function () {
+                var orderPrice = $("#TPrice").html().substr(1);
+                var couponprice = $(".select").first().attr("price");
+                if (Validata.isNull(couponprice)) {
+                    couponprice = 0;
+                }
+                var coupon = $(".select").first().attr("num");
+                if (Validata.isNull(coupon)) {
+                    coupon = "";
+                }
+                var payprice = $("#YPrice").html().substr(1);
+                var paytype = $("input[name='paytype']:checked").val();
+                var otype = '@(Model.order==null?"0":Model.order.OrderType)';
+                var parm = {
+                    oid: oid,
+                    paytype: paytype,
+                    payprice: payprice,
+                    coupon: coupon,
+                    couponprice: couponprice,
+                    ordertype: otype
+                }
+
+               Base.ajaxPost("/Common/PayOrder", parm, function (data) {
+                    if (data.r == "ok") {
+                        if (paytype == "alipay") {
+                            // window.location.href = "/pay/alipay/send.aspx?oid=" + oid;
+                            window.location.href = "/pay/alipay/pay-alert.html?oid=" + oid;
+                        } else if (paytype == "weixin")
+                        {
+                            window.location.href = "/pay/weixin/send.aspx?oid=" + oid;
+                        }
+                        else{
+                            alert("暂未开放");
+                        }
+                    } else if (data.r == "nologin") {
+                        window.location.href = "/member/login";
+                    } else if (data.r == "error") {
+                        alert(data.msg);
+                    }
+                })
+
+            });
+
+            $(".voucher").click(function () {
+                var ishas = false;
+                if ($(this).hasClass("select")) {
+                    ishas = true;
+                } else {
+                    ishas = false;
+                }
+                $(".voucher").removeClass("select");
+                $(".voucher b").removeClass("selectb");
+                if (ishas) {
+                    $(this).removeClass("select");
+                    $(this).children("b").removeClass("selectb");
+                    var Tprice = $("#TPrice").html();
+                    $("#JPrice").val(0);                 
+                    $("#YPrice").html(Tprice);
+                } else {
+                    $(this).addClass("select");
+                    $(this).children("b").addClass("selectb");
+                    var jprice = $(this).attr("price");
+                    var Tprice = $("#TPrice").html().substr(1);
+                    $("#JPrice").val("￥-" + jprice);
+                    var pprice = parseFloat(Tprice) - parseFloat(jprice);
+                    $("#YPrice").html("￥" + pprice.toFixed(2));
+                }
+
+                // var Jprice = $("#JPrice").html().substr(1);
+                // var Yprice = $("#YPrice").html().substr(1);
+            });
+        })
+    </script>
+    }

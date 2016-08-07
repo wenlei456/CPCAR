@@ -1,0 +1,153 @@
+﻿@model  ProductModule.Models.GoOrder
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+    decimal normPrice = 0;
+    decimal actPrice = 0;
+}
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/content/img/ico/icon_phome.png"></a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/content/img/ico/icon_shopcar.png"></a>
+    <div class="head-title">填写订单信息</div>
+</header>
+<div class="mui-content">
+    <div class="go-order-title" style="margin-top: 5px;">收货信息</div>
+    <div style="padding-top: 10px; width: 95%; margin: 0 auto;">
+        <ul style="list-style: none; margin: 0px; padding: 0px">
+            <li>
+                <input type="text" placeholder="请输入收货人" id="sendPeople">
+            </li>
+            <li>
+                <div style="width: 50%; padding-right: 10px;" class=" mui-pull-left">
+                    <select id="cmbProvince">
+                        @*  <option value="">选择省份</option>*@
+                    </select>
+                </div>
+                <div style="width: 50%; padding-left: 10px;" class=" mui-pull-left">
+                    <select class="form-control" id="cmbCity">
+                        <option value="">选择城市</option>
+                    </select>
+                </div>
+
+            </li>
+            <li>
+                <div style="width: 100%">
+                    <select class="form-control" id="cmbArea">
+                        <option value="">选择辖区</option>
+                    </select>
+                </div>
+            </li>
+            <li>
+                <input type="text" placeholder="请输入详细地址" id="Address">
+            </li>
+            <li>
+                <input type="text" placeholder="请输入收货人手机号" id="Phone">
+            </li>
+        </ul>
+    </div>
+    <div class="go-order-title" style="margin-top: 5px;">商品信息</div>
+    <div style="padding-top: 10px; width: 95%; margin: 0 auto;">
+        <div class="car-pros" style="padding-bottom: 5px;">
+            @if (Model != null && Model.carProList.Count() > 0)
+            {
+                foreach (var item in Model.carProList)
+                {
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder(item.proDetail.ID.ToString());
+                    string pixstr;
+                    if (item.activeM != null)
+                    {
+                        pixstr = "/Active/ProDetail?aid=" + item.activeM.ID + "&&id=" + item.proDetail.ID;
+                    }
+                    else
+                    {
+                        pixstr = "/Product/ProductDetail?id=" + item.proDetail.ID;
+                    }
+                <div class="car-pro">
+                    <a href="@pixstr">
+                        <div class="car-item-name">@item.proDetail.PartName</div>
+                        <div class="car-pro-img mui-pull-left" style="width: 30%;">
+                            <img class="mui-media-object mui-pull-left" style="width:100%;" src="http://www.91cpcar.com/@(item.imgStock == null ? "/content/img/ico/noimg.jpg" : (item.imgStock.ImgPath)) ">
+                        </div>
+                        <div class="car-pro-info mui-pull-left">
+                            <div class="car-item-cty">分类：@item.partCate.CategoryName</div>
+                            @if (!string.IsNullOrEmpty(item.proDetail.BrandName))
+                            {
+                                <div>品牌：@item.proDetail.BrandName</div>
+                            }
+                            <div class="car-item-atts">
+                                @if (item.partExt != null)
+                                {
+                                    foreach (var item2 in item.partExt)
+                                    {
+                                    <span class="TDatt">@item2.AttrName:@item2.AttrValue</span>
+                                        sb.Append(@item2.ID.ToString());
+                                    }
+
+                                }
+                                @{string cid = sb.ToString();}
+                                <input type="hidden" class="cid" value="@cid" />
+                            </div>
+                            @if (item.activeM != null)
+                            {
+                                actPrice += item.proDetail.Price * item.Qty;
+                                <input id="type-@cid" value="@item.activeM.ID" type="hidden" />
+                                <div style="padding: 5px"><span style="color: #fff; background: red; border-radius: 5px; padding: 2px">@item.activeM.Name</span>              </div>
+                            }
+                            else
+                            {
+                                normPrice += item.proDetail.Price * item.Qty;
+                                <input id="type-@cid" value="-1" type="hidden" />
+                                <div style="padding: 5px"></div>
+                            }
+                            <div id="itemPrice-@(cid)"  class="car-item-price">￥<span class="car-item-price-v">@item.proDetail.Price</span></div>
+
+                        </div>
+                    </a>
+                    <div class="car-pro-op mui-pull-right">
+                        @*  <button type="button" class="mui-btn mui-btn-danger">删除</button>*@
+                        @*  <img class="delCar"pid="@item.proDetail.ID" attid="@item.lastAttr" alt="删除"  src="/Content/img/ico/icon-del.png" style="display:block" />*@
+                        <div>
+                            <input id="itemNum-@(cid)"  type="text"  class="car-item-num " value="@item.Qty" readonly />
+                            <input  type="hidden" id="lastAttr-@(cid)" value="@item.lastAttr"/>
+                            <input  type="hidden" id="pid-@(cid)" value="@item.proDetail.ID"/>
+                        </div>
+                    </div>
+                    <div class=" mui-clearfix"></div>
+
+                </div>
+          
+                }
+            }
+        </div>
+    </div>
+    <div class="go-order-title" style="margin-top: 5px;">付款信息</div>
+    <div style="padding-top: 10px; width: 95%; margin: 0 auto; padding-bottom: 50px;">
+        <div class="go-order-payinfo">
+            <div class="mui-pull-right">总金额:<span style="color: red">￥</span><span style="color: red" id="totlePrice"></span></div>
+            <div class="mui-pull-right" style="margin-right: 20px"><span style="color: red" id="totleNum"></span>件商品</div>
+            <div class=" mui-clearfix"></div>
+        </div>
+        @{
+            decimal totle = normPrice * (Model.userLevel == null ? 1 : Model.userLevel.Ratio) + actPrice;
+        }
+        <div class="go-order-payinfo">折扣率：<span style="color: red">@(Math.Round(Model.userLevel == null ? 0 : (Model.userLevel.Ratio * 100), 2) + "%")</span><br />
+            <span style="font-size: 13px">(活动产品不参与)</span></div>
+        <div class="go-order-payinfo">订单金额：<span style="color: red" id="orderPrice">@(Math.Round(totle, 2))</span></div>
+        <div class="btn-main mui-pull-right" style="width: 50%;" id="SendOrder">提交订单</div>
+    </div>
+</div>
+@section scripts{
+
+    <script src="~/Content/js/service-cart.js"></script>
+    <script src="~/Content/js/shopCar.js"></script>
+    <script src="~/Content/js/jsAddress.js"></script>
+    <script>
+        addressInit('cmbProvince', 'cmbCity', 'cmbArea', '湖南', '长沙市', '芙蓉区');
+    </script>
+
+}
+

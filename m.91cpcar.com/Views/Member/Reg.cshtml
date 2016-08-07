@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+}
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>   
+    <a class="mui-pull-right" href="/Member/Myhome"><img class="head-ico" src="/content/img/ico/icon_phome.png"></a>
+    <a class="mui-pull-right" href="/Product/getCar"><img class="head-ico" src="/content/img/ico/icon_shopcar.png"></a>
+    <div class="head-title">注册</div>
+</header>
+<div class="mui-content">
+        <div style="width: 90%; margin: 0 auto; padding-top:30px;">
+            <input id="phone" name="phone" type="text" placeholder="请输入手机号" class=" input-text login-text mui-pull-left" style="width:60%;" value="" />
+            <div class=" mui-pull-right" style="padding-top:10px;padding-left:10px"><button class="btn-border" id="PhoneCodeShow" href="#">获得短信验证码</button></div>
+            <div class="mui-clearfix"></div>
+            <input id="code" name="code" type="text" placeholder="请输入验证码" class="width-100 input-text login-text" />
+            <input id="fcode" name="fcode" type="text" placeholder="如果有邀请码请输入" class="width-100 input-text login-text" />
+            <div style="padding-top:10px;"><a class="btn-main width-100" onclick="reg()">下一步</a></div>
+        </div>
+</div>
+@section scripts{
+    <script>
+        function reg()
+        {
+            var phone = Base.Trim($("#phone").val());
+            var code = Base.Trim($("#code").val());
+            var fcode = Validata.isNull(Base.Trim($("#fcode").val())) ? "" : Base.Trim($("#fcode").val());
+            if (Validata.isNull(phone) || Validata.isNull(code)) {
+                mui.alert('手机号/验证码不能为空', '提示')
+            } else {
+                if (Validata.isPhone(phone)) {
+                    Base.ajaxPost("/Member/Reg", { phone: phone, phonecode: code, fcode: fcode }, function (data) {
+                        if (data.r) {
+                            mui.alert(data.msg, '提示', function () {
+                                window.location.href = "/Member/Myhome";
+                            });
+                         
+                        } else {
+                            mui.alert(data.msg, '提示');
+                        }
+
+                    });                  
+                } else {
+                    mui.alert('请输入正确的手机号', '提示')
+                }
+               
+            }
+
+        }
+        var puser =Base.getQueryString("puser");
+        $(function () {
+           
+            if (!Validata.isNull(puser)) {
+                $("#fcode").val(puser);
+            }
+            $("#PhoneCodeShow").click(function () {
+                var PhoneNumber = $("#phone").val();
+                if (Validata.isNull(PhoneNumber)) {
+                    mui.alert('手机号不能为空', '提示')
+                } else if (Validata.isPhone(PhoneNumber)) {
+                    var jsonObj = new Object();
+                    jsonObj.PhoneNumber = PhoneNumber;
+            
+                    $.ajax({
+                        type: "POST",
+                        url: "/Member/PhoneNumber",
+                        data: jsonObj,
+                        dataType: 'json',
+                        success: function (msg) {
+                            if (msg == "false") {
+                                alert("获取验证码失败");
+                            }
+                        }
+                    })
+                    if (!Validata.isNull(PhoneNumber)) {
+                        curCount = 60;
+                        $("#PhoneCodeShow").attr("disabled", "true");
+                        $("#PhoneCodeShow").html("请在" + curCount + "秒后重新获取");
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+
+                    } else {
+                        mui.alert('请输入手机号', '提示')
+                    }
+                } else {
+                    mui.alert("手机号不正确", "提示");
+                }
+            });
+
+        });
+        //timer处理函数
+        function SetRemainTime() {
+            if (curCount == 0) {
+                window.clearInterval(InterValObj);//停止计时器
+                $("#PhoneCodeShow").removeAttr("disabled");//启用按钮
+                $("#PhoneCodeShow").html("重新发送验证码");
+            }
+            else {
+                curCount--;
+                $("#PhoneCodeShow").html("请在" + curCount + "秒后重新获取");
+            }
+        }
+    </script>
+    
+    }

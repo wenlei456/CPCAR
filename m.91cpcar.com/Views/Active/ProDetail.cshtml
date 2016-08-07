@@ -1,0 +1,395 @@
+﻿@model ProductModule.Models.ProductDetail
+@{
+
+    ProductModule.model.ActivePro Actmodel = ViewBag.ActiveSet;
+}
+@section styles{
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cp车品嘉年华全球商品免费送</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+    <meta name="keywords" content="诚配,诚配改装,汽车改装,改装件,汽车配件,海外配件,进口配件,保时捷,宝马,奔驰,法拉利,豪车改装,高端改装">
+    <meta name="description" content="">   <meta  />
+       <link href="/New/content/css/mui.css" rel="stylesheet" />
+     <link href="/New/content/css/main.css" rel="stylesheet" />
+		<style type="text/css">
+			#list {
+				/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+				margin-top: -1px;               
+			}
+			body{padding-bottom:58px;}
+			.head-title,.mui-pull-left{background:none;}
+			.mui-pull-left{width: auto;margin: 0;}
+			.pro-info{padding:0;}
+			.pro-baseInfo{padding:10px;border-top:solid 8px #eee;border-bottom: solid 1px #eee;}
+			.pro-attr, .pro-qty, .pro-tocar, .pro-buyArea{padding:5px 10px;}
+			.pro-buyArea{position:fixed;left:0;bottom:0;z-index: 999;width:100%;background:#eee;border-top:solid 1px #d3d3d3;}
+			.pro-buyArea div button{padding:8px 0;}
+			.mui-segmented-control.mui-segmented-control-inverted{background:#fff;border-top:solid 8px #eee;border-bottom:solid 8px #fff;}
+			.pro-tocar-item{border-top:solid 1px #d3d3d3;border-left:solid 1px #d3d3d3;display:inline-block;padding:0;}
+			.pro-tocar-item li{padding:10px 5px;border:solid 1px #d3d3d3;border-left:none;border-top:none;}
+			#partExtAttr,.pro-qty{font-size:.8rem;}
+			.head-title{margin: 0;}
+			.mui-icon-back:before, .mui-icon-left-nav:before{color:#666;}
+			.head-ico{margin-right:10px;}
+			@@media screen and (max-width: 374px) {
+			.pro-tocar-item li{width:100%;}
+			}
+		</style>
+    
+    <style>
+        .mui-active {
+            color: #007aff !important;
+        }
+
+        .mui-control-item {
+            background: transparent;
+        }
+
+        
+        .tabdiv{margin:10px; font-size:.8rem}
+.tabdiv table{ background:#fff; border-collapse:collapse;width:100%}
+.tabdiv table tr td:first-child{width:80px; text-align:right;color:#999;}
+.tabdiv table tr td{padding:5px;}
+    </style>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?d252ab9e4e87638601460ea0c7412a01";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+  
+</head>
+<body>
+     <div id="modal-bg"></div>
+    <div id="modal-show">
+       <img  src="/New/content/img/ico/loading.gif"/>
+    </div>
+  
+    <div class="main-container">
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/New/content/img/ico/icon_phome.png">
+    </a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/New/content/img/ico/icon_shopcar.png">
+    </a>
+    <div class="head-title">产品详情</div>
+</header>
+<div class="mui-content">
+        @if (Actmodel.active != null)
+        {
+    <!--图片展示开始-->
+    <div id="slider" class="mui-slider mui-slider-300">
+        <div class="mui-slider-group mui-slider-loop">
+            @if (Model.imgStock.Count > 0)
+            { 
+                <div class="mui-slider-item mui-slider-item-duplicate">
+                    <a href="#">
+                        <img src="http://91cpcar.com/@Model.imgStock[0].ImgPath">
+                    </a>
+                </div>
+                foreach (var item in Model.imgStock)
+                {
+                <div class="mui-slider-item">
+                    <a href="#">
+                        <img src="http://91cpcar.com/@item.ImgPath">
+                    </a>
+                </div>
+                }
+                <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+                <div class="mui-slider-item mui-slider-item-duplicate">
+                    <a href="#">
+                        <img src="http://91cpcar.com/@Model.imgStock[0].ImgPath">
+                    </a>
+                </div>    
+            }
+        </div>
+        <div class="mui-slider-indicator">
+            <div class="mui-indicator mui-active"></div>
+            <div class="mui-indicator"></div>
+            <div class="mui-indicator"></div>
+            <div class="mui-indicator"></div>
+        </div>
+    </div>
+    <!--图片展示结束-->
+
+    <div class="pro-info">
+        <!--产品名称和价格-->
+        <div class="pro-baseInfo">
+             <input type="hidden" id="proId" value="@(Model.proDetail.ID)"/>
+               <input type="hidden" id="currPrice" value="@(Model.proDetail.Price)"/>
+               <div style="background:red;color:#fff; width:200px; text-align:center;padding:3px;font-size:15px">@Actmodel.active.Name</div>
+            <div class="pro-baseInfo-name ">@Model.proDetail.PartName</div>
+              @if (Model.partExt.Count > 0 && Actmodel.activePro != null)
+              {
+                 
+            <div class="pro-baseInfo-price "><span class="dprice" id="oldPrice">原价：￥@Model.proDetail.Price</span>&nbsp;&nbsp;活动价：￥<span id="newPrice"></span></div>
+              }
+              else
+              {
+                  <div class="pro-baseInfo-price "><span class="dprice" id="oldPrice">原价：￥@Model.proDetail.Price</span>&nbsp;&nbsp;活动价：￥<span id="newPrice">@Math.Round(Actmodel.activePro.NewPrice, 2)</span></div>
+              }
+            <div class="mui-clearfix"></div>
+        </div>
+                @if (Actmodel.active.EndDate < DateTime.Now)
+                { 
+                     <h3>活动产品已下架</h3>
+                }
+                else
+                {
+        <div class="pro-attr">
+            <table id="partExtAttr" style="width: 100%">
+                @foreach (var item in Model.partExt)
+                {
+                    List<string> haveAttr = new List<string>();
+                    <tr>
+                        <td style='width: 50px;'><span class='AttrName'  currType='AttrName'  ParentAttr='@item.ParentAttr'>@item.AttrName</span></td>
+                        <td class="TDattValue">
+                            @foreach (var obj in item.AttrList)
+                            {
+                                decimal newPrice = obj.AttrPrice;
+                                if (Actmodel.activeAttr != null)
+                                {
+                                    foreach (var i in Actmodel.activeAttr)
+                                    {
+                                        if (i.AProID == obj.PartID && i.AtrrID == obj.ID)
+                                        {
+                                            newPrice = i.NewPrice;
+                                        }
+                                    }
+                                }
+                                <span class='AtttValue' newPrice="@newPrice" currPrice="@obj.AttrPrice" ParentAttr='@obj.ParentAttr' currType='AttrValue'  CurrID='@obj.ID'>@obj.AttrValue</span>                       
+                                       
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="pro-qty">
+            <div style="float: left; width: 50px; padding: 5px 0px;">数量</div>
+            <div class="mui-numbox" data-numbox-step='1' data-numbox-min='1' data-numbox-max='99'>
+                
+               
+                @if ((double)Model.proDetail.Price==0.01)
+                {
+                    
+                     <input id="txtNum" class="mui-input-numbox" disabled="true" type="number" value="1" />
+                }
+                else
+                {
+                    <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+                    <input id="txtNum" class="mui-input-numbox" type="number" value="1" />
+                    <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+                }
+                
+                
+                
+            </div>
+        </div>
+        <div class="pro-buyArea">
+             @if (Model.proDetail.State == 1)
+             {
+            <div class="btn-addcar">
+                <button type="button" class="mui-btn mui-btn-warning" id="AddCar">
+                    加入购物车
+                </button>
+            </div>
+            <div class="btn-lbuy">
+                <button type="button" class="mui-btn mui-btn-danger" id="goBuy">
+                    立即购买
+                </button>
+            </div>
+             }
+             else
+             {
+               <h3 style="padding-bottom: 30px;">该产品已下架,无法购买！</h3>
+             }
+        </div>
+                }
+        <div class="mui-clearfix"></div>
+
+        <div class="pro-detail-info">
+
+            <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary">
+                <a class="mui-control-item mui-active" href="#item1">产品详情</a>
+                <a class="mui-control-item" href="#item2">适用车型</a>
+            </div>
+            <div id="item1" class="mui-control-content mui-active" style="width:100%;">
+
+<p>
+	<img alt="" src="/upload/images/2016-05-28/%e5%8f%82%e6%95%b0.jpg" style="width: 400px; height: 40px;" /></p>
+
+
+                <div class="tabdiv">
+<table>
+<tr>
+<td>商品名称：</td>
+<td>@Model.proDetail.PartName</td>
+</tr>
+<tr>
+<td>货源地：</td>
+<td>@Model.proDetail.supply</td>
+</tr>
+<tr>
+<td>店铺：</td>
+<td>@Model.proDetail.storeName</td>
+</tr>
+<tr>
+<td>材质：</td>
+<td>@Model.proDetail.material</td>
+</tr>
+<tr>
+<td>规格：</td>
+<td>@Model.proDetail.specifications</td>
+</tr>
+    <tr>
+<td>使用部位：</td>
+<td>@Model.proDetail.useSite</td>
+</tr>
+    <tr>
+<td>颜色：</td>
+<td>@Model.proDetail.ParsColour</td>
+</tr>
+</table>
+</div>
+
+                    @Html.Raw(Model.proDetail.mDescribe != null ? Model.proDetail.mDescribe.Replace("/upload/images", "http://91cpcar.com/upload/images") : "")
+            </div>
+            <div id="item2" class="mui-control-content">
+                <div class="pro-tocar">
+                    <ul class="pro-tocar-item">
+                        @if (Model.carList == null)
+                        { 
+                          <li style="">适用所有车型</li>
+                        }
+                        else
+                        {
+                            foreach (var item in Model.carList)
+                            {
+                            <li style="">@item.ProYear @item.Brand @item.Model</li>
+                            }
+                        }              
+                    </ul>
+                    <div class="mui-clearfix"></div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+            
+        }
+        else
+        {
+        <h3>没有找到活动信息</h3>
+        }
+</div>
+</div>
+   <footer class="pfoot">		
+    <div class="ui-footer-version">        
+    <p>Copyring @@ 2015 诚配91CPCAR.com  版权所有 <br> 湘ICP备15020410号  </p>
+    </div>
+</footer>
+</body>
+</html>
+  <script src="/New/content/js/mui.min.js"></script>
+ <script src="/New/Content/js/zepto.min.js"></script>
+<script src="/New/Content/js/zepto.cookie.js"></script>
+<script src="/New/Content/js/Base.js"></script>
+ 
+    <script src="/Content/js/service-cart.js"></script>
+    <script type="text/javascript" charset="UTF-8">
+ 
+    
+        mui.init({
+            swipeBack: false //启用右滑关闭功能
+        });
+        var slider = mui("#slider");
+        slider.slider({ interval: 0 });
+
+        $(function () {
+            //选中样式
+            $(".TDattValue").first().children("span").click(function () {
+                // $(this).parent().children("span").removeClass("currAttr");
+                $(".AtttValue").removeClass("currAttr");
+            })
+
+            //父子属性反向选择
+            $(".AtttValue").click(function () {
+                $(this).parent().children("span").removeClass("currAttr");
+                $(this).addClass("currAttr");
+                $(this).parent().parent().next().find(".AtttValue").show();
+                var parent = $(this).attr("parentattr");
+                var currid = $(this).attr("currid");
+                $(this).parent().parent().next().find(".AtttValue:not([parentattr='" + currid + "'])").hide();
+                $("#currPrice").val($(this).attr("newPrice"));
+                $("#newPrice").html($(this).attr("newPrice"));
+                $("#oldPrice").html("原价：￥"+$(this).attr("currPrice"));
+            })
+            $(".TDattValue span").first().trigger('click');
+
+            //Validata
+            $("#AddCar").click(function () {
+                tocar("add");
+            });
+            $("#goBuy").click(function () {
+                tocar("goBuy");
+            });
+        })
+        function tocar(type)
+        {
+            if (Validata.isInteger($("#txtNum").val())) {
+                var flag = true;
+                var attrs = "";
+                if ($(".TDattValue").last().children(".currAttr").length <= 0) {
+                    mui.alert('请选择完整的产品', '提示', function () {
+                        flag = false;
+                        return false;
+                    });
+                } else {
+                    if (flag) {
+                        var shop =
+                            {
+                                ID: $("#proId").val(),
+                                Qty: $("#txtNum").val(),
+                                Price: $("#currPrice").val(),
+                                Attrs: $(".TDattValue").last().children(".currAttr").first().attr("currid"),
+                                Type: '@(Actmodel.active.ID)'
+                        }
+                        shopCar.AddToCart(shop);
+                        shopCar.GetAllCount();
+                        if (type == "add") {
+                            mui.alert('已经添加到购物车', '提示');
+                        } else {
+                            window.location.href = "/Product/GetCar";
+                        }
+                    }
+
+                }
+                //$(".TDattValue").each(function () {
+                //    if ($(this).children(".currAttr").length <= 0) {
+                //        mui.alert('请选择完整的产品', '提示', function () {
+                //            flag = false;
+                //            return false;
+                //        });
+                //    }
+                //})
+              
+            } else {
+                mui.alert('数量应为大于0的数字', '提示');
+                // mui-ico <span class="mui-badge">5</span>
+            }
+
+        }
+    </script>
+

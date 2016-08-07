@@ -1,0 +1,123 @@
+﻿@model IEnumerable<DAO.ActiveImg>
+@{
+    ViewBag.Title = "活动轮播图片管理";
+    Layout = "~/Views/Shared/_master.cshtml";
+}
+@section styles{
+    <link href="/Content/Tools/imgUpload/uploadify.css" type="text/css" rel="stylesheet" />
+    <style>
+         .imgDiv {
+            float:left; margin:5px;border:2px solid #444
+        }
+            .imgDiv img {
+                width:200px;height:200px;
+            }
+        .currImg {
+        border:4px solid red;
+        }
+    </style>
+    }
+<div class="content-box">
+    <!-- Start Content Box -->
+    <div class="content-box-header2">
+        <h3>活动管理</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">所有列表</a></li>
+            <!-- href must be unique and match the id of target div -->
+            @* <li><a href="#tab2" id="f1">添加</a></li>
+                <li><a href="#tab3" id="tabEdit">编辑</a></li>*@
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <button id="delImg" class="button">--选中删除--</button>
+            <br /><br />
+            <div id="imgView">
+                @foreach (var item in Model)
+                {
+                    <div class='imgDiv' currid='@item.ID'><img src='@item.ImgPath' /></div>
+                }
+
+            </div>
+            <div style="clear:both;"></div>
+            <form id="form1" runat="server" enctype="multipart/form-data">
+                <div>
+                    <input type="file" name="uploadify" id="uploadify" />&nbsp;  <a href="javascript:$('#uploadify').uploadifyUpload()">上传</a>| <a href="javascript:$('#uploadify').uploadifyClearQueue()">取消上传</a>
+                </div>
+                <div id="fileQueue"></div>
+                <div style="clear: both;"></div>
+            </form>
+
+        </div>
+        <div class="tab-content" id="tab2" style="width: 100%">
+
+
+
+            <!-- End .clear -->
+
+        </div>
+        <div class="tab-content" id="tab3" style="width: 100%">
+
+
+
+
+        </div>
+        <!-- End #tab2 -->
+    </div>
+    <!-- End .content-box-content -->
+</div>
+@section scripts{
+    <script type="text/javascript" src="/Content/Tools/imgUpload/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="/Content/Tools/imgUpload/uploadswfobject.js"></script>
+    <script>
+        $(function () {
+            initImgUpload();//图片控件初始化
+            //删除图片
+            $("#delImg").click(function () {
+                //partID='" + data[i].PartID + "' currId='" + data[i].ID + "
+           
+                var imgid = $("#imgView .currImg").attr("currId");
+                Post("/Master/DelActiveImg", { id: imgid }, function (data) {
+                    if (data.r) {
+                        window.location.href = window.location.href;
+                    } else {
+                        alert("请重试");
+                    }
+                });
+            });
+            $(".imgDiv").click(function () {
+                $(".imgDiv").removeClass("currImg");
+                $(this).addClass("currImg");
+
+            });
+        })
+        //初始化图片上传控件
+        function initImgUpload() {
+            $("#uploadify").uploadify({
+                'uploader': '/Content/Tools/imgUpload/uploadify.swf',
+                'script': '/Content/Tools/imgUpload/UpLoadPage.ashx',
+                'cancelImg': '/Content/Tools/imgUpload/images/cancel.png',
+                'folder': '/upload/Active',
+                'queueID': 'fileQueue',
+                'auto': false,
+                'multi': true,
+                'fileExt': '*.jpg;*.gif;*.png',
+                'fileDesc': 'Web Image Files (.JPG, .GIF, .PNG)',
+                'buttonText': '浏览',
+                'onSelect': function (event, queueID, fileObj) {
+                    $("#uploadify").uploadifySettings("script", "/Content/Tools/imgUpload/UpLoadPage.ashx?pid=-999"); //动态更新配(执行此处时可获得值)
+
+                },
+                'onError': function (event, queueId, fileObj, errorObj) {
+                    alert(errorObj.info + "---------" + errorObj.type);
+                },
+                'onAllComplete': function () {
+                    //ShowImg();
+                    window.location.href = window.location.href;
+                }
+            });
+        }
+    </script>
+}

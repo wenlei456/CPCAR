@@ -1,0 +1,38 @@
+﻿@model  IEnumerable<DAO.Voucher>
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+}
+@section styles{
+    <style>
+        h4 {
+        color:#3f3f3f;
+        }
+    </style>
+    }
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome">
+        <img class="head-ico" src="/content/img/ico/icon_phome.png">
+    </a>
+    <a class="mui-pull-right" href="/Product/getCar">
+        <img class="head-ico" src="/content/img/ico/icon_shopcar.png">
+    </a>
+    <div class="head-title">优惠卷列表</div>
+
+</header>
+<div class="mui-content" >
+    <div style="padding:20px; ">
+
+    <dl>
+        @foreach (var item in Model)
+        {
+              <dt><dd>优惠卷类型：@item.TypeName</dd><dd>生成时间：@(string.Format("{0:yyyy-MM-dd}",item.InsertTime))</dd><dd>到期时间：@(string.Format("{0:yyyy-MM-dd}",item.InsertTime))</dd><dd>状态：<span style="color:@(item.IsState==0?"red":"green")">@(item.IsState==0?"已使用":"未使用")</span></dd></dt>
+       <hr />
+        }
+      
+    </dl>
+        </div>
+
+    </div>

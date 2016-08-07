@@ -1,0 +1,318 @@
+﻿@model Cparts_service.Model.Crowshows
+@{
+    ViewBag.Title = "crowslect";
+    Layout = "~/Views/Shared/_master.cshtml";
+}
+
+    <div class="content-box-header2">
+        <h3>众筹管理</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">所有列表</a></li>
+            <!-- href must be unique and match the id of target div -->
+            <li><a href="#tab2" id="f1">添加</a></li>
+            <li><a href="#tab3" id="tabEdit">编辑</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+<div  id="tab1">
+     <table width="100%" id="datalist">
+                <thead>
+                    <tr>
+                        <th valign="middle">ID</th>
+                        <th valign="middle">产品ID</th>
+                        <th valign="middle">产品名称</th>                    
+                        <th valign="middle">更新时间</th> 
+                        <th valign="middle">开始时间</th>
+                        <th valign="middle">结束时间</th>
+                        <th valign="middle">是否显示</th>
+                        <th valign="middle">名称</th>
+                        <th valign="middle">照片</th>
+                        <th valign="middle">数量</th>
+
+                       
+                    </tr>
+                </thead>
+                <tfoot>
+                    @*分页*@
+                    <tr class="">
+                        <td colspan="11" style="text-align:right;" class="paginator">
+                            <div style="float:right;">
+                                <span>
+                               
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody style="font-size: 12px">
+                        
+                    @foreach (var item in Model.shod)
+                    {
+                        <tr>
+                             <td valign="middle" id="ID_@item.ID">@item.ID</td> 
+                            <td valign="middle" id="pid_@item.ID">@item.Pid</td>
+                            <td valign="middle" >@item.PartName</td>                          
+                            <td valign="middle"id="show_@item.ID">@string.Format("{0:yyyy-MM-dd hh:mm:ss}", item.ShowTime)</td>
+                            <td valign="middle"id="star_@item.ID">@string.Format("{0:yyyy-MM-dd hh:mm:ss}",item.StarTime)</td>
+                            <td valign="middle"id="end_@item.ID">@string.Format("{0:yyyy-MM-dd hh:mm:ss}",item.EndTime)</td>
+                            @if (@item.isBool == 1)
+                            {
+                                <td valign="middle">是</td>
+                            }
+                             @if (@item.isBool == 2)
+                             {
+                                  <td valign="middle">否</td>
+                             } 
+                            <td valign="middle" id="Tille_@item.ID">@item.ListTille</td>
+                             <td><img  id="ban_@item.ID" src="@item.Banner" style="width:100px;"/></td>
+                             <td valign="middle" id="nuber_@item.ID">@item.Number</td>
+                            <td><a class="button edits"  aid="@item.ID" state="@item.isBool" >编辑</a></td>
+                            <td> <input name="pid" type="hidden" value="@item.Pid" id="hid_pid"/></td>
+                        </tr>
+
+                       
+                    }
+
+                </tbody>
+            </table>
+</div>
+<div class="content-box-content">
+<div class="tab-content" id="tab2" style="width: 100%;display:none">
+    <form id="form_AddtActive" action="/Master/AddcrowdFunding" method="post" enctype="multipart/form-data">
+                <h4>活动添加</h4>
+                <table>
+                    <tr>
+                        <td >封面图片</td>
+                        <td colspan="3">
+                            <input type="file" value="选择图片" name="file" accept="image/*" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>活动名称</td>
+                        <td><input type="text" id="add_Act_Name"  name="ListTille"/></td>
+                        <td>数量</td>
+                        <td><input type="text" id="Numbers"  name="Number"/></td>
+                    </tr>
+                    <tr>
+                        <td>产品ID</td>
+                        <td><input type="text" id="Pids"  name="Pid"/></td>
+                    </tr>
+                    <tr>
+                        <td>开始时间</td>
+                        <td >
+                            <input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" id="add_Act_sdate" name="StarTime"/>
+                            <select id="add_Act_shour" class="dplist" name="shour"></select>
+                            <select id="add_Act_smin" class="dplist" name="smin" ></select>
+                        </td>
+                        <td>截止时间</td>
+                        <td>
+                            <input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" id="add_Act_edate"  name="EndTime"/>
+                            <select id="add_Act_ehour" class="dplist" name="ehour"></select>
+                            <select id="add_Act_emin" class="dplist" name="emin"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>状态：</td>
+                        <td><select id="add_Act_status" name="isBool"><option value="0">终止</option><option value="1" selected>正常</option></select></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><button id="btn-add" type="submit" >保存</button></td>
+                    </tr>
+                </table>
+        </form>
+</div>
+    <div class="tab-content" id="tab3" style="width: 100%;display:none">
+        <form id="form_editActive" action="/Master/EditcrowdFundingd" method="post" enctype="multipart/form-data">
+            <input name="aid" type="hidden" id="hid_aid"/>
+                <h4>众筹编辑</h4>
+                <table>
+                    <tr>
+                        <td >封面图片</td>
+                        <td colspan="3">
+                            <img  style="width:200px;height:200px"  id="edit_img"/>
+                            <input type="file" value="选择图片" name="file" accept="image/*"  id="filed"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>活动名称</td>
+                        <td><input type="text" id="edit_Name"  name="ListTille"/></td>
+                        <td>数量</td>
+                        <td><input type="text" id="Number"  name="Number"/></td>
+                    </tr>
+                    <tr>
+                        <td>开始时间</td>
+                        <td >
+                            <input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" id="edit_sdate" name="StarTime"/>
+                            <select id="edit_shour" class="dplist" name="shour"></select>
+                            <select id="edit_smin" class="dplist" name="smin" ></select>
+                        </td>
+                        <td>截止时间</td>
+                        <td>
+                            <input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" id="edit_edate"  name="EndTime"/>
+                            <select id="edit_ehour" class="dplist" name="ehour"></select>
+                            <select id="edit_emin" class="dplist" name="emin"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>状态：</td>
+                        <td><select id="edit_status" name="isBool"><option value="0">终止</option><option value="1" selected>正常</option></select></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><button id="btns-edit" type="submit" >修改</button></td>
+                    </tr>
+                </table>
+            </form>
+</div>
+    </div>
+<script src="~/resources/scripts/My97DatePicker/WdatePicker.js"></script>
+    <script>
+        $(function () {
+            $(".dplist option").remove();
+            var hours = []; var min = [];
+            for (var i = 0; i < 24; i++) {
+                hours.push('<option value="' + i + '">' + i + '时</option>');
+            }
+            for (var i = 0; i <60; i++) {
+                min.push('<option value="' + i + '">' + i + '分</option>');
+            }
+            $("#add_Act_shour,#add_Act_ehour,#edit_shour,#edit_ehour").append(hours.join(""));
+            $("#add_Act_smin,#add_Act_emin,#edit_smin,#edit_emin").append(min.join(""));
+            $(".edits").click(function () {
+                $("#tab3").show();
+                var aid = $(this).attr("aid");
+                var state = $(this).attr("state");
+                var img = $("#ban_" + aid).attr("src");
+                var name = $("#Tille_" + aid).html();
+                var stime = $("#star_" + aid).html();
+                var etime = $("#end_" + aid).html();
+                var ban = $("#nuber_" + aid).html();
+                $("#hid_aid").val(aid);
+                $("#edit_img").attr("src", img);
+                $("#edit_Name").val(name);
+                $("#Number").val(ban);
+                $("#edit_status").val(state);
+                var stimeD = new Date(stime);
+                var etimeD = new Date(etime);
+                $("#edit_sdate").val(stimeD.toLocaleDateString());
+                $("#edit_shour").val(stimeD.getHours());
+                $("#edit_emin").val(stimeD.getMinutes());
+                $("#edit_edate").val(etimeD.toLocaleDateString());
+                $("#edit_ehour").val(etimeD.getHours());
+                $("#edit_emin").val(etimeD.getMinutes());
+            
+            });
+            $("#btns-edit").click(function () {
+                    document.getElementById("form_editActive").submit();
+                })
+            
+            //$("#btn-add").click(function () {
+            //    var file = $("#file").val();
+            //    var filed = $("#edit_Act_img").val("src", file)
+            //    var Pid = $("#Pids").val();
+            //    var name = $("#add_Act_Name").val();
+            //    var date = $("#add_Act_sdate").val();
+            //    var shur = $("#add_Act_shour").val();
+            //    var smin = $("#add_Act_smin").val();
+            //    var edate = $("#add_Act_edate").val();
+            //    var ehour = $("#add_Act_ehour").val();
+            //    var emin = $("#add_Act_emin").val();
+            //    var status = $("#add_Act_status").val();
+            //    var Number = $("#Numbers").val();
+            //    var Pid = $("#Pids").val();
+            //    var cList = {
+            //        Pid: Pid,
+            //        Banner: file,
+            //        ListTille: name,
+            //        StarTime: date + " " + shur + ":" + smin,
+            //        EndTime: edate + " " + ehour + ":" + emin,
+            //        isBool: status,
+            //        Number: Number
+            //    };
+            //    Post("/Master/AddcrowdFunding/", { cList: JSON.stringify(cList) }, function (data, error) {
+            //        if (error) {
+            //            ChangBox("网络异常，请稍后再试");
+            //        }
+            //        if (data.result == "error") {
+            //            alert("添加异常，请稍后再试！");
+            //        }
+            //        else if (data.result == "ok") {
+            //            setTimeout(function () {
+            //                alert("添加成功");
+            //                window.location.reload();
+            //            }, 2)
+            //        }
+            //    })
+            //})
+            //$(".edits").click(function () {
+            //    $("#tab3").show();
+            //    var Pid = $(this).attr("pid");
+            //    Post("/Master/EditcrowdFunding/", { 'Pid': Pid }, function (data, error) {
+            //        var oDate = new Date(data.StarTime)
+            //        var nian = oDate.getFullYear();
+            //        var yue = oDate.getMonth()+1;
+            //        var ri = oDate.getDate();
+            //        var shi = oDate.getHours();
+            //        var fen = oDate.getMinutes();
+            //        var etimeD = new Date(data.EndTime);
+            //        var etinshi = etimeD.getHours();
+            //        var etinfen = etimeD.getMinutes();
+            //        var etinnian = etimeD.getFullYear();
+            //        var etinyue = etimeD.getMonth()+1;
+            //        var etinri = etimeD.getDate();
+            //        $("#edit_Name").val(data.ListTille);
+            //        $("#edit_sdate").val(nian + '-' + yue + '-' + ri);
+            //        $("#edit_shour").val(shi);
+            //        $("#edit_smin").val(fen);
+            //        $("#edit_edate").val(etinnian + '-' + etinyue + '-' + etinri);
+            //        $("#edit_ehour").val(etinshi);
+            //        $("#edit_emin").val(etinfen);
+            //        $("#edit_status").val(data.isBool);
+            //        $("#Number").val(data.Number);
+            //        $("#edit_img").attr("src", data.Banner);
+            //        $("#hid_pid").val(data.Pid);
+            //    })
+            //})
+            //$("#btns-edit").click(function () {
+            //    var cid = $("#hid_pid").val();
+            //    var file = $("#filed").val();
+            //    var filed = $("#edit_img").val("src", file)
+            //    var name = $("#edit_Name").val();
+            //    var date = $("#edit_sdate").val();
+            //    var shur = $("#edit_shour").val();
+            //    var smin = $("#edit_smin").val();
+            //    var edate = $("#edit_edate").val();
+            //    var ehour = $("#edit_ehour").val();
+            //    var emin = $("#edit_emin").val();
+            //    var status = $("#edit_status").val();
+            //    var Number = $("#Number").val();
+            //    var cList = {
+            //        Pid: cid,
+            //        Banner: file,
+            //        ListTille: name,
+            //        StarTime: date + " " + shur + ":" + smin,
+            //        EndTime: edate + " " + emin + ":" + status,
+            //        isBool: status,
+            //        Number: Number
+            //    };
+            //    Post("/Master/CarowdEdit/", { sendInfo: JSON.stringify(cList) }, function (data, error) {
+            //        if (error) {
+            //            ChangBox("网络异常，请稍后再试");
+            //        }
+            //        if (data.result == "error") {
+            //            alert("修改异常，请稍后再试！");
+            //        }
+            //        else if (data.result == "ok") {
+            //            setTimeout(function () {
+            //                alert("修改成功");
+            //                window.location.reload();
+            //            }, 2)
+            //        }
+            //    })
+            //})
+                $("#f1").click(function () {
+                    $("#tab2").show();
+                    $("#datalist").hide();
+                    $("#tab3").hide();
+                })
+        })
+</script>

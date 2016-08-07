@@ -1,0 +1,71 @@
+﻿@model CParts_Online.Models.LoginModel
+@{
+    ViewBag.Title = "登录|诚配网";
+    Layout = "~/Views/Shared/_LayoutNoBa.cshtml";
+}
+
+   @using (Html.BeginForm("Login", "Member", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "LoginForm" }))
+{          
+            <div class="modal-header">
+              
+                <h2 class="modal-title" id="myModalLabel">登录</h2>
+            </div>
+            <div class="modal-body">
+                     
+                <div class="form-group">
+                        <label for="loginName" class="col-sm-3 control-label"></label>
+                        <div class="col-sm-5">
+                           <h4 style="color:red">@ViewBag.loginFail</h4>
+                        </div>
+                     
+                    </div>
+                    <div class="form-group">
+                        <label for="loginName" class="col-sm-3 control-label">用户名</label>
+                        <div class="col-sm-5">
+                             @Html.TextBoxFor(m => m.loginName, new { @class = "form-control", id = "loginName", placeholder = "用户名/邮箱/手机号" })
+             
+                        </div>
+                         @Html.ValidationMessageFor(m => m.loginName)
+                     
+                    </div>
+                    <div class="form-group">
+                        <label for="passWord" class="col-sm-3 control-label">密码</label>
+                        <div class="col-sm-5">
+                            @Html.PasswordFor(m => m.passWord, new { @class = "form-control", id = "passWord", placeholder = "密码" })
+                </div>
+                @Html.ValidationMessageFor(m => m.passWord)
+                    </div>
+                  
+                    <div class="form-group">
+                        <label for="VeriCode" class="col-sm-3 control-label">输入验证码</label>
+                        <div class="col-sm-2">
+                            @Html.TextBoxFor(m => m.VeriCode, new { @class = "form-control", id = "VeriCode" })
+                            @Html.ValidationMessageFor(m => m.VeriCode)
+                        </div>
+                        <img src="/ValidateCode.ashx" id="changeVerCode" style="cursor: pointer" alt="看不清楚，换一个" title="看不清楚，换一个" />
+
+                    </div>
+
+                <div class="form-group">
+                    <label for="VeriCode" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-3">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                            登录
+                        </button>
+                    </div>
+
+                </div>
+
+                 <div class="form-group">
+                      <label for="VeriCode" class="col-sm-3 control-label"></label>
+                        <div class="col-sm-2">
+                          <a href="/Member/RegView">没有账号？注册新账号</a>
+                        </div>
+                     <div class="col-sm-2">
+                          <a>忘记密码？</a>
+                        </div>
+                       
+                    </div>
+              
+            </div>
+}        

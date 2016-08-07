@@ -1,0 +1,234 @@
+﻿@model IEnumerable<DAO.Active>
+@{
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>CP文化</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+ <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+<meta name="keywords" content="诚配,诚配改装,汽车改装,改装件,汽车配件,海外配件,进口配件,保时捷,宝马,奔驰,法拉利,豪车改装,高端改装">
+<meta name="description" content="">   <meta  />
+  <link href="/New/content/css/mui.css" rel="stylesheet" />
+ <link href="/New/content/css/main.css" rel="stylesheet" />
+ <style>
+ 	.head-ico{margin-right:10px;}
+ </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?d252ab9e4e87638601460ea0c7412a01";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+</script>
+ </head>
+<body>
+ <div id="modal-bg"></div>
+<div id="modal-show"><img  src="/New/content/img/ico/loading.gif"/></div>
+<div class="main-container">
+  <header class="mui-bar mui-bar-nav">
+ <a class="mui-pull-left"></a>
+  <a class="mui-pull-right" href="/Member/Myhome/login"><img class="head-ico" src="/New/content/img/ico/icon_phome.png"></a>
+  <a class="mui-pull-right" href="Product/getCar"><img class="head-ico" src="/New/content/img/ico/icon_shopcar.png"></a>
+ <div class="head-title"></div>		   
+</header>
+        @if(Model.Count()>0)
+                {
+<div id="slider" class="mui-slider" >
+<div class="mui-slider-group mui-slider-loop">
+
+
+
+
+
+<div class="mui-slider-item mui-slider-item-duplicate">
+<a href='/Active/index?aid=@(Model.LastOrDefault().ID)&&puser=@(Session["mobile"]==null?"":Session["mobile"].ToString())'>
+    <img src="http://91cpcar.com/@Model.LastOrDefault().ActiveIMG">
+</a>
+</div>
+        
+         @foreach (var item in Model)
+                    { 
+<div class="mui-slider-item">
+<a href='/Active/index?aid=@(item.ID)&&puser=@(Session["mobile"]==null?"":Session["mobile"].ToString())'>
+                                <img src="http://91cpcar.com/@item.ActiveIMG">
+                            </a>
+</div>
+             
+         }
+<div class="mui-slider-item mui-slider-item-duplicate">
+<a href='/Active/index?aid=@(Model.FirstOrDefault().ID)&&puser=@(Session["mobile"]==null?"":Session["mobile"].ToString())'>
+                        <img src="http://91cpcar.com/@Model.FirstOrDefault().ActiveIMG">
+                    </a>
+</div>
+</div>
+<div class="mui-slider-indicator">
+<div class="mui-indicator mui-active"></div>
+<div class="mui-indicator"></div>
+<div class="mui-indicator"></div>
+</div>
+</div>
+            
+        }
+<div class="mui-content">
+<ul id="list" class="mui-table-view mui-table-view-chevron">
+<li class="mui-table-view-cell mui-collapse topLevel" id="carBrandLi">
+<a class="mui-navigate-right nav-header" href="#">品牌&nbsp;Brand</a>
+<div id="carBrand" class="mui-collapse-content">
+	
+</div>
+</li>
+<li class="mui-table-view-cell mui-collapse topLevel"  id="carModelLi">
+<a class="mui-navigate-right nav-header" href="#">
+型号&nbsp;Model
+</a>
+<div id="carModel" class="mui-collapse-content">						
+</div>
+</li>
+<li class="mui-table-view-cell mui-collapse topLevel"  id="carYearLi">
+<a class="mui-navigate-right nav-header" href="#">
+年份&nbsp;Year
+</a>
+<div id="caryear" class="mui-collapse-content">
+	
+</div>
+</li>
+</ul>
+</div>
+</div>
+   <footer class="pfoot">		
+<div class="ui-footer-version">        
+<p>Copyring @@ 2015 诚配91CPCAR.com  版权所有 <br> 湘ICP备15020410号  </p>
+</div>
+  
+	</footer>
+</body>
+
+  <script src="/New/content/js/mui.min.js"></script>
+ <script src="/New/Content/js/zepto.min.js"></script>
+<script src="/New/Content/js/zepto.cookie.js"></script>
+<script src="/New/Content/js/Base.js"></script>
+  <script>
+      var selectBrand, selectModel, selectYear;
+      $(function () {
+          var CarList;
+          Base.ShowModal();
+          Base.ajaxPost("/Product/GetCarList", {}, function (data) {
+              if (data.length > 0) {
+                  //附加品牌
+                  $("#carBrand a").remove();
+                  $("#carModel a").remove();
+                  $("#caryear a").remove();
+                  var brands = [], models = [], years = [];
+                  for (var i = 0; i < data.length; i++) {
+                      brands.push("<a class='nev-item item-brand' href='#' >" + data[i].brand + "</a>");
+                  }
+                  selectBrand = data[0].brand;
+                  //附加第一个品牌下的型号-----》年份
+                  var m = data[0].models;
+                  for (var i = 0; i < m.length; i++) {
+                      models.push("<a class='nev-item item-model' href='javascript:void(0)'>" + m[i].model + "</a>");
+                  }
+                  selectModel = m[0].model;
+                  var y = data[0].models[0].year;
+                  for (var i = 0; i < y.length; i++) {
+                      years.push("<a class='nev-item item-year' href='javascript:void(0)'>" + y[i] + "</a>");
+                  }
+                  selectYear = y[0];
+                  $("#carBrand").append(brands.join(""));
+                  $("#carModel").append(models.join(""));
+                  $("#caryear").append(years.join(""));
+                  BindEventToBrand(data);
+                  BindEventToModel(data);
+                  BindEventToYear(data);
+                  Base.HideModal();
+              }
+          });
+
+      })
+      function BindEventToBrand(data) {
+          $(".item-brand").click(function () {
+              $(this).siblings().removeClass("selectCar");
+              $(this).addClass("selectCar");
+              $(this).parent().parent("li").removeClass("mui-active");
+              $("#carModelLi").addClass("mui-active");
+              //绑定型号
+              var b = $(this).html();
+              selectBrand = b;
+              var models = [], years = [];
+              $("#carModel a").remove();
+              $("#caryear a").remove();
+              for (var i = 0; i < data.length; i++) {
+                  if (data[i].brand == b) {
+                      var m = data[i].models;
+                      for (var j = 0; j < m.length; j++) {
+                          models.push("<a class='nev-item item-model' href='javascript:void(0)'>" + m[j].model + "</a>");
+                      }
+                      selectModel = m[0].model;
+                      var y = data[i].models[0].year;
+                      for (var j = 0; j < y.length; j++) {
+                          years.push("<a class='nev-item item-year' href='javascript:void(0)'>" + y[j] + "</a>");
+                      }
+                      selectYear = y[0];
+                      $("#carModel").append(models.join(""));
+                      $("#caryear").append(years.join(""));
+                      BindEventToModel(data);
+                      BindEventToYear(data);
+                      break;
+                  }
+              }
+          });
+      }
+      function BindEventToModel(data) {
+          $(".item-model").click(function () {
+              $(this).siblings().removeClass("selectCar");
+              $(this).addClass("selectCar");
+              $(this).parent().parent("li").removeClass("mui-active");
+              $("#carYearLi").addClass("mui-active");
+              var b = selectBrand;
+              var mm = $(this).html();
+              selectModel = mm;
+              var years = [];
+              $("#caryear a").remove();
+              for (var i = 0; i < data.length; i++) {
+                  if (data[i].brand == b) {
+                      var m = data[i].models;
+                      for (var j = 0; j < m.length; j++) {
+                          if (m[j].model == mm) {
+                              var y = m[j].year;
+                              for (var k = 0; k < y.length; k++) {
+                                  years.push("<a class='nev-item item-year' href='javascript:void(0)'>" + y[k] + "</a>");
+                              }
+                              selectYear = y[0];
+                              $("#caryear").append(years.join(""));
+                              BindEventToYear(data);
+                              break;
+                          }
+                      }
+
+                  }
+              }
+          })
+      }
+      function BindEventToYear() {
+          $(".item-year").click(function () {
+              var mm = $(this).html();
+              selectYear = mm;
+
+              window.location.href = "/Product/TypeListByCar?t=-1&&b=" + selectBrand + "&&m=" + selectModel + "&&y=" + selectYear;
+              // window.location.href = "/TypeListByCar.html?t=-1&&b=" + selectBrand + "&&m=" + selectModel + "&&y=" + selectYear;
+
+          })
+      }
+</script>
+  
+<script>
+    if (Validata.IsPC()) {
+        //  window.location.href = "http://www.91cpcar.com";
+    }
+</script>
+</html>

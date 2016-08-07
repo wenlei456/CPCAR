@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastUsedBuildConfiguration>Debug</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/ActiveModule.dll">
+      <publishTime>05/07/2016 20:09:42</publishTime>
+    </File>
+    <File Include="bin/ActiveModule.pdb">
+      <publishTime>05/07/2016 20:09:42</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>05/04/2016 21:22:38</publishTime>
+    </File>
+    <File Include="bin/AOP.dll">
+      <publishTime>05/07/2016 20:09:41</publishTime>
+    </File>
+    <File Include="bin/AOP.pdb">
+      <publishTime>05/07/2016 20:09:41</publishTime>
+    </File>
+    <File Include="bin/CommonModule.dll">
+      <publishTime>05/07/2016 20:09:42</publishTime>
+    </File>
+    <File Include="bin/CommonModule.pdb">
+      <publishTime>05/07/2016 20:09:42</publishTime>
+    </File>
+    <File Include="bin/CommonUtils.dll">
+      <publishTime>05/07/2016 20:09:41</publishTime>
+    </File>
+    <File Include="bin/CommonUtils.pdb">
+      <publishTime>05/07/2016 20:09:41</publishTime>
+    </File>
+    <File Include="bin/Cparts-service.dll">
+      <publishTime>05/07/2016 20:09:42</publishTime>
+    </File>
+    <File Include="bin/Cparts-service.pdb">
+      <publishTime>05/07/2016 20:09:42</publishTime>
+    </File>
+    <File Include="bin/DAO.dll">
+      <publishTime>05/07/2016 20:09:41</publishTime>
+    </File>
+    <File Include="bin/DAO.pdb">
+      <publishTime>05/07/2016 20:09:41</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>05/04/2016 21:22:34</publishTime>
+    </File>
+    <File Include="bin/LitJson.dll">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>05/04/2016 21:21:17</publishTime>
+    </File>
+    <File Include="bin/m.91cpcar.com.dll">
+      <publishTime>05/07/2016 20:09:45</publishTime>
+    </File>
+    <File Include="bin/m.91cpcar.com.pdb">
+      <publishTime>05/07/2016 20:09:45</publishTime>
+    </File>
+    <File Include="bin/MemberModule.dll">
+      <publishTime>05/07/2016 20:09:43</publishTime>
+    </File>
+    <File Include="bin/MemberModule.pdb">
+      <publishTime>05/07/2016 20:09:43</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>05/04/2016 21:23:24</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>05/04/2016 21:23:32</publishTime>
+    </File>
+    <File Include="bin/OrderModule.dll">
+      <publishTime>05/07/2016 20:09:43</publishTime>
+    </File>
+    <File Include="bin/OrderModule.pdb">
+      <publishTime>05/07/2016 20:09:43</publishTime>
+    </File>
+    <File Include="bin/ProductModule.dll">
+      <publishTime>05/07/2016 20:09:42</publishTime>
+    </File>
+    <File Include="bin/ProductModule.pdb">
+      <publishTime>05/07/2016 20:09:42</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.dll">
+      <publishTime>05/04/2016 21:23:23</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>05/04/2016 21:23:05</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.WebRequest.dll">
+      <publishTime>05/04/2016 21:23:23</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>05/04/2016 21:23:09</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>05/04/2016 21:23:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>05/04/2016 21:23:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>05/04/2016 21:23:01</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>05/04/2016 21:23:02</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>05/04/2016 21:23:08</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>05/04/2016 21:23:09</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>05/04/2016 21:23:08</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>05/04/2016 21:23:59</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Net.Http.Formatting.resources.dll">
+      <publishTime>05/04/2016 21:23:03</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Net.Http.resources.dll">
+      <publishTime>05/04/2016 21:23:23</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Net.Http.WebRequest.resources.dll">
+      <publishTime>05/04/2016 21:23:23</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Helpers.resources.dll">
+      <publishTime>05/04/2016 21:23:08</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Http.resources.dll">
+      <publishTime>05/04/2016 21:23:05</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Http.WebHost.resources.dll">
+      <publishTime>05/04/2016 21:23:06</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Mvc.resources.dll">
+      <publishTime>05/04/2016 21:22:58</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Razor.resources.dll">
+      <publishTime>05/04/2016 21:23:02</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.Deployment.resources.dll">
+      <publishTime>05/04/2016 21:23:09</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.Razor.resources.dll">
+      <publishTime>05/04/2016 21:23:09</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.resources.dll">
+      <publishTime>05/04/2016 21:23:09</publishTime>
+    </File>
+    <File Include="Content/css/main.css">
+      <publishTime>05/07/2016 19:31:38</publishTime>
+    </File>
+    <File Include="Content/css/mui.css">
+      <publishTime>05/04/2016 21:22:20</publishTime>
+    </File>
+    <File Include="Content/css/mui.min.css">
+      <publishTime>05/04/2016 21:22:19</publishTime>
+    </File>
+    <File Include="Content/css/v-day-hotel.css">
+      <publishTime>05/04/2016 21:22:19</publishTime>
+    </File>
+    <File Include="Content/fonts/mui.ttf">
+      <publishTime>05/04/2016 21:22:20</publishTime>
+    </File>
+    <File Include="Content/img/cbd.jpg">
+      <publishTime>05/04/2016 21:22:23</publishTime>
+    </File>
+    <File Include="Content/img/ico/address-icon.png">
+      <publishTime>05/04/2016 21:22:21</publishTime>
+    </File>
+    <File Include="Content/img/ico/change-icon.png">
+      <publishTime>05/04/2016 21:22:21</publishTime>
+    </File>
+    <File Include="Content/img/ico/choujiang-icon.png">
+      <publishTime>05/04/2016 21:22:21</publishTime>
+    </File>
+    <File Include="Content/img/ico/icon-cart.png">
+      <publishTime>05/04/2016 21:22:22</publishTime>
+    </File>
+    <File Include="Content/img/ico/icon-del.png">
+      <publishTime>05/04/2016 21:22:22</publishTime>
+    </File>
+    <File Include="Content/img/ico/icon-pay-card.png">
+      <publishTime>05/04/2016 21:22:22</publishTime>
+    </File>
+    <File Include="Content/img/ico/icon-pay-hdfk.png">
+      <publishTime>05/04/2016 21:22:22</publishTime>
+    </File>
+    <File Include="Content/img/ico/icon-pay-jz.png">
+      <publishTime>05/04/2016 21:22:22</publishTime>
+    </File>
+    <File Include="Content/img/ico/icon-pay-yl.png">
+      <publishTime>05/04/2016 21:22:22</publishTime>
+    </File>
+    <File Include="Content/img/ico/icon-pay-zfb.png">
+      <publishTime>05/04/2016 21:22:22</publishTime>
+    </File>
+    <File Include="Content/img/ico/icon_phome.png">
+      <publishTime>05/04/2016 21:22:21</publishTime>
+    </File>
+    <File Include="Content/img/ico/icon_shopcar.png">
+      <publishTime>05/04/2016 21:22:21</publishTime>
+    </File>
+    <File Include="Content/img/ico/list-icon.png">
+      <publishTime>05/04/2016 21:22:22</publishTime>
+    </File>
+    <File Include="Content/img/ico/loading.gif">
+      <publishTime>05/04/2016 21:22:22</publishTime>
+    </File>
+    <File Include="Content/img/ico/logo.png">
+      <publishTime>05/04/2016 21:22:22</publishTime>
+    </File>
+    <File Include="Content/img/ico/money-icon.png">
+      <publishTime>05/04/2016 21:22:23</publishTime>
+    </File>
+    <File Include="Content/img/ico/myhome_ico.jpg">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Content/img/ico/m_neishi.jpg">
+      <publishTime>05/04/2016 21:22:23</publishTime>
+    </File>
+    <File Include="Content/img/ico/order-success-icon.png">
+      <publishTime>05/04/2016 21:22:23</publishTime>
+    </File>
+    <File Include="Content/img/ico/pay-icon.png">
+      <publishTime>05/04/2016 21:22:23</publishTime>
+    </File>
+    <File Include="Content/img/ico/person-data-icon.png">
+      <publishTime>05/04/2016 21:22:23</publishTime>
+    </File>
+    <File Include="Content/img/ico/pwd-icon.png">
+      <publishTime>05/04/2016 21:22:23</publishTime>
+    </File>
+    <File Include="Content/img/ico/sale-icon.png">
+      <publishTime>05/04/2016 21:22:23</publishTime>
+    </File>
+    <File Include="Content/img/money-icon.png">
+      <publishTime>05/04/2016 21:22:20</publishTime>
+    </File>
+    <File Include="Content/img/muwu.jpg">
+      <publishTime>05/04/2016 21:22:22</publishTime>
+    </File>
+    <File Include="Content/img/noimg.jpg">
+      <publishTime>05/04/2016 21:22:20</publishTime>
+    </File>
+    <File Include="Content/img/sel.png">
+      <publishTime>05/04/2016 21:22:20</publishTime>
+    </File>
+    <File Include="Content/img/shuijiao.jpg">
+      <publishTime>05/04/2016 21:22:21</publishTime>
+    </File>
+    <File Include="Content/img/weixin/arrow.png">
+      <publishTime>05/04/2016 21:22:23</publishTime>
+    </File>
+    <File Include="Content/img/weixin/Loading.gif">
+      <publishTime>05/04/2016 21:22:23</publishTime>
+    </File>
+    <File Include="Content/img/weixin/share.png">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Content/img/yuantiao.jpg">
+      <publishTime>05/04/2016 21:22:21</publishTime>
+    </File>
+    <File Include="Content/js/Base.js">
+      <publishTime>05/04/2016 21:22:23</publishTime>
+    </File>
+    <File Include="Content/js/jsAddress.js">
+      <publishTime>05/04/2016 21:22:23</publishTime>
+    </File>
+    <File Include="Content/js/mui.js">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Content/js/mui.min.js">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Content/js/service-cart.js">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Content/js/shopCar.js">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Content/js/weixin/jweixin-1.0.0.js">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Content/js/weixin/m.js">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Content/js/weixin/signature.ashx">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Content/js/weixin/wxApi.js">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Content/js/zepto.cookie.js">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Content/js/zepto.extend.js">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Content/js/zepto.min.js">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="dll/LitJson.dll">
+      <publishTime>05/04/2016 21:22:24</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>05/04/2016 21:22:18</publishTime>
+    </File>
+    <File Include="html/5-1.html">
+      <publishTime>05/04/2016 22:14:05</publishTime>
+    </File>
+    <File Include="html/5-1/1.png">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="html/5-1/2.png">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="html/5-1/3.png">
+      <publishTime>05/04/2016 22:14:05</publishTime>
+    </File>
+    <File Include="html/5-1/4.png">
+      <publishTime>05/04/2016 22:14:05</publishTime>
+    </File>
+    <File Include="html/5-1/5.png">
+      <publishTime>05/04/2016 22:14:05</publishTime>
+    </File>
+    <File Include="html/5-1/6.png">
+      <publishTime>05/04/2016 22:14:05</publishTime>
+    </File>
+    <File Include="html/5-1/7.png">
+      <publishTime>05/04/2016 22:14:05</publishTime>
+    </File>
+    <File Include="html/5-1/8.jpg">
+      <publishTime>05/07/2016 19:47:26</publishTime>
+    </File>
+    <File Include="html/5-1/bg.jpg">
+      <publishTime>05/07/2016 19:31:39</publishTime>
+    </File>
+    <File Include="html/5-1/btn-reg.jpg">
+      <publishTime>05/04/2016 22:14:05</publishTime>
+    </File>
+    <File Include="html/5-1/free.png">
+      <publishTime>05/04/2016 22:14:05</publishTime>
+    </File>
+    <File Include="html/5-1/hu_zuo.png">
+      <publishTime>05/04/2016 22:14:05</publishTime>
+    </File>
+    <File Include="html/5-1/qty_pao.png">
+      <publishTime>05/04/2016 22:14:05</publishTime>
+    </File>
+    <File Include="log4net.config">
+      <publishTime>05/04/2016 21:22:18</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>05/04/2016 21:22:19</publishTime>
+    </File>
+    <File Include="pay/alipay/images/16558.png">
+      <publishTime>05/04/2016 21:22:30</publishTime>
+    </File>
+    <File Include="pay/alipay/images/3636.png">
+      <publishTime>05/04/2016 21:22:30</publishTime>
+    </File>
+    <File Include="pay/alipay/images/alipay.gif">
+      <publishTime>05/04/2016 21:22:30</publishTime>
+    </File>
+    <File Include="pay/alipay/pay-alert.html">
+      <publishTime>05/04/2016 21:22:29</publishTime>
+    </File>
+    <File Include="pay/alipay/send.aspx">
+      <publishTime>05/04/2016 21:22:29</publishTime>
+    </File>
+    <File Include="pay/recharge_success.html">
+      <publishTime>05/04/2016 21:22:28</publishTime>
+    </File>
+    <File Include="pay/weixin/images/weixin.png">
+      <publishTime>05/04/2016 21:22:31</publishTime>
+    </File>
+    <File Include="pay/weixin/ResultNotifyPage.aspx">
+      <publishTime>05/04/2016 21:22:30</publishTime>
+    </File>
+    <File Include="pay/weixin/send.aspx">
+      <publishTime>05/04/2016 21:22:30</publishTime>
+    </File>
+    <File Include="ValidateCode.ashx">
+      <publishTime>05/04/2016 21:22:19</publishTime>
+    </File>
+    <File Include="Views/Active/Index.cshtml">
+      <publishTime>05/07/2016 19:31:39</publishTime>
+    </File>
+    <File Include="Views/Active/ProDetail.cshtml">
+      <publishTime>05/07/2016 19:31:39</publishTime>
+    </File>
+    <File Include="Views/Common/PayOrder.cshtml">
+      <publishTime>05/07/2016 19:31:39</publishTime>
+    </File>
+    <File Include="Views/Member/ExpRecord.cshtml">
+      <publishTime>05/07/2016 19:31:39</publishTime>
+    </File>
+    <File Include="Views/Member/Login.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Member/Myhome.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Member/MyInfo.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Member/MyOrder.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Member/RebateRecord.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Member/Reg.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Member/UpdatePW.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Member/副本 MyOrder.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Order/Detail.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Order/goOrder.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Product/cList.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Product/GetCar.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Product/Index.cshtml">
+      <publishTime>05/07/2016 19:47:26</publishTime>
+    </File>
+    <File Include="Views/Product/List.cshtml">
+      <publishTime>05/07/2016 19:47:26</publishTime>
+    </File>
+    <File Include="Views/Product/pList.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Product/ProductDetail.cshtml">
+      <publishTime>05/07/2016 20:15:21</publishTime>
+    </File>
+    <File Include="Views/Product/TypeListByCar.cshtml">
+      <publishTime>05/07/2016 20:04:46</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>05/04/2016 21:22:32</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>05/07/2016 19:31:40</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutNoBa.cshtml">
+      <publishTime>05/04/2016 21:22:32</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>05/04/2016 21:22:31</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>05/04/2016 21:22:31</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/07/2016 20:16:29</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

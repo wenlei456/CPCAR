@@ -1,0 +1,219 @@
+﻿@model  ProductModule.Models.GoOrder
+@{
+    ViewBag.Title = "提交订单|诚配网";
+    Layout = "~/Views/Shared/_LayoutNoBa.cshtml";
+    decimal normPrice = 0;
+    decimal actPrice = 0;
+}
+@section styles{
+    <style>
+    .Carlist img{
+      width: 152px;
+     height: 112px;
+    }      
+        .TDimg {
+         width:260px;
+        }
+        .TDName {
+        
+         padding-top:20px;
+        }
+        .TDatt {
+         margin-right:10px;
+        }
+        .itemTotlePrice {        
+         font-size:16px;
+        }       
+        .middle{
+            padding-top:30px;       
+        }
+        </style>
+    }
+<script src="http://localhost:12621/Content/js/Base.js"></script>
+<script type="text/javascript">
+    
+</script>
+  <div class="modal-header">              
+    <h3 class="modal-title">填写并核对订单信息</h3>
+  </div>
+<div style="border:1px dashed #e8e8e8; padding:20px">
+<div class="AddressArea">
+   <div style="padding-bottom:30px"><h4>收货人信息</h4></div>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="provi" class="col-sm-1 control-label">
+                <h5>收货人</h5>
+            </label>
+            <div class=" col-sm-2">
+                <input class="form-control" id="sendPeople"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-1 control-label">
+                <h5>选择地区</h5>
+            </label>
+            <div class=" col-sm-2">
+                <select class="form-control" id="cmbProvince">
+                    <option>选择省份</option>                   
+                </select>
+            </div>
+             <div class=" col-sm-2">
+                <select class="form-control" id="cmbCity">
+                    <option>选择城市</option>                   
+                </select>
+            </div>
+               <div class=" col-sm-2">
+                <select class="form-control"  id="cmbArea">
+                    <option>选择辖区</option>                   
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cmbCity" class="col-sm-1 control-label"> <h5>详细地址</h5></label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="Address">
+            </div>
+        </div>
+         <div class="form-group">
+            <label for="firstname" class="col-sm-1 control-label"> <h5>手机号码</h5></label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="Phone">
+            </div>
+        </div>
+
+           <div class="form-group">
+            <label for="beizhu" class="col-sm-1 control-label"> <h5>备注：</h5></label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="beizhu">
+            </div>
+        </div>
+    </form>
+</div>
+    <div class="ShoppingArea">
+<table class="table table-condensed Carlist">  
+   <thead>
+      <tr>
+         <th colspan="2"><h4>产品信息</h4></th>
+         <th>单价</th>
+         <th>产品数量</th>
+         <th>金额小计</th>
+         <th></th>
+      </tr>
+   </thead>
+   <tbody id='tb_rows'>
+       @if (Model != null && Model.carProList.Count() > 0)
+       {
+       foreach (var item in Model.carProList)
+       {
+           System.Text.StringBuilder sb = new System.Text.StringBuilder(item.proDetail.ID.ToString());
+           string pixstr;
+           if (item.activeM != null)
+           {
+               pixstr = "/Active/ProDetail?aid=" + item.activeM.ID + "&&id=" + item.proDetail.ID;
+           }
+           else
+           {
+               pixstr = "/Product/detail?id=" + item.proDetail.ID;
+           }
+         <tr>
+         <td class="TDimg"><a href="@pixstr" target="_blank"><img  src="@(item.imgStock==null?"/content/img/noimg.jpg":(item.imgStock.ImgPath)) "/></a></td>
+         <td class="TDName">
+             <h4><a href="@pixstr" target="_blank">@item.proDetail.PartName</a></h4>
+             <span>分类：@item.partCate.CategoryName</span><br />
+             <span>品牌：@item.proDetail.BrandName</span><br />
+             @if(@item.partExt!=null)
+             {
+                 foreach (var item2 in @item.partExt)
+                 {
+                      <span class="TDatt">@item2.AttrName:@item2.AttrValue</span>
+                     sb.Append(item2.ID.ToString());
+                 }
+            
+             }
+             @{string cid = sb.ToString();}
+             <input  type="hidden" class="cid" value="@cid"/>
+         </td>
+         <td ><div class="middle"><h5>￥<span id="itemPrice-@(cid)" class="itemPrice">@item.proDetail.Price</span></h5>
+                  @if (item.activeM != null)
+                  {                      
+                       actPrice += item.proDetail.Price*item.Qty;
+                      <input id="type-@cid" value="@item.activeM.ID" type="hidden" />
+                      <br />
+                     <span style="color:#fff; background:red;border-radius:5px; padding:2px">@item.activeM.Name</span>
+                  }
+                  else
+                  {
+                    <input id="type-@cid" value="-1" type="hidden" />
+                      normPrice += item.proDetail.Price * item.Qty;
+                  }
+             </div></td>
+         <td >   <div class="middle">
+                        <span id="itemNum-@(cid)"   class="txtNum"  style="display: block;width:60px; height: 34px;padding: 6px;font-size: 14px;line-height: 1.42857143;color: #555; background-color: #fff; border: 1px solid #ccc;" >@item.Qty</span>
+                  </div>
+            </td>
+         <td class="middle"><div class="middle">￥<span id="itemTotlePrice-@(cid)" class="itemTotlePrice" >@(item.proDetail.Price*item.Qty)</span></div></td>
+             <td>
+                 <input  type="hidden" id="lastAttr-@(cid)" value="@item.lastAttr"/>
+                 <input  type="hidden" id="pid-@(cid)" value="@item.proDetail.ID"/>
+               </td>
+     
+              </tr>
+       }
+       }else{
+       
+       <tr><td><h2>购物车还没有产品，<a href="/Porduct/Index/">去选购</a></h2></td></tr>
+       }
+   
+   </tbody>
+   <tfoot>
+    <tr>
+        <td></td>
+         <td></td>
+         <td></td>
+         <td><h4><span id="totleNum" style="color:red"></span>件商品</h4></td>
+         <td><h4 >总金额：<span style="color:red">￥</span><span id="totlePrice" style="color:red"></span></h4></td>
+         <td></td>
+    </tr>
+          <tr>
+        <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         @*<td><h4 >折扣率：<span style="color:red"></span><span id="disPrice" style="color:red">@(Model.userLevel==null?"0":(Model.userLevel.Ratio*100).ToString(".00")+"%")</span>&nbsp;&nbsp;<span style="font-size:13px">(活动产品不参与)</span></h4></td>*@
+         <td></td>
+    </tr>
+       @{
+           //decimal all = Model.carProList.Sum(m => m.Qty * m.proDetail.Price);
+           decimal totle = normPrice+actPrice;
+                          }
+          <tr>
+        <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td><h4 >订单金额：<span style="color:red">￥</span><span id="orderPrice" style="color:red">@(Math.Round(totle,2))</span></h4></td>
+         <td></td>
+    </tr>
+          <tr>
+        <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td colspan="2"><button type="button" class="btn btn-danger btn-block" id="SendOrder" >去结算</button></td>
+       
+    </tr>
+   
+   </tfoot>
+</table>
+        </div>
+    </div>
+ <div class="Discount">
+  </div>
+@section scripts{
+    <script src="/Content/js/shopCar.js">  </script>
+    <script src="/Content/js/jsAddress.js">  </script>
+    <script>
+        addressInit('cmbProvince', 'cmbCity', 'cmbArea', '湖南', '长沙市', '芙蓉区');//, '陕西', '宝鸡市', '金台区'
+    </script>
+    }
+

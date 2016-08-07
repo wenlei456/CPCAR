@@ -1,0 +1,58 @@
+﻿@model ProductModule.Models.ProductList
+@{
+    ViewBag.Title = "产品列表|诚配网";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    string t = Request.QueryString["t"];
+    string b = Request.QueryString["b"];
+    string m = Request.QueryString["m"];
+    string y = Request.QueryString["y"];
+    string ext="";
+           if (!string.IsNullOrEmpty(t) && !string.IsNullOrEmpty(m) && !string.IsNullOrEmpty(b) && !string.IsNullOrEmpty(y))
+            {
+            ext= "?t=" + t + "&&b=" + b + "&&m=" + m + "&&y=" + y;
+            }
+}
+  @* <div class="ProMain">
+          <div class="ProNav">
+              <div></div>
+              <div>首页 / 所有产品 / @Model.partCate.CategoryName </div>
+          </div>
+          <div class="ProArea">
+             <div class="ProTitle">
+                 <div class="ProTitleImg left" style="background-image:url(@Model.partCate.ICOPath)"></div>
+                 <div class="ProTitleImgN"></div>
+                 <div class="clear"></div>
+             </div>*@
+              <div class="ProList">
+                  @if(Model.proList.Count>0)
+                  {
+                     
+                      foreach (var item in Model.proList)
+                      {
+                          <a href="/Product/detail/@item.ID@ext" target="_blank" class="prohref">
+                          <div class="ProItem left">
+                              <div class="ProItemImg">
+                                  @if (string.IsNullOrEmpty(item.imgpath))
+                                  {
+                                  <img src="/content/img/noimg.jpg" />
+                                  }else{
+                                   <img src="@item.imgpath" />
+                                  }
+                              </div>
+                              <div class="ProItemName">@item.PartName</div>
+                               <div class="ProItemPrice">￥@(item.Price.ToString(".00"))</div>
+                              <div></div>
+                          </div>
+                              </a>
+                      }
+                  }else{
+                      
+                 <h2>没有找到产品</h2>
+                  }
+                  </div>
+         @*         
+                
+              </div>
+          </div>
+             <div class="clear"></div>
+        </div>*@

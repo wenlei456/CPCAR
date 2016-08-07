@@ -1,0 +1,116 @@
+﻿@model IEnumerable<DAO.information>
+@{
+    ViewBag.Title = "物流";
+    Layout = "~/Views/Shared/_master.cshtml";
+}
+
+<div>
+    <ul>
+     <li id="li1"><a href="#" id="f1">添加</a></li>
+         <li id="li2" style="display:none;"><a href="#" id="f2">列表</a></li>
+
+    </ul> 
+    <div class="bulk-actions">
+        <div id="selectTable">
+                      <input type="text" id="numberId" class="text-input" />
+                  <button type="button" class="button"  id="btnSearch">搜索</button>
+               
+            <table width="100%" id="datalist">
+                 
+                <thead>
+                    <tr>
+                      <th valign="middle">ID</th>
+                        <th valign="middle">物流ID</th>
+                        <th valign="middle">物流号</th>
+                        <th valign="middle">时间</th>
+                        <th valign="middle">是否收件</th>
+                    </tr>
+                </thead> 
+
+                <tfoot>
+                    @*分页*@
+        <tr class="">
+            <td colspan="11"  style="text-align:right;" class="paginator">
+                <div style="float:right;">
+                    </div>
+            </td>
+        </tr>
+                </tfoot>
+                <tbody style="font-size: 12px">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td valign="middle">@item.ID</td>
+                            <td valign="middle">@item.ordID</td>
+                            <td valign="middle">@item.wuliuhao</td>
+                            <td valign="middle">@item.time</td>
+                            <td valign="middle">@(item.isshouhuo == 0 ? "否" : "是")</td>
+                              
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </div>
+     <div class="tab-content" id="tab2" style="width: 100%;display:none" >
+            <form id="form_addActive" method="post" action="/Master/wuliupart">
+                <table>
+                    <tr>
+                        <td>ordID:</td>
+                        <td>
+                            <input type="text" name="ordID" id="ordID"   ><span style="color:red">*</span>
+                        </td>
+                    </tr>
+              
+                          <tr>
+                        <td>物流号:</td>
+                        <td>
+                            <input type="text" name="wuliuhao" id="wuliuhao">
+                        </td>
+                    <tr>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <input type="button" id="saveCa" value="       添加      " class="button" /></td>
+                        </tr>
+
+                    </tfoot>
+                   
+                </table>
+                </form>
+                <div class="clear"></div>
+         
+        </div>  
+        </div>
+    </div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#saveCa").click(function () {
+            // showdiv('正在保存中***');
+            var name = $("#ordID").val();
+            var isB = $("#wuliuhao").val();
+            var level = {
+                Name: name,
+                wuliuhao: isB
+            };
+        })
+            $("#btnSearch").click(function () {
+                var number = $("#numberId").val();
+                window.location.href = "/Master/GetPamodel/?stringNumber=" + number;
+            })
+            $("#f1").click(function () {
+                $("#li1").hide();
+                $("#li2").show();
+                $("#selectTable").hide();
+                $("#tab2").show();
+
+            })
+            $("#f2").click(function () {
+                $("#li1").show();
+                $("#li2").hide();
+                $("#selectTable").show();
+                $("#tab2").hide();
+
+            })
+    })
+</script>

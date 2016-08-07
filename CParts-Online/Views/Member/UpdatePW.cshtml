@@ -1,0 +1,43 @@
+﻿@model CParts_Online.Models.UpdatePassWordVM
+@{
+    ViewBag.Title = "修改密码|诚配网";
+    Layout = "~/Views/Shared/_UserHome.cshtml";
+}
+<div > 
+    <h3>个人信息</h3>
+ <h4 class="pull-left bold-weight-600">修改密码</h4>
+    <div style="clear:both"></div>
+    
+   @using (Html.BeginForm("UpdatePW", "Member", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "UpdatePWForm" }))
+   {
+       if (ViewBag.msg != null)
+       { 
+       <h4 style="color:#e80c4d">@ViewBag.msg</h4>
+       }
+     <table>
+        <tr>
+            <td><h4>旧密码:</h4></td>
+            <td>@Html.PasswordFor(m => m.oldPW, new {@class = "form-control", id="oldPW"})</td>
+            <td style="padding:10px;">@Html.ValidationMessageFor(m => m.oldPW)</td>
+             
+        </tr>
+         <tr>
+            <td><h4>新密码:</h4></td>
+            <td>@Html.PasswordFor(m => m.newPW, new {@class = "form-control", id="newPW"})</td>
+             <td style="padding:10px;">@Html.ValidationMessageFor(m => m.newPW)</td>
+        </tr>
+         <tr>
+            <td><h4>确认密码:</h4></td>
+            <td>@Html.PasswordFor(m => m.RnewPW, new { @class = "form-control",id="RnewPW"})</td>
+             <td style="padding:10px;">@Html.ValidationMessageFor(m => m.RnewPW)</td>
+        </tr>
+         <tr>
+            <td></td>
+            <td style="padding-top:30px;" ><button class="btn btn-danger"  type="submit" id="uppw">确认修改</button></td>
+             <td></td>
+        </tr>
+
+    </table>  
+    }
+    </div>
+

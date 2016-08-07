@@ -1,0 +1,175 @@
+﻿@model CParts_Online.Controllers.PayOrderOM
+@{
+    ViewBag.Title = "选择支付方式";
+    Layout = "~/Views/Shared/_LayoutNoBa.cshtml";
+}
+@section styles{
+   <style>
+       #vouchers ul{
+       list-style:none;
+       }
+       #vouchers ul li{
+           width:150px;         
+       }
+           #vouchers ul li a {
+           text-decoration:none;
+           }
+           .vouchers{
+               padding:10px 10px 20px 0px;
+
+           }
+      .voucher{
+           border:1px solid #ccc;
+           margin-right:15px;
+           padding:8px 5px;
+           font-size:22px;
+           font-weight:600;
+           color:#242121;
+           position:relative;
+       }
+          .select {
+           border:1px solid #f00;
+           }
+    .selectb   {
+     background: url(/content/img/sel.png) no-repeat;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+       }
+    </style>
+    
+    }
+<div class="modal-header">
+    <h3 class="modal-title">选择支付方式</h3>
+</div>
+<div style="border:1px dashed #e8e8e8; padding:20px;">
+    @if(Model.order!=null)
+    { 
+        <p style="font-size:16px">订单总金额：<span style="color:red" id="TPrice">￥@Model.order.TotalPrice</span>&nbsp;&nbsp;&nbsp;&nbsp;减免：<span style="color:red" id="JPrice">￥0</span>&nbsp;&nbsp;&nbsp;&nbsp;应付：<span style="color:red" id="YPrice">￥@Model.order.TotalPrice</span></p>
+        <br />
+      <div style="padding:10px;background:#efefef" >优惠券信息</div>
+    <div id="vouchers" class="vouchers">
+        <ul>
+            @if (Model.voucher.Count == 0)
+            {
+                <h3 style="text-align:center">没有可用优惠券</h3>
+            }
+            else
+            {
+                foreach (var item in Model.voucher)
+                {
+
+                    <li class="pull-left">
+                        <a><div class="voucher" price="@Math.Round(item.Price)" num="@item.VoucherNumber"><img src="~/Content/img/money-icon.png" style="width:30px" />￥@Math.Round(item.Price)<b class=""></b></div></a>
+                    </li>
+                }
+            }
+        </ul>
+        <div class="clear"></div>
+    </div>
+    
+
+    <div style="padding:10px;background:#efefef">现金支付</div>
+        <br />
+        <div class="pull-left">
+            <label class="checkbox-inline">
+                <input type="radio" name="paytype"
+                       value="alipay" checked> <img src="~/pay/alipay/images/16558.png" style="width:120px; margin-left:5px;" />
+            </label>
+        </div>
+        @*
+            <label class="checkbox-inline">
+                <input type="radio" name="optionsRadiosinline" id="optionsRadios4"
+                       value="option2">
+            </label>
+        *@
+        <div class="pull-left" style="padding-left:200px">
+            <button class="btn btn-danger" type="submit" id="btn-submit">支付</button>
+        </div>
+        <div style="width:200px;margin:0px auto;padding-bottom:300px">
+
+        </div>
+    }
+    else { 
+    <h3>订单信息无效</h3>
+    }
+    </div>
+@section scripts{
+    <script>
+        var oid = getQueryString("oid");
+        $(function () {        
+            $("#btn-submit").click(function () {
+                var orderPrice = $("#TPrice").html().substr(1);
+                var couponprice = $(".select").first().attr("price");
+                if (isNull(couponprice))
+                {
+                    couponprice = 0;
+                }
+                var coupon = $(".select").first().attr("num");
+                if (isNull(coupon)) {
+                    coupon = "";
+                }
+                var payprice = $("#YPrice").html().substr(1);
+                var paytype = jQuery("input[name='paytype']:checked").val();
+                var otype = '@(Model.order==null?"0":Model.order.OrderType)';
+                var parm = {
+                    oid: oid,
+                    paytype: paytype,
+                    payprice:payprice,
+                    coupon: coupon,
+                    couponprice: couponprice,
+                    ordertype:otype
+                }
+     
+                Post("/Common/PayOrder", parm, function (data) {
+                    if (data.r=="ok")
+                    {
+                        if (paytype == "alipay") {
+                            window.location.href = "/pay/alipay/send.aspx?oid=" + oid;
+                        } else {
+                            alert("暂未开放");
+                        }
+                    } else if (data.r == "nologin")
+                    {
+                        window.location.href = "/member/login";
+                    } else if (data.r == "error")
+                    {
+                        alert(data.msg);
+                    }
+                })
+
+            });
+
+            $(".voucher").click(function () {
+                var ishas = false;
+                if ($(this).hasClass("select")) {
+                    ishas = true;                  
+                } else {
+                    ishas = false;                  
+                }             
+                $(".voucher").removeClass("select");
+                $(".voucher b").removeClass("selectb");
+                if (ishas) {
+                    $(this).removeClass("select");
+                    $(this).children("b").removeClass("selectb"); 
+                    var Tprice = $("#TPrice").html();                  
+                    $("#JPrice").html("￥" + 0);              
+                    $("#YPrice").html(Tprice);
+                } else {
+                    $(this).addClass("select");
+                    $(this).children("b").addClass("selectb");
+                    var jprice = $(this).attr("price");
+                    var Tprice = $("#TPrice").html().substr(1);
+                    $("#JPrice").html("￥-" + jprice);
+                    var pprice = parseFloat(Tprice) - parseFloat(jprice);
+                    $("#YPrice").html("￥" + pprice.toFixed(2));
+                }
+              
+               // var Jprice = $("#JPrice").html().substr(1);
+               // var Yprice = $("#YPrice").html().substr(1);
+            });
+        })
+    </script>
+    }

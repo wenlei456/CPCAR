@@ -1,0 +1,235 @@
+﻿@model IEnumerable<DAO.Active>
+@{
+    ViewBag.Title = "活动管理";
+    Layout = "~/Views/Shared/_master.cshtml";
+}
+@section styles{
+    <style>
+        td {
+            vertical-align: middle !important;
+        }
+    </style>
+    }
+<div class="content-box">
+    <!-- Start Content Box -->
+    <div class="content-box-header2">
+        <h3>活动管理</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">所有列表</a></li>
+            <!-- href must be unique and match the id of target div -->
+            <li><a href="#tab2" id="f1">添加</a></li>
+            <li><a href="#tab3" id="tabEdit">编辑</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <div>
+
+                <div class="bulk-actions">
+                    活动名称或简码: <input type="text" class="text-input" id="active_name"/> &nbsp;&nbsp;
+                    活动状态: 
+                    <select name="orderStatus" id="active_status">
+                        <option value="all">--所有--</option>
+                        <option value="未开始">未开始</option>
+                        <option value="进行中">进行中</option>  
+                         <option value="已终止">已终止</option>                      
+                        <option value="已结束">已结束</option>                       
+                    </select>&nbsp;&nbsp;               
+                   
+                    开始时间：<input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" id="active_BeginDate"/> 
+                  
+                    结束时间：<input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" id="active_EndDate"/>
+                 
+                    <button class="button"  type="submit">搜索</button>
+                </div>              
+                <br /><br />
+            </div>         
+          <table width="100%" id="orderTable">
+                <thead>
+                    <tr>
+                        <th valign="middle">活动ID</th>
+                        <th valign="middle">活动封面</th>
+                        @*<th valign="middle">活动类型</th>*@
+                        <th valign="middle">活动名称</th>
+                        <th valign="middle">活动代码</th>
+                        <th valign="middle">开始时间</th>
+                        <th valign="middle">结束时间</th> 
+                        <th valign="middle">活动状态</th>    
+                        <th valign="middle">操作</th>
+                    </tr>
+                </thead>               
+                <tbody style="font-size: 14px">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td><img id="img_@item.ID" src="@item.ActiveIMG" style="width:100px;"/></td>
+                        <td id="name_@item.ID">@item.Name</td>
+                        <td id="sname_@item.ID">@item.SubName</td>
+                        <td id="stime_@item.ID">@string.Format("{0:yyyy-MM-dd hh:mm:ss}", item.StarDate)</td>
+                        <td id="etime_@item.ID">@string.Format("{0:yyyy-MM-dd hh:mm:ss}", item.EndDate)</td>
+                        <td>
+                            @if (item.Status == "0")
+                            {
+                            <span style="color:red">终止</span>
+                            }
+                            else if (item.Status == "1")
+                            {
+                                <span style="color:green">正常</span>
+                            }
+                        </td>
+                        <td><a href="#" aid="@item.ID" state="@item.Status" class="edit_active">编辑</a></td>
+                        <td><a></a></td>
+                    </tr>
+                }
+                    
+                </tbody>
+            </table>
+        </div>       
+        <div class="tab-content" id="tab2" style="width: 100%">
+            <form id="form_addActive" action="/Master/AddActive" method="post" enctype="multipart/form-data">
+                <h4>活动添加</h4>
+                <table>
+                    <tr>
+                        <td >封面图片</td>
+                        <td colspan="3">
+                            <input type="file" value="选择图片" name="file" accept="image/*" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>活动名称</td>
+                        <td><input type="text" id="add_Act_Name"  name="Name"/></td>
+                        <td>活动代码</td>
+                        <td><input type="text" id="add_Act_subName" name="SubName" /></td>
+                    </tr>
+                    <tr>
+                        <td>开始时间</td>
+                        <td>
+                            <input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" id="add_Act_sdate" name="StarDate"/>
+                            <select id="add_Act_shour" class="dplist" name="shour"></select>
+                            <select id="add_Act_smin" class="dplist" name="smin"></select>
+                        </td>
+                        <td>截止时间</td>
+                        <td>
+                            <input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" id="add_Act_edate"  name="EndDate"/>
+                            <select id="add_Act_ehour" class="dplist" name="ehour"></select>
+                            <select id="add_Act_emin" class="dplist" name="emin"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>状态：</td>
+                        <td><select id="add_Act_status" name="Status"><option value="0">终止</option><option value="1" selected>正常</option></select></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><button id="btn-add" type="submit">保存活动</button></td>
+                    </tr>
+                </table>
+                </form>
+</div>
+         <div class="tab-content" id="tab3" style="width: 100%">
+             <form id="form_editActive" action="/Master/EditActive" method="post" enctype="multipart/form-data">
+                 <input name="aid" type="hidden" id="hid_aid"/>
+                 <h4>编辑活动</h4>
+                 <table>
+                     <tr>
+                         <td >封面图片</td>
+                         <td colspan="3">
+                             <img src="" style="width:200px;height:200px"  id="edit_Act_img"/>
+                             <input type="file" value="选择图片" name="file" accept="image/*" />
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>活动名称</td>
+                         <td><input type="text" id="edit_Act_Name" name="Name"/></td>
+                         <td>活动代码</td>
+                         <td><input type="text" id="edit_Act_subName" name="SubName"/></td>
+                     </tr>
+                     <tr>
+                         <td>开始时间</td>
+                         <td>
+                             <input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" id="edit_Act_sdate" name="StarDate"/>
+                             <select id="edit_Act_shour" class="dplist" name="shour"></select>
+                             <select id="edit_Act_smin" class="dplist" name="smin"></select>
+                         </td>
+                         <td>截止时间</td>
+                         <td>
+                             <input type="text" readonly="true" class="text-input Wdate" onclick="WdatePicker()" id="edit_Act_edate" name="EndDate"/>
+                             <select id="edit_Act_ehour" class="dplist" name="ehour"></select>
+                             <select id="edit_Act_emin" class="dplist" name="emin"></select>
+                         </td>
+                     </tr>
+                      <tr>
+                        <td>状态：</td>
+                        <td><select id="edit_Act_status" name="Status"><option value="0">终止</option><option value="1" selected>正常</option></select></td>
+                    </tr>
+                     <tr>
+                         <td colspan="4">
+                             <button id="btn_edit">修改</button>
+                         </td>
+                     </tr>
+                 </table>
+                 </form>
+</div>
+        <!-- End #tab2 -->
+    </div>
+    <!-- End .content-box-content -->
+</div>
+@section scripts{
+      <script language="javascript" type="text/javascript" src="/resources/scripts/My97DatePicker/WdatePicker.js"></script>
+    <script>
+        $(function () {
+            $(".dplist option").remove();
+            var hours = []; var min = [];
+            for (var i = 0; i < 24; i++) {
+                hours.push('<option value="' + i + '">' + i + '时</option>');
+            }
+            for (var i = 0; i <60; i++) {
+                min.push('<option value="' + i + '">' + i + '分</option>');
+            }
+            $("#add_Act_shour,#add_Act_ehour,#edit_Act_shour,#edit_Act_ehour").append(hours.join(""));
+            $("#add_Act_smin,#add_Act_emin,#edit_Act_smin,#edit_Act_emin").append(min.join(""));
+            $(".edit_active").click(function () {
+                $("#tabEdit").click();
+                var aid = $(this).attr("aid");
+                var state = $(this).attr("state");
+                var img = $("#img_" + aid).attr("src");
+                var name = $("#name_" + aid).html();
+                var sname = $("#sname_" + aid).html();
+                var stime = $("#stime_" + aid).html();
+                var etime = $("#etime_" + aid).html();
+                $("#hid_aid").val(aid);
+                $("#edit_Act_img").attr("src", img);
+                $("#edit_Act_Name").val(name);
+                $("#edit_Act_subName").val(sname);
+                $("#edit_Act_status").val(state);
+                var stimeD = new Date(stime);
+                var etimeD = new Date(etime);
+                $("#edit_Act_sdate").val(stimeD.toLocaleDateString());
+                $("#edit_Act_ehour").val(stimeD.getHours());
+                $("#edit_Act_smin").val(stimeD.getMinutes());
+                $("#edit_Act_edate").val(etimeD.toLocaleDateString());
+                $("#edit_Act_ehour").val(etimeD.getHours());
+                $("#edit_Act_emin").val(etimeD.getMinutes());
+            });
+            $("#btn_edit").click(function () {
+                document.getElementById("form_editActive").submit();
+            });
+            //添加
+            //$("#btn-add").click(function () {
+            //    var name = $("#add_Act_Name").val();
+            //    var subname = $("#add_Act_subName").val();
+            //    var sdate = $("#add_Act_sdate").val();
+            //    var shour = $("#add_Act_shour").val();
+            //    var smin = $("#add_Act_smin").val();
+            //    var sdate = $("#add_Act_edate").val();
+            //    var shour = $("#add_Act_ehour").val();
+            //    var smin = $("#add_Act_emin").val();
+            //    var state = $("#add_Act_status").val();
+
+            //    document.getElementById("form_addActive").submit();
+            //});
+        })
+    </script>
+    }

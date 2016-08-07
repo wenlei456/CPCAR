@@ -1,0 +1,67 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+    <meta name="keywords" content="诚配,诚配改装,汽车改装,改装件,汽车配件,海外配件,进口配件,保时捷,宝马,奔驰,法拉利,豪车改装,高端改装">
+    <meta name="description" content="">   <meta  />
+       <link href="/content/css/mui.css" rel="stylesheet" />
+     <link href="/content/css/main.css" rel="stylesheet" />
+		<style type="text/css">
+			#list {
+				/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+				margin-top: -1px;               
+			}
+		</style>
+    @RenderSection("styles", required: false)  
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?d252ab9e4e87638601460ea0c7412a01";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+</script>
+</head>
+<body>
+     <div id="modal-bg"></div>
+    <div id="modal-show">
+       <img  src="/content/img/ico/loading.gif"/>
+    </div>
+  
+    <div class="main-container">@RenderBody()</div>
+    @if (ViewBag.isFoot == null || ViewBag.isFoot)
+    {
+   <footer class="pfoot">		
+		<!--<div class="ui-footer-version">
+        <p>我们在致力于打造中国最齐全的汽车改装配件市场!诚配改装网是汽车改装配件电商平台.
+我们能为您快速查找您需要的改装配件，同时提供最放心的交易平台</p>        	
+        </div>-->
+		<!--<div class="ui-footer-version">
+        
+        	<a class="txt-grey-3" href="http://www.91cpcar.com">电脑版</a>
+            <a class="txt-grey-3" href="http://m.91cpcar.com">触屏版</a>
+            <a class="txt-grey-3" href="#">客户端</a>
+        </div>-->
+        <div class="ui-footer-version">        
+        <p>Copyring @@ 2015 诚配91CPCAR.com  版权所有 <br> 湘ICP备15020410号  </p>
+        </div>
+  
+	</footer>
+    }
+</body>
+</html>
+  <script src="/content/js/mui.min.js"></script>
+ <script src="~/Content/js/zepto.min.js"></script>
+<script src="~/Content/js/zepto.cookie.js"></script>
+<script src="~/Content/js/Base.js"></script>
+ @RenderSection("scripts", required: false)  
+<script>
+    if (Validata.IsPC()) {
+      //  window.location.href = "http://www.91cpcar.com";
+    } 
+</script>
+

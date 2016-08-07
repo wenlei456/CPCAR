@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DAO.CarM>  
+@{
+    var carYears = Model.GroupBy(m => m.ProYear).ToList();
+    
+
+}
+<div class="searchTitle">车型选择</div>
+                  <div class="form-group serchDiv">                   
+                    <select class="form-control serchSelect" id="nav_proYear">
+                      <option value="-1">选择出产年份</option>
+                                @foreach (var item in carYears)
+                                                    {
+                                                   <option value="@item.Key">@(item.Key)年</option>
+                                                    }
+                    </select>
+                </div>
+                  <div class="form-group serchDiv">                   
+                    <select class="form-control serchSelect" id="nav_proBrand">
+                     <option value="-1">选择品牌</option>
+                       
+                    </select>
+                </div>
+                  <div class="form-group serchDiv">                   
+                   <select class="form-control serchSelect" id="nav_proModel">
+                         <option value="-1">选择型号</option>
+                    </select>
+                      
+                       </div>
+                 <div class="searchTitle">产品类型</div>
+                    <div class="form-group serchDiv">                   
+                    <button class="btn btn-default btn-block"> 选择类型</button>
+                </div>
+
+@section scripts{
+    <script>
+ 
+    </script>
+    
+    }

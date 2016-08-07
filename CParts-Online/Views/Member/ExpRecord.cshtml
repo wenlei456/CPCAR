@@ -1,0 +1,67 @@
+﻿@model  IEnumerable<DAO.ExpRecord>
+@{
+    ViewBag.Title = "积分记录|诚配网";
+    Layout = "~/Views/Shared/_UserHome.cshtml";
+    var totle = Model.Where(m => m.Status == 1).Sum(m => m.Exp);
+    var dtotle = Model.Where(m => m.Status == 0).Sum(m => m.Exp);
+}
+
+    <style>
+        .expTable {
+        
+        border:1px solid #e8e8e8;
+        }
+        .expTable th {
+        font-weight:600;
+        font-size:16px;
+        padding:10px;
+          text-align:center;
+        }
+        .expTable td{    
+        font-size:15px;
+        padding:10px;
+        text-align:center;
+        }
+
+    </style>
+
+<div > 
+    <h3>积分记录</h3>
+       <h4 class="pull-left bold-weight-600">当前积分：@totle</h4>
+    <div style="clear:both"></div>
+      <h4 class="pull-left bold-weight-600">冻结积分：@dtotle</h4>
+    <div style="clear:both"></div>   
+   <div >
+  
+    <table  style="width:100%" class="expTable">
+        <thead>
+            <tr>
+             <th>序号</th>
+             <th>积分来源</th>
+             <th>积分</th>
+             <th>获得日期</th>
+             <th>积分状态</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+             <td>@item.ID</td>
+             <td>@item.Source</td>
+             <td>@item.Exp</td>
+             <td>@(string.Format("{0:yyyy-MM-dd}",item.Datetime))</td>
+             <td style="color:@(item.Status==0?"red":"green")">@(item.Status==0?"冻结":"正常")</td>
+        </tr>
+        }
+            </tbody>
+       
+         
+    </table>  
+</div>
+    
+
+
+
+
+</div>

@@ -1,0 +1,82 @@
+@charset "utf-8";
+/* CSS Document */
+/*header*/
+.header{position: relative;height: 43px; border-bottom: 1px solid #e6e6e6; z-index: 12000; background: #fff;}
+.header .logo{position:absolute;left:15px;top:0;z-index:1;display:block;width:90px;height:60px;background:url(../images/logo.png) no-repeat; background-size:90px 52px;}
+.header .head-txt{position:absolute;width:140px;height:16px;left:110px;top:14px;z-index:1;display:block;background:url(../images/text.png) no-repeat; background-size: cover;}
+.header .login-box .icon-login{position:absolute;right:13px;top:8px;width:30px;height:30px; font-size: 30px;color:#ccc;}
+.header .login-box .icon-a-r{position:absolute;right:5px;top:8px;width:55px;height:30px;color:#ccc;line-height:30px;color:#848484;}
+.header .login-box .icon-a-r:before{float:right;font-size:10px;}
+.ad_tab{width:100%;position:relative;margin:0 auto;overflow:hidden;}
+.contentbox{position:relative;}
+.arrowbtn{background:#ddd;width:60px;height:60px;cursor:pointer;position:absolute;top:100px;}
+.prebtn{left:0px;}
+.nextbtn{right:0px;}
+.contentimg{position:absolute;top:0;left:0;width:7000px;}
+.contentimg li{float:left;margin-right:0px;overflow:hidden;}
+.contentimg li img{width:100%;}
+.ad_tab .navbox{position:absolute;overflow:hidden;left:50%;bottom:10px;z-index:9;}
+.ad_tab .navbox li{width:8px;height:8px;overflow:hidden;float:left;margin:0px 5px;color:#fff;font-size:12px;line-height:8px;cursor:pointer;text-align:center;border-radius:15px;background:#369;}
+.ad_tab .navbox li.on{color:#ff0;background:#ff8400;}
+.Choosecar{clear:both;position:relative;width:80%;margin:10px auto;}
+.Choosecar a{display:block;background:#f2f2f2;padding:15px;border-radius:5px;color:#848484;font-size:.9rem;text-indent:60px;}
+.menu{clear:both;position: relative;height:170px;}
+.menu ul li{float:left;width:25%;text-align:center;margin-top:25px;}
+.menu ul li a{display:inline-block;}
+.menu ul li a:before{font-size:28px;color:#fff;padding:8px;border-radius:5px;}
+.menu ul li a em{display: block;padding-top:13px;color:#848484;}
+.icon-neishi:before{background:#ff3460;}
+.icon-waishi:before{background:#ff9121;}
+.icon-xingneng:before{background:#ff5115;}
+.icon-zhaoming:before{background:#03acc9;}
+.icon-chelun:before{background:#fb44e3;}
+.icon-yinpin:before{background:#4fd91f;}
+.icon-cheshen:before{background:#16e6f3;}
+.icon-gongju:before{background:#ffaa57;}
+.act-head{height: 2.8rem; line-height: 3.2rem; text-align: center; overflow: hidden; position: relative;background:#f5f5f5;}
+.act-head a{display:block;color:#848484;}
+.act-head em{width: 0.32rem;height: 0.32rem;background: #ccc; border-radius: 50%; display: inline-block; vertical-align: middle;}
+.act-head span{margin:0 10px;}
+.productlist{clear:both;position: relative;margin-top:10px;display:inline-block;width:100%;}
+.productlist ul{margin-right:15px;}
+.productlist ul li{float:left;width:50%;margin-bottom:10px;}
+.productlist ul li a{display: block;margin-left:15px;color:#848484;}
+.productlist ul li a img{width:100%;}
+.productlist ul li span.name{display:block;height:1.2rem;white-space: nowrap;text-overflow:ellipsis;overflow: hidden;line-height:1.2rem;}
+.productlist ul li span.price{color:#e00;height:2rem;line-height:2rem;}
+.productlist ul li span.price em{font-size:1rem;font-weight: bold;}
+.footer{clear:both;background:#f5f5f5;padding:15px;text-align:center;color:#aaa;line-height:1.75rem;}
+.footer span{display:block}
+.cart{position:fixed;z-index:22;right:5px;top:45%;width:40px;height:40px;background:rgba(0,0,0,.7);text-align:center;font-size:20px;line-height:40px;border-radius:50%;overflow: hidden;}
+.cart a.icon-cart{display: block;height:40px;line-height:40px;overflow: hidden;color:#fff;}
+.cart a.icon-cart:after{position:absolute;content:"";display:block;top:6px;right:8px;z-index:1;width:5px;height:5px;background:#ff8ea7;border-radius:50%;}
+.pop{position:fixed;z-index:99999;top:0;right:0;width:90%;height:100%;background:#fff;transform: translateX(100%);-webkit-transform: translateX(100%);overflow-y:auto;}
+.maskdiv{position:fixed;z-index:99900;left:0;top:0;width:100%;height:100%;display:none;background:rgba(0,0,0,.8);}
+.pop.show{-webkit-animation: bouncedelay .5s ;transform: translateX(0%);-webkit-transform: translateX(0%);}
+@-webkit-keyframes bouncedelay{0%, 80%, 100%{-webkit-transform: translateX(100%);} 100%{-webkit-transform: translateX(0%);}}
+.pop ul{display:inline-block;width:100%;}
+.pop ul li{float:left;width:21%;margin:15px 0 0 10px;}
+.pop ul li span{padding:5px 0;border:solid 1px #d1d1d1;display:block;text-align:center;position:relative;}
+.pop ul li span:before{color:#f54f4f;position:absolute;bottom:-15px;left:50%;margin-left:-8px;display:none;}
+.pop ul li div{display:none;margin-top:12px;overflow-y: auto;height:315px;}
+.pop ul li.car-on span{background:#f54f4f;border:solid 1px #f54f4f;color:#fff;}
+.pop ul li.car-on span:before{display:block;}
+.pop ul li.car-on div{display:block;background:#f5f5f5;border:solid 1px #f54f4f;padding:10px;left:0;}
+.pop ul li div ol{display:inline-block;}
+.pop ul li div ol li{text-align:center;margin:0 18px 10px 8px;width:80px;height:73px;}
+.pop ul li div ol li em{display:inline-block;}
+.pop ul li div ol li em img{width:80px;}
+.pop ul li div ol li p{width:100%;text-align:center;display:none;height:100%;background:rgba(0,0,0,.8);position: absolute;z-index: 1;top:0;left:0;}
+.pop ul li div ol li p a{display:block;background:#fff;border:solid 1px #d1d1d1;margin:10px 20px;padding:8px 0;}
+.pop ul li div ol li.showp p{display:block;}
+.pop ul li div ol li p i{display:block;width:20px;height:20px;background:#fff;border-radius:50%;margin:10px 0;overflow: hidden;position:relative;}
+.pop ul li div ol li p i:before,.pop ul li div ol li p i:after{position:absolute;z-index:1;left:3px;top:9px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);content:"";display:block;width:14px;height:2px;background:#ff7300;}
+.pop ul li div ol li p i:after{transform:rotate(45deg);-webkit-transform:rotate(45deg);}
+@media only screen and (max-width: 413px) {
+.pop ul li div ol li{margin:0 18px 10px 0;}
+.pop ul li div{height:235px;}
+}
+@media only screen and (max-width: 374px) {
+.pop ul li div ol li{margin:0 18px 10px 16px;}
+.pop ul li div{height:165px;}
+}

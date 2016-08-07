@@ -1,0 +1,74 @@
+﻿@model  IEnumerable<DAO.PartsCategory>
+@{
+    ViewBag.Title = "产品列表|诚配网";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.banner = "/content/img/banner4.jpg";
+}
+ <div class="ProMain">
+     @if (Model.Count() > 0)
+     {
+        <div class="ProNav">           
+              <div>产品分类</div>           
+              </div>
+               @*
+                  <div><a href="/Product/Index/" style="color:#1d2088">首页</a>
+                                @foreach (var item in Model.parentCate)
+                               {
+                                @:/ <a href="/Product/TypeListByCar2?t=@item.ID&&c=@Model.Carinfo.ID" style="color:#1d2088"> @item.CategoryName</a>
+                               }                       
+                  </div>
+          </div>*@
+     
+             foreach (var citem in Model.Where(m=>m.ParentID==0))
+             {
+                 var childenrs = Model.Where(m=>m.ParentID==citem.ID);
+                 if(childenrs.Count()<1)
+                 {
+                     continue;
+                 }
+                
+                 <div class="ProArea">
+             <div class="ProTitle">               
+                 <div class="ProTitleImg left" style="background-image:url(@citem.ICOPath)"></div>                
+                 <div class="ProTitleImgN"></div>
+                 <div class="clear"></div>
+             </div>
+              <div class="ProList">
+                  @if (childenrs != null && childenrs.Count() > 0)
+                  {
+                      foreach (var item in childenrs)
+                      {
+                          <a href="/Product/TypeList/@item.ID">
+                          <div class="ProItem left">
+                              <div class="ProItemImg">
+                                  @if (string.IsNullOrEmpty(item.ICOPath))
+                                  {
+                                  <img src="/content/img/noimg.jpg" />
+                                  }else{
+                                   <img src="@item.ICOPath" />
+                                  }
+                              </div>
+                              <div class="ProItemName">@item.CategoryName</div>
+                                <div class="ProItemName2"></div>
+                              <div></div>
+                          </div>
+                              </a>
+                      }
+                  }                 
+                
+              </div>
+          </div>
+          <div class="clear"></div>
+             }               
+             
+         
+     }else{
+     <h2>没有找到该产品</h2>
+     }
+             <div class="clear"></div>
+         
+           
+
+
+
+        </div>

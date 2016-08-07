@@ -1,0 +1,411 @@
+﻿@model Cparts_service.Model.OrderDetail
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Views/Shared/_master.cshtml";
+    decimal ptotlePrice = Model.opList.Sum(m => m.Price * m.Num);
+}
+@section styles{
+    <style>
+        .od-head {
+            border: 1px solid #EED97C;
+            padding: 15px 20px;
+            background: #FFFCEB;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        .od-title {
+            font-weight: 600;
+        }
+
+        .od-detail {
+            padding: 5px 0px;
+        }
+
+        .odImg img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .odName {
+            width: 500px;
+        }
+
+        .orderTotlaAre tr {
+            height: 30px;
+        }
+    </style>
+}
+
+   <script src="/Content/js/common/base.js"></script>
+@section scripts{
+    <script>
+        $(function () {
+            var orderStatu = '@Model.order.OrderStatus';
+            var payStatu = '@Model.order.PayStatus';
+            var sendNO = '@(Model.order.SendNum==null?"":Model.order.SendNum)';
+            var uName = '@Model.order.Consignee';
+            var tell = '@Model.order.CellPhone';
+            var address = '@Model.order.Prov' + '@Model.order.City' + '@Model.order.Area' + '@Model.order.Address';
+
+            $("#SendOrder").click(function () {
+                if (payStatu == "未支付") {
+                    if (confirm('订单没有支付，确定要发货？')) {
+                        var sendNum = $("#SandNumber").val();
+                        if (sendNO.length > 0 && sendNO != sendNum) {
+                            if (confirm('已经发货了，是否更改发货单？')) {
+                                if (sendNum.length > 0) {
+                                    var obj = {
+                                        OrderNumber: $("#OrderNumber").val(),
+                                        SendName: $("#SendName").val(),
+                                        SandNumber: $("#SandNumber").val()
+                                    }
+                                    Post("/Master/SendOrder", obj, function (data, error) {
+                                        if (data.status) {
+                                            alert("发货成功");
+                                            window.open("/html/day.aspx?uName=" + uName + "&tell=" + tell + "&address=" + address);
+                                            window.location.href = window.location.href;
+                                        } else {
+                                            alert("发货失败");
+                                        }
+
+                                    })
+                                } else {
+                                    alert("快递单号不能为空");
+                                }
+                            }
+                        } else {
+                            if (sendNum.length > 0) {
+                                var obj = {
+                                    OrderNumber: $("#OrderNumber").val(),
+                                    SendName: $("#SendName").val(),
+                                    SandNumber: $("#SandNumber").val()
+                                }
+                                Post("/Master/SendOrder", obj, function (data, error) {
+                                    if (data.status) {
+                                        alert("发货成功");
+                                        window.open("/html/day.aspx?uName=" + uName + "&tell=" + tell + "&address=" + address);
+                                        window.location.href = window.location.href;
+                                    } else {
+                                        alert(data.msg);
+                                    }
+
+                                })
+                            } else {
+                                alert("快递单号不能为空");
+                            }
+
+                        }
+                    }
+                }
+                else {
+                    if (confirm('确定要发货？')) {
+                        var sendNum = $("#SandNumber").val();
+                        if (sendNO.length > 0 && sendNO != sendNum) {
+                            if (confirm('已经发货了，是否更改发货单？')) {
+                                if (sendNum.length > 0) {
+                                    var obj = {
+                                        OrderNumber: $("#OrderNumber").val(),
+                                        SendName: $("#SendName").val(),
+                                        SandNumber: $("#SandNumber").val()
+                                    }
+                                    Post("/Master/SendOrder", obj, function (data, error) {
+                                        if (data.status) {
+                                            alert("发货成功");
+                                            window.open("/html/day.aspx?uName=" + uName + "&tell=" + tell + "&address=" + address);
+                                            window.location.href = window.location.href;
+                                        } else {
+                                            alert("发货失败");
+                                        }
+
+                                    })
+                                } else {
+                                    alert("快递单号不能为空");
+                                }
+                            }
+                        } else {
+                            if (sendNum.length > 0) {
+                                var obj = {
+                                    OrderNumber: $("#OrderNumber").val(),
+                                    SendName: $("#SendName").val(),
+                                    SandNumber: $("#SandNumber").val()
+                                }
+                                Post("/Master/SendOrder", obj, function (data, error) {
+                                    if (data.status) {
+                                        alert("发货成功");
+                                        window.open("/html/day.aspx?uName=" + uName + "&tell=" + tell + "&address=" + address);
+                                        window.location.href = window.location.href;
+                                    } else {
+                                        alert(data.msg);
+                                    }
+
+                                })
+                            } else {
+                                alert("快递单号不能为空");
+                            }
+
+                        }
+                    }
+                }
+
+            })
+            $("#cancelSend").click(function () {
+                if (confirm('确定要取消发货？将更改订单与物流信息！'))
+                {
+                    var obj = {
+                        OrderNumber: $("#OrderNumber").val(),
+                        SendName: "",
+                        SandNumber: ""
+                    }
+                    Post("/Master/SendOrder", obj, function (data, error) {
+                        if (data.status) {
+                            alert("取消发货成功");
+                            window.location.href = window.location.href;
+                        } else {
+
+                            alert(data.msg);
+                        }
+
+                    })
+                }
+
+            })
+        })
+
+    </script>
+    
+    }
+<script type="text/javascript">
+   
+    $(function () {
+        $("#bianj").click(function () {
+            $("#tab2").show();
+            var oid = getQueryString("OrderNumber");
+            Post("/Master/detail/", { 'OrderNumber': oid }, function (data, error) {
+                $("#consignee").val(data.name);
+                $("#cmbProvince").val(data.Prov);
+                $("#cmbCity").val(data.City);
+                $("#cmbArea").val(data.Area);
+                $("#Address").val(data.Address);
+                $("#phon").val(data.CellPhone);
+            })
+            $("#btn_edit").click(function () {
+                document.getElementById("btn_edit").submit();
+            });
+        })
+    });
+</script>
+ <div class="modal-header">              
+    <h2 class="modal-title">订单详情</h2>
+ </div>
+
+<div class="od-head">
+    <strong>订单号：@Model.order.OrderId &nbsp;&nbsp;&nbsp;&nbsp; 
+        状态：@if(Model.order.OrderStatus=="未处理"){<span style="color:red;">未处理</span>}else{<span style="color:green;">@Model.order.OrderStatus</span>}  &nbsp;&nbsp;&nbsp;&nbsp; 
+        支付状态：@if (Model.order.PayStatus == "未支付")
+             {<span style="color:red;">未支付</span>}else{<span style="color:green;"> @Model.order.PayStatus</span>}</strong>
+    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+
+</div>
+<div class="od-head" id="tab1">
+    <div class="" style="float:left; width:600px">
+    <h4 style="font-weight:600; ">订单信息</h4>
+    <div class="od-title">收获人信息</div><br />
+    <div id="Consignee_@Model.order.Uid" class="od-detail">收货人：@Model.order.Consignee</div>
+    <div id="Prov_@Model.order.Uid">地 址 ：@Model.order.Prov  </div>
+     <div id="City_@Model.order.Uid">城市：@Model.order.City</div>
+        <div id="Area_@Model.order.Uid">地区：@Model.order.Area</div>
+      <div id="Address_@Model.order.Uid">详细地址：@Model.order.Address</div>
+    <div class="od-detail" id="phone_@Model.order.Uid">手机号码：@Model.order.CellPhone</div>
+            <div id="edit">
+        <a id="bianj" href="#" eid="@Model.order.ID">编辑</a>
+    </div>
+    <br /><br />
+    <div class="od-title">支付及配送方式</div><br />
+    <div class="od-detail">支付方式：@(string.IsNullOrEmpty(Model.order.Payment)?"未支付":Model.order.Payment)</div>
+    @*<div class="od-detail">支付日期：20152541524</div>*@
+    <div class="od-detail">物流公司：@Model.order.SendName</div>
+    <div class="od-detail">运单号：@Model.order.SendNum</div>
+  <input name="aid" type="hidden" value="@Model.order.Uid" id="hid_aid"/>
+    <br /><br />
+    @*<div class="od-title">积分及折扣</div><br />*@
+        <div class="od-title">积分</div><br />
+    <div class="od-detail">获得积分：152</div>
+    @*<div class="od-detail">折扣：@(Model.order.Ratio*100)%</div>*@
+    <br /><br />
+        </div>
+    </div>
+       @******************* 编辑**********@
+        <div id="tab2" style="display:none">
+                 
+                 <h4>编辑地址</h4>
+                 <table border="1">
+                     <tr>
+                         <td>收货人</td>
+                         <td><input type="text" id="consignee" name="consignee"/></td>
+                         </tr>
+                        
+                            <tr>
+                         <td>省区</td>
+                         <td> <select class="form-control" id="cmbProvince">
+                    <option>选择省份</option>                   
+                </select></td>
+                     </tr>
+                            <tr>
+                         <td>地址</td>
+                         <td><select class="form-control" id="cmbCity">
+                    <option>选择城市</option>                   
+                </select></td>
+                     </tr>
+                     <tr>
+                         <td>辖区</td>
+                         <td>  <select class="form-control"  id="cmbArea">
+                    <option>选择辖区</option>   
+                              </select></td>
+                       
+                     </tr>
+                     <tr>
+                         <td>详细地址:</td>
+                          <td>   <input type="text" id="Address" name="Address" /> </td>
+                        
+                     </tr>
+                         <tr>
+                         <td>手机号</td>
+                         <td><input type="text" id="phon" name="phon" /></td>
+                     </tr>
+
+                     <tr>
+                         <td colspan="4">
+                             <button type="button" id="btn_edit">修改</button>
+                         </td>
+                     </tr>
+                 </table>
+</div>
+         @******************* 编辑**********@
+    <div style="float:left;">
+          <h4 style="font-weight:600; ">订单处理</h4>
+        <br />
+        <div class="SendAre">
+            <div>
+                <form>
+                    <input  type="hidden" value="@Model.order.OrderId" name="OrderNumber" id="OrderNumber"/>
+                    <select name="SendName" id="SendName">
+                         <option value="EMS">EMS</option>
+                        <option value="顺丰速运">顺丰速运</option>
+                        <option value="中通快递">中通快递</option>
+                        <option value="申通快递">申通快递</option>
+                        <option value="圆通快递">圆通快递</option>
+                        <option value="韵达快递">韵达快递</option>
+                        <option value="百世汇通">百世汇通</option>
+                    </select>
+                    <input id="SandNumber" name="SandNumber" class="text-input" />
+                    <a href="javascript:void(0)" class="button" id="SendOrder">发货</a>                   
+                </form>               
+            </div> 
+            @if (Model.order.OrderStatus=="已发货")
+            {
+            <div style="padding-top:20px;"><a id="cancelSend" href="javascript:void(0)" style="color: #fff; background: red; padding: 10px;display:block; width:60px;">取消发货</a></div>         
+            }
+                </div>
+       
+
+
+    </div>
+    <div style="clear:both;"></div>
+    <div class="od-title">商品清单</div><br />
+       <div class="tab-contents">
+       @* <div id="all" class="tab-content">*@
+    <table style="width:100%" border="1">
+        <thead>
+            <tr>
+            <th>商品图片</th>
+            <th style="width:500px;">商品名称</th>
+                 <th style="width:500px;">商品属性</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>总金额</th>
+            <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.opList)
+            {
+                 var imgItem=Model.pimgList.Where(m=>m.PartID==item.ProductID).FirstOrDefault();
+                 var imgPath = imgItem == null ? "/content/img/noimg.jpg" : imgItem.ImgPath;
+                     
+                  <tr class="plist">
+                    <td>
+                        <div class="odImg" ><a target="_blank"  href="/Product/detail/@item.ID"><img  src="@imgPath"/></a></div>                        
+                    </td>
+                      <td>
+                    <a target="_blank"  href="/Product/detail/@item.ID"> @item.ProductName</a>
+                         
+                      </td>
+                      <td>@item.AttrDecribe</td>
+                      <td>
+                           <div class="">￥ @(item.Price.ToString(".00"))</div>
+                      </td>
+                      <td>
+                          <div class="">x @(item.Num)</div>
+                      </td>
+                       <td>
+                          <div class="">￥ @((item.Num * item.Price).ToString(".00"))</div>
+                      </td>
+                      <td></td>
+
+                      </tr>                       
+            }
+
+        </tbody>        
+    </table>
+           </div>
+        <div style="float:right; padding:20px;">
+            <table class="orderTotlaAre">
+                <tr>
+                    <td style="text-align:right">总商品金额:</td>
+                    <td style="padding-left:15px">￥@ptotlePrice</td>
+                </tr>
+                <tr>
+                    <td  style="text-align:right">优惠金额:</td>
+                    <td style="padding-left:15px">￥-@Model.order.DiscountAmount</td>
+                </tr>
+                <tr>
+                    <td  style="text-align:right; font-size:16px; font-weight:600">应付总金额:</td>
+                    <td style="padding-left:15px; color:#f00;font-size:18px; font-weight:600">￥@Model.order.TotalPrice</td>
+                </tr>
+
+            </table>                       
+
+         </div>
+           <div style="clear:both;"></div>
+
+<script src="/Content/js/jsAddress.js">  </script>
+    <script>
+        $("#btn_edit").click(function () {
+            var oid = getQueryString("OrderNumber");
+
+                var sendInfo = {
+                    Consignee: $("#consignee").val(),
+                    Prov: $("#cmbProvince").val(),
+                    City: $("#cmbCity").val(),
+                    Address: $("#Address").val(),
+                    Area: $("#cmbArea").val(),
+                    CellPhone: $("#phon").val(),
+                    Uid: $("#hid_aid").val(),
+                    OrderId: oid
+            }
+                Post("/Master/editdizd/", { sendInfo: JSON.stringify(sendInfo) }, function (data, error) {
+
+                    if (data.status == 'ok') {
+                        alert(data.msg);
+                        location.href = "/master/index";
+                    }
+                    else { 
+                        alert(data.msg);
+                    }
+
+                })
+        })
+                        
+        addressInit('cmbProvince', 'cmbCity', 'cmbArea', '湖南', '岳阳市', '岳阳楼区');//, '陕西', '宝鸡市', '金台区'
+    </script>

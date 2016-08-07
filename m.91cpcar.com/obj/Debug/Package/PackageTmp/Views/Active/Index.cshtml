@@ -1,0 +1,184 @@
+﻿@model m.cpcar.com.Controllers.OutModel
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+}
+@section styles{
+    <style>
+           .price {
+        text-decoration: line-through;
+        }
+               .pro-1, .pro-2 {
+        width:100%;
+        padding:10px;
+        }
+    </style>
+   
+    }
+<header class="mui-bar mui-bar-nav">
+    	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome"><img class="head-ico" src="/content/img/ico/icon_phome.png"></a>
+    <a class="mui-pull-right" href="/Product/getCar"><img class="head-ico" src="/content/img/ico/icon_shopcar.png"></a>
+    <div class="head-title">@(string.IsNullOrEmpty(Model.active.Name)?"活动页":Model.active.Name)</div>
+</header>
+
+<div class="mui-content mui-row mui-fullscreen">
+      @*   @if(Model.active!=null)
+        {               
+                               	<ul class="mui-table-view mui-grid-view">
+                                     @foreach (var item in Model.parts)
+	                                    {
+		                                 <li class="mui-table-view-cell mui-media mui-col-xs-6">
+		                                    <a href="/Active/ProDetail?id=@item.ID&&aid=@Model.active.ID">
+		                                        <img class="mui-media-object" src="http://91cpcar.com@item.imgpath">
+                                                     <p class="price">@item.Price</p>
+		                                        <div class="mui-media-body">@item.PartName</div>
+		                                    </a>
+		                                 </li>
+	                                    }
+                                       </ul>
+         }else{
+         <p>活动不存在</p>
+         }*@
+
+    <div style="background-image:url(/html/5-1/bg.jpg); width:100%; margin:0px auto;">
+        @if (Model.active != null)
+        {
+            @*<h3>@Model.active.Name</h3>
+            <h4>测试优惠产品列表</h4>*@
+             <div><img src="/html/5-1/1.png" style="width:100%" /></div>
+              <div><img src="/html/5-1/2.png" style="width:100%" /></div>
+    <div style="position:absolute; top:200px;left:65%; cursor:pointer;" onclick="flink()"><img src="~/html/5-1/btn-reg.jpg"  style="width:128px;" /></div>
+            for (int item = 0; item < Model.parts.Count; item++)
+            {
+                if (item % 2 == 0)
+                {
+                    var ap = Model.activePro.Where(m => m.ProID == Model.parts[item].ID).FirstOrDefault();
+
+                    int i = ap == null ? 0 : Convert.ToInt32(ap.Stock);
+                        <div class="pro-1">
+                            <a href="/Active/ProDetail?id=@Model.parts[item].ID&&aid=@Model.active.ID">
+                                <div style="float:left;">
+                                    <img src="http://91cpcar.com/@Model.parts[item].imgpath" style="width:150px" />
+                                </div>                           
+                                <div style="float:right;color:#faf83c; font-size:16px; font-weight:600; width:50% ; padding-left:10px">
+                                         <div >
+                                    @Model.parts[item].PartName
+                                        </div>
+                                    <div >
+                                        <div style="float:left; padding-top:20px" ><img  src="~/html/5-1/free.png" style="width:120px"/></div>
+                                    <div style="float:left;  position:relative" ><img  src="~/html/5-1/qty_pao.png" style="width:60px"/><div style="position:absolute; left:10px;top:10px; color:#044171; font-size:13px">限量<br />@(i)套</div></div>
+                                          <div style="clear:both;"></div>
+                                    </div>
+                                </div>
+                                  <div style="clear:both;"></div>
+                            </a>
+                        </div>
+                   }
+                   else
+                   {
+                       var ap = Model.activePro.Where(m => m.ProID == Model.parts[item].ID).FirstOrDefault();
+
+                       int i = ap == null ? 0 : Convert.ToInt32(ap.Stock);
+                    <div class="pro-1">
+                        <a href="/Active/ProDetail?id=@Model.parts[item].ID&&aid=@Model.active.ID">
+                            <div style="float:right;">
+                                <img src="http://91cpcar.com/@Model.parts[item].imgpath" style="width:150px" />
+                            </div>
+                            <div style="float:left;color:#faf83c; font-size:16px; font-weight:600; width:50% ; padding-left:10px">
+                                <div>
+                                    @Model.parts[item].PartName
+                                </div>
+                                <div>
+                                    <div style="float:left; padding-top:20px"><img src="~/html/5-1/free.png" style="width:120px" /></div>
+                                    <div style="float:left;  position:relative"><img src="~/html/5-1/qty_pao.png" style="width:60px" /><div style="position:absolute; left:10px;top:10px; color:#044171; font-size:13px">限量<br />@(i)套</div></div>
+                                    <div style="clear:both;"></div>
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </a>
+                    </div>
+
+                   }
+
+                }
+                <div><img style="width:100%;"  src="~/html/5-1/8.jpg"/></div>
+                    <div>
+                        @if (Model.aimg.Count > 0)
+                        {
+                            <div id="slider" class="mui-slider">
+                                <div class="mui-slider-group mui-slider-loop">
+
+                                    <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+                                    <div class="mui-slider-item mui-slider-item-duplicate">
+                                             <img src="http://91cpcar.com/@Model.aimg[Model.aimg.Count-1].ImgPath">                                   
+                                    </div>
+
+                                    @foreach (var item in Model.aimg)
+                                    {
+                                        <div class="mui-slider-item">
+                                                 <img src="http://91cpcar.com/@item.ImgPath">                                    
+                                        </div>
+                                    }
+                                    <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+                                    <div class="mui-slider-item mui-slider-item-duplicate">                                     
+                                            <img src="http://91cpcar.com/@Model.aimg[0].ImgPath">                                     
+                                    </div>
+
+                                </div>
+                                <div class="mui-slider-indicator">
+                                    <div class="mui-indicator mui-active"></div>
+                                    <div class="mui-indicator"></div>
+                                    <div class="mui-indicator"></div>
+                                    <div class="mui-indicator"></div>
+                                    <div class="mui-indicator"></div>
+                                </div>
+                            </div>
+                        }
+
+
+
+
+                    </div>
+        }
+        else
+        {
+            <p>活动不存在</p>
+        }
+
+    </div>
+
+	</div>
+@section scripts{
+    <script>
+        var q = getQueryString("puser");
+        function flink() {
+            window.location.href = "/member/reg?timeExp=" + randomChar(32) + "&&puser=" + q + "&&usePK=" + randomChar(32);
+
+        }
+        //获取URL参数
+        function getQueryString(value) {
+            var reg = new RegExp("(^|&)" + value + "=([^&]*)(&|$)", "i");
+            var href = decodeURI(window.location.search);
+            var r = href.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            } else {
+                return "";
+            }
+
+        }
+        //生成一个时间戳字符串
+        function randomChar(l) {
+            var x = "0123456789qwertyuioplkjhgfdsazxcvbnm";
+            var tmp = "";
+            var timestamp = new Date().getTime();
+            for (var i = 0; i < l; i++) {
+                tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length);
+            }
+            return timestamp + tmp;
+        }
+
+</script>
+    }

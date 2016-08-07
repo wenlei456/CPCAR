@@ -1,0 +1,164 @@
+﻿@model CParts_Online.Models.RegUserModel
+@{
+    ViewBag.Title = "注册新用户|诚配网";
+    Layout = "~/Views/Shared/_LayoutNoBa.cshtml";
+}
+
+   @using (Html.BeginForm("RegMember", "Member", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "RegForm" }))
+{          
+       <div class="modal-header">
+              
+                <h2 class="modal-title" id="myModalLabel">注册新账号</h2>
+            </div>
+            <div class="modal-body">
+                          <div class="form-group">
+                        <label for="loginName" class="col-sm-3 control-label"></label>
+                        <div class="col-sm-5">
+                          <a href="/Member/Login"><h4> 已有账号？立刻登录----></h4></a>
+                        </div>
+                        
+                     
+                    </div>
+                    <div class="form-group">
+                        <label for="loginName" class="col-sm-3 control-label">用户名</label>
+                        <div class="col-sm-5">
+                             @Html.TextBoxFor(m => m.loginName, new { @class = "form-control", id = "loginName", placeholder = "长度限定4-30" })
+             
+                        </div>
+                         @Html.ValidationMessageFor(m => m.loginName)
+                     
+                    </div>
+                    <div class="form-group">
+                        <label for="passWord" class="col-sm-3 control-label">密码</label>
+                        <div class="col-sm-5">
+                            @Html.PasswordFor(m => m.passWord, new { @class = "form-control", id = "passWord", placeholder = "限定8-20英文字" })
+                </div>
+                @Html.ValidationMessageFor(m => m.passWord)
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassWord" class="col-sm-3 control-label">确认密码</label>
+                        <div class="col-sm-5">
+                            @Html.PasswordFor(m => m.confirmPassWord, new { @class = "form-control", id = "confirmPassWord", placeholder = "请再次输入密码" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.confirmPassWord)
+                    </div>                    
+                    <div class="form-group">
+                        <label for="eMail" class="col-sm-3 control-label">邮箱</label>
+                        <div class="col-sm-5">
+                            @Html.TextBoxFor(m => m.eMail, new { @class = "form-control", id = "eMail", placeholder = "绑定邮箱以获取激活邮件" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.eMail)
+                    </div>                    
+                    <div class="form-group">
+                        <label for="PhoneNumber" class="col-sm-3 control-label">手机号</label>
+                        <div class="col-sm-5">
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", id = "PhoneNumber", placeholder = "输入手机号获取验证码" })
+                            @Html.ValidationMessageFor(m => m.PhoneNumber)
+                        </div>
+                        <input type="button" id="PhoneCodeShow" name="PhoneCodeShow" class="btn-sm" value="获取验证码" />
+                    </div>
+                    <div class="form-group">
+                        <label for="PhoneCode" class="col-sm-3 control-label">手机验证码</label>
+                        <div class="col-sm-2">
+                            @Html.TextBoxFor(m => m.PhoneCode, new { @class = "form-control", id = "PhoneCode" })                         
+                        </div>
+                        @Html.ValidationMessageFor(m => m.PhoneCode)
+                        <span style="color:red"> @ViewBag.phoneCodeValid </span>
+                    </div>    
+                    <div class="form-group">
+                        <label for="FriendCode" class="col-sm-3 control-label">邀请码</label>
+                        <div class="col-sm-2">
+                            @Html.TextBoxFor(m => m.FriendCode, new { @class = "form-control", id = "FriendCode" })                  
+                        </div>
+                           <div class="col-sm-3" style="padding-top:5px">
+                               <span style="color:red;"> 如果你有邀请码，请输入 </span>           
+                        </div>
+                        @Html.ValidationMessageFor(m => m.FriendCode)
+                    </div> 
+                    <div class="form-group">
+                        <label for="VeriCode" class="col-sm-3 control-label">输入验证码</label>
+                        <div class="col-sm-1">
+                            @Html.TextBoxFor(m => m.VeriCode, new { @class = "form-control", id = "VeriCode" })
+                            @Html.ValidationMessageFor(m => m.VeriCode)
+                        </div>
+                        <img src="/ValidateCode.ashx" id="changeVerCode" style="cursor: pointer" alt="看不清楚，换一个" title="看不清楚，换一个" />
+
+                    </div>
+                <div class="form-group">
+                    <label for="VeriCode" class="col-sm-3 control-label"></label>
+                    <div class="col-sm-3">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                            注册
+                        </button>
+                    </div>
+
+                </div>
+              
+            </div>
+         
+                            }
+     @section scripts{
+         <script type="text/javascript">
+
+        $(function () {
+            var puser = getQueryString("puser");
+            if (!isNull(puser)) {
+                $("#FriendCode").val(puser);
+            }
+            $("#PhoneCodeShow").click(function () {
+                var PhoneNumber = $("#PhoneNumber").val();
+
+                var jsonObj = new Object();
+                jsonObj.PhoneNumber = PhoneNumber;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Member/PhoneNumber",
+                    data: jsonObj,
+                    dataType: 'json',
+                    success: function (msg) {
+                        if (msg == "false") {
+                            alert("获取验证码失败");
+                        }
+
+                    }
+
+                })
+                if ("" != $.trim(PhoneNumber)) {
+                    curCount = 60;
+                    $("#PhoneCodeShow").attr("disabled", "true");
+                    $("#PhoneCodeShow").val("请在" + curCount + "秒后重新获取");
+                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    /*   $.ajax({
+                         type: "POST",
+                         url: "/Test/PhoneCodeShow",
+                         data:{PhoneNumber:PhoneNumber},
+                         success: function(mess) {
+                         　　alert(mess);
+                             });
+                         }
+                     });*/
+                } else {
+                    alert("请输入手机号！")
+                }
+
+            });
+
+        });
+
+        //timer处理函数
+        function SetRemainTime() {
+            if (curCount == 0) {
+                window.clearInterval(InterValObj);//停止计时器
+                $("#PhoneCodeShow").removeAttr("disabled");//启用按钮
+                $("#PhoneCodeShow").val("重新发送验证码");
+            }
+            else {
+                curCount--;
+                $("#PhoneCodeShow").val("请在" + curCount + "秒后重新获取");
+            }
+        }
+</script>
+
+         
+         }

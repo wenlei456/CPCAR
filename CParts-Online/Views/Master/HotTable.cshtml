@@ -1,0 +1,236 @@
+﻿@model IEnumerable<DAO.HotTable>
+@{
+    ViewBag.Title = "热卖分类管理";
+    Layout = "~/Views/Shared/_master.cshtml";
+  
+}
+
+
+
+<div class="content-box">
+    <!-- Start Content Box -->
+    <div class="content-box-header2">
+        <h3>热卖分类管理</h3>
+        <ul class="content-box-tabs">
+            <li><a href="#tab1" class="default-tab">所有列表</a></li>
+            <!-- href must be unique and match the id of target div -->
+            <li><a href="#tab2" id="f1">添加</a></li>
+            <li><a href="#tab3" id="tabEdit">编辑</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <!-- End .content-box-header -->
+    <div class="content-box-content">
+        <div class="tab-content default-tab" id="tab1">
+            <div>
+                <div class="bulk-actions">
+                    
+                </div>
+
+            </div>
+
+
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th valign="middle">
+                            <input class="check-all" type="checkbox" />
+                        </th>
+                        <th valign="middle">热卖分类名称</th>
+                        <th valign="middle">是否启用</th>
+                          
+                        <th valign="middle">操作</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <button class="button">删除</button>
+                            <div class="clear"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody style="font-size: 12px">
+                    @foreach (var item in Model)
+                    {
+                         <tr>
+                        <td >
+                            <input  type="checkbox"  class="check"/>
+                        </td>
+                        <td >@item.HotName</td>
+                        <td >@(item.Status==1?"是":"否")</td>
+                             
+                        <td ><a class="button edit" levelid="@item.ID" levelratio="@item.Status" levlName="@item.HotName" >编辑</a>&nbsp;&nbsp;<a class="button del" levelid="@item.ID">删除</a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- End #tab1 -->
+        <div class="tab-content" id="tab2" style="width: 100%">
+            <form method="post" action="/Master/AddHot" id="addForm">
+            <table width="30%">
+                <tr>
+                    <td>热卖分类名称:</td>
+                    <td>
+                        <input type="text" id="txtName" name="Name"  /></td>
+                </tr>
+                <tr>
+                    <td>是否启用:</td>
+                   
+                    <td><input type="text"  id="txtIsBool" name="IsBool" />1或者0，1是启用</td>
+                </tr>
+                <tr>
+                    <td>排序:</td>
+                   
+                    <td><input type="text"  id="txtPx" name="Px" />填写数字</td>
+                </tr>
+          
+                <tfoot>
+                    <tr>
+                      
+                        <td><a class="button" id="save" >保存</a></td>
+                       <td><p style="color:red; display:none" id="errorMsg">信息不完整！</p></td>
+                    </tr>
+
+                </tfoot>
+            </table>
+            <div class="clear">
+            </div>
+                </form>
+            <!-- End .clear -->
+
+        </div>
+
+
+         <div class="tab-content" id="tab3" style="width: 100%">
+
+         <form method="post" action="/Master/EditHot" id="EaddForm">
+            <table width="30%">
+                <tr>
+                    <td>热卖分类名称:</td>
+                    <td>
+                        <input type="hidden" id="Eid" name="ID"  />
+                        <input type="text" id="EtxtName" name="Name"  /></td>
+                </tr>
+               
+                <tr>
+                    <td>是否启用:</td>
+                   
+                    <td><input type="text"  id="EtxtIsBool" name="IsBool" />1或者0，1是启用</td>
+                </tr>
+                  <tr>
+                    <td>排序:</td>
+                   
+                    <td><input type="text"  id="EtxtPx" name="Px" />填写数字</td>
+                </tr>
+                <tfoot>
+                    <tr>
+                      
+                        <td><a class="button" id="Esave" >保存</a></td>
+                       <td><p style="color:red; display:none" id="EerrorMsg">信息不完整！</p></td>
+                    </tr>
+
+                </tfoot>
+            </table>
+            <div class="clear">
+            </div>
+                </form>
+            <div class="clear">
+            </div>
+            <!-- End .clear -->
+
+        </div>
+        <!-- End #tab2 -->
+    </div>
+    <!-- End .content-box-content -->
+</div>
+@section scripts
+    {
+   <script type="text/ecmascript">    
+       $(function () {
+           //添加
+           $("#save").click(function () {
+              // showdiv('正在保存中***');
+               var name = $("#txtName").val();
+               var isB = $("#txtIsBool").val();
+              
+               var level = {
+                   HotName: name,
+                   Status: isB
+               };
+               
+                   /**Post("/master/AddCar", car, function (data, error) {
+                       if (error) {
+                           ChangBox("网络异常，请稍后再试");
+                       }
+                       if (data.result == "error") {
+                           alert("添加异常，请稍后再试！");
+                       }
+                       else if (data.result == "ok") {
+                           setTimeout(function () {
+                               window.location.href = "/Master/CarsManage";
+                           }, 2)
+                       }
+                   });
+                   **/
+                   $("#addForm").submit();
+             
+           })
+           //删除
+           $(".del").click(function () {
+               if (confirm("确认要删除？")) {                  
+                   var id = $(this).attr("levelid");
+                   Post("/Master/DelHot", { id: id }, function (data, error) {
+                       if (error) {
+                           ChangBox("网络异常，请稍后再试");
+                       }
+                       if (data.result == "error") {
+                           alert("删除异常，请稍后再试！");
+                       } else if (data.result == "ok") {
+                           setTimeout(function () {
+                               window.location.href = "/Master/HotTable";
+                           }, 2)
+
+                       }
+                   });
+               }
+           });
+           //修改
+           $(".edit").click(function () {
+              // levlname="等级二" minint="256" maxint="1000" levelratio="0.900"
+               $("#tabEdit").click();            
+               var id = $(this).attr("levelid");
+               var levlname = $(this).attr("levlname");
+             
+               var levelratio = $(this).attr("levelratio");
+             
+               $("#Eid").val(id);
+               $("#EtxtName").val(levlname);
+               $("#EtxtIsBool").val(levelratio);
+
+             
+           })
+           //提交更改
+           $("#Esave").click(function () {
+             var id=$("#Eid").val();
+             var levlname = $("#EtxtName").val();
+             var levelratio = $("#EtxtIsBool").val();
+               var level = {
+                   ID: id,
+                   HotName: levlname,
+                   Status: levelratio
+
+               };
+              
+                   $("#EaddForm").submit();
+              
+
+           })
+
+       })
+
+
+   </script>
+    }
+ 

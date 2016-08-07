@@ -1,0 +1,98 @@
+﻿@model IEnumerable<ProductModule.Models.CarProductDetail>
+@{
+    ViewBag.Title = "CP文化";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.isFoot = false;
+}
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome"><img class="head-ico" src="/content/img/ico/icon_phome.png"> </a>
+    <a class="mui-pull-right" href="/Product/getCar"><img class="head-ico" src="/content/img/ico/icon_shopcar.png">  </a>
+    <div class="head-title">购物车</div>
+
+</header>
+
+<div class="mui-content">
+    <div class="car-pros">
+        @if (Model != null && Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {              
+                System.Text.StringBuilder sb = new System.Text.StringBuilder(item.proDetail.ID.ToString());
+                string pixstr;
+                      if (item.activeM != null)
+                      {
+                          pixstr = "/Active/ProDetail?aid=" + item.activeM.ID + "&&id=" + item.proDetail.ID;
+                      }
+                      else { 
+                       pixstr ="/Product/ProductDetail?id="+item.proDetail.ID;
+                      }
+            <div class="car-pro">
+                <a href="@pixstr">
+                <div class="car-item-name"> @item.proDetail.PartName</div>
+                <div class="car-pro-img mui-pull-left" style="width: 30%;">
+                    <img class="mui-media-object mui-pull-left" style="width:100%;" src="http://www.91cpcar.com/@(item.imgStock == null ? "/content/img/ico/noimg.jpg" : (item.imgStock.ImgPath)) ">
+                </div>
+                <div class="car-pro-info mui-pull-left">                    
+                    <div class="car-item-cty">分类：@item.partCate.CategoryName</div>
+                    @if (!string.IsNullOrEmpty(item.proDetail.BrandName))
+                    {
+                        <div>品牌：@item.proDetail.BrandName</div>
+                    }
+                    <div class="car-item-atts">
+                        @if (@item.partExt != null)
+                        {
+                            foreach (var item2 in @item.partExt)
+                            {
+                            <span class="TDatt">@item2.AttrName:@item2.AttrValue</span>
+                                sb.Append(@item2.ID.ToString());
+                            }
+
+                        }
+                        @{string cid = sb.ToString();}
+                        <input type="hidden" id="pid-@cid" value="@item.proDetail.ID"/>
+                        <input type="hidden" id="patt-@cid" value="@item.lastAttr"/>
+                    </div>
+                    <div id="itemPrice-@(cid)"  class="car-item-price">￥<span class="car-item-price-v">@item.proDetail.Price</span></div>
+                    @if(item.activeM!=null)
+                {
+                    <input id="type-@cid" value="@item.activeM.ID" type="hidden"/>
+               <br />
+                   <span style="color:#fff; background:red;border-radius:5px; padding:2px">@item.activeM.Name</span>              
+                }
+                </div>
+                </a>
+                <div class="car-pro-op mui-pull-right">
+                  @*  <button type="button" class="mui-btn mui-btn-danger">删除</button>*@
+                      <img class="delCar"pid="@item.proDetail.ID" attid="@item.lastAttr" alt="删除"  src="/Content/img/ico/icon-del.png" style="display:block" />
+                    <div>
+                        <input id="itemNum-@(cid)" cid="@cid" type="text"  class="car-item-num" value=" @item.Qty" />
+                    </div>
+                </div>
+                 <div class=" mui-clearfix"></div>
+            </div>
+           
+            }
+            <!--总数-->
+          
+        }  
+        <div class="bottom-submit">
+            <div class="car-totle">
+                <div class="cart-submit-right" ><a href="/Order/goOrder" style="color:#fff">立即结算</a></div>
+                <div class="mui-pull-right" style="padding-right:20px">
+                    <h4>总数:<span id="totleNum" style="color: red"></span></h4>
+                    <h4>合计:<span style="color: red">￥</span><span id="totlePrice" style="color: red"></span></h4>
+                </div>
+
+
+                <div class=" mui-clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Content/js/service-cart.js"></script>
+    <script src="~/Content/js/shopCar.js"></script>
+    
+    }

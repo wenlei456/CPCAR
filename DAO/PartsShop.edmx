@@ -1,0 +1,1620 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CarPartsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="CarPartsModelStoreContainer">
+          <EntitySet Name="Active" EntityType="CarPartsModel.Store.Active" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ActiveAttr" EntityType="CarPartsModel.Store.ActiveAttr" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ActiveImg" EntityType="CarPartsModel.Store.ActiveImg" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ActivePros" EntityType="CarPartsModel.Store.ActivePros" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AddressBook" EntityType="CarPartsModel.Store.AddressBook" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Addship" EntityType="CarPartsModel.Store.Addship" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AdminAccount" EntityType="CarPartsModel.Store.AdminAccount" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CarM" EntityType="CarPartsModel.Store.CarM" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CarsInfo" EntityType="CarPartsModel.Store.CarsInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="comments" EntityType="CarPartsModel.Store.comments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CrowdFunding" EntityType="CarPartsModel.Store.CrowdFunding" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ExpRecord" EntityType="CarPartsModel.Store.ExpRecord" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FriendCode" EntityType="CarPartsModel.Store.FriendCode" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="HotTable" EntityType="CarPartsModel.Store.HotTable" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ImgStock" EntityType="CarPartsModel.Store.ImgStock" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="information" EntityType="CarPartsModel.Store.information" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LogInfo" EntityType="CarPartsModel.Store.LogInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MemberBase" EntityType="CarPartsModel.Store.MemberBase" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MemberLevel" EntityType="CarPartsModel.Store.MemberLevel" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Order" EntityType="CarPartsModel.Store.Order" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderPay" EntityType="CarPartsModel.Store.OrderPay" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderProList" EntityType="CarPartsModel.Store.OrderProList" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PartAttr" EntityType="CarPartsModel.Store.PartAttr" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PartBrand" EntityType="CarPartsModel.Store.PartBrand" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Parts" EntityType="CarPartsModel.Store.Parts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PartsCategory" EntityType="CarPartsModel.Store.PartsCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PartsExtend" EntityType="CarPartsModel.Store.PartsExtend" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PartStock" EntityType="CarPartsModel.Store.PartStock" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PhoneMsg" EntityType="CarPartsModel.Store.PhoneMsg" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RebateDraw" EntityType="CarPartsModel.Store.RebateDraw" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RebateRecord" EntityType="CarPartsModel.Store.RebateRecord" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tml" EntityType="CarPartsModel.Store.tml" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Voucher" EntityType="CarPartsModel.Store.Voucher" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WebsiteMenu" EntityType="CarPartsModel.Store.WebsiteMenu" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Active">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ActiveIMG" Type="nvarchar" MaxLength="200" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StarDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="10" />
+          <Property Name="Decribe" Type="nvarchar" MaxLength="200" />
+          <Property Name="Common" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ActiveAttr">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ActiveID" Type="int" Nullable="false" />
+          <Property Name="AProID" Type="int" Nullable="false" />
+          <Property Name="AtrrID" Type="int" Nullable="false" />
+          <Property Name="NewPrice" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Stock" Type="int" />
+        </EntityType>
+        <EntityType Name="ActiveImg">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ActiveID" Type="int" Nullable="false" />
+          <Property Name="ImgPath" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="UploadDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActivePros">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ActiveID" Type="int" Nullable="false" />
+          <Property Name="ProID" Type="int" Nullable="false" />
+          <Property Name="ProName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NewPrice" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ATitle" Type="nvarchar" MaxLength="500" />
+          <Property Name="AContent" Type="nvarchar" MaxLength="500" />
+          <Property Name="Adecribe" Type="nvarchar" MaxLength="500" />
+          <Property Name="Stock" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AddressBook">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Province" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Area" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="80" />
+          <Property Name="People" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Tel" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsDefault" Type="bit" />
+        </EntityType>
+        <EntityType Name="Addship">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="int" />
+          <Property Name="scity" Type="nvarchar" MaxLength="50" />
+          <Property Name="province" Type="nvarchar" MaxLength="50" />
+          <Property Name="region" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="200" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AdminAccount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CarM">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProYear" Type="nvarchar" MaxLength="50" />
+          <Property Name="BrandEnglish" Type="nvarchar" MaxLength="50" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModelEnglish" Type="nvarchar" MaxLength="50" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="Engine" Type="nvarchar" MaxLength="50" />
+          <Property Name="Oil" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="int" />
+        </EntityType>
+        <EntityType Name="CarsInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProYear" Type="nvarchar" MaxLength="50" />
+          <Property Name="Engine" Type="nvarchar" MaxLength="50" />
+          <Property Name="Oil" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="int" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="mentsname" Type="nvarchar" MaxLength="500" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="shown" Type="int" />
+        </EntityType>
+        <EntityType Name="CrowdFunding">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Pid" Type="int" Nullable="false" />
+          <Property Name="ShowTime" Type="datetime" Nullable="false" />
+          <Property Name="StarTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="isBool" Type="int" />
+          <Property Name="ListTille" Type="nvarchar" MaxLength="500" />
+          <Property Name="Banner" Type="nvarchar" MaxLength="300" />
+          <Property Name="Number" Type="int" />
+        </EntityType>
+        <EntityType Name="ExpRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Uid" Type="int" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="50" />
+          <Property Name="LowerUid" Type="int" />
+          <Property Name="OrderNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderPrice" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="Exp" Type="int" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="Datetime" Type="datetime" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="FriendCode">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreatUser" Type="int" Nullable="false" />
+          <Property Name="UseUser" Type="int" />
+          <Property Name="CreatDate" Type="datetime" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="HotTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="HotName" Type="varchar" MaxLength="100" />
+          <Property Name="Status" Type="int" />
+          <Property Name="px" Type="int" />
+        </EntityType>
+        <EntityType Name="ImgStock">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PartID" Type="int" Nullable="false" />
+          <Property Name="ImgPath" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="UploadDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="information">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ordID" Type="nvarchar" MaxLength="100" />
+          <Property Name="wuliuhao" Type="nvarchar" MaxLength="100" />
+          <Property Name="isshouhuo" Type="int" />
+          <Property Name="time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LogInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OpearName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EventName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EvenMsg" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="InAttr" Type="text" Nullable="false" />
+          <Property Name="OutAttr" Type="text" Nullable="false" />
+          <Property Name="Datetime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MemberBase">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="LoginName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="int" />
+          <Property Name="MemberType" Type="int" />
+          <Property Name="Ucode" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpUser" Type="int" Nullable="false" />
+          <Property Name="Levels" Type="int" />
+          <Property Name="Integral" Type="int" />
+          <Property Name="Source" Type="nvarchar" MaxLength="10" />
+          <Property Name="RegDate" Type="datetime" />
+          <Property Name="wxOpenid" Type="nvarchar" MaxLength="100" />
+          <Property Name="wxNickname" Type="nvarchar" MaxLength="100" />
+          <Property Name="wxSex" Type="int" />
+          <Property Name="wxProvince" Type="nvarchar" MaxLength="50" />
+          <Property Name="wxCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="wxCountry" Type="nvarchar" MaxLength="50" />
+          <Property Name="wxHeadimgurl" Type="nvarchar" MaxLength="200" />
+          <Property Name="wxPrivilege" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="MemberLevel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LevelId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="MinIntegral" Type="int" Nullable="false" />
+          <Property Name="MaxIntegral" Type="int" Nullable="false" />
+          <Property Name="Ratio" Type="decimal" Nullable="false" Precision="5" Scale="3" />
+          <Property Name="Income" Type="decimal" Nullable="false" Precision="5" Scale="3" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="varchar" MaxLength="50" />
+          <Property Name="Uid" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="UserPhone" Type="varchar" MaxLength="50" />
+          <Property Name="OrderSource" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderTime" Type="datetime" />
+          <Property Name="OrderStatus" Type="varchar" MaxLength="50" />
+          <Property Name="Consignee" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="CellPhone" Type="varchar" MaxLength="50" />
+          <Property Name="PayStatus" Type="varchar" MaxLength="50" />
+          <Property Name="Payment" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks" Type="varchar" MaxLength="800" />
+          <Property Name="Preferential" Type="varchar" MaxLength="50" />
+          <Property Name="CashPwd" Type="varchar" MaxLength="100" />
+          <Property Name="Ratio" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="DiscountAmount" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ShippingCost" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="TotalPrice" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="SearchTag" Type="varchar" MaxLength="500" />
+          <Property Name="OperatorRemarks" Type="varchar" MaxLength="500" />
+          <Property Name="OrderType" Type="varchar" MaxLength="10" />
+          <Property Name="OrderFrom" Type="int" />
+          <Property Name="SendName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SendNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="Prov" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Area" Type="nvarchar" MaxLength="50" />
+          <Property Name="Beizhu" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="OrderPay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Uid" Type="int" Nullable="false" />
+          <Property Name="Uname" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderId" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="PayState" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Bank" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+          <Property Name="PayType" Type="int" Nullable="false" />
+          <Property Name="OrderType" Type="int" Nullable="false" />
+          <Property Name="RecordState" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderProList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="varchar" MaxLength="50" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SupplyNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Num" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="InputTime" Type="datetime" />
+          <Property Name="AttrID" Type="int" />
+          <Property Name="AttrDecribe" Type="nvarchar" MaxLength="50" />
+          <Property Name="PType" Type="int" />
+          <Property Name="IsFlag" Type="int" />
+          <Property Name="activeName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PartAttr">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="FlagName" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="int" />
+        </EntityType>
+        <EntityType Name="PartBrand">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="Describe" Type="text" />
+          <Property Name="Common" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Parts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PartName" Type="nvarchar" MaxLength="500" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="PartTitle" Type="ntext" />
+          <Property Name="PartSubtitle" Type="ntext" />
+          <Property Name="PartBrand" Type="int" />
+          <Property Name="PartModel" Type="nvarchar" MaxLength="50" />
+          <Property Name="PartSuppyNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="PartNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ToCars" Type="nvarchar(max)" />
+          <Property Name="Describe" Type="ntext" />
+          <Property Name="SpecParma" Type="ntext" />
+          <Property Name="DetailList" Type="ntext" />
+          <Property Name="SAS" Type="ntext" />
+          <Property Name="Common" Type="ntext" />
+          <Property Name="Orderby" Type="int" />
+          <Property Name="ShowDate" Type="datetime" />
+          <Property Name="State" Type="int" />
+          <Property Name="mDescribe" Type="ntext" />
+          <Property Name="ProType" Type="int" />
+          <Property Name="product_child_json" Type="varchar(max)" />
+          <Property Name="child_product_dicts" Type="varchar(max)" />
+          <Property Name="sku" Type="varchar" MaxLength="50" />
+          <Property Name="imgProduct" Type="varchar" MaxLength="5000" />
+          <Property Name="HotProductId" Type="int" />
+          <Property Name="insertDate" Type="datetime" />
+          <Property Name="supply" Type="varchar" MaxLength="100" />
+          <Property Name="storeName" Type="varchar" MaxLength="100" />
+          <Property Name="material" Type="varchar" MaxLength="100" />
+          <Property Name="specifications" Type="varchar" MaxLength="100" />
+          <Property Name="useSite" Type="varchar" MaxLength="100" />
+          <Property Name="ParsColour" Type="varchar" MaxLength="50" />
+          <Property Name="herf" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PartsCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="ICOPath" Type="nvarchar" MaxLength="100" />
+          <Property Name="BannerPath" Type="nvarchar" MaxLength="100" />
+          <Property Name="OrderBy" Type="int" />
+          <Property Name="IsShow" Type="int" />
+        </EntityType>
+        <EntityType Name="PartsExtend">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PartID" Type="int" Nullable="false" />
+          <Property Name="ParentAttr" Type="int" Nullable="false" />
+          <Property Name="AttrName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttrFlagName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttrValue" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttrPrice" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Qty" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" />
+          <Property Name="IsMain" Type="int" />
+        </EntityType>
+        <EntityType Name="PartStock">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PartID" Type="int" />
+          <Property Name="StockType" Type="int" />
+          <Property Name="StockNUM" Type="int" />
+        </EntityType>
+        <EntityType Name="PhoneMsg">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="int" />
+          <Property Name="PhoneNum" Type="varchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Code" Type="varchar" MaxLength="500" />
+          <Property Name="MSG" Type="nvarchar" MaxLength="250" />
+          <Property Name="State" Type="varchar" MaxLength="20" />
+          <Property Name="Source" Type="varchar" MaxLength="50" />
+          <Property Name="STime" Type="datetime" />
+          <Property Name="Port" Type="varchar" MaxLength="50" />
+          <Property Name="InfoNumber" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RebateDraw">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="OrderNumber" Type="varchar" MaxLength="50" />
+          <Property Name="PType" Type="nvarchar" MaxLength="10" />
+          <Property Name="Payment" Type="nvarchar" MaxLength="10" />
+          <Property Name="BankInfo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CardNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CardName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Datetime" Type="datetime" />
+          <Property Name="Statu" Type="int" />
+        </EntityType>
+        <EntityType Name="RebateRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Source" Type="nvarchar" MaxLength="20" />
+          <Property Name="PType" Type="nvarchar" MaxLength="20" />
+          <Property Name="LowerUID" Type="int" />
+          <Property Name="LowerLoginName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LowerOrder" Type="varchar" MaxLength="50" />
+          <Property Name="InCome" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="OrderPrice" Type="decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Datetime" Type="datetime" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="tml">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="pro" Type="nvarchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Voucher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Uid" Type="int" Nullable="false" />
+          <Property Name="VoucherNumber" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsState" Type="int" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="InsertTime" Type="datetime" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="50" />
+          <Property Name="N2" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WebsiteMenu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MenuLevel" Type="int" />
+          <Property Name="MenuParent" Type="int" />
+          <Property Name="MenuOrderby" Type="int" />
+          <Property Name="MenuBindURL" Type="nvarchar" MaxLength="200" />
+          <Property Name="MenuState" Type="int" />
+          <Property Name="Enable" Type="int" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarPartsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="CarPartsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarsInfo" EntityType="CarPartsModel.CarsInfo" />
+          <EntitySet Name="ExpRecord" EntityType="CarPartsModel.ExpRecord" />
+          <EntitySet Name="PartAttr" EntityType="CarPartsModel.PartAttr" />
+          <EntitySet Name="PartBrand" EntityType="CarPartsModel.PartBrand" />
+          <EntitySet Name="PartStock" EntityType="CarPartsModel.PartStock" />
+          <EntitySet Name="WebsiteMenu" EntityType="CarPartsModel.WebsiteMenu" />
+          <EntitySet Name="MemberLevel" EntityType="CarPartsModel.MemberLevel" />
+          <EntitySet Name="FriendCode" EntityType="CarPartsModel.FriendCode" />
+          <EntitySet Name="AddressBook" EntityType="CarPartsModel.AddressBook" />
+          <EntitySet Name="RebateDraw" EntityType="CarPartsModel.RebateDraw" />
+          <EntitySet Name="AdminAccount" EntityType="CarPartsModel.AdminAccount" />
+          <EntitySet Name="PartsCategory" EntityType="CarPartsModel.PartsCategory" />
+          <EntitySet Name="PartsExtend" EntityType="CarPartsModel.PartsExtend" />
+          <EntitySet Name="LogInfo" EntityType="CarPartsModel.LogInfo" />
+          <EntitySet Name="Active" EntityType="CarPartsModel.Active" />
+          <EntitySet Name="ActiveAttr" EntityType="CarPartsModel.ActiveAttr" />
+          <EntitySet Name="OrderPay" EntityType="CarPartsModel.OrderPay" />
+          <EntitySet Name="OrderProList" EntityType="CarPartsModel.OrderProList" />
+          <EntitySet Name="RebateRecord" EntityType="CarPartsModel.RebateRecord" />
+          <EntitySet Name="Voucher" EntityType="CarPartsModel.Voucher" />
+          <EntitySet Name="ActivePros" EntityType="CarPartsModel.ActivePros" />
+          <EntitySet Name="ActiveImg" EntityType="CarPartsModel.ActiveImg" />
+          <EntitySet Name="CarM" EntityType="CarPartsModel.CarM" />
+          <EntitySet Name="HotTable" EntityType="CarPartsModel.HotTable" />
+          <EntitySet Name="ImgStock" EntityType="CarPartsModel.ImgStock" />
+          <EntitySet Name="MemberBase" EntityType="CarPartsModel.MemberBase" />
+          <EntitySet Name="Order" EntityType="CarPartsModel.Order" />
+          <EntitySet Name="information" EntityType="CarPartsModel.information" />
+          <EntitySet Name="PhoneMsg" EntityType="CarPartsModel.PhoneMsg" />
+          <EntitySet Name="Addship" EntityType="CarPartsModel.Addship" />
+          <EntitySet Name="tml" EntityType="CarPartsModel.tml" />
+          <EntitySet Name="Parts" EntityType="CarPartsModel.Parts" />
+          <EntitySet Name="CrowdFunding" EntityType="CarPartsModel.CrowdFunding" />
+          <EntitySet Name="comments" EntityType="CarPartsModel.comments" />
+        </EntityContainer>
+        <EntityType Name="CarsInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Brand" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Model" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ProYear" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Engine" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Oil" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="State" />
+        </EntityType>
+        <EntityType Name="ExpRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Uid" Nullable="false" />
+          <Property Type="String" Name="Source" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="LowerUid" />
+          <Property Type="String" Name="OrderNum" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="OrderPrice" Precision="12" Scale="2" />
+          <Property Type="Int32" Name="Exp" />
+          <Property Type="Int32" Name="Balance" />
+          <Property Type="DateTime" Name="Datetime" Precision="3" />
+          <Property Type="Int32" Name="Status" />
+        </EntityType>
+        <EntityType Name="PartAttr">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FlagName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="State" />
+        </EntityType>
+        <EntityType Name="PartBrand">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="BrandName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Country" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Describe" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Common" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PartStock">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PartID" />
+          <Property Type="Int32" Name="StockType" />
+          <Property Type="Int32" Name="StockNUM" />
+        </EntityType>
+        <EntityType Name="WebsiteMenu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="MenuName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="MenuLevel" />
+          <Property Type="Int32" Name="MenuParent" />
+          <Property Type="Int32" Name="MenuOrderby" />
+          <Property Type="String" Name="MenuBindURL" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="MenuState" />
+          <Property Type="Int32" Name="Enable" />
+        </EntityType>
+        <EntityType Name="MemberLevel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="LevelId" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="MinIntegral" Nullable="false" />
+          <Property Type="Int32" Name="MaxIntegral" Nullable="false" />
+          <Property Type="Decimal" Name="Ratio" Precision="5" Scale="3" Nullable="false" />
+          <Property Type="String" Name="Remark" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Income" Precision="5" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FriendCode">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreatUser" Nullable="false" />
+          <Property Type="Int32" Name="UseUser" />
+          <Property Type="DateTime" Name="CreatDate" Precision="3" />
+          <Property Type="Int32" Name="Status" />
+        </EntityType>
+        <EntityType Name="AddressBook">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Province" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Area" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="People" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Tel" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsDefault" />
+        </EntityType>
+        <EntityType Name="RebateDraw">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UID" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="String" Name="OrderNumber" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PType" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Payment" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="BankInfo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CardNumber" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CardName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Datetime" Precision="3" />
+          <Property Type="Int32" Name="Statu" />
+        </EntityType>
+        <EntityType Name="AdminAccount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Role" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AccountName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RealName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PassWord" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PartsCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CategoryName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ParentID" />
+          <Property Type="String" Name="ICOPath" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="BannerPath" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="OrderBy" />
+          <Property Type="Int32" Name="IsShow" />
+        </EntityType>
+        <EntityType Name="PartsExtend">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PartID" Nullable="false" />
+          <Property Type="Int32" Name="ParentAttr" Nullable="false" />
+          <Property Type="String" Name="AttrName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AttrFlagName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AttrValue" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="AttrPrice" Precision="12" Scale="2" Nullable="false" />
+          <Property Type="Int32" Name="Qty" Nullable="false" />
+          <Property Type="Int32" Name="State" />
+          <Property Type="Int32" Name="IsMain" />
+        </EntityType>
+        <EntityType Name="LogInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="OpearName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EventName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EvenMsg" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="InAttr" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OutAttr" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Datetime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Active">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StarDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Decribe" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Common" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ActiveIMG" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ActiveAttr">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActiveID" Type="Int32" Nullable="false" />
+          <Property Name="AtrrID" Type="Int32" Nullable="false" />
+          <Property Name="NewPrice" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Type="Int32" Name="AProID" Nullable="false" />
+          <Property Type="Int32" Name="Stock" />
+        </EntityType>
+        <EntityType Name="OrderPay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Uid" Type="Int32" Nullable="false" />
+          <Property Name="Uname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PayState" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bank" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PayType" Type="Int32" Nullable="false" />
+          <Property Name="OrderType" Type="Int32" Nullable="false" />
+          <Property Name="RecordState" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderProList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="OrderId" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ProductID" />
+          <Property Type="String" Name="ProductName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SupplyNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Num" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="DateTime" Name="InputTime" Precision="3" />
+          <Property Type="Int32" Name="AttrID" />
+          <Property Type="String" Name="AttrDecribe" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PType" />
+          <Property Type="Int32" Name="IsFlag" />
+          <Property Type="String" Name="activeName" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RebateRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UID" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="String" Name="Source" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PType" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="LowerUID" />
+          <Property Type="String" Name="LowerLoginName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LowerOrder" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="InCome" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="Decimal" Name="OrderPrice" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="DateTime" Name="Datetime" Precision="3" />
+          <Property Type="Int32" Name="Status" />
+        </EntityType>
+        <EntityType Name="Voucher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Uid" Type="Int32" Nullable="false" />
+          <Property Name="VoucherNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsState" Type="Int32" Nullable="false" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="InsertTime" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="N2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ActivePros">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActiveID" Type="Int32" Nullable="false" />
+          <Property Name="ProID" Type="Int32" Nullable="false" />
+          <Property Name="ProName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NewPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ATitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AContent" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Adecribe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Stock" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActiveImg">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActiveID" Type="Int32" Nullable="false" />
+          <Property Name="ImgPath" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarM">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BrandEnglish" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModelEnglish" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Engine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Oil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" />
+        </EntityType>
+        <EntityType Name="HotTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="HotName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Status" />
+          <Property Type="Int32" Name="px" />
+        </EntityType>
+        <EntityType Name="ImgStock">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PartID" Nullable="false" />
+          <Property Type="String" Name="ImgPath" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UploadDate" Precision="3" />
+        </EntityType>
+        <EntityType Name="MemberBase">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoginName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PassWord" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Mobile" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="State" />
+          <Property Type="Int32" Name="MemberType" />
+          <Property Type="String" Name="Ucode" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UpUser" Nullable="false" />
+          <Property Type="Int32" Name="Levels" />
+          <Property Type="Int32" Name="Integral" />
+          <Property Type="String" Name="Source" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="RegDate" Precision="3" />
+          <Property Type="String" Name="wxOpenid" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="wxNickname" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="wxSex" />
+          <Property Type="String" Name="wxProvince" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="wxCity" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="wxCountry" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="wxHeadimgurl" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="wxPrivilege" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="OrderId" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Uid" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserPhone" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OrderSource" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="OrderTime" Precision="3" />
+          <Property Type="String" Name="OrderStatus" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Consignee" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CellPhone" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PayStatus" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Payment" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Remarks" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Preferential" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CashPwd" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Ratio" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="Decimal" Name="DiscountAmount" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="Decimal" Name="ShippingCost" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="Decimal" Name="TotalPrice" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="String" Name="SearchTag" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OperatorRemarks" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OrderType" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OrderFrom" />
+          <Property Type="String" Name="SendName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SendNum" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Prov" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="City" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Area" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Beizhu" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="information">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ordID" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="wuliuhao" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="isshouhuo" />
+          <Property Type="DateTime" Name="time" Precision="3" />
+        </EntityType>
+        <EntityType Name="PhoneMsg">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UID" />
+          <Property Type="String" Name="PhoneNum" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Type" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Code" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MSG" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="State" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Source" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="STime" Precision="3" />
+          <Property Type="String" Name="Port" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InfoNumber" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Addship">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UID" />
+          <Property Type="String" Name="scity" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="province" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="region" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="address" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="phone" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tml">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="pro" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Parts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PartName" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CategoryID" />
+          <Property Type="String" Name="PartTitle" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PartSubtitle" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PartBrand" />
+          <Property Type="String" Name="PartModel" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PartSuppyNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="String" Name="PartNumber" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ToCars" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Describe" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SpecParma" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DetailList" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SAS" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Common" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Orderby" />
+          <Property Type="DateTime" Name="ShowDate" Precision="3" />
+          <Property Type="Int32" Name="State" />
+          <Property Type="String" Name="mDescribe" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ProType" />
+          <Property Type="String" Name="product_child_json" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="child_product_dicts" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="sku" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="imgProduct" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="HotProductId" />
+          <Property Type="DateTime" Name="insertDate" Precision="3" />
+          <Property Type="String" Name="supply" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="storeName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="material" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="specifications" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="useSite" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ParsColour" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="herf" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CrowdFunding">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Pid" Nullable="false" />
+          <Property Type="DateTime" Name="ShowTime" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="StarTime" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="EndTime" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="isBool" />
+          <Property Type="String" Name="ListTille" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Banner" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Number" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="userID" />
+          <Property Type="Int32" Name="ProductID" />
+          <Property Type="String" Name="mentsname" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Time" Precision="3" />
+          <Property Type="Int32" Name="shown" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CarPartsModelStoreContainer" CdmEntityContainer="CarPartsEntities">
+          <EntitySetMapping Name="CarsInfo">
+            <EntityTypeMapping TypeName="CarPartsModel.CarsInfo">
+              <MappingFragment StoreEntitySet="CarsInfo">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Oil" ColumnName="Oil" />
+                <ScalarProperty Name="Engine" ColumnName="Engine" />
+                <ScalarProperty Name="ProYear" ColumnName="ProYear" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpRecord">
+            <EntityTypeMapping TypeName="CarPartsModel.ExpRecord">
+              <MappingFragment StoreEntitySet="ExpRecord">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Exp" ColumnName="Exp" />
+                <ScalarProperty Name="OrderPrice" ColumnName="OrderPrice" />
+                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+                <ScalarProperty Name="LowerUid" ColumnName="LowerUid" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartAttr">
+            <EntityTypeMapping TypeName="CarPartsModel.PartAttr">
+              <MappingFragment StoreEntitySet="PartAttr">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="FlagName" ColumnName="FlagName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartBrand">
+            <EntityTypeMapping TypeName="CarPartsModel.PartBrand">
+              <MappingFragment StoreEntitySet="PartBrand">
+                <ScalarProperty Name="Common" ColumnName="Common" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartStock">
+            <EntityTypeMapping TypeName="CarPartsModel.PartStock">
+              <MappingFragment StoreEntitySet="PartStock">
+                <ScalarProperty Name="StockNUM" ColumnName="StockNUM" />
+                <ScalarProperty Name="StockType" ColumnName="StockType" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebsiteMenu">
+            <EntityTypeMapping TypeName="CarPartsModel.WebsiteMenu">
+              <MappingFragment StoreEntitySet="WebsiteMenu">
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="MenuState" ColumnName="MenuState" />
+                <ScalarProperty Name="MenuBindURL" ColumnName="MenuBindURL" />
+                <ScalarProperty Name="MenuOrderby" ColumnName="MenuOrderby" />
+                <ScalarProperty Name="MenuParent" ColumnName="MenuParent" />
+                <ScalarProperty Name="MenuLevel" ColumnName="MenuLevel" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberLevel">
+            <EntityTypeMapping TypeName="CarPartsModel.MemberLevel">
+              <MappingFragment StoreEntitySet="MemberLevel">
+                <ScalarProperty Name="Income" ColumnName="Income" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Ratio" ColumnName="Ratio" />
+                <ScalarProperty Name="MaxIntegral" ColumnName="MaxIntegral" />
+                <ScalarProperty Name="MinIntegral" ColumnName="MinIntegral" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FriendCode">
+            <EntityTypeMapping TypeName="CarPartsModel.FriendCode">
+              <MappingFragment StoreEntitySet="FriendCode">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
+                <ScalarProperty Name="UseUser" ColumnName="UseUser" />
+                <ScalarProperty Name="CreatUser" ColumnName="CreatUser" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddressBook">
+            <EntityTypeMapping TypeName="CarPartsModel.AddressBook">
+              <MappingFragment StoreEntitySet="AddressBook">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="People" ColumnName="People" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RebateDraw">
+            <EntityTypeMapping TypeName="CarPartsModel.RebateDraw">
+              <MappingFragment StoreEntitySet="RebateDraw">
+                <ScalarProperty Name="Statu" ColumnName="Statu" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="CardName" ColumnName="CardName" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="BankInfo" ColumnName="BankInfo" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="PType" ColumnName="PType" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminAccount">
+            <EntityTypeMapping TypeName="CarPartsModel.AdminAccount">
+              <MappingFragment StoreEntitySet="AdminAccount">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartsCategory">
+            <EntityTypeMapping TypeName="CarPartsModel.PartsCategory">
+              <MappingFragment StoreEntitySet="PartsCategory">
+                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="BannerPath" ColumnName="BannerPath" />
+                <ScalarProperty Name="ICOPath" ColumnName="ICOPath" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartsExtend">
+            <EntityTypeMapping TypeName="CarPartsModel.PartsExtend">
+              <MappingFragment StoreEntitySet="PartsExtend">
+                <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="AttrPrice" ColumnName="AttrPrice" />
+                <ScalarProperty Name="AttrValue" ColumnName="AttrValue" />
+                <ScalarProperty Name="AttrFlagName" ColumnName="AttrFlagName" />
+                <ScalarProperty Name="AttrName" ColumnName="AttrName" />
+                <ScalarProperty Name="ParentAttr" ColumnName="ParentAttr" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogInfo">
+            <EntityTypeMapping TypeName="CarPartsModel.LogInfo">
+              <MappingFragment StoreEntitySet="LogInfo">
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="OutAttr" ColumnName="OutAttr" />
+                <ScalarProperty Name="InAttr" ColumnName="InAttr" />
+                <ScalarProperty Name="EvenMsg" ColumnName="EvenMsg" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="OpearName" ColumnName="OpearName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Active">
+            <EntityTypeMapping TypeName="CarPartsModel.Active">
+              <MappingFragment StoreEntitySet="Active">
+                <ScalarProperty Name="ActiveIMG" ColumnName="ActiveIMG" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Common" ColumnName="Common" />
+                <ScalarProperty Name="Decribe" ColumnName="Decribe" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StarDate" ColumnName="StarDate" />
+                <ScalarProperty Name="SubName" ColumnName="SubName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActiveAttr">
+            <EntityTypeMapping TypeName="CarPartsModel.ActiveAttr">
+              <MappingFragment StoreEntitySet="ActiveAttr">
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="AProID" ColumnName="AProID" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="AtrrID" ColumnName="AtrrID" />
+                <ScalarProperty Name="ActiveID" ColumnName="ActiveID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderPay">
+            <EntityTypeMapping TypeName="CarPartsModel.OrderPay">
+              <MappingFragment StoreEntitySet="OrderPay">
+                <ScalarProperty Name="RecordState" ColumnName="RecordState" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="PayState" ColumnName="PayState" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Uname" ColumnName="Uname" />
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderProList">
+            <EntityTypeMapping TypeName="CarPartsModel.OrderProList">
+              <MappingFragment StoreEntitySet="OrderProList">
+                <ScalarProperty Name="activeName" ColumnName="activeName" />
+                <ScalarProperty Name="IsFlag" ColumnName="IsFlag" />
+                <ScalarProperty Name="PType" ColumnName="PType" />
+                <ScalarProperty Name="AttrDecribe" ColumnName="AttrDecribe" />
+                <ScalarProperty Name="AttrID" ColumnName="AttrID" />
+                <ScalarProperty Name="InputTime" ColumnName="InputTime" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Num" ColumnName="Num" />
+                <ScalarProperty Name="SupplyNo" ColumnName="SupplyNo" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RebateRecord">
+            <EntityTypeMapping TypeName="CarPartsModel.RebateRecord">
+              <MappingFragment StoreEntitySet="RebateRecord">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="OrderPrice" ColumnName="OrderPrice" />
+                <ScalarProperty Name="InCome" ColumnName="InCome" />
+                <ScalarProperty Name="LowerOrder" ColumnName="LowerOrder" />
+                <ScalarProperty Name="LowerLoginName" ColumnName="LowerLoginName" />
+                <ScalarProperty Name="LowerUID" ColumnName="LowerUID" />
+                <ScalarProperty Name="PType" ColumnName="PType" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Voucher">
+            <EntityTypeMapping TypeName="CarPartsModel.Voucher">
+              <MappingFragment StoreEntitySet="Voucher">
+                <ScalarProperty Name="N2" ColumnName="N2" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="InsertTime" ColumnName="InsertTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="IsState" ColumnName="IsState" />
+                <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivePros">
+            <EntityTypeMapping TypeName="CarPartsModel.ActivePros">
+              <MappingFragment StoreEntitySet="ActivePros">
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Adecribe" ColumnName="Adecribe" />
+                <ScalarProperty Name="AContent" ColumnName="AContent" />
+                <ScalarProperty Name="ATitle" ColumnName="ATitle" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="ProName" ColumnName="ProName" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="ActiveID" ColumnName="ActiveID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActiveImg">
+            <EntityTypeMapping TypeName="CarPartsModel.ActiveImg">
+              <MappingFragment StoreEntitySet="ActiveImg">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+                <ScalarProperty Name="ActiveID" ColumnName="ActiveID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarM">
+            <EntityTypeMapping TypeName="CarPartsModel.CarM">
+              <MappingFragment StoreEntitySet="CarM">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Oil" ColumnName="Oil" />
+                <ScalarProperty Name="Engine" ColumnName="Engine" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ModelEnglish" ColumnName="ModelEnglish" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="BrandEnglish" ColumnName="BrandEnglish" />
+                <ScalarProperty Name="ProYear" ColumnName="ProYear" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HotTable">
+            <EntityTypeMapping TypeName="CarPartsModel.HotTable">
+              <MappingFragment StoreEntitySet="HotTable">
+                <ScalarProperty Name="px" ColumnName="px" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="HotName" ColumnName="HotName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImgStock">
+            <EntityTypeMapping TypeName="CarPartsModel.ImgStock">
+              <MappingFragment StoreEntitySet="ImgStock">
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberBase">
+            <EntityTypeMapping TypeName="CarPartsModel.MemberBase">
+              <MappingFragment StoreEntitySet="MemberBase">
+                <ScalarProperty Name="wxPrivilege" ColumnName="wxPrivilege" />
+                <ScalarProperty Name="wxHeadimgurl" ColumnName="wxHeadimgurl" />
+                <ScalarProperty Name="wxCountry" ColumnName="wxCountry" />
+                <ScalarProperty Name="wxCity" ColumnName="wxCity" />
+                <ScalarProperty Name="wxProvince" ColumnName="wxProvince" />
+                <ScalarProperty Name="wxSex" ColumnName="wxSex" />
+                <ScalarProperty Name="wxNickname" ColumnName="wxNickname" />
+                <ScalarProperty Name="wxOpenid" ColumnName="wxOpenid" />
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Integral" ColumnName="Integral" />
+                <ScalarProperty Name="Levels" ColumnName="Levels" />
+                <ScalarProperty Name="UpUser" ColumnName="UpUser" />
+                <ScalarProperty Name="Ucode" ColumnName="Ucode" />
+                <ScalarProperty Name="MemberType" ColumnName="MemberType" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="CarPartsModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Beizhu" ColumnName="Beizhu" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Prov" ColumnName="Prov" />
+                <ScalarProperty Name="SendNum" ColumnName="SendNum" />
+                <ScalarProperty Name="SendName" ColumnName="SendName" />
+                <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="OperatorRemarks" ColumnName="OperatorRemarks" />
+                <ScalarProperty Name="SearchTag" ColumnName="SearchTag" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="ShippingCost" ColumnName="ShippingCost" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="Ratio" ColumnName="Ratio" />
+                <ScalarProperty Name="CashPwd" ColumnName="CashPwd" />
+                <ScalarProperty Name="Preferential" ColumnName="Preferential" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="PayStatus" ColumnName="PayStatus" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Consignee" ColumnName="Consignee" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="OrderSource" ColumnName="OrderSource" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="information">
+            <EntityTypeMapping TypeName="CarPartsModel.information">
+              <MappingFragment StoreEntitySet="information">
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="isshouhuo" ColumnName="isshouhuo" />
+                <ScalarProperty Name="wuliuhao" ColumnName="wuliuhao" />
+                <ScalarProperty Name="ordID" ColumnName="ordID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhoneMsg">
+            <EntityTypeMapping TypeName="CarPartsModel.PhoneMsg">
+              <MappingFragment StoreEntitySet="PhoneMsg">
+                <ScalarProperty Name="InfoNumber" ColumnName="InfoNumber" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="STime" ColumnName="STime" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="MSG" ColumnName="MSG" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Addship">
+            <EntityTypeMapping TypeName="CarPartsModel.Addship">
+              <MappingFragment StoreEntitySet="Addship">
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="scity" ColumnName="scity" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tml">
+            <EntityTypeMapping TypeName="CarPartsModel.tml">
+              <MappingFragment StoreEntitySet="tml">
+                <ScalarProperty Name="pro" ColumnName="pro" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parts">
+            <EntityTypeMapping TypeName="CarPartsModel.Parts">
+              <MappingFragment StoreEntitySet="Parts">
+                <ScalarProperty Name="herf" ColumnName="herf" />
+                <ScalarProperty Name="ParsColour" ColumnName="ParsColour" />
+                <ScalarProperty Name="useSite" ColumnName="useSite" />
+                <ScalarProperty Name="specifications" ColumnName="specifications" />
+                <ScalarProperty Name="material" ColumnName="material" />
+                <ScalarProperty Name="storeName" ColumnName="storeName" />
+                <ScalarProperty Name="supply" ColumnName="supply" />
+                <ScalarProperty Name="insertDate" ColumnName="insertDate" />
+                <ScalarProperty Name="HotProductId" ColumnName="HotProductId" />
+                <ScalarProperty Name="imgProduct" ColumnName="imgProduct" />
+                <ScalarProperty Name="sku" ColumnName="sku" />
+                <ScalarProperty Name="child_product_dicts" ColumnName="child_product_dicts" />
+                <ScalarProperty Name="product_child_json" ColumnName="product_child_json" />
+                <ScalarProperty Name="ProType" ColumnName="ProType" />
+                <ScalarProperty Name="mDescribe" ColumnName="mDescribe" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ShowDate" ColumnName="ShowDate" />
+                <ScalarProperty Name="Orderby" ColumnName="Orderby" />
+                <ScalarProperty Name="Common" ColumnName="Common" />
+                <ScalarProperty Name="SAS" ColumnName="SAS" />
+                <ScalarProperty Name="DetailList" ColumnName="DetailList" />
+                <ScalarProperty Name="SpecParma" ColumnName="SpecParma" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="ToCars" ColumnName="ToCars" />
+                <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PartSuppyNo" ColumnName="PartSuppyNo" />
+                <ScalarProperty Name="PartModel" ColumnName="PartModel" />
+                <ScalarProperty Name="PartBrand" ColumnName="PartBrand" />
+                <ScalarProperty Name="PartSubtitle" ColumnName="PartSubtitle" />
+                <ScalarProperty Name="PartTitle" ColumnName="PartTitle" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="PartName" ColumnName="PartName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CrowdFunding">
+            <EntityTypeMapping TypeName="CarPartsModel.CrowdFunding">
+              <MappingFragment StoreEntitySet="CrowdFunding">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Banner" ColumnName="Banner" />
+                <ScalarProperty Name="ListTille" ColumnName="ListTille" />
+                <ScalarProperty Name="isBool" ColumnName="isBool" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StarTime" ColumnName="StarTime" />
+                <ScalarProperty Name="ShowTime" ColumnName="ShowTime" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="CarPartsModel.comments">
+              <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="shown" ColumnName="shown" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="mentsname" ColumnName="mentsname" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+        <DesignerProperty Name="SynchronizePropertyFacets" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

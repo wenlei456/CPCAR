@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>CP文化,您身边的汽车设计师</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+ <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+<meta name="keywords" content="诚配,诚配改装,汽车改装,改装件,汽车配件,海外配件,进口配件,保时捷,宝马,奔驰,法拉利,豪车改装,高端改装">
+<meta name="description" content="" />
+<link rel="stylesheet" href="New/content/css/default.css" />
+</head>
+<body>
+<div id="loading">
+<div class="spinner8">
+<div class="spinner-container container1">
+<div class="circle1">&nbsp;</div>
+<div class="circle2">&nbsp;</div>
+<div class="circle3">&nbsp;</div>
+<div class="circle4">&nbsp;</div>
+</div>
+<div class="spinner-container container2">
+<div class="circle1">&nbsp;</div>
+<div class="circle2">&nbsp;</div>
+<div class="circle3">&nbsp;</div>
+<div class="circle4">&nbsp;</div>
+</div>
+<div class="spinner-container container3">
+<div class="circle1">&nbsp;</div>
+<div class="circle2">&nbsp;</div>
+<div class="circle3">&nbsp;</div>
+<div class="circle4">&nbsp;</div>
+</div>
+<i>loading...</i>
+</div></div>
+<section id="default">
+<div id="anbg"></div>
+<div id="header">
+<div class="logo"></div>
+<ul><li><a href="/Active/hot">热卖</a></li><li><a href="/Active/index?aid=3&&puser=">活动</a></li></ul>
+</div>
+    <br><a href="//m.kuaidi100.com" target="_blank">快递查询</a> 
+<div class="audio_btn audio_off audio_play">
+<audio loop="" autoplay="autoplay" src="New/content/img/fll.mp3" id="bgMusic"></audio>
+</div>
+</section>
+<script type="text/javascript" src="New/content/js/zepto.min.js" ></script>
+<script type="text/javascript">
+    $(function () {
+        $("#loading").remove();
+        $("#default").addClass("showbg");
+        setTimeout(function () { $(".logo").addClass("s-logo"); $("#header ul").addClass("s-link") }, 1000);
+        $(".audio_btn").click(function () {
+            $(this).toggleClass("audio_play");
+            var music = document.getElementById("bgMusic");//找到音乐位置ID
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        });
+    });
+</script>
+</body>
+</html>

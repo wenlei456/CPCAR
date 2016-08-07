@@ -1,0 +1,81 @@
+﻿@model ProductModule.Models.ProDetail
+@{
+    ViewBag.Title = "产品详情";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cp车品嘉年华全球商品免费送</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+    <meta name="keywords" content="诚配,诚配改装,汽车改装,改装件,汽车配件,海外配件,进口配件,保时捷,宝马,奔驰,法拉利,豪车改装,高端改装">
+    <meta name="description" content="">   <meta  />
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache" />
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache" />
+<META HTTP-EQUIV="Expires" CONTENT="0" />
+      <script src="/New/content/js/mui.min.js"></script>
+		<style type="text/css">
+			#list {
+				/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+				margin-top: -1px;               
+			}
+			body{padding-bottom:58px;}
+			.head-title,.mui-pull-left{background:none;}
+			.mui-pull-left{width: auto;margin: 0;}
+			.pro-info{padding:0;}
+			.pro-baseInfo{padding:10px;border-top:solid 8px #eee;border-bottom: solid 1px #eee;}
+			.pro-attr, .pro-qty, .pro-tocar, .pro-buyArea{padding:5px 10px;}
+			.pro-buyArea{position:fixed;left:0;bottom:0;z-index: 999;width:100%;background:#eee;border-top:solid 1px #d3d3d3;}
+			.pro-buyArea div button{padding:8px 0;}
+			.mui-segmented-control.mui-segmented-control-inverted{background:#fff;border-top:solid 8px #eee;border-bottom:solid 8px #fff;}
+			.pro-tocar-item{border-top:solid 1px #d3d3d3;border-left:solid 1px #d3d3d3;display:inline-block;padding:0;}
+			.pro-tocar-item li{padding:10px 5px;border:solid 1px #d3d3d3;border-left:none;border-top:none;}
+			#partExtAttr,.pro-qty{font-size:.8rem;}
+			.head-title{margin: 0;}
+			.mui-icon-back:before, .mui-icon-left-nav:before{color:#666;}
+			.head-ico{margin-right:10px;}
+			@@media screen and (max-width: 374px) {
+			.pro-tocar-item li{width:100%;}
+			}
+
+		</style>
+    
+    <style>
+        .mui-active {
+            color: #007aff !important;
+        }
+
+        .mui-control-item {
+            background: transparent;
+        }
+
+        .tabdiv{margin:10px; font-size:.8rem}
+.tabdiv table{ background:#fff; border-collapse:collapse;width:100%}
+.tabdiv table tr td:first-child{width:80px; text-align:right;color:#999;}
+.tabdiv table tr td{padding:5px;}
+    </style>
+
+    
+       <link href="/New/content/css/mui.min.css" rel="stylesheet" />
+     <link href="/New/content/css/main.css" rel="stylesheet" />
+    
+
+</head>
+<body>
+    <div class="main-container">
+        <header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+    <a class="mui-pull-right" href="/Member/Myhome"><img class="head-ico" src="/New/content/img/ico/icon_phome.png"> </a>
+    <a class="mui-pull-right" href="/Product/getCar"><img class="head-ico" src="/New/content/img/ico/icon_shopcar.png">  </a>
+    <div class="head-title"></div>
+
+</header>
+ <div id="item1" class="mui-control-content mui-active" style="width:100%; overflow:auto;">
+<div class="tabdiv">
+ @Html.Raw(string.IsNullOrEmpty(Model.mDescribe) ? "" : Model.mDescribe.Replace("/upload/images", "http://91cpcar.com/upload/images"))
+    </div>
+     </div>
+        </div>
+    </body>
+    </html>
