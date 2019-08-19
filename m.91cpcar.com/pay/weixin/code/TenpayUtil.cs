@@ -4,16 +4,16 @@ using System.Web;
 namespace tenpayApp
 {
 	/// <summary>
-	/// TenpayUtil µÄÕªÒªËµÃ÷¡£
-    /// ÅäÖÃÎÄ¼ş
+	/// TenpayUtil çš„æ‘˜è¦è¯´æ˜ã€‚
+    /// é…ç½®æ–‡ä»¶
 	/// </summary>
 	public class TenpayUtil
 	{
         public static string tenpay = "1";
-        public static string partner = "1220711601";                   //ÉÌ»§ºÅ
-        public static string key = "d2fca6c465c0c5184833a350d2f6b75b";  //ÃÜÔ¿
-        public static string appid = "wx90183c23e1c8a533";//appid
-        public static string appkey = "z8B42quxJ53ai8pcBmbC1jWqXlENz1tgVdoNfp7B6J0w8YvoKln2M6SPE89VFPSJ8wtnqAGGan596o0YlCUIfH3aPNZ37HdF4ctS6Yr5AUYBiVbj7x2o5UPSKMzsnvxJ";//paysignkey(·Çappkey) 
+        public static string partner = "";                   //å•†æˆ·å·
+        public static string key = "";  //å¯†é’¥
+        public static string appid = "";//appid
+        public static string appkey = "";//paysignkey(éappkey) 
 
 
 		public TenpayUtil()
@@ -34,7 +34,7 @@ namespace tenpayApp
         }
       
 
-		/** ¶Ô×Ö·û´®½øĞĞURL±àÂë */
+		/** å¯¹å­—ç¬¦ä¸²è¿›è¡ŒURLç¼–ç  */
 		public static string UrlEncode(string instr, string charset)
 		{
 			//return instr;
@@ -59,7 +59,7 @@ namespace tenpayApp
 			}
 		}
 
-		/** ¶Ô×Ö·û´®½øĞĞURL½âÂë */
+		/** å¯¹å­—ç¬¦ä¸²è¿›è¡ŒURLè§£ç  */
 		public static string UrlDecode(string instr, string charset)
 		{
 			if(instr == null || instr.Trim() == "")
@@ -85,13 +85,13 @@ namespace tenpayApp
 		}
        
 
-		/** È¡Ê±¼ä´ÁÉú³ÉËæ¼´Êı,Ìæ»»½»Ò×µ¥ºÅÖĞµÄºó10Î»Á÷Ë®ºÅ */
+		/** å–æ—¶é—´æˆ³ç”Ÿæˆéšå³æ•°,æ›¿æ¢äº¤æ˜“å•å·ä¸­çš„å10ä½æµæ°´å· */
 		public static UInt32 UnixStamp()
 		{
 			TimeSpan ts = DateTime.Now - TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
 			return Convert.ToUInt32(ts.TotalSeconds);
 		}
-		/** È¡Ëæ»úÊı */
+		/** å–éšæœºæ•° */
 		public static string BuildRandomStr(int length) 
 		{
 			Random rand = new Random();
